@@ -1,11 +1,2 @@
-// @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
-body {
-  font-family: "Roboto Mono", sans-serif;
-}
-h2 {
-  font-family: "Roboto Mono", sans-serif;
-  font-variation-settings: "wght" 100, "wdth" 85;
-  &:hover {
-    font-variation-settings: "wght" 700, "wdth" 100;
-  }
-}
+@import "base/global.scss";
+@import "base/typography.scss";

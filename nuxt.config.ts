@@ -21,15 +21,12 @@ export default {
   css: ["~/assets/scss/main.scss"],
   // style resources
   styleResources: {
-    scss: ["~/assets/scss/settings/vars.scss"],
+    scss: [
+      "~/assets/scss/settings/vars.scss",
+      "~/assets/scss/tools/mixins.scss",
+    ],
   },
 
-  // google fonts
-  googleFonts: {
-    families: {
-      "Roboto+Mono": [400],
-    },
-  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
@@ -44,8 +41,55 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/style-resources"],
+  modules: [
+    "@nuxtjs/style-resources",
+    "@nuxtjs/sitemap",
+    "@nuxtjs/robots",
+    "@nuxtjs/svg",
+  ],
+  robots: {
+    UserAgent: "*",
+    Disallow: process.env.ROBOTS === "false" ? "/" : "",
+    sitemap: process.env.BASE_URL + "/sitemap.xml",
+  },
+  sitemap: {
+    hostname: process.env.BASE_URL || "http://localhost:3000",
+    // add trailing slash to final sitemap
+    trailingSlash: true,
+    priority: 1,
+    path: "/sitemap.xml",
+    gzip: true,
+    generate: false,
+  },
 
+  // Control ssr
+  ssr: process.env.SERVER_RENDER === "true",
+  purgeCSS: {
+    // whitelist spicific classes
+    whitelist: [],
+    // whitelist spicific classes and all that contains that naming
+    whitelistPatterns: [
+      /__layout/,
+      /__nuxt/,
+      /is-inview/,
+      /is/,
+      /hooper/,
+      /social-links__item/,
+      /svg/,
+      /g/,
+      /path/,
+      /rect/,
+      /fade-out/,
+    ],
+  },
+  // google fonts
+  googleFonts: {
+    families: {
+      "Roboto+Mono": { wght: [100 + ".." + 700] },
+    },
+    display: "swap",
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  loading: false,
 }

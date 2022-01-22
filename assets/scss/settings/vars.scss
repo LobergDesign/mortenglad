@@ -1,1 +1,22 @@
-$color-red: red;
+$color-black: #151515;
+$color-white: #e9f1f7;
+$color-cta: #f3abab;
+
+// transitions
+$transition--cubic: cubic-bezier(0.4, 0, 0, 1);
+$transition: 0.5s $transition--cubic;
+$transition--slow: 0.7s $transition--cubic;
+$transition--fast: 0.4s $transition--cubic;
+
+//------- Media queries -------//
+$viewport-extra-small: 350px; // 350px
+$viewport-small: 576px; // 576px
+$viewport-medium: 992px; // 992px
+$viewport-large: 1025px; // 1025px
+$viewport-extra-large: 1440px; // 1200px
+$viewport-max: 1920px; // 1920px
+
+// layout - grid
+$grid-max-width: 1680px;
+$grid-max-content-width: 1615px;
+$grid-min-width: 370px;
