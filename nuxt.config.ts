@@ -38,6 +38,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
+    "nuxt-graphql-request",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -60,6 +61,35 @@ export default {
     path: "/sitemap.xml",
     gzip: true,
     generate: false,
+  },
+  // graphql
+  // graphql: {
+  // 	clients: {
+  // 		default: {
+  // 			endpoint: process.env.GRAPHQL_ENDPOINT,
+  // 			options: {
+  // 				headers: {
+  // 					authorization:
+  // 						"Bearer " +
+  // 						(process.env.BASE_URL === "https://portfolio-preview-prod.netlify.app/"
+  // 							? process.env.GRAPHQL_PREVIEW_TOKEN
+  // 							: process.env.GRAPHQL_TOKEN),
+  // 				},
+  // 			},
+  // 		},
+  // 	},
+  // },
+  graphql: {
+    clients: {
+      default: {
+        endpoint: process.env.GRAPHQL_ENDPOINT,
+        options: {
+          headers: {
+            authorization: "Bearer " + process.env.GRAPHQL_TOKEN,
+          },
+        },
+      },
+    },
   },
 
   // Control ssr
