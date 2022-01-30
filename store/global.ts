@@ -1,24 +1,30 @@
+import { Commit } from "vuex"
 import { query } from "~/queries/global"
 
-export const state = () => ({
-  menu: {},
+export const state = (): NStates.IGlobalSettingsState => ({
+  globalSettings: {} as NStates.IGlobalSettings,
 })
 
 export const mutations = {
-  SET_MENU(state: any, menu: any) {
-    state.menu = menu
+  SET_GLOBALE_SETTINGS(
+    state: NStates.IGlobalSettingsState,
+    globalSettings: NStates.IGlobalSettings
+  ) {
+    state.globalSettings = globalSettings
+    console.log("globalSettings", globalSettings)
   },
 }
 
 export const actions = {
-  async fetchMenu({ commit }: any) {
-    console.log("fetchmenu from store")
+  async fetchGlobalSettings({ commit }: { commit: Commit }) {
     try {
-      const menu = await this.$graphql.default.request(query)
-      console.log("menu", menu)
-      commit("SET_MENU", menu)
-    } catch (e) {
-      console.log("error from store", e)
+      // @ts-ignore
+      const globalSettings = await this.$graphql.default.request(query)
+
+      commit("SET_GLOBALE_SETTINGS", globalSettings)
+    } catch (errors) {
+      // eslint-disable-next-line no-console
+      console.log("error from store", errors)
     }
   },
 }
