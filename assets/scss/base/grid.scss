@@ -1,0 +1,34 @@
+$columns: 12;
+
+.grid-w {
+  @include grid-wrap;
+}
+//////// grid row
+.grid-r {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-gap: clamp(1.5rem, 1.8vw, 4rem);
+}
+[class^="grid-c"] {
+  grid-column-end: span $columns;
+  //   border: 1px solid red;
+}
+
+@for $i from 1 through $columns {
+  .grid-c-#{$i} {
+    grid-column-end: span $i;
+  }
+}
+
+@each $size, $abbr in ($viewport-extra-large, lg), ($viewport-large, md),
+  ($viewport-medium, sm), ($viewport-small, xs)
+{
+  @media (max-width: $size) {
+    // Loop through col classes
+    @for $i from 1 through $columns {
+      .grid-c-#{$abbr}-#{$i} {
+        grid-column-end: span $i;
+      }
+    }
+  }
+}

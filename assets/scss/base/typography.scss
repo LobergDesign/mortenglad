@@ -33,3 +33,8 @@ strong,
 .font-bold {
   font-weight: 700;
 }
+a {
+  @include font-main-bold;
+  color: $color-cta;
+  text-decoration: none;
+}

@@ -1,33 +1,12 @@
-const query = `query globalSettingsEntryQuery {
+import { referencePagesFragment } from "./fragments/referencePages";
+
+const query = `query {
     globalSettings(id: "3RFdUR5nituVqENy0L5R5c") {
       headerLogo
       mainMenuCollection {
         items {
           pageType: __typename
-          ... on PageHome {
-            slug
-            title
-          }
-          ... on PageCv {
-            slug
-            title
-          }
-          ... on PageResume {
-            slug
-            title
-          }
-          ... on PageShowreels {
-            slug
-            title
-          }
-          ... on PageGallery {
-            slug
-            title
-          }
-          ... on PageContact {
-            slug
-            title
-          }
+         ...referencePagesFragment
         }
       }
       telephonenumber
@@ -40,5 +19,7 @@ const query = `query globalSettingsEntryQuery {
       contactFormTitle
       contactFormSuccessMessage
     }
-  }`
-export { query }
+  }
+  ${referencePagesFragment}
+  `;
+export { query };
