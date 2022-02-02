@@ -39,15 +39,13 @@ export default {
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
     "nuxt-graphql-request",
+    "nuxt-gsap-module",
+    "@nuxt/image",
+    "@nuxtjs/svg",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    "@nuxtjs/style-resources",
-    "@nuxtjs/sitemap",
-    "@nuxtjs/robots",
-    "@nuxtjs/svg",
-  ],
+  modules: ["@nuxtjs/style-resources", "@nuxtjs/sitemap", "@nuxtjs/robots"],
   robots: {
     UserAgent: "*",
     Disallow: process.env.ROBOTS === "false" ? "/" : "",
@@ -61,6 +59,12 @@ export default {
     path: "/sitemap.xml",
     gzip: true,
     generate: false,
+  },
+  // GSAP
+  gsap: {
+    clubPlugins: {
+      splitText: true,
+    },
   },
   // graphql
   // graphql: {
@@ -92,6 +96,13 @@ export default {
     },
   },
 
+  // images
+  image: {
+    cloudinary: {
+      baseURL: "https://res.cloudinary.com/dzw0r5i7d/image/fetch/",
+    },
+  },
+
   // Control ssr
   ssr: process.env.SERVER_RENDER === "true",
   purgeCSS: {
@@ -120,6 +131,6 @@ export default {
     display: "swap",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: { transpile: ["gsap"] },
   loading: false,
 };

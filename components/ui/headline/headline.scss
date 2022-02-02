@@ -1,0 +1,10 @@
+.headline {
+  .xl {
+    display: inline-block;
+  }
+  &__title-extension {
+    display: inline-block;
+    @include font-main;
+    color: $color-cta;
+  }
+}

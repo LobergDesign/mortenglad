@@ -14,6 +14,11 @@
   font-weight: 700;
   font-style: normal;
 }
+@mixin font-main-light {
+  font-family: "Roboto Mono", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
 
 @mixin position-center {
   position: absolute;

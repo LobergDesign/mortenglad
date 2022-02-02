@@ -1,9 +1,10 @@
 <template>
-  <div>
-    <hero-large />
-    <pre>
+  <div class="overflow-hidden">
+    <hero-large :data="hero" />
+
+    <!-- <pre>
       {{ data }}
-    </pre>
+    </pre> -->
   </div>
 </template>
 
@@ -16,40 +17,19 @@ import { query } from "~/queries/frontpage";
 export default Vue.extend({
   name: "IndexPage",
 
-  async asyncData({ $apiResource }: Context) {
-    const frontpageData = await $apiResource.getData(query);
-    console.log("globalSettings", frontpageData?.pageHome);
-    return { data: frontpageData?.pageHome };
+  async asyncData({ $apiResource, error }: Context) {
+    const response = await $apiResource.getData(query);
+    if (!response) {
+      return error;
+    } else {
+      const data = response.pageHome;
+      const hero = {
+        heroTitle: data.heroTitle,
+        heroImages: data.heroImages,
+        heroTitleExtension: data.heroTitleExtension,
+      };
+      return { data, hero };
+    }
   },
-  // async asyncData({ $graphql, params }) {
-  //     const query = gql`
-  //       query planets {
-  //         allPlanets {
-  //           planets {
-  //             id
-  //             name
-  //           }
-  //         }
-  //       }
-  //     `;
-
-  //     const planets = await $graphql.default.request(query);
-  //     return { planets };
-  //   },
-
-  //  async asyncData({ error, $graphql}: Context) {
-  //    console.log("error", error);
-  //    console.log("error", $graphql)
-
-  // 	try {
-  // 		const response = await $graphql.default.request(query);
-  //     console.log("response", response);
-  // 		return response;
-  // 	} catch (error: any) {
-  //      console.error(JSON.stringify(error, undefined, 2));
-  //       process.exit(1);
-  // 	}
-
-  // }
 });
 </script>

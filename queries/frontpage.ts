@@ -23,7 +23,6 @@ const query = `query {
         }
     }
 }
-
 ${referenceAllBlocksFragment}
 ${seoFragment}
 `;

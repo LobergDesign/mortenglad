@@ -8,9 +8,14 @@ h3,
 }
 h1,
 .h1 {
+  @include font-main;
   font-size: clamp(6rem, 12vw, 17.3rem);
   margin-top: 0;
   margin-bottom: clamp(2rem, 2vw, 3rem);
+}
+.h1.xl,
+h1.xl {
+  font-size: clamp(15rem, 21vw, 30rem);
 }
 h2,
 .h2 {

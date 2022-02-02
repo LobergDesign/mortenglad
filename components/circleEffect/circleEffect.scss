@@ -1,0 +1,31 @@
+.circular-effect {
+  @include position-center-x;
+  bottom: 1rem;
+  z-index: 5;
+  width: 220px;
+  height: 220px;
+  svg path {
+    will-change: transform;
+  }
+}
+text {
+  @include font-main;
+  font-size: 1.15rem;
+  letter-spacing: 0.2rem;
+  fill: var(--color-secondary);
+  transition: fill $transition;
+}
+
+// Initial animation
+// body.is-ready {
+//   .circular-effect {
+//     transition-delay: 0.15s;
+//     transform: scale(1);
+//   }
+// }
+// @include viewport-small {
+//   .circular-effect {
+//     max-width: 200px;
+//     max-height: 200px;
+//   }
+// }
