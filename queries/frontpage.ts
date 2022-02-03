@@ -12,6 +12,7 @@ const query = `query {
         introLink {
           ...referencePagesFragment
         }
+        introLinkText
         dynamicBlockSectionCollection {
             items {
               blockType: __typename

@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-hidden">
     <hero-large :data="hero" />
-
+    <intro :data="intro" />
     <!-- <pre>
       {{ data }}
     </pre> -->
@@ -28,7 +28,13 @@ export default Vue.extend({
         heroImages: data.heroImages,
         heroTitleExtension: data.heroTitleExtension,
       };
-      return { data, hero };
+      const intro = {
+        introTitle: data.introTitle,
+        introBodytext: data.introBodytext,
+        introLink: data.introLink,
+        introLinkText: data.introLinkText,
+      };
+      return { data, hero, intro };
     }
   },
 });

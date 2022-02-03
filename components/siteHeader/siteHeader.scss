@@ -8,7 +8,7 @@
   // logo
   &__logo {
     @include font-main;
-    color: $color-white;
+    color: var(--color-secondary);
     font-size: clamp(1.4rem, 1.3vw, 1.55rem);
   }
 
@@ -39,7 +39,7 @@
     position: absolute;
   }
   &__menu-item-inner span {
-    color: $color-white;
+    color: var(--color-secondary);
     font-size: 1.4rem;
     @include font-main;
     display: inline-block;

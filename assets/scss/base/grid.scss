@@ -32,3 +32,31 @@ $columns: 12;
     }
   }
 }
+//////// offsets
+.grid-c-10-offset-1 {
+  grid-column: -10 / span 10;
+}
+.grid-c-6-offset-3 {
+  grid-column: -10 / span 6;
+}
+@include viewport-extra-large {
+  .grid-c-8-offset-2-xl {
+    grid-column: -11 / span 8;
+  }
+}
+@include viewport-large {
+  .grid-c-6-offset-3-l {
+    grid-column: -10 / span 6;
+  }
+}
+@include viewport-medium {
+  .grid-remove-offset-md {
+    grid-column: span $columns;
+  }
+}
+@include viewport-small {
+  //////// offsets
+  .grid-remove-offset-sm {
+    grid-column: span $columns;
+  }
+}

@@ -18,4 +18,8 @@ declare namespace NGlobal {
     raw_transformation: string;
     original_secure_url: string;
   }
+  export interface ILink {
+    slug: string;
+    title: string;
+  }
 }

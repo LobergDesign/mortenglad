@@ -1,23 +1,24 @@
 <template>
-  <div class="circular-effect">
-    <svg viewBox="0 0 200 200">
-      <path
-        id="circle"
-        d="
+  <nuxt-link :to="{ path: '/', hash: '#intro' }">
+    <div class="circular-effect">
+      <svg viewBox="0 0 200 200">
+        <path
+          id="circle"
+          d="
         M 100, 100
         m -60, 0
         a 60,60 0 1,0 120,0
         a 60,60 0 1,0 -120,0
     "
-        style="fill: transparent"
-      ></path>
-
-      <text>
-        <textPath xlink:href="#circle">- {{ text }} - {{ text }}</textPath>
-      </text>
-    </svg>
-    <arrow />
-  </div>
+          style="fill: transparent"
+        ></path>
+        <text>
+          <textPath xlink:href="#circle">- {{ text }} - {{ text }}</textPath>
+        </text>
+      </svg>
+      <arrow class="svg-arrow" />
+    </div>
+  </nuxt-link>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -31,7 +32,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      text: "scroll to explorer",
+      text: "Scroll to explorer",
     };
   },
   mounted() {
@@ -46,7 +47,7 @@ export default Vue.extend({
 
       const initRotate = () => {
         tl.to("#circle", {
-          duration: "14",
+          duration: "18",
           ease: "none",
           rotate: 360,
           transformOrigin: "center center",

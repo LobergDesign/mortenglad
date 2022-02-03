@@ -5,6 +5,6 @@
   &__title-extension {
     display: inline-block;
     @include font-main;
-    color: $color-cta;
+    color: var(--color-cta);
   }
 }
