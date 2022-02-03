@@ -1,7 +1,8 @@
 <template>
   <div class="overflow-hidden">
     <hero-large :data="hero" />
-    <intro :data="intro" />
+    <lazy-intro :data="intro" />
+    <lazy-cv-collections :data="cvCollection.cvListCollection.items" />
     <!-- <pre>
       {{ data }}
     </pre> -->
@@ -9,16 +10,16 @@
 </template>
 
 <script lang="ts">
-// import { Context } from "@nuxt/types";
-// import { query } from "~/queries/global";
 import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/frontpage";
+import { query as cvCollectionQuery } from "~/queries/cvCollections";
 export default Vue.extend({
   name: "IndexPage",
 
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
+    const cvCollection = await $apiResource.getData(cvCollectionQuery);
     if (!response) {
       return error;
     } else {
@@ -34,7 +35,8 @@ export default Vue.extend({
         introLink: data.introLink,
         introLinkText: data.introLinkText,
       };
-      return { data, hero, intro };
+
+      return { data, hero, intro, cvCollection: cvCollection.pageCv || null };
     }
   },
 });

@@ -32,6 +32,7 @@ export default Vue.extend({
   methods: {
     splitWord() {
       const SplitText = this.$SplitText;
+      // @ts-ignore
       const gsap = this.$gsap as NLib.IGsap;
       const tl = gsap.timeline();
       const target = document.querySelector("[data-custom-split-text]");

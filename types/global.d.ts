@@ -22,4 +22,8 @@ declare namespace NGlobal {
     slug: string;
     title: string;
   }
+  export interface ILinkComponent {
+    link: NGlobal.ILink;
+    linktext: string;
+  }
 }

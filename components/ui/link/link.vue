@@ -16,7 +16,7 @@ export default Vue.extend({
   name: "UILink",
   props: {
     data: {
-      type: Object as () => NGlobal.ILink,
+      type: Object as () => NGlobal.ILinkComponent,
       default: null,
     },
   },
