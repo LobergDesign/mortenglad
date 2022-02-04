@@ -2,8 +2,9 @@ $color-black: #151515;
 $color-white: #e9f1f7;
 $color-cta: #f3abab;
 
+// layout
 $header-height: clamp(4rem, 6vw, 8rem);
-
+$cv-list-item-spacing: 1.6rem;
 // transitions
 $transition--cubic: cubic-bezier(0.38, 0.005, 0.215, 1);
 $transition: 0.5s $transition--cubic;

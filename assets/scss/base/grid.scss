@@ -32,6 +32,11 @@ $columns: 12;
     }
   }
 }
+//////// helpers
+.grid-revert {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
 //////// offsets
 .grid-c-10-offset-1 {
   grid-column: -10 / span 10;

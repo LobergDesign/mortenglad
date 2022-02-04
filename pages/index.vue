@@ -2,7 +2,10 @@
   <div class="overflow-hidden">
     <hero-large :data="hero" />
     <lazy-intro :data="intro" />
-    <lazy-cv-collections :data="cvCollection.cvListCollection.items" />
+    <lazy-cv-collections
+      :data="cvCollection.cvListCollection.items"
+      :link="cvLink"
+    />
     <!-- <pre>
       {{ data }}
     </pre> -->
@@ -35,8 +38,17 @@ export default Vue.extend({
         introLink: data.introLink,
         introLinkText: data.introLinkText,
       };
-
-      return { data, hero, intro, cvCollection: cvCollection.pageCv || null };
+      const cvLink = {
+        cvLink: data.cvCollectionsLink,
+        cvLinkText: data.cvCollectionsLinkText,
+      };
+      return {
+        data,
+        hero,
+        intro,
+        cvLink,
+        cvCollection: cvCollection.pageCv || null,
+      };
     }
   },
 });

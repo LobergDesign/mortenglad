@@ -13,6 +13,11 @@ const query = `query {
           ...referencePagesFragment
         }
         introLinkText
+        cvCollectionsLink{
+          slug
+          title
+        }
+        cvCollectionsLinkText
         dynamicBlockSectionCollection {
             items {
               blockType: __typename
