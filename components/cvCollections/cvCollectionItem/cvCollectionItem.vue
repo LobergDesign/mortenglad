@@ -3,22 +3,22 @@
     <!-- IF THERE IS 4 HEADLINES -->
     <template v-if="headlines.length === 4">
       <div class="grid-r last-text-align-right cv-collection-item__title-list">
-        <div class="grid-c-3">
+        <div class="grid-c-3 hide-mobile">
           <span class="cv-collection-item__title">
             {{ headlines[0] }}
           </span>
         </div>
-        <div class="grid-c-5">
+        <div class="grid-c-5 hide-mobile">
           <span class="cv-collection-item__title">
             {{ headlines[1] }}
           </span>
         </div>
-        <div class="grid-c-3">
+        <div class="grid-c-3 hide-mobile">
           <span class="cv-collection-item__title">
             {{ headlines[2] }}
           </span>
         </div>
-        <div class="grid-c-1">
+        <div class="grid-c-1 hide-mobile">
           <span class="cv-collection-item__title">
             {{ headlines[3] }}
           </span>
@@ -29,21 +29,39 @@
           <lazy-cv-collection-nested-item
             :data="item"
             :len="headlines.length"
+            :headlines="headlines"
           />
         </li>
       </ul>
     </template>
     <!-- IF THERE IS 3 HEADLINES -->
     <template v-if="headlines.length === 3">
-      <div class="grid-r">
-        <div
-          v-for="(headline, index) in headlines"
-          :key="index"
-          class="grid-c-4"
-        >
-          {{ headline }}
+      <div class="grid-r last-text-align-right cv-collection-item__title-list">
+        <div class="grid-c-5 hide-mobile">
+          <span class="cv-collection-item__title">
+            {{ headlines[0] }}
+          </span>
+        </div>
+        <div class="grid-c-6 hide-mobile">
+          <span class="cv-collection-item__title">
+            {{ headlines[1] }}
+          </span>
+        </div>
+        <div class="grid-c-1 hide-mobile">
+          <span class="cv-collection-item__title">
+            {{ headlines[2] }}
+          </span>
         </div>
       </div>
+      <ul class="reset-ul">
+        <li v-for="(item, i) in items" :key="i">
+          <lazy-cv-collection-nested-item
+            :data="item"
+            :len="headlines.length"
+            :headlines="headlines"
+          />
+        </li>
+      </ul>
     </template>
     <!-- IF THERE IS 2 HEADLINES -->
     <template v-if="headlines.length === 2">

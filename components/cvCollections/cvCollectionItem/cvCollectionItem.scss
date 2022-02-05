@@ -2,6 +2,9 @@
   &__title-list {
     position: relative;
     padding: $cv-list-item-spacing 0;
+    @include viewport-small {
+      padding: 0.8rem 0;
+    }
   }
   &__title-list::after {
     content: "";

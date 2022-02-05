@@ -15,4 +15,9 @@
   &__item {
     font-size: 1.4rem;
   }
+  &__item-headline {
+    font-size: 1.2rem;
+    @include font-main-bold;
+    margin-bottom: 0.2rem;
+  }
 }
