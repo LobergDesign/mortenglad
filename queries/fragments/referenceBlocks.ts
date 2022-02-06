@@ -22,7 +22,11 @@ const referenceAllBlocksFragment = `fragment referenceAllBlocksFragment on Entry
     }
     ... on ShowcaseSection {
       title
-      showLinkToShowreelPage
+      linkToShowcase {
+        slug
+        title
+      }
+      linkText
       video
       videoCaption
     }

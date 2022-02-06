@@ -3,5 +3,7 @@ declare namespace NHeroLarge {
     heroTitle: string;
     heroImages: Array<NGlobal.IImage>;
     heroTitleExtension: string;
+    title?: string;
+    headlineType?: string;
   }
 }

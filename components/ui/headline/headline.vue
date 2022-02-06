@@ -1,6 +1,9 @@
 <template>
   <div class="headline">
-    <h1 v-if="data.heroTitle" class="xl" data-custom-split-text>
+    <h2 v-if="data.headlineType === 'h2'" class="h1" data-custom-split-text>
+      {{ data.title }}
+    </h2>
+    <h1 v-else-if="data.heroTitle" class="xl" data-custom-split-text>
       {{ data.heroTitle }}
     </h1>
     <span v-if="data.heroTitleExtension" class="headline__title-extension">

@@ -1,10 +1,11 @@
-declare namespace NGridHandler {
+declare namespace NGrid {
   export interface IGridShowCase {
     blockType: string;
     title: string;
-    showLinkToShowreelPage: boolean;
     video: NGlobal.IImage;
     videoCaption: string;
+    linkToShowcase: NGlobal.ILink;
+    linkText: string;
   }
   export interface IGridGallery {
     blockType: string;
@@ -14,6 +15,6 @@ declare namespace NGridHandler {
   }
 
   export interface IGridHanderData {
-    items: Array<NGridHandler.IGridGallery | NGridHandler.IGridShowCase>;
+    items: Array<IGridGallery | IGridShowCase>;
   }
 }

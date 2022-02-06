@@ -1,35 +1,55 @@
-.hero-large {
-  height: calc(100vh - $header-height);
-  position: relative;
+$icon-size: clamp(6rem, 5vw, 12rem);
+$icon-play-size: clamp(2rem, 2vw, 3rem);
 
-  &__title-w {
-    @include position-center-y;
-    top: 42%;
+.grid-showcase {
+  a {
+    display: block;
+    margin-top: -3rem;
   }
-  &__images > div {
+
+  &__video {
+    margin-top: 3rem;
+    position: relative;
+  }
+  // overlay
+  &__video-overlay {
     position: absolute;
-    bottom: 0;
-    max-height: 45vh;
-    z-index: -1;
-    overflow: hidden;
-    .image {
-      height: 100%;
-    }
-  }
-  &__images > div:nth-child(1) {
+    top: 0;
     left: 0;
-    height: clamp(40rem, 45vh, 70rem);
-    width: clamp(10rem, 32vw, 90rem);
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+    background-color: var(--color-primary);
+    z-index: 1;
+    transition: $transition;
   }
-  &__images > div:nth-child(2) {
-    width: clamp(10rem, 32vw, 82rem);
-    left: 45vw;
-    @include position-center-y;
-    top: 40%;
+  // icon
+  &__video-icon {
+    cursor: pointer;
+    @include position-center;
+    background-color: var(--color-cta);
+    width: $icon-size;
+    height: $icon-size;
+    border-radius: 50%;
+    z-index: 2;
+    transition: opacity $transition, transform $transition;
   }
-  &__images > div:nth-child(3) {
-    width: clamp(10rem, 30vw, 50rem);
-    right: -5rem;
-    bottom: -10rem;
+  &__video-icon svg {
+    width: $icon-play-size;
+    height: $icon-play-size;
+    margin-left: 0.5rem;
+    fill: var(--color-secondary);
+  }
+}
+
+// video is playing
+.grid-showcase__video.is-playing {
+  .grid-showcase__video-overlay {
+    visibility: hidden;
+    opacity: 0;
+  }
+  .grid-showcase__video-icon {
+    opacity: 0;
+    transform: scale(0) translateX(-50%) translateY(-50%);
   }
 }

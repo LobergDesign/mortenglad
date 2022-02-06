@@ -1,7 +1,16 @@
 <template>
-  <section>
-    {{ data }}
-  </section>
+  <div>
+    <section v-for="(item, i) in data.items" :key="i" class="spacing-b">
+      <lazy-grid-show-case
+        v-if="item.blockType === 'ShowcaseSection'"
+        :data="item"
+      />
+      <lazy-grid-gallery
+        v-if="item.blockType === 'GallerySection'"
+        :data="item"
+      />
+    </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,7 +20,7 @@ export default Vue.extend({
   name: "GridHandler",
   props: {
     data: {
-      type: Object as () => NGridHandler.IGridHanderData,
+      type: Object as () => NGrid.IGridHanderData,
       default: null,
     },
   },

@@ -7,9 +7,9 @@
       :data="cvCollection.cvListCollection.items"
       :link="cvLink"
     />
-    <pre>
+    <!-- <pre>
       {{ data }}
-    </pre>
+    </pre> -->
     <lazy-grid-handler
       v-if="data.dynamicBlockSectionCollection"
       :data="data.dynamicBlockSectionCollection"
