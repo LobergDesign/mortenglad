@@ -79,7 +79,7 @@
       </li>
       <li class="grid-c-xs-6 grid-c-1">
         <span class="cv-collection-nested-list__item-headline mobile-only">
-          {{ headlines[3] }}
+          {{ headlines[2] }}
         </span>
         <span class="cv-collection-nested-list__item">
           {{ data.year }}

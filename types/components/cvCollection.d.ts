@@ -5,6 +5,9 @@ declare namespace NCVCollection {
     role: string;
     year: string;
     additionalContent: Object;
+    place: string;
+    workshop: string;
+    educationcourse: String;
   }
   export interface ICVCollection {
     collectionType: string;

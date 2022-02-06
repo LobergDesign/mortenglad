@@ -58,6 +58,9 @@ $columns: 12;
   .grid-remove-offset-md {
     grid-column: span $columns;
   }
+  .grid-revert--reset-md {
+    grid-row-start: inital;
+  }
 }
 @include viewport-small {
   //////// offsets

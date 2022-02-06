@@ -1,0 +1,35 @@
+.hero-large {
+  height: calc(100vh - $header-height);
+  position: relative;
+
+  &__title-w {
+    @include position-center-y;
+    top: 42%;
+  }
+  &__images > div {
+    position: absolute;
+    bottom: 0;
+    max-height: 45vh;
+    z-index: -1;
+    overflow: hidden;
+    .image {
+      height: 100%;
+    }
+  }
+  &__images > div:nth-child(1) {
+    left: 0;
+    height: clamp(40rem, 45vh, 70rem);
+    width: clamp(10rem, 32vw, 90rem);
+  }
+  &__images > div:nth-child(2) {
+    width: clamp(10rem, 32vw, 82rem);
+    left: 45vw;
+    @include position-center-y;
+    top: 40%;
+  }
+  &__images > div:nth-child(3) {
+    width: clamp(10rem, 30vw, 50rem);
+    right: -5rem;
+    bottom: -10rem;
+  }
+}

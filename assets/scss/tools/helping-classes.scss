@@ -82,6 +82,11 @@
 .overflow-hidden {
   overflow: hidden;
 }
+@include viewport-medium {
+  .text-right--reset-md {
+    text-align: left;
+  }
+}
 
 @include viewport-small {
   .hide-on-mobile {

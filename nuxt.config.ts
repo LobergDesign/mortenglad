@@ -131,6 +131,6 @@ export default {
     display: "swap",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: { transpile: ["gsap"] },
+  build: {},
   loading: false,
 };
