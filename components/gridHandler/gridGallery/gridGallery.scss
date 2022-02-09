@@ -1,35 +1,24 @@
-.hero-large {
-  height: calc(100vh - $header-height);
-  position: relative;
+.grid-gallery {
+  a {
+    display: block;
+    margin-top: -1.5rem;
+  }
+}
+.keen-slider {
+  cursor: grab;
+  overflow: initial;
+  margin-top: 4rem;
 
-  &__title-w {
-    @include position-center-y;
-    top: 42%;
+  &__slide {
+    overflow: initial !important;
+    height: clamp(35rem, 41vw, 55rem);
+    will-change: transform;
   }
-  &__images > div {
-    position: absolute;
-    bottom: 0;
-    max-height: 45vh;
-    z-index: -1;
-    overflow: hidden;
-    .image {
-      height: 100%;
-    }
+  // images
+  &__slide:nth-child(4n + 3) img {
+    transform: translateY(clamp(10rem, 15vw, 20rem));
   }
-  &__images > div:nth-child(1) {
-    left: 0;
-    height: clamp(40rem, 45vh, 70rem);
-    width: clamp(10rem, 32vw, 90rem);
-  }
-  &__images > div:nth-child(2) {
-    width: clamp(10rem, 32vw, 82rem);
-    left: 45vw;
-    @include position-center-y;
-    top: 40%;
-  }
-  &__images > div:nth-child(3) {
-    width: clamp(10rem, 30vw, 50rem);
-    right: -5rem;
-    bottom: -10rem;
+  &__slide:nth-child(4n + 1) img {
+    transform: translateY(clamp(10rem, 15vw, 10rem));
   }
 }

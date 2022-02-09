@@ -17,7 +17,11 @@ const referenceAllBlocksFragment = `fragment referenceAllBlocksFragment on Entry
     }
     ... on GallerySection {
       title
-      showLinkToGalleryPage
+      linkToGallery {
+        slug
+        title
+      }
+      linkText
       images
     }
     ... on ShowcaseSection {

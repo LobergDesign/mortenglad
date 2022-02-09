@@ -2,22 +2,18 @@
   <section class="grid-gallery">
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c">
+        <div class="grid-c text-right">
           <ui-headline
             v-if="data.title"
             :data="{ title: data.title, headlineType: 'h2' }"
           />
-          <!-- <ui-link
-            v-if="data.linkToShowcase"
-            :data="{ link: data.linkToShowcase, linktext: data.linkText }"
-          /> -->
+          <ui-link
+            v-if="data.linkToGallery"
+            :data="{ link: data.linkToGallery, linktext: data.linkText }"
+          />
         </div>
       </div>
     </div>
-
-    <pre>
-      {{ data }}
-    </pre>
     <div ref="slider" class="keen-slider">
       <div
         v-for="(item, i) in data.images"
@@ -25,9 +21,10 @@
         class="keen-slider__slide number-slide"
       >
         <nuxt-img
+          loading="lazy"
           provider="cloudinary"
           :src="item.url"
-          :sizes="'sm:100vw md:50vw lg:400px'"
+          :sizes="'lg:100vw'"
         />
       </div>
     </div>
@@ -57,7 +54,7 @@ export default Vue.extend({
     this.slider = new KeenSlider(slider, {
       loop: true,
       mode: "free",
-      dragSpeed: 0.6,
+      dragSpeed: 0.5,
       slides: {
         perView: 3,
         spacing: 40,

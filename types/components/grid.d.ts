@@ -10,7 +10,8 @@ declare namespace NGrid {
   export interface IGridGallery {
     blockType: string;
     title: string;
-    showLinkToGalleryPage: boolean;
+    linkToGallery: NGlobal.ILink;
+    linkText: string;
     images: Array<NGlobal.IImage>;
   }
 
