@@ -1,3 +1,8 @@
-footer {
-  background-color: red;
+.footer {
+  background-color: var(--color-alternative);
+  padding-top: clamp(8rem, 7vw, 11rem);
+  padding-bottom: clamp(2rem, 3vw, 4rem);
+  ul li {
+    display: inline-block;
+  }
 }

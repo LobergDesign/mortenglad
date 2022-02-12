@@ -22,3 +22,22 @@
     transform: translateY(clamp(10rem, 15vw, 10rem));
   }
 }
+@include viewport-small {
+  .grid-gallery {
+    a {
+      margin-top: -1rem;
+    }
+  }
+  .keen-slider {
+    margin-top: 4rem;
+
+    &__slide {
+      height: auto;
+    }
+    // images
+    &__slide:nth-child(4n + 3) img,
+    &__slide:nth-child(4n + 1) img {
+      transform: none;
+    }
+  }
+}

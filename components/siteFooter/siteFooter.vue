@@ -1,30 +1,45 @@
 <template>
-  <footer>
-    <div v-if="data.telephonenumber">
-      {{ data.telephonenumber }}
-    </div>
-    <div v-if="data.email">
-      {{ data.email }}
-    </div>
-    <div v-if="data.address">
-      {{ data.address }}
-    </div>
-    <div v-if="data.linkedIn">
-      {{ data.linkedIn }}
-    </div>
-
-    <div v-if="data.instagram">
-      {{ data.instagram }}
-    </div>
-    <div v-if="data.youtube">
-      {{ data.youtube }}
-    </div>
-
-    <div v-if="data.contactFormTitle">
-      {{ data.contactFormTitle }}
-    </div>
-    <div v-if="data.contactFormSuccessMessage">
-      {{ data.contactFormSuccessMessage }}
+  <footer class="footer">
+    <lazy-contact-form
+      :title="data.contactFormTitle"
+      :success-message="data.contactFormSuccessMessage"
+    />
+    <div class="grid-w">
+      <div class="grid-r">
+        <div class="grid-c-9">
+          <ul class="reset-ul">
+            <li v-if="data.address">
+              <address>
+                {{ data.address }}
+              </address>
+            </li>
+            <li v-if="data.telephonenumber">
+              <a :href="'tel:' + data.telephonenumber"
+                >+45 {{ data.telephonenumber }}</a
+              >
+            </li>
+            <li v-if="data.email">
+              <a :href="'mailto:' + data.email">{{ data.email }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="grid-c-3">
+          <ul class="reset-ul">
+            <li v-if="data.facebook">
+              <a :href="data.facebook" target="_blank">facebook</a>
+            </li>
+            <li v-if="data.linkedIn">
+              <a :href="data.linkedIn" target="_blank">linkedIn</a>
+            </li>
+            <li v-if="data.instagram">
+              <a :href="data.instagram" target="_blank">instagram</a>
+            </li>
+            <li v-if="data.youtube">
+              <a :href="data.youtube" target="_blank">youtube</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </footer>
 </template>

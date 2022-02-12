@@ -59,6 +59,20 @@ export default Vue.extend({
         perView: 3,
         spacing: 40,
       },
+      breakpoints: {
+        "(max-width: 1100px)": {
+          slides: {
+            perView: 2,
+            spacing: 30,
+          },
+        },
+        "(max-width: 700px)": {
+          slides: {
+            perView: 1.4,
+            spacing: 20,
+          },
+        },
+      },
     });
   },
   beforeDestroy() {
