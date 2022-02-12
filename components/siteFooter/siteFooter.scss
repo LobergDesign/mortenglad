@@ -5,4 +5,18 @@
   ul li {
     display: inline-block;
   }
+  a,
+  address {
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    @include font-main;
+  }
+  &__info li {
+    margin-right: clamp(2rem, 4vw, 6rem);
+  }
+  &__social {
+    a {
+      font-size: 1.2rem;
+    }
+  }
 }

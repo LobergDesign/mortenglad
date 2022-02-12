@@ -7,7 +7,7 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-9">
-          <ul class="reset-ul">
+          <ul class="reset-ul footer__info">
             <li v-if="data.address">
               <address>
                 {{ data.address }}
@@ -23,19 +23,21 @@
             </li>
           </ul>
         </div>
-        <div class="grid-c-3">
-          <ul class="reset-ul">
+        <div class="grid-c-3 flex-end">
+          <ul class="reset-ul footer__social">
             <li v-if="data.facebook">
-              <a :href="data.facebook" target="_blank">facebook</a>
+              <a :href="data.facebook" target="_blank">Facebook</a>
             </li>
             <li v-if="data.linkedIn">
-              <a :href="data.linkedIn" target="_blank">linkedIn</a>
+              <a :href="data.linkedIn" target="_blank"> LinkedIn </a>
             </li>
             <li v-if="data.instagram">
-              <a :href="data.instagram" target="_blank">instagram</a>
+              <a :href="data.instagram" target="_blank" class="reset-fill">
+                Instagram
+              </a>
             </li>
             <li v-if="data.youtube">
-              <a :href="data.youtube" target="_blank">youtube</a>
+              <a :href="data.youtube" target="_blank"> Youtube </a>
             </li>
           </ul>
         </div>
