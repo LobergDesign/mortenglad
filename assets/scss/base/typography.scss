@@ -8,15 +8,20 @@ h3,
 }
 h1,
 .h1 {
+  @include font-main;
   font-size: clamp(6rem, 12vw, 17.3rem);
   margin-top: 0;
   margin-bottom: clamp(2rem, 2vw, 3rem);
+}
+.h1.xl,
+h1.xl {
+  font-size: clamp(15rem, 21vw, 30rem);
 }
 h2,
 .h2 {
   font-size: clamp(4rem, 5vw, 7rem);
   margin-top: 0;
-  margin-bottom: clamp(2rem, 2vw, 3rem);
+  margin-bottom: clamp(2rem, 4vw, 5rem);
 }
 h3,
 .h3 {
@@ -26,10 +31,15 @@ h3,
 }
 p {
   font-size: clamp(1.4rem, 1.1vw, 1.6rem);
-  line-height: clamp(1.9rem, 1.9vw, 2.7rem);
+  line-height: clamp(2.25rem, 2.2vw, 3rem);
 }
 b,
 strong,
 .font-bold {
   font-weight: 700;
+}
+a {
+  @include font-main-bold;
+  color: $color-cta;
+  text-decoration: none;
 }

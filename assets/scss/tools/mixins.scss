@@ -1,11 +1,23 @@
-// layout
-@mixin grid {
-  width: 90vw;
-  max-width: $grid-max-width;
+@mixin grid-wrap {
+  width: clamp(37rem, 80vw, 192rem);
   margin: 0 auto;
-  @include viewport-small {
-    width: 100%;
-  }
+}
+
+//-------- Fonts -------//
+@mixin font-main {
+  font-family: "Roboto Mono", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin font-main-bold {
+  font-family: "Roboto Mono", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+@mixin font-main-light {
+  font-family: "Roboto Mono", sans-serif;
+  font-weight: 100;
+  font-style: normal;
 }
 
 @mixin position-center {

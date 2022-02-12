@@ -1,0 +1,6 @@
+.intro {
+  margin-top: clamp(20rem, 22vw, 35rem);
+  &__lower {
+    padding-left: 25%;
+  }
+}

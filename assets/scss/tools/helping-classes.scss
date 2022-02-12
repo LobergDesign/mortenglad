@@ -52,7 +52,23 @@
   padding-left: 0;
   list-style-type: none;
 }
+// text alignment
+.text-right {
+  text-align: right;
+}
+.last-text-align-right {
+  > div:last-child,
+  > li:last-child {
+    text-align: right;
+  }
+}
 
+// responsve
+.mobile-only {
+  display: none;
+}
+
+// other
 .full-height {
   height: 100%;
 }
@@ -62,11 +78,33 @@
 .hide-on-desktop {
   display: none;
 }
+// overflow
+.overflow-hidden {
+  overflow: hidden;
+}
+@include viewport-medium {
+  .text-right--reset-md {
+    text-align: left;
+  }
+}
+
 @include viewport-small {
   .hide-on-mobile {
     display: none;
   }
   .hide-on-desktop {
     display: block;
+  }
+  .mobile-only {
+    display: block;
+  }
+  .hide-mobile {
+    display: none;
+  }
+  .reset-align-xs {
+    > div:last-child,
+    > li:last-child {
+      text-align: left;
+    }
   }
 }

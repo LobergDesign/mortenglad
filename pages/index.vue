@@ -1,85 +1,60 @@
 <template>
-  <div>
-    <h1>Headline 1 - hero</h1>
-    <p>
-      lorem
-    </p>
-    <h1>Headline 1</h1>
-    <h2>Headline 2</h2>
-    <h3>HEadline 3</h3>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lacus quam id
-      porttitor at. Consectetur porta amet. Eget ut condimentum morbi rhoncus,
-      lacinia integer pretium suspendisse tortor. Turpis massa iaculis orci et
-      at. Posuere sit dui lacus lectus massa ante. Ligula facilisi tincidunt
-      mattis vivamus est, mauris mi ut sed. Molestie sagittis, risus, id
-      pulvinar porta neque amet.
-      <ul> 
-        <li>
-        ul li</li>
-         <li>
-        ul li</li>
-         <li>
-        ul li</li>
-        </ul>
-    </p>
-
-     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lacus quam id
-      porttitor at. Consectetur porta amet. Eget ut condimentum morbi rhoncus,
-      lacinia integer pretium suspendisse tortor. Turpis massa iaculis orci et
-      at. Posuere sit dui lacus lectus massa ante. Ligula facilisi tincidunt
-      mattis vivamus est, mauris mi ut sed. Molestie sagittis, risus, id
-      pulvinar porta neque amet.
-     <ol>
-       <li>ol li</li>
-       <li>ol li</li>
-     </ol>
-     <a href="#">Link</a>
-    </p>
-    <ul><li>ul li</li>
-    <li>ul li</li></ul>
+  <div class="overflow-hidden">
+    <hero-large v-if="hero" :data="hero" />
+    <lazy-intro v-if="intro" :data="intro" />
+    <lazy-cv-collections
+      v-if="cvCollection.cvListCollection"
+      :data="cvCollection.cvListCollection.items"
+      :link="cvLink"
+    />
+    <!-- <pre>
+      {{ data }}
+    </pre> -->
+    <lazy-grid-handler
+      v-if="data.dynamicBlockSectionCollection"
+      :data="data.dynamicBlockSectionCollection"
+    />
   </div>
 </template>
 
 <script lang="ts">
-// import { Context } from "@nuxt/types";
-// import { query } from "~/queries/global";
-import Vue from "vue"
-
+import { Context } from "@nuxt/types";
+import Vue from "vue";
+import { query } from "~/queries/frontpage";
+import { query as cvCollectionQuery } from "~/queries/cvCollections";
 export default Vue.extend({
   name: "IndexPage",
 
-// async asyncData({ $graphql, params }) {
-//     const query = gql`
-//       query planets {
-//         allPlanets {
-//           planets {
-//             id
-//             name
-//           }
-//         }
-//       }
-//     `;
-
-//     const planets = await $graphql.default.request(query);
-//     return { planets };
-//   },
-
-
-  //  async asyncData({ error, $graphql}: Context) {
-  //    console.log("error", error);
-  //    console.log("error", $graphql)
-	
-	// 	try {
-	// 		const response = await $graphql.default.request(query);
-  //     console.log("response", response);
-	// 		return response;
-	// 	} catch (error: any) {
-  //      console.error(JSON.stringify(error, undefined, 2));
-  //       process.exit(1);
-	// 	}
-	
-  // }
-})
+  async asyncData({ $apiResource, error }: Context) {
+    const response = await $apiResource.getData(query);
+    const cvCollection = await $apiResource.getData(cvCollectionQuery);
+    if (!response) {
+      return error;
+    } else {
+      const data = response.pageHome;
+      const hero = {
+        heroTitle: data.heroTitle,
+        heroImages: data.heroImages,
+        heroTitleExtension: data.heroTitleExtension,
+      };
+      const intro = {
+        introTitle: data.introTitle,
+        introBodytext: data.introBodytext,
+        introLink: data.introLink,
+        introLinkText: data.introLinkText,
+      };
+      const cvLink = {
+        cvLink: data.cvCollectionsLink,
+        cvLinkText: data.cvCollectionsLinkText,
+      };
+      return {
+        data,
+        hero,
+        intro,
+        cvLink,
+        cvCollection: cvCollection.pageCv || null,
+      };
+    }
+  },
+});
 </script>

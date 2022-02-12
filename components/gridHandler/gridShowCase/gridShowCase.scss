@@ -1,0 +1,55 @@
+$icon-size: clamp(6rem, 5vw, 12rem);
+$icon-play-size: clamp(2rem, 2vw, 3rem);
+
+.grid-showcase {
+  a {
+    display: block;
+    margin-top: -3rem;
+  }
+
+  &__video {
+    margin-top: 3rem;
+    position: relative;
+  }
+  // overlay
+  &__video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+    background-color: var(--color-primary);
+    z-index: 1;
+    transition: $transition;
+  }
+  // icon
+  &__video-icon {
+    cursor: pointer;
+    @include position-center;
+    background-color: var(--color-cta);
+    width: $icon-size;
+    height: $icon-size;
+    border-radius: 50%;
+    z-index: 2;
+    transition: opacity $transition, transform $transition;
+  }
+  &__video-icon svg {
+    width: $icon-play-size;
+    height: $icon-play-size;
+    margin-left: 0.5rem;
+    fill: var(--color-secondary);
+  }
+}
+
+// video is playing
+.grid-showcase__video.is-playing {
+  .grid-showcase__video-overlay {
+    visibility: hidden;
+    opacity: 0;
+  }
+  .grid-showcase__video-icon {
+    opacity: 0;
+    transform: scale(0) translateX(-50%) translateY(-50%);
+  }
+}

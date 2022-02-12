@@ -1,0 +1,43 @@
+.grid-gallery {
+  a {
+    display: block;
+    margin-top: -1.5rem;
+  }
+}
+.keen-slider {
+  cursor: grab;
+  overflow: initial;
+  margin-top: 4rem;
+
+  &__slide {
+    overflow: initial !important;
+    height: clamp(35rem, 41vw, 55rem);
+    will-change: transform;
+  }
+  // images
+  &__slide:nth-child(4n + 3) img {
+    transform: translateY(clamp(10rem, 15vw, 20rem));
+  }
+  &__slide:nth-child(4n + 1) img {
+    transform: translateY(clamp(10rem, 15vw, 10rem));
+  }
+}
+@include viewport-small {
+  .grid-gallery {
+    a {
+      margin-top: -1rem;
+    }
+  }
+  .keen-slider {
+    margin-top: 4rem;
+
+    &__slide {
+      height: auto;
+    }
+    // images
+    &__slide:nth-child(4n + 3) img,
+    &__slide:nth-child(4n + 1) img {
+      transform: none;
+    }
+  }
+}

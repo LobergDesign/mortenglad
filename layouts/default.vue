@@ -1,7 +1,10 @@
 <template>
   <div class="app">
     <site-header v-if="!$fetchState.pending" :data="header" />
-    <Nuxt />
+    <main>
+      <Nuxt />
+    </main>
+
     <site-footer v-if="!$fetchState.pending" :data="footer" />
   </div>
 </template>

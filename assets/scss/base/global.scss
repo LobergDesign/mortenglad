@@ -2,7 +2,8 @@
 :root {
   --color-primary: #{$color-black};
   --color-secondary: #{$color-white};
-  --color-alternative: #{$color-cta};
+  --color-cta: #{$color-cta};
+  --color-alternative: #{$color-alternative};
 }
 
 html {
@@ -15,9 +16,19 @@ html {
 }
 
 body {
-  font-family: "Roboto Mono", sans-serif;
-  font-weight: 400;
+  @include font-main;
   background-color: var(--color-primary);
   color: var(--color-secondary);
   font-size: 1.6rem;
+  margin: 0;
+}
+
+main {
+  margin-top: $header-height;
+}
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
