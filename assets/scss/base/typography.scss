@@ -38,8 +38,15 @@ strong,
 .font-bold {
   font-weight: 700;
 }
-a {
+a,
+.btn {
   @include font-main-bold;
   color: $color-cta;
   text-decoration: none;
+}
+.btn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
 }

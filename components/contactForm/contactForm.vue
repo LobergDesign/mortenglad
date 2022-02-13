@@ -2,12 +2,12 @@
   <div class="contact-form">
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c-4">
+        <div class="grid-c-4 grid-c-sm-12">
           <h3 v-if="!showSucces && !showError && title">
             {{ title }}
           </h3>
         </div>
-        <div class="grid-c-8">
+        <div class="grid-c-8 grid-c-sm-12">
           <template v-if="showSucces && successMessage">
             <p>{{ successMessage }}</p>
           </template>
@@ -24,14 +24,15 @@
               data-netlify="true"
             >
               <div class="grid-r">
-                <div class="grid-c-8">
-                  <input type="text" placeholder="Navn" name="name" required />
+                <div class="grid-c-6 grid-c-sm-12">
+                  <input
+                    type="text"
+                    placeholder="Full name"
+                    name="name"
+                    required
+                  />
                 </div>
-                <div class="grid-c-8">
-                  <input type="tel" placeholder="Telefonnummer" name="phone" />
-                </div>
-
-                <div class="grid-c-8">
+                <div class="grid-c-6 grid-c-sm-12">
                   <input
                     type="email"
                     placeholder="Email"
@@ -39,18 +40,15 @@
                     required
                   />
                 </div>
-                <div class="grid-c-8">
-                  <input type="text" placeholder="Emne" name="Emne" />
-                </div>
-                <div class="grid-c-16">
+                <div class="grid-c-12">
                   <textarea
-                    placeholder="Besked"
+                    placeholder="Message"
                     name="message"
                     required
                   ></textarea>
                 </div>
                 <div class="grid-c-16">
-                  <button class="btn" type="submit">Send besked</button>
+                  <button class="btn" type="submit">Send message</button>
                 </div>
                 <input
                   type="hidden"
@@ -107,12 +105,10 @@ export default Vue.extend({
       });
       const formSuccesHandler = () => {
         form.reset();
-        // @ts-ignore
         this.showSucces = true;
       };
       const formErrorHandler = () => {
         form.reset();
-        // @ts-ignore
         this.showError = true;
       };
     }

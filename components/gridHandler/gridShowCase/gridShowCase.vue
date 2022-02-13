@@ -27,6 +27,7 @@
             <video
               v-if="data.video"
               ref="video"
+              provider="cloudinary"
               width="100%"
               height="auto"
               @click="pause"

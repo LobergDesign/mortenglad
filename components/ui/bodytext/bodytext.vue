@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+// @ts-ignore
 import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 export default Vue.extend({
   name: "UIBodytext",
