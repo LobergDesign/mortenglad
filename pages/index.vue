@@ -3,7 +3,7 @@
     <hero-large v-if="hero" :data="hero" />
     <lazy-intro v-if="intro" :data="intro" />
     <lazy-cv-collections
-      v-if="cvCollection.cvListCollection"
+      v-if="cvCollection"
       :data="cvCollection.cvListCollection.items"
       :link="cvLink"
     />
@@ -11,7 +11,7 @@
       {{ data }}
     </pre> -->
     <lazy-grid-handler
-      v-if="data.dynamicBlockSectionCollection"
+      v-if="data && data.dynamicBlockSectionCollection"
       :data="data.dynamicBlockSectionCollection"
     />
   </div>
@@ -55,6 +55,15 @@ export default Vue.extend({
         cvCollection: cvCollection.pageCv || null,
       };
     }
+  },
+  data() {
+    return {
+      hero: null,
+      intro: null,
+      cvCollection: null,
+      cvLink: null,
+      data: null,
+    };
   },
 });
 </script>

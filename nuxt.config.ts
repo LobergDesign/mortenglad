@@ -1,3 +1,4 @@
+import { extendRoutes, generate } from "./config/router";
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
@@ -60,12 +61,26 @@ export default {
     gzip: true,
     generate: false,
   },
-
+  // router
+  router: {
+    trailingSlash: true,
+    linkActiveClass: "is-active",
+    extendRoutes: async (routes: any, resolve: (...param: string[]) => Vue) =>
+      await extendRoutes(routes, resolve),
+  },
   // generate
   generate: {
     fallback: true,
-    exclude: [/ContentPage/, /WorkItem/],
+    exclude: [
+      /PageCv/,
+      /PageResume/,
+      /PageHome/,
+      /PageGallery/,
+      /PageShowreels/,
+      /PageContact/,
+    ],
     crawler: false,
+    routes: async () => await generate(),
   },
 
   // GSAP
@@ -83,7 +98,7 @@ export default {
   // 				headers: {
   // 					authorization:
   // 						"Bearer " +
-  // 						(process.env.BASE_URL === "https://portfolio-preview-prod.netlify.app/"
+  // 						(process.env.BASE_URL === "https://morten-glad-preview.netlify.app"
   // 							? process.env.GRAPHQL_PREVIEW_TOKEN
   // 							: process.env.GRAPHQL_TOKEN),
   // 				},

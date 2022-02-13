@@ -18,6 +18,7 @@ html {
 body {
   @include font-main;
   background-color: var(--color-primary);
+
   color: var(--color-secondary);
   font-size: 1.6rem;
   margin: 0;

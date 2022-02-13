@@ -26,6 +26,12 @@ declare namespace NGlobal {
     link: NGlobal.ILink;
     linktext: string;
   }
+  export interface IRouteItems {
+    path?: string;
+    component?: Vue;
+    route?: string;
+    name?: string;
+  }
 }
 declare module "*.svg?inline" {
   import Vue from "vue";

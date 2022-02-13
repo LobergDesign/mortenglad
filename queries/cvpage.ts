@@ -1,23 +1,11 @@
 import { referenceAllBlocksFragment } from "./fragments/referenceBlocks";
 import { seoFragment } from "./fragments/seo";
+import { heroFragment } from "./fragments/hero";
 const query = `query {
-    pageHome(id: "3Oln3i9cBK6vV7lvdPPMjc") {
-        heroTitle
-        heroImages
-        heroTitleExtension
-        introTitle
-        introBodytext {
-          json
+    pageCv(id: "39ij59NxggY9zUrKbGaFRF") {
+        hero{
+          ...heroFragment
         }
-        introLink {
-          ...referencePagesFragment
-        }
-        introLinkText
-        cvCollectionsLink{
-          slug
-          title
-        }
-        cvCollectionsLinkText
         dynamicBlockSectionCollection {
             items {
               blockType: __typename
@@ -29,6 +17,7 @@ const query = `query {
         }
     }
 }
+${heroFragment}
 ${referenceAllBlocksFragment}
 ${seoFragment}
 `;
