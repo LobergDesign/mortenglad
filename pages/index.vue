@@ -27,7 +27,10 @@ export default Vue.extend({
 
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
-    const cvCollection = await $apiResource.getData(cvCollectionQuery);
+    const cvCollection = await $apiResource.getDataWithLimit(
+      cvCollectionQuery,
+      3
+    );
     if (!response) {
       return error;
     } else {

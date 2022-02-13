@@ -1,21 +1,12 @@
 <template>
-  <div class="cv-collections">
+  <div class="accordion">
     <div class="grid-w">
       <section v-for="(item, i) in data" :key="i" class="grid-r">
-        <div
-          class="grid-c-md-12 grid-c-4"
-          :class="{ 'text-right text-right--reset-md': i === 1 }"
-        >
+        <div class="grid-c-12">
           <lazy-ui-headline-small :data="item.title" />
-          <cv-collection-link
-            :data="{ collectionType: item.collectionType, link }"
-          />
         </div>
-        <div
-          class="grid-c-md-12 grid-c-8"
-          :class="{ 'grid-revert grid-revert--reset-md': i === 1 }"
-        >
-          <cv-collection-item
+        <div class="grid-c-12">
+          <accordion-item
             :headlines="item.tabelHeadlines"
             :items="item.itemsCollection.items"
           />
@@ -28,7 +19,7 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  name: "CVCollections",
+  name: "AccordionComponent",
   props: {
     data: {
       type: Array as () => NCVCollection.ICVCollection[],

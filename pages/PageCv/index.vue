@@ -1,12 +1,16 @@
 <template>
   <div v-if="data">
     <hero :title="data.hero.title" :bodytext="data.hero.bodytext" />
-    <pre>
+    <lazy-accordion
+      v-if="cvCollection"
+      :data="cvCollection.cvListCollection.items"
+    />
+    <!-- <pre>
       {{ data }}
     </pre>
     <pre>
       {{ cvCollection }}
-    </pre>
+    </pre> -->
   </div>
 </template>
 
@@ -20,8 +24,10 @@ export default Vue.extend({
 
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
-    console.log("response", response);
-    const cvCollection = await $apiResource.getData(cvCollectionQuery);
+    const cvCollection = await $apiResource.getDataWithLimit(
+      cvCollectionQuery,
+      null
+    );
     if (!response) {
       return error;
     } else {
@@ -35,7 +41,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      data: Object as () => NPage.IStandardPage,
+      data: Object as () => NPage.IStandardPage | null,
       cvCollection: null,
     };
   },

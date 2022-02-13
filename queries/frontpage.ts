@@ -1,7 +1,7 @@
 import { referenceAllBlocksFragment } from "./fragments/referenceBlocks";
 import { seoFragment } from "./fragments/seo";
-const query = `query {
-    pageHome(id: "3Oln3i9cBK6vV7lvdPPMjc") {
+const query = `query($isPreview: Boolean!) {
+    pageHome(id: "3Oln3i9cBK6vV7lvdPPMjc", preview:$isPreview) {
         heroTitle
         heroImages
         heroTitleExtension
