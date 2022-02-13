@@ -27,3 +27,11 @@ declare namespace NGlobal {
     linktext: string;
   }
 }
+declare module "*.svg?inline" {
+  import Vue from "vue";
+  export default Vue;
+}
+declare module "@contentful/rich-text-html-renderer" {
+  import Vue from "vue";
+  export default Vue;
+}

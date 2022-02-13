@@ -6,7 +6,7 @@
     />
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c-9">
+        <div class="grid-c-9 grid-c-sm-12">
           <ul class="reset-ul footer__info">
             <li v-if="data.address">
               <address>
@@ -23,7 +23,7 @@
             </li>
           </ul>
         </div>
-        <div class="grid-c-3 flex-end">
+        <div class="grid-c-3 grid-c-sm-12 flex-end">
           <ul class="reset-ul footer__social">
             <li v-if="data.facebook">
               <a :href="data.facebook" target="_blank">Facebook</a>

@@ -1,2 +1,35 @@
+@mixin placeholder {
+  color: var(--color-secondary);
+  @include font-main;
+  font-size: 1.3rem;
+}
+
 .contact-form {
+  margin-bottom: clamp(4rem, 7vw, 10rem);
+  input,
+  textarea,
+  form {
+    width: 100%;
+  }
+  input,
+  textarea {
+    padding: clamp(1rem, 1.5vw, 1.2rem) 0;
+    color: var(--color-secondary);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color-secondary);
+    &::-webkit-input-placeholder {
+      @include placeholder;
+    }
+    &::-moz-placeholder {
+      @include placeholder;
+    }
+    &:-ms-input-placeholder {
+      @include placeholder;
+    }
+    &:-moz-placeholder {
+      @include placeholder;
+    }
+  }
 }

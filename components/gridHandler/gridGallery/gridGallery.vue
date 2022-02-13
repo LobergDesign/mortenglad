@@ -21,7 +21,7 @@
         class="keen-slider__slide number-slide"
       >
         <nuxt-img
-          loading="lazy"
+          v-if="item.url"
           provider="cloudinary"
           :src="item.url"
           :sizes="'lg:100vw'"

@@ -1,6 +1,11 @@
 <template>
   <div class="image">
-    <nuxt-img provider="cloudinary" :src="data.url" :sizes="sizes" />
+    <nuxt-img
+      v-if="data.url"
+      provider="cloudinary"
+      :src="data.url"
+      :sizes="sizes"
+    />
   </div>
 </template>
 

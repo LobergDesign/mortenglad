@@ -60,6 +60,14 @@ export default {
     gzip: true,
     generate: false,
   },
+
+  // generate
+  generate: {
+    fallback: true,
+    exclude: [/ContentPage/, /WorkItem/],
+    crawler: false,
+  },
+
   // GSAP
   gsap: {
     clubPlugins: {
@@ -99,7 +107,8 @@ export default {
   // images
   image: {
     cloudinary: {
-      baseURL: "https://res.cloudinary.com/dzw0r5i7d/image/fetch/",
+      baseURL:
+        "https://res.cloudinary.com/dzw0r5i7d/image/fetch/f_auto,c_scale,w_auto/",
     },
   },
 
@@ -122,6 +131,11 @@ export default {
       /rect/,
       /fade-out/,
     ],
+  },
+  loaders: {
+    ts: {
+      silent: true,
+    },
   },
   // google fonts
   googleFonts: {
