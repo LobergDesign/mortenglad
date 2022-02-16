@@ -3,7 +3,7 @@
     <div class="grid-w">
       <section v-for="(item, i) in data" :key="i" class="grid-r">
         <div class="grid-c-12">
-          <lazy-ui-headline-small :data="item.title" />
+          <lazy-ui-headline-medium :data="item.title" />
         </div>
         <div class="grid-c-12">
           <accordion-item

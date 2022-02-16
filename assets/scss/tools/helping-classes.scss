@@ -57,8 +57,8 @@
   text-align: right;
 }
 .last-text-align-right {
-  > div:last-child,
-  > li:last-child {
+  > div:last-of-type,
+  > li:last-of-type {
     text-align: right;
   }
 }
