@@ -1,5 +1,5 @@
 <template>
-  <section class="grid-gallery">
+  <div class="grid-gallery">
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c text-right">
@@ -28,7 +28,7 @@
         />
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">

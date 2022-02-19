@@ -1,5 +1,5 @@
 <template>
-  <div class="stats">
+  <div class="stats spacing-b">
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-5 grid-c-sm-12 text-center">
