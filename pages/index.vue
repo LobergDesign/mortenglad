@@ -7,9 +7,6 @@
       :data="cvCollection.cvListCollection.items"
       :link="cvLink"
     />
-    <!-- <pre>
-      {{ data }}
-    </pre> -->
     <lazy-grid-handler
       v-if="data && data.dynamicBlockSectionCollection"
       :data="data.dynamicBlockSectionCollection"
@@ -34,7 +31,7 @@ export default Vue.extend({
     if (!response) {
       return error;
     } else {
-      const data = response.pageHome;
+      const data = response.page;
       const hero = {
         heroTitle: data.heroTitle,
         heroImages: data.heroImages,
@@ -55,7 +52,7 @@ export default Vue.extend({
         hero,
         intro,
         cvLink,
-        cvCollection: cvCollection.pageCv || null,
+        cvCollection: cvCollection.page || null,
       };
     }
   },
@@ -65,7 +62,7 @@ export default Vue.extend({
       intro: null,
       cvCollection: null,
       cvLink: null,
-      data: null,
+      data: ({} as NPage.IStandardPage) || {},
     };
   },
 });

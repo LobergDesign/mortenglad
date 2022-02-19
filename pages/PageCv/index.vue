@@ -1,16 +1,14 @@
 <template>
   <div v-if="data">
-    <hero :title="data.hero.title" :bodytext="data.hero.bodytext" />
+    <hero
+      v-if="data.hero"
+      :title="data.hero.title"
+      :bodytext="data.hero.bodytext"
+    />
     <lazy-accordion
       v-if="cvCollection"
       :data="cvCollection.cvListCollection.items"
     />
-    <!-- <pre>
-      {{ data }}
-    </pre>
-    <pre>
-      {{ cvCollection }}
-    </pre> -->
   </div>
 </template>
 
@@ -31,17 +29,16 @@ export default Vue.extend({
     if (!response) {
       return error;
     } else {
-      const data = response.pageCv;
-
+      const data = response.page;
       return {
         data,
-        cvCollection: cvCollection.pageCv || null,
+        cvCollection: cvCollection.page || null,
       };
     }
   },
   data() {
     return {
-      data: Object as () => NPage.IStandardPage | null,
+      data: ({} as NPage.IStandardPage) || {},
       cvCollection: null,
     };
   },

@@ -1,6 +1,11 @@
 declare namespace NPage {
-  export interface IStandardPage {
-    hero: NHero.IHeroData;
+  interface IResumePage {
+    profileAdditionalCollection: NStats.IProfileAdditionalCollectionItem;
+    profileCollection: NStats.IProfileCollectionItem;
+  }
+  export interface IStandardPage extends IResumePage {
+    hero?: NHero.IHeroData;
+    dynamicBlockSectionCollection?: [];
   }
   // export interface ICVCollection {
   //   collectionType: string;

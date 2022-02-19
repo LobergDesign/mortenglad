@@ -26,7 +26,7 @@
     overflow: hidden;
 
     // active link
-    &.nuxt-link-active .header__menu-item-inner span {
+    &.nuxt-link-exact-active .header__menu-item-inner span {
       @include font-main-bold;
     }
     &.is-medium-string .header__menu-item-inner span {
