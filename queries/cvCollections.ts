@@ -1,12 +1,12 @@
-const query = `query {
-  pageCv(id: "39ij59NxggY9zUrKbGaFRF") {
-    cvListCollection {
+const query = `query($limit: Int) {
+  page: pageCv(id: "39ij59NxggY9zUrKbGaFRF") {
+    cvListCollection(limit:3) {
       items {
         collectionType: __typename
         ... on ExperienceSection {
           title
           tabelHeadlines
-          itemsCollection {
+          itemsCollection(limit: $limit) {
             items {
               type
               production
@@ -21,7 +21,7 @@ const query = `query {
         ... on EducationSection {
           title
           tabelHeadlines
-          itemsCollection {
+          itemsCollection(limit: $limit) {
             items {
               educationcourse
               place
@@ -35,7 +35,7 @@ const query = `query {
         ... on WorkshoptrainingSection {
           title
           tabelHeadlines
-          itemsCollection {
+          itemsCollection(limit: $limit) {
             items {
               workshop
               place

@@ -1,12 +1,14 @@
 <template>
   <div v-if="data">
-    <hero :title="data.hero.title" :bodytext="data.hero.bodytext" />
-    <pre>
-      {{ data }}
-    </pre>
-    <pre>
-      {{ cvCollection }}
-    </pre>
+    <hero
+      v-if="data.hero"
+      :title="data.hero.title"
+      :bodytext="data.hero.bodytext"
+    />
+    <lazy-accordion
+      v-if="cvCollection"
+      :data="cvCollection.cvListCollection.items"
+    />
   </div>
 </template>
 
@@ -20,22 +22,23 @@ export default Vue.extend({
 
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
-    console.log("response", response);
-    const cvCollection = await $apiResource.getData(cvCollectionQuery);
+    const cvCollection = await $apiResource.getDataWithLimit(
+      cvCollectionQuery,
+      null
+    );
     if (!response) {
       return error;
     } else {
-      const data = response.pageCv;
-
+      const data = response.page;
       return {
         data,
-        cvCollection: cvCollection.pageCv || null,
+        cvCollection: cvCollection.page || null,
       };
     }
   },
   data() {
     return {
-      data: Object as () => NPage.IStandardPage,
+      data: ({} as NPage.IStandardPage) || {},
       cvCollection: null,
     };
   },

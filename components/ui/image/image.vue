@@ -1,5 +1,5 @@
 <template>
-  <div class="image">
+  <div class="image" :class="{ 'no-aspect-ratio': !aspectRatio }">
     <nuxt-img
       v-if="data.url"
       provider="cloudinary"
@@ -22,6 +22,10 @@ export default Vue.extend({
     sizes: {
       type: String,
       default: "sm:100vw md:50vw lg:400px",
+    },
+    aspectRatio: {
+      type: Boolean,
+      default: true,
     },
   },
 });

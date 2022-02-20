@@ -1,4 +1,4 @@
-/* eslint-disable no-new */
+/* eslint-disable vue/no-v-html */
 <template>
   <div
     v-html="toHtmlString(data.json)"

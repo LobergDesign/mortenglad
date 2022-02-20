@@ -12,17 +12,21 @@ export default function (ctx: Context, inject: Inject) {
   const isPreview = { isPreview: setPreviewBool };
 
   // get data from query
-  const getData = async (query: string) => {
+  const getData = async (query: string, preview: object = isPreview) => {
     try {
-      const response = await client.default.request(query, isPreview);
+      const response = await client.default.request(query, preview);
       return response;
     } catch (error: any) {
       console.log("error from cms plugin", error);
     }
   };
 
-  const getDynamicData = async (query: string, routePath: string) => {
-    const variables = { slug: routePath, isPreview: setPreviewBool };
+  // get data from query
+  const getDataWithLimit = async (
+    query: string,
+    limit: number | null = null
+  ) => {
+    const variables = { limit, isPreview: setPreviewBool };
     try {
       const response = await client.default.request(query, variables);
       return response;
@@ -34,6 +38,6 @@ export default function (ctx: Context, inject: Inject) {
   // Inject in Nuxt Context
   inject("apiResource", {
     getData,
-    getDynamicData,
+    getDataWithLimit,
   });
 }

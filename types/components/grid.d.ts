@@ -14,8 +14,19 @@ declare namespace NGrid {
     linkText: string;
     images: Array<NGlobal.IImage>;
   }
+  export interface IGridTextArea {
+    blockType: string;
+    title: string;
+    bodytext: Object;
+    linkToInternalPage: NGlobal.ILink;
+    linkTextToInternalPage: string;
+  }
+  export interface IGridImages {
+    blockType: string;
+    images: Array<NGlobal.IImage>;
+  }
 
   export interface IGridHanderData {
-    items: Array<IGridGallery | IGridShowCase>;
+    items: Array<IGridGallery | IGridShowCase | IGridImages | IGridTextArea>;
   }
 }

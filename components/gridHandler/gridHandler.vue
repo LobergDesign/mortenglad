@@ -9,6 +9,11 @@
         v-if="item.blockType === 'GallerySection'"
         :data="item"
       />
+      <lazy-grid-text-area
+        v-if="item.blockType === 'SimpleTextArea'"
+        :data="item"
+      />
+      <lazy-grid-images v-if="item.blockType === 'ImageSection'" :data="item" />
     </section>
   </div>
 </template>

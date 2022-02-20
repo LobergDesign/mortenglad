@@ -1,10 +1,10 @@
-import _Vue from "vue"
+import _Vue from "vue";
 
 declare module "@nuxt/types" {
   export interface Context {
     $apiResource: {
-      getData: (arg: any) => Promise<any>
-      getDynamicData: (arg: any, args: string) => Promise<any>
-    }
+      getData: (query: string) => Promise<any>;
+      getDataWithLimit: (query: string, limit: number | null) => Promise<any>;
+    };
   }
 }
