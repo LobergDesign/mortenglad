@@ -1,18 +1,10 @@
 declare namespace NGrid {
-  export interface IGridShowCase {
-    blockType: string;
-    title: string;
-    video: NGlobal.IImage;
-    videoCaption: string;
-    linkToShowcase: NGlobal.ILink;
-    linkText: string;
-  }
   export interface IGridGallery {
     blockType: string;
     title: string;
     linkToGallery: NGlobal.ILink;
     linkText: string;
-    images: Array<NGlobal.IImage>;
+    images: Array<NGlobal.IMedia>;
   }
   export interface IGridTextArea {
     blockType: string;
@@ -23,10 +15,9 @@ declare namespace NGrid {
   }
   export interface IGridImages {
     blockType: string;
-    images: Array<NGlobal.IImage>;
+    images: Array<NGlobal.IMedia>;
   }
-
   export interface IGridHanderData {
-    items: Array<IGridGallery | IGridShowCase | IGridImages | IGridTextArea>;
+    items: Array<IGridGallery | IGridImages | IGridTextArea>;
   }
 }

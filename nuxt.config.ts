@@ -129,24 +129,6 @@ export default {
 
   // Control ssr
   ssr: process.env.SERVER_RENDER === "true",
-  purgeCSS: {
-    // whitelist spicific classes
-    whitelist: [],
-    // whitelist spicific classes and all that contains that naming
-    whitelistPatterns: [
-      /__layout/,
-      /__nuxt/,
-      /is-inview/,
-      /is/,
-      /hooper/,
-      /social-links__item/,
-      /svg/,
-      /g/,
-      /path/,
-      /rect/,
-      /fade-out/,
-    ],
-  },
   loaders: {
     ts: {
       silent: true,
