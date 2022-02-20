@@ -1,5 +1,5 @@
 declare namespace NGlobal {
-  export interface IImage {
+  export interface IMedia {
     url: string;
     tags: [];
     type: string;

@@ -1,0 +1,33 @@
+.contact-section {
+  padding-bottom: clamp(6rem, 10vw, 12rem);
+
+  a,
+  p,
+  span {
+    font-size: 1.4rem;
+    color: var(--color-secondary);
+    @include font-main;
+  }
+  &__small-title {
+    @include font-main-bold;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+  &__info {
+    li {
+      margin-bottom: 1rem;
+    }
+  }
+  &__info li {
+    margin-right: clamp(2rem, 4vw, 6rem);
+  }
+  &__social {
+    a {
+      font-size: 1rem;
+      font-size: 1.2rem;
+    }
+    li {
+      display: inline-block;
+    }
+  }
+}

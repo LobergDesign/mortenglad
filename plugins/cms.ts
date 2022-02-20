@@ -4,13 +4,12 @@ export default function (ctx: Context, inject: Inject) {
   const client = ctx.app.$graphql;
 
   // handle preview
-  const previewUrl = "https://morten-glad-preview.netlify.app";
+  const previewUrl = "https://morten-glad-preview.netlify.app/";
   const setPreviewBool = !!(
     process.env.BASE_URL === previewUrl ||
     ctx.app.$config.baseUrl === previewUrl
   );
   const isPreview = { isPreview: setPreviewBool };
-
   // get data from query
   const getData = async (query: string, preview: object = isPreview) => {
     try {

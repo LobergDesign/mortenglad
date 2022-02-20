@@ -1,18 +1,18 @@
 $icon-size: clamp(6rem, 5vw, 12rem);
 $icon-play-size: clamp(2rem, 2vw, 3rem);
 
-.grid-showcase {
+.video {
   a {
     display: block;
     margin-top: -3rem;
   }
 
-  &__video {
+  &__item {
     margin-top: 3rem;
     position: relative;
   }
   // overlay
-  &__video-overlay {
+  &__overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,7 +24,7 @@ $icon-play-size: clamp(2rem, 2vw, 3rem);
     transition: $transition;
   }
   // icon
-  &__video-icon {
+  &__icon {
     cursor: pointer;
     @include position-center;
     background-color: var(--color-cta);
@@ -34,7 +34,7 @@ $icon-play-size: clamp(2rem, 2vw, 3rem);
     z-index: 2;
     transition: opacity $transition, transform $transition;
   }
-  &__video-icon svg {
+  &__icon svg {
     width: $icon-play-size;
     height: $icon-play-size;
     margin-left: 0.5rem;
@@ -43,12 +43,12 @@ $icon-play-size: clamp(2rem, 2vw, 3rem);
 }
 
 // video is playing
-.grid-showcase__video.is-playing {
-  .grid-showcase__video-overlay {
+.video__item.is-playing {
+  .video__overlay {
     visibility: hidden;
     opacity: 0;
   }
-  .grid-showcase__video-icon {
+  .video__icon {
     opacity: 0;
     transform: scale(0) translateX(-50%) translateY(-50%);
   }

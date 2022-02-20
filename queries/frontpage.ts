@@ -18,7 +18,7 @@ const query = `query($isPreview: Boolean!) {
           title
         }
         cvCollectionsLinkText
-        dynamicBlockSectionCollection {
+        dynamicBlockSectionCollection(limit: 20) {
             items {
               blockType: __typename
               ...referenceAllBlocksFragment

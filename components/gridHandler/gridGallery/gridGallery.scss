@@ -6,7 +6,7 @@
 }
 .keen-slider {
   cursor: grab;
-  overflow: initial;
+  overflow: initial !important;
   margin-top: 4rem;
 
   &__slide {
@@ -40,4 +40,7 @@
       transform: none;
     }
   }
+}
+.keen-slider:not([data-keen-slider-disabled]) {
+  overflow: initial !important;
 }
