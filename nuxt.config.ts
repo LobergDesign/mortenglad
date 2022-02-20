@@ -17,7 +17,9 @@ export default {
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
-
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL || "http://localhost:3000/",
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ["~/assets/scss/main.scss"],
   // style resources
@@ -54,6 +56,11 @@ export default {
   },
   sitemap: {
     hostname: process.env.BASE_URL || "http://localhost:3000",
+    exclude: [
+      "/PageCv/",
+      "/PageResume/",
+      "/PageHome/, /PageGallery/, /PageShowreels/, /PageContact/",
+    ],
     // add trailing slash to final sitemap
     trailingSlash: true,
     priority: 1,
@@ -90,29 +97,18 @@ export default {
     },
   },
   // graphql
-  // graphql: {
-  // 	clients: {
-  // 		default: {
-  // 			endpoint: process.env.GRAPHQL_ENDPOINT,
-  // 			options: {
-  // 				headers: {
-  // 					authorization:
-  // 						"Bearer " +
-  // 						(process.env.BASE_URL === "https://morten-glad-preview.netlify.app"
-  // 							? process.env.GRAPHQL_PREVIEW_TOKEN
-  // 							: process.env.GRAPHQL_TOKEN),
-  // 				},
-  // 			},
-  // 		},
-  // 	},
-  // },
   graphql: {
     clients: {
       default: {
         endpoint: process.env.GRAPHQL_ENDPOINT,
         options: {
           headers: {
-            authorization: "Bearer " + process.env.GRAPHQL_TOKEN,
+            authorization:
+              "Bearer " +
+              (process.env.BASE_URL ===
+              "https://morten-glad-preview.netlify.app/"
+                ? process.env.GRAPHQL_PREVIEW_TOKEN
+                : process.env.GRAPHQL_TOKEN),
           },
         },
       },

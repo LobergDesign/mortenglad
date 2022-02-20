@@ -1,8 +1,8 @@
 import { referenceAllBlocksFragment } from "./fragments/referenceBlocks";
 import { seoFragment } from "./fragments/seo";
 import { heroFragment } from "./fragments/hero";
-const query = `query {
-  page: pageResume(id: "5BrH9tH85VtpxsV9YZDDwG") {
+const query = `query($isPreview: Boolean!) {
+  page: pageResume(id: "5BrH9tH85VtpxsV9YZDDwG", preview:$isPreview) {
         hero{
           ...heroFragment
         }
