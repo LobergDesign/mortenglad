@@ -1,0 +1,6 @@
+.hero {
+  padding: clamp(8rem, 9vw, 15rem) 0 clamp(9rem, 10vw, 17rem);
+  &__title {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,6 @@
+.image {
+  aspect-ratio: 16/9;
+  &.no-aspect-ratio {
+    aspect-ratio: unset;
+  }
+}

@@ -1,3 +1,4 @@
+import { extendRoutes, generate } from "./config/router";
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
@@ -21,31 +22,144 @@ export default {
   css: ["~/assets/scss/main.scss"],
   // style resources
   styleResources: {
-    scss: ["~/assets/scss/settings/vars.scss"],
+    scss: [
+      "~/assets/scss/settings/vars.scss",
+      "~/assets/scss/tools/mixins.scss",
+    ],
   },
 
-  // google fonts
-  googleFonts: {
-    families: {
-      "Roboto+Mono": [400],
-    },
-  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ["~/plugins/cms"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [{ path: "~/components", extensions: ["vue"] }],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
+    "nuxt-graphql-request",
+    "nuxt-gsap-module",
+    "@nuxt/image",
+    "@nuxtjs/svg",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/style-resources"],
+  modules: ["@nuxtjs/style-resources", "@nuxtjs/sitemap", "@nuxtjs/robots"],
+  robots: {
+    UserAgent: "*",
+    Disallow: process.env.ROBOTS === "false" ? "/" : "",
+    sitemap: process.env.BASE_URL + "/sitemap.xml",
+  },
+  sitemap: {
+    hostname: process.env.BASE_URL || "http://localhost:3000",
+    // add trailing slash to final sitemap
+    trailingSlash: true,
+    priority: 1,
+    path: "/sitemap.xml",
+    gzip: true,
+    generate: false,
+  },
+  // router
+  router: {
+    trailingSlash: true,
+    linkActiveClass: "is-active",
+    extendRoutes: async (routes: any, resolve: (...param: string[]) => Vue) =>
+      await extendRoutes(routes, resolve),
+  },
+  // generate
+  generate: {
+    fallback: true,
+    exclude: [
+      /PageCv/,
+      /PageResume/,
+      /PageHome/,
+      /PageGallery/,
+      /PageShowreels/,
+      /PageContact/,
+    ],
+    crawler: false,
+    routes: async () => await generate(),
+  },
 
+  // GSAP
+  gsap: {
+    clubPlugins: {
+      splitText: true,
+    },
+  },
+  // graphql
+  // graphql: {
+  // 	clients: {
+  // 		default: {
+  // 			endpoint: process.env.GRAPHQL_ENDPOINT,
+  // 			options: {
+  // 				headers: {
+  // 					authorization:
+  // 						"Bearer " +
+  // 						(process.env.BASE_URL === "https://morten-glad-preview.netlify.app"
+  // 							? process.env.GRAPHQL_PREVIEW_TOKEN
+  // 							: process.env.GRAPHQL_TOKEN),
+  // 				},
+  // 			},
+  // 		},
+  // 	},
+  // },
+  graphql: {
+    clients: {
+      default: {
+        endpoint: process.env.GRAPHQL_ENDPOINT,
+        options: {
+          headers: {
+            authorization: "Bearer " + process.env.GRAPHQL_TOKEN,
+          },
+        },
+      },
+    },
+  },
+
+  // images
+  image: {
+    cloudinary: {
+      baseURL:
+        "https://res.cloudinary.com/dzw0r5i7d/image/fetch/f_auto,c_scale,w_auto/",
+    },
+  },
+
+  // Control ssr
+  ssr: process.env.SERVER_RENDER === "true",
+  purgeCSS: {
+    // whitelist spicific classes
+    whitelist: [],
+    // whitelist spicific classes and all that contains that naming
+    whitelistPatterns: [
+      /__layout/,
+      /__nuxt/,
+      /is-inview/,
+      /is/,
+      /hooper/,
+      /social-links__item/,
+      /svg/,
+      /g/,
+      /path/,
+      /rect/,
+      /fade-out/,
+    ],
+  },
+  loaders: {
+    ts: {
+      silent: true,
+    },
+  },
+  // google fonts
+  googleFonts: {
+    families: {
+      "Roboto+Mono": { wght: [100 + ".." + 700] },
+    },
+    display: "swap",
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-}
+  loading: false,
+};

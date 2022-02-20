@@ -1,0 +1,23 @@
+.footer {
+  background-color: var(--color-alternative);
+  padding-top: clamp(8rem, 7vw, 11rem);
+  padding-bottom: clamp(2rem, 3vw, 4rem);
+  ul li {
+    display: inline-block;
+  }
+  a,
+  address {
+    font-size: 1.3rem;
+    color: var(--color-secondary);
+    @include font-main;
+  }
+  &__info li {
+    margin-right: clamp(2rem, 4vw, 6rem);
+  }
+  &__social {
+    a {
+      font-size: 1rem;
+      font-size: 1.2rem;
+    }
+  }
+}
