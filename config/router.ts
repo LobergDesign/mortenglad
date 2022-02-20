@@ -3,7 +3,7 @@ import { query } from "../queries/global";
 
 const siteStructure = async () => {
   const endpoint = process.env.GRAPHQL_ENDPOINT as string;
-  const previewUrl = "https://morten-glad-preview.netlify.app";
+  const previewUrl = "https://morten-glad-preview.netlify.app/";
   const token =
     process.env.BASE_URL === previewUrl
       ? process.env.GRAPHQL_PREVIEW_TOKEN

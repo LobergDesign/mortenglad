@@ -22,9 +22,10 @@
       >
         <nuxt-img
           v-if="item.url"
+          loading="lazy"
           provider="cloudinary"
           :src="item.url"
-          :sizes="'lg:100vw'"
+          :sizes="'sm:80vw lg:100vw'"
         />
       </div>
     </div>

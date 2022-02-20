@@ -9,12 +9,8 @@
       :profile-additional-collection="data.profileAdditionalCollection"
       :profile-collection="data.profileCollection"
     />
-    <!-- <pre>
-      {{ data }}
- </pre
-    > -->
     <lazy-grid-handler
-      v-if="data && data.dynamicBlockSectionCollection"
+      v-if="data.dynamicBlockSectionCollection"
       :data="data.dynamicBlockSectionCollection"
     />
   </div>

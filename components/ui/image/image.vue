@@ -16,7 +16,7 @@ export default Vue.extend({
   name: "UIImage",
   props: {
     data: {
-      type: Object as () => NGlobal.IImage,
+      type: Object as () => NGlobal.IMedia,
       default: null,
     },
     sizes: {
