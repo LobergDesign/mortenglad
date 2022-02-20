@@ -1,7 +1,6 @@
 <template>
   <div>
     <section v-for="(item, i) in data.items" :key="i" class="spacing-b">
-      {{ item }}
       <lazy-grid-show-case
         v-if="item.blockType === 'ShowcaseSection'"
         :data="item"
@@ -14,6 +13,7 @@
         v-if="item.blockType === 'SimpleTextArea'"
         :data="item"
       />
+      <lazy-grid-images v-if="item.blockType === 'ImageSection'" :data="item" />
     </section>
   </div>
 </template>

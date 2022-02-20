@@ -12,7 +12,6 @@ const referenceAllBlocksFragment = `fragment referenceAllBlocksFragment on Entry
       linkTextToInternalPage
     }
     ... on ImageSection {
-      title
       images
     }
     ... on GallerySection {
