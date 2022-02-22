@@ -54,20 +54,7 @@ export default {
     Disallow: process.env.ROBOTS === "false" ? "/" : "",
     sitemap: process.env.BASE_URL + "/sitemap.xml",
   },
-  sitemap: {
-    hostname: process.env.BASE_URL || "http://localhost:3000",
-    exclude: [
-      "/PageCv/",
-      "/PageResume/",
-      "/PageHome/, /PageGallery/, /PageShowreels/, /PageContact/",
-    ],
-    // add trailing slash to final sitemap
-    trailingSlash: true,
-    priority: 1,
-    path: "/sitemap.xml",
-    gzip: true,
-    generate: false,
-  },
+
   // router
   router: {
     trailingSlash: true,
@@ -88,6 +75,23 @@ export default {
     ],
     crawler: false,
     routes: async () => await generate(),
+  },
+  sitemap: {
+    hostname: process.env.BASE_URL || "http://localhost:3000",
+    exclude: [
+      "/PageCv/",
+      "/PageResume/",
+      "/PageHome/",
+      "/PageGallery/",
+      "/PageShowreels/",
+      "/PageContact/",
+    ],
+    // add trailing slash to final sitemap
+    trailingSlash: true,
+    priority: 1,
+    path: "/sitemap.xml",
+    gzip: true,
+    generate: false,
   },
 
   // GSAP
