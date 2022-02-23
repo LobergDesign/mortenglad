@@ -1,7 +1,6 @@
-import { simpleAnimation } from "~/utils/transitions";
+import { simpleAnimation, inviewSplitLineEffect } from "~/utils/transitions";
 
 const ioSimple = (targets: any, gsap: NLib.IGsap) => {
-  console.log("targets from io.ts", targets);
   // set initial value
 
   simpleAnimation(targets, gsap).init();
@@ -9,10 +8,8 @@ const ioSimple = (targets: any, gsap: NLib.IGsap) => {
   const initIo = (target: any) => {
     const io = new IntersectionObserver((entries: any, observer) => {
       const en = entries[0];
-      console.log("entries", en);
       if (en.isIntersecting) {
         const e = en.target as HTMLElement;
-        console.log("e", en.isIntersecting);
         simpleAnimation(e, gsap).action();
         observer.unobserve(e);
       }
@@ -74,37 +71,18 @@ const ioSplitLineAnimation = (
   // set initial value
 
   const initIo = (target: any) => {
+    const options = {
+      rootMargin: "300px",
+    };
     const io = new IntersectionObserver((entries: any, observer) => {
       const en = entries[0];
       const target = en.target as HTMLElement;
-      const t1 = gsap.timeline();
-      // eslint-disable-next-line no-new
-      new (SplitText as any)(target, {
-        type: "lines",
-        linesClass: "child",
-      });
-      // eslint-disable-next-line no-new
-      new (SplitText as any)(target, {
-        type: "lines",
-        linesClass: "overflow-hidden",
-      });
-      t1.set(".child", {
-        yPercent: 100,
-        opacity: 0,
-      });
-      //   console.log("target", en);
+      inviewSplitLineEffect(target, gsap, SplitText).init();
       if (en.isIntersecting) {
-        t1.to(".child", {
-          duration: 0.8,
-          yPercent: 0,
-          force3D: true,
-          opacity: 1,
-          ease: "power3.inOut",
-          stagger: 0.05,
-        });
+        inviewSplitLineEffect(target, gsap, SplitText).action();
         observer.unobserve(target);
       }
-    });
+    }, options);
     io.observe(target);
   };
   targets.forEach(initIo);

@@ -77,4 +77,40 @@ const inviewSplitCharAnimmation = (
   return { init, action };
 };
 
-export { inviewSplitCharAnimmation, simpleAnimation };
+// headline animation
+const inviewSplitLineEffect = (
+  target: HTMLElement,
+  gsap: NLib.IGsap,
+  SplitText: NLib.ISplitText
+) => {
+  const t1 = gsap.timeline();
+
+  const action = () => {
+    // eslint-disable-next-line no-new
+    new (SplitText as any)(target, {
+      type: "lines",
+      linesClass: "child",
+    });
+    // eslint-disable-next-line no-new
+    new (SplitText as any)(target, {
+      type: "lines",
+      linesClass: "overflow-hidden",
+    });
+    console.log("here", target);
+    const childTarget = target.querySelectorAll(".child");
+    t1.fromTo(
+      childTarget,
+      { yPercent: 100, opacity: 0 },
+      {
+        duration: 1.4,
+        yPercent: 0,
+        force3D: true,
+        opacity: 1,
+        ease: "power4.inOut",
+        stagger: 0.05,
+      }
+    );
+  };
+  return { action };
+};
+export { inviewSplitCharAnimmation, simpleAnimation, inviewSplitLineEffect };

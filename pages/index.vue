@@ -19,6 +19,7 @@ import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/frontpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
+import test from "~/utils/transitionSetter";
 export default Vue.extend({
   name: "IndexPage",
 
@@ -64,6 +65,14 @@ export default Vue.extend({
       cvLink: null,
       data: ({} as NPage.IStandardPage) || {},
     };
+  },
+  mounted() {
+    const SplitText = this.$SplitText;
+    // @ts-ignore
+    const gsap = this.$gsap as NLib.IGsap;
+    test(gsap, SplitText);
+    // const targets = document.querySelectorAll("[data-test-target]");
+    // console.log("targets", targets);
   },
 });
 </script>
