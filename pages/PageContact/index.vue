@@ -17,7 +17,7 @@
 import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/contactpage";
-
+import ioTransitions from "~/utils/transitionSetter";
 export default Vue.extend({
   name: "ContactPage",
 
@@ -42,6 +42,14 @@ export default Vue.extend({
   fetch() {
     const globalData = this.$store.state.global.globalSettings;
     if (globalData) this.global = globalData.globalSettings;
+  },
+  mounted() {
+    const SplitText = this.$SplitText;
+    const gsap = this.$gsap as NLib.IGsap;
+    ioTransitions(gsap, SplitText).init();
+    this.$nextTick(() => {
+      ioTransitions(gsap, SplitText).action();
+    });
   },
 });
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <h3>{{ data }}</h3>
+  <div>
+    <h3 data-split-line-effect>{{ data }}</h3>
+  </div>
 </template>
 
 <script lang="ts">
