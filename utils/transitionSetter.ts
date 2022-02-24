@@ -1,25 +1,33 @@
 import { inviewSplitLineEffect } from "./transitions";
 
 export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
-  const targets = document.querySelectorAll("[data-split-line-effect]");
-  const ioSplitLineAnimation = () => {
+  const splitLineEffects = document.querySelectorAll(
+    "[data-split-line-effect], [data-split-line-effect-bodytext] p"
+  );
+
+  const init = () => {
+    splitLineEffects.forEach((element) => {
+      inviewSplitLineEffect(element, gsap, SplitText).init();
+    });
+  };
+  const action = () => {
     const initIo = (target: any) => {
       const io = new IntersectionObserver(
         (entries: IntersectionObserverEntry[], observer) => {
-          console.log("entries", entries);
-          entries.forEach((entry: IntersectionObserverEntry) => {
-            if (entry.isIntersecting) {
-              console.log("object", entry.target);
-              const e = entry.target as HTMLElement;
+          const entry = entries[0] as IntersectionObserverEntry;
+          if (entry.isIntersecting) {
+            const e = entry.target as HTMLElement;
+            // split line effect
+            splitLineEffects &&
               inviewSplitLineEffect(e, gsap, SplitText).action();
-              observer.unobserve(target);
-            }
-          });
+            observer.unobserve(target);
+          }
         }
       );
       io.observe(target);
     };
-    targets.forEach(initIo);
+    // split line effect
+    splitLineEffects && splitLineEffects.forEach(initIo);
   };
-  return ioSplitLineAnimation();
+  return { action, init };
 }

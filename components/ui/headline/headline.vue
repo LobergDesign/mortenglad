@@ -29,40 +29,40 @@ export default Vue.extend({
       $SplitText: Object as () => NLib.IGsap,
     };
   },
-  // mounted() {
-  //   this.splitWord();
-  // },
-  // methods: {
-  //   splitWord() {
-  //     const SplitText = this.$SplitText;
-  //     const gsap = this.$gsap as NLib.IGsap;
-  //     const tl = gsap.timeline();
-  //     const target = document.querySelector("[data-custom-split-text]");
+  mounted() {
+    this.splitWord();
+  },
+  methods: {
+    splitWord() {
+      const SplitText = this.$SplitText;
+      const gsap = this.$gsap as NLib.IGsap;
+      const tl = gsap.timeline();
+      const target = document.querySelector("[data-custom-split-text]");
 
-  //     const mySplitText = new SplitText(target, {
-  //       type: "chars",
-  //     });
-  //     const chars = mySplitText.chars;
+      const mySplitText = new SplitText(target, {
+        type: "chars",
+      });
+      const chars = mySplitText.chars;
 
-  //     tl.fromTo(
-  //       chars,
-  //       {
-  //         opacity: 0,
-  //         x: -120,
-  //         fontWeight: 100,
-  //       },
-  //       {
-  //         fontWeight: 400,
-  //         x: 0,
-  //         opacity: 1,
-  //         force3D: true,
-  //         duration: 0.9,
-  //         stagger: 0.05,
-  //         ease: "power3.out",
-  //       }
-  //     );
-  //   },
-  // },
+      tl.fromTo(
+        chars,
+        {
+          opacity: 0,
+          x: -120,
+          fontWeight: 100,
+        },
+        {
+          fontWeight: 400,
+          x: 0,
+          opacity: 1,
+          force3D: true,
+          duration: 0.9,
+          stagger: 0.05,
+          ease: "power3.out",
+        }
+      );
+    },
+  },
 });
 </script>
 <style lang="scss" src="./headline.scss" scoped></style>
