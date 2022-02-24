@@ -35,25 +35,32 @@ export default Vue.extend({
   methods: {
     splitWord() {
       const SplitText = this.$SplitText;
-      // @ts-ignore
       const gsap = this.$gsap as NLib.IGsap;
       const tl = gsap.timeline();
       const target = document.querySelector("[data-custom-split-text]");
 
-      const mySplitText = new (SplitText as any)(target, {
+      const mySplitText = new SplitText(target, {
         type: "chars",
       });
       const chars = mySplitText.chars;
 
-      tl.from(chars, {
-        duration: 0.9,
-        opacity: 0,
-        x: -120,
-        force3D: true,
-        fontWeight: 100,
-        ease: "power3.out",
-        stagger: 0.05,
-      });
+      tl.fromTo(
+        chars,
+        {
+          opacity: 0,
+          x: -120,
+          fontWeight: 100,
+        },
+        {
+          fontWeight: 400,
+          x: 0,
+          opacity: 1,
+          force3D: true,
+          duration: 0.9,
+          stagger: 0.05,
+          ease: "power3.out",
+        }
+      );
     },
   },
 });
