@@ -1,0 +1,6 @@
+[data-split-line-effect],
+[data-split-line-effect-bodytext] {
+  .child {
+    will-change: transform, opacity;
+  }
+}
