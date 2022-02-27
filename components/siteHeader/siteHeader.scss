@@ -23,7 +23,6 @@
     width: clamp(6rem, 7vw, 9rem);
     height: 1.8rem;
     white-space: nowrap;
-    overflow: hidden;
 
     // active link
     &.nuxt-link-exact-active .header__menu-item-inner span {
@@ -103,5 +102,11 @@
           font-weight $transition--slow, opacity $transition--slow;
       }
     }
+  }
+}
+
+@include viewport-small {
+  .header {
+    padding-top: 1.5rem;
   }
 }
