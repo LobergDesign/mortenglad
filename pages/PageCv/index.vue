@@ -18,6 +18,7 @@ import Vue from "vue";
 import { query } from "~/queries/cvpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
 import ioTransitions from "~/utils/transitionSetter";
+import { loadSplitCharEffect } from "~/utils/transitions";
 export default Vue.extend({
   name: "CvPage",
 
@@ -46,9 +47,14 @@ export default Vue.extend({
   mounted() {
     const SplitText = this.$SplitText;
     const gsap = this.$gsap as NLib.IGsap;
-    ioTransitions(gsap, SplitText).init();
+    const target = document.querySelector(
+      "[data-load-split-char-effect]"
+    ) as HTMLElement;
+    target && ioTransitions(gsap, SplitText).init();
+    loadSplitCharEffect(target, gsap, SplitText).init();
     this.$nextTick(() => {
       ioTransitions(gsap, SplitText).action();
+      target && loadSplitCharEffect(target, gsap, SplitText).action();
     });
   },
 });
