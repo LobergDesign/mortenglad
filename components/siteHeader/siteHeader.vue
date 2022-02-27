@@ -11,7 +11,7 @@
           <ul class="reset-ul header__menu">
             <li v-for="(item, index) in data.menu.items" :key="index">
               <nuxt-link
-                :to="item.slug"
+                :to="item.slug === '/' ? '/' : `/${item.slug}/`"
                 class="header__menu-item"
                 :class="{ 'is-medium-string': item.title.length > 4 }"
               >
