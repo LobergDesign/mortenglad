@@ -3,7 +3,7 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-10 grid-sm-12">
-          <h1 v-if="title" class="hero__title">
+          <h1 v-if="title" class="hero__title" data-load-split-char-effect>
             {{ title }}
           </h1>
         </div>

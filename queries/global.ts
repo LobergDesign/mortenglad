@@ -18,6 +18,10 @@ const query = `query {
       youtube
       contactFormTitle
       contactFormSuccessMessage
+      pageNotFoundTitle
+      pageNotFoundBodytext {
+        json
+      }
     }
   }
   ${referencePagesFragment}
