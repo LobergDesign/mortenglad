@@ -123,7 +123,7 @@ export default {
   image: {
     cloudinary: {
       baseURL:
-        "https://res.cloudinary.com/dzw0r5i7d/image/fetch/f_auto,c_scale,w_auto/",
+        "https://res.cloudinary.com/dzw0r5i7d/image/website/fetch/f_auto,c_scale,w_auto/",
     },
   },
 

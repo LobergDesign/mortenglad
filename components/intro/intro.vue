@@ -5,11 +5,15 @@
         <div
           class="grid-c-6-offset-3 grid-c-8-offset-2-xl grid-remove-offset-sm"
         >
-          <ui-headline-medium :data="data.introTitle" />
+          <ui-headline-medium v-if="data.introTitle" :data="data.introTitle" />
           <div class="grid-r">
             <div class="grid-c-10-offset-1 grid-remove-offset-md">
-              <ui-bodytext :data="data.introBodytext" />
+              <ui-bodytext
+                v-if="data.introBodytext"
+                :data="data.introBodytext"
+              />
               <ui-link
+                v-if="data.introLink"
                 :data="{ link: data.introLink, linktext: data.introLinkText }"
               />
             </div>
