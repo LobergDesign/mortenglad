@@ -15,7 +15,8 @@ h1,
 }
 .h1.xl,
 h1.xl {
-  font-size: clamp(15rem, 21vw, 30rem);
+  font-size: clamp(10rem, 21vw, 30rem);
+  margin-bottom: 0;
 }
 h2,
 .h2 {
