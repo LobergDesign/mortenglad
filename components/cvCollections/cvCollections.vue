@@ -6,8 +6,9 @@
           class="grid-c-md-12 grid-c-4"
           :class="{ 'text-right text-right--reset-md': i === 1 }"
         >
-          <lazy-ui-headline-small :data="item.title" />
+          <lazy-ui-headline-small v-if="item.title" :data="item.title" />
           <cv-collection-link
+            v-if="item && link"
             :data="{ collectionType: item.collectionType, link }"
           />
         </div>
@@ -16,6 +17,7 @@
           :class="{ 'grid-revert grid-revert--reset-md': i === 1 }"
         >
           <cv-collection-item
+            v-if="item"
             :headlines="item.tabelHeadlines"
             :items="item.itemsCollection.items"
           />
