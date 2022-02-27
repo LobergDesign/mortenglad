@@ -29,12 +29,6 @@ export default Vue.extend({
       default: null,
     },
   },
-  data() {
-    return {
-      $gsap: Object as () => NLib.IGsap,
-      $SplitText: Object as () => NLib.IGsap,
-    };
-  },
 });
 </script>
 <style lang="scss" src="./headline.scss" scoped></style>

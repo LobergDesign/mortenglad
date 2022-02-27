@@ -21,7 +21,7 @@ const loadSplitCharEffect = (
 
     tl.fromTo(
       chars,
-      { opacity: 0, x: -250, fontWeight: 100 },
+      { opacity: 0, x: -150, fontWeight: 100 },
       {
         fontWeight: 400,
         x: 0,

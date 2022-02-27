@@ -68,16 +68,16 @@ export default Vue.extend({
     };
   },
   mounted() {
+    const SplitText = this.$SplitText;
+    const gsap = this.$gsap as NLib.IGsap;
     const target = document.querySelector(
       "[data-load-split-char-effect]"
     ) as HTMLElement;
-    const SplitText = this.$SplitText;
-    const gsap = this.$gsap as NLib.IGsap;
-    ioTransitions(gsap, SplitText).init();
+    target && ioTransitions(gsap, SplitText).init();
     loadSplitCharEffect(target, gsap, SplitText).init();
     this.$nextTick(() => {
       ioTransitions(gsap, SplitText).action();
-      loadSplitCharEffect(target, gsap, SplitText).action();
+      target && loadSplitCharEffect(target, gsap, SplitText).action();
     });
   },
 });
