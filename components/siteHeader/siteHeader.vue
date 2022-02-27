@@ -1,5 +1,8 @@
 <template>
-  <header class="header flex-vertical-center">
+  <header
+    class="header flex-vertical-center"
+    :class="{ ' is-ux-optimized ': isUXOptimized }"
+  >
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-4">
@@ -8,7 +11,13 @@
           </nuxt-link>
         </div>
         <div class="grid-c-8 flex-end">
-          <ul class="reset-ul header__menu">
+          <button type="button" class="header__menu-icon" @click="toggleMenu">
+            menu
+          </button>
+          <ul
+            class="reset-ul header__menu"
+            :class="{ 'is-active': isMenuActive }"
+          >
             <li v-for="(item, index) in data.menu.items" :key="index">
               <nuxt-link
                 :to="item.slug === '/' ? '/' : `/${item.slug}/`"
@@ -44,6 +53,47 @@ export default Vue.extend({
       default: null,
     },
   },
+  data() {
+    return {
+      isMenuActive: false,
+      isUXOptimized: false,
+    };
+  },
+  mounted() {
+    this.resize();
+    this.handleScroll();
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuActive = !this.isMenuActive;
+    },
+    resize() {
+      window.addEventListener("resize", this.handleOptimized);
+    },
+    isDevices() {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    handleOptimized() {
+      this.isDevices
+        ? (this.isUXOptimized = true)
+        : (this.isUXOptimized = false);
+    },
+    handleScroll() {
+      const scrollTop =
+        window.pageYOffset ||
+        (document.documentElement || document.body.parentNode || document.body)
+          .scrollTop;
+      scrollTop > 290
+        ? (this.isUXOptimized = true)
+        : (this.isUXOptimized = false);
+    },
+  },
 });
 </script>
 <style lang="scss" src="./siteHeader.scss" scoped></style>
+<style lang="scss" src="./siteHeaderControl.scss" scoped></style>
