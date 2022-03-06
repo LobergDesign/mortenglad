@@ -16,7 +16,7 @@
     "@contentful/rich-text-html-renderer": "^15.11.1",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
-    "core-js": "^3.19.3",
+    "core-js": "^3.21.1",
     "gsap": "npm:@gsap/shockingly@^3.9.1",
     "keen-slider": "^6.6.3",
     "nuxt": "^2.15.8",
