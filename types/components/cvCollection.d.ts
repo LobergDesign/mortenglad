@@ -3,6 +3,7 @@ declare namespace NCVCollection {
     type: string;
     production: string;
     role: string;
+    city: string;
     year: string;
     additionalContent: Object;
     place: string;

@@ -32,7 +32,15 @@ declare namespace NGlobal {
     route?: string;
     name?: string;
   }
+  export interface ISeo {
+    metaTitle: string;
+    metaDescription: string;
+    openGraphTitle: string;
+    openGraphType: string;
+    openGraphimage: IMedia;
+  }
 }
+
 declare module "*.svg?inline" {
   import Vue from "vue";
   export default Vue;

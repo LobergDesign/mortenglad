@@ -27,6 +27,7 @@ import Vue from "vue";
 import { query } from "~/queries/showreelspage";
 import { loadSplitCharEffect } from "~/utils/transitions";
 import ioTransitions from "~/utils/transitionSetter";
+import setHead from "~/config/head";
 
 export default Vue.extend({
   name: "ShowreelsPage",
@@ -39,6 +40,7 @@ export default Vue.extend({
     } else {
       return {
         data: response.page,
+        seo: response.page.seo,
       };
     }
   },
@@ -46,6 +48,9 @@ export default Vue.extend({
     return {
       data: ({} as NPage.IStandardPage) || {},
     };
+  },
+  head(): any {
+    return setHead(this.seo || null);
   },
   mounted() {
     const SplitText = this.$SplitText;

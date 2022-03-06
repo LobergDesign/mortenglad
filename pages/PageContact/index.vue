@@ -19,6 +19,7 @@ import Vue from "vue";
 import { query } from "~/queries/contactpage";
 import { loadSplitCharEffect } from "~/utils/transitions";
 import ioTransitions from "~/utils/transitionSetter";
+import setHead from "~/config/head";
 export default Vue.extend({
   name: "ContactPage",
 
@@ -30,6 +31,7 @@ export default Vue.extend({
     } else {
       return {
         data: response.page,
+        seo: response.page.seo,
       };
     }
   },
@@ -40,9 +42,13 @@ export default Vue.extend({
       global: ({} as NGlobalData.IGlobalData) || {},
     };
   },
+
   fetch() {
     const globalData = this.$store.state.global.globalSettings;
     if (globalData) this.global = globalData.globalSettings;
+  },
+  head(): any {
+    return setHead(this.seo || null);
   },
   mounted() {
     const SplitText = this.$SplitText;

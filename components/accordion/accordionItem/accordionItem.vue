@@ -1,24 +1,24 @@
 <template>
   <div class="accordion-item spacing-b">
     <!-- IF THERE IS 4 HEADLINES -->
-    <template v-if="headlines.length === 4">
+    <template v-if="headlines.length <= 4">
       <div class="grid-r last-text-align-right accordion-item__title-list">
-        <div class="grid-c-3 hide-mobile">
+        <div v-if="headlines.length > 0" class="grid-c-3 hide-mobile">
           <span class="accordion-item__title">
             {{ headlines[0] }}
           </span>
         </div>
-        <div class="grid-c-5 hide-mobile">
+        <div v-if="headlines.length > 1" class="grid-c-5 hide-mobile">
           <span class="accordion-item__title">
             {{ headlines[1] }}
           </span>
         </div>
-        <div class="grid-c-3 hide-mobile">
+        <div v-if="headlines.length > 2" class="grid-c-3 hide-mobile">
           <span class="accordion-item__title">
             {{ headlines[2] }}
           </span>
         </div>
-        <div class="grid-c-1 hide-mobile">
+        <div v-if="headlines.length > 3" class="grid-c-1 hide-mobile">
           <span class="accordion-item__title">
             {{ headlines[3] }}
           </span>
@@ -34,51 +34,6 @@
         </li>
       </ul>
     </template>
-    <!-- IF THERE IS 3 HEADLINES -->
-    <template v-if="headlines.length === 3">
-      <div class="grid-r last-text-align-right accordion-item__title-list">
-        <div class="grid-c-5 hide-mobile">
-          <span class="accordion-item__title">
-            {{ headlines[0] }}
-          </span>
-        </div>
-        <div class="grid-c-6 hide-mobile">
-          <span class="accordion-item__title">
-            {{ headlines[1] }}
-          </span>
-        </div>
-        <div class="grid-c-1 hide-mobile">
-          <span class="accordion-item__title">
-            {{ headlines[2] }}
-          </span>
-        </div>
-      </div>
-      <ul class="reset-ul">
-        <li v-for="(item, i) in items" :key="i">
-          <lazy-accordion-nested-item
-            :data="item"
-            :len="headlines.length"
-            :headlines="headlines"
-          />
-        </li>
-      </ul>
-    </template>
-    <!-- IF THERE IS 2 HEADLINES -->
-    <template v-if="headlines.length === 2">
-      <div v-if="headlines.length === 2" class="grid-r">
-        <div
-          v-for="(headline, index) in headlines"
-          :key="index"
-          class="grid-c-4"
-        >
-          {{ headline }}
-        </div>
-      </div>
-    </template>
-    <!-- <pre>
-     {{ items }}
-   </pre
-    > -->
   </div>
 </template>
 
