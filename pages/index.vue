@@ -21,6 +21,7 @@ import { query } from "~/queries/frontpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
 import ioTransitions from "~/utils/transitionSetter";
 import { loadSplitCharEffect } from "~/utils/transitions";
+import setHead from "~/config/head";
 export default Vue.extend({
   name: "IndexPage",
 
@@ -55,6 +56,7 @@ export default Vue.extend({
         intro,
         cvLink,
         cvCollection: cvCollection.page || null,
+        seo: data.seo,
       };
     }
   },
@@ -66,6 +68,9 @@ export default Vue.extend({
       cvLink: null,
       data: ({} as NPage.IStandardPage) || {},
     };
+  },
+  head(): any {
+    return setHead(this.seo || null);
   },
   mounted() {
     const SplitText = this.$SplitText;

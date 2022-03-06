@@ -12,7 +12,7 @@
         </div>
         <div class="grid-c-8 flex-end">
           <button type="button" class="header__menu-icon" @click="toggleMenu">
-            menu
+            Menu
           </button>
           <ul
             class="reset-ul header__menu"

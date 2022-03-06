@@ -74,3 +74,11 @@ $accordion-toggle-icon-size: 1rem;
     transform: rotate(-45deg);
   }
 }
+
+@include viewport-medium {
+  .accordion-nested-item {
+    &.has-additional-content {
+      row-gap: clamp(1.5rem, 1.8vw, 4rem);
+    }
+  }
+}

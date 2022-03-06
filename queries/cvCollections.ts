@@ -25,6 +25,7 @@ const query = `query($limit: Int, $isPreview: Boolean!) {
             items {
               educationcourse
               place
+              city
               year
               additionalContent {
                 json
@@ -39,6 +40,7 @@ const query = `query($limit: Int, $isPreview: Boolean!) {
             items {
               workshop
               place
+              city
               year
               additionalContent {
                 json

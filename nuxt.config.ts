@@ -42,6 +42,7 @@ export default {
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
     "nuxt-graphql-request",
+    "@aceforth/nuxt-netlify",
     "nuxt-gsap-module",
     "@nuxt/image",
     "@nuxtjs/svg",
@@ -93,13 +94,24 @@ export default {
     gzip: true,
     generate: false,
   },
-
-  // GSAP
-  gsap: {
-    clubPlugins: {
-      splitText: true,
+  // netlify
+  netlify: {
+    redirects: [
+      {
+        from: "https://morten-glad-prod.netlify.app/",
+        to: "https://mortenglad.dk/",
+      },
+      {
+        from: "http://morten-glad-prod.netlify.app/",
+        to: "https://mortenglad.dk/",
+      },
+    ],
+    headers: {
+      "/*": ["Access-Control-Allow-Origin: *"],
+      "/favicon.ico": ["Cache-Control: public, max-age=86400"],
     },
   },
+
   // graphql
   graphql: {
     clients: {
@@ -118,12 +130,17 @@ export default {
       },
     },
   },
-
+  // GSAP
+  gsap: {
+    clubPlugins: {
+      splitText: true,
+    },
+  },
   // images
   image: {
     cloudinary: {
       baseURL:
-        "https://res.cloudinary.com/dzw0r5i7d/image/website/fetch/f_auto,c_scale,w_auto/",
+        "https://res.cloudinary.com/dzw0r5i7d/image/fetch/f_auto,c_scale,w_auto/",
     },
   },
 
