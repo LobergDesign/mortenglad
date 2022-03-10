@@ -1,0 +1,16 @@
+.image-gallery {
+  overflow: hidden;
+}
+.image-gallery-enlarged {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  white-space: nowrap;
+  .is-active {
+    padding: 2rem;
+    background-color: red;
+  }
+  li {
+    display: inline-block;
+  }
+}

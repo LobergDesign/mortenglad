@@ -5,17 +5,8 @@
       :title="data.hero.title"
       :bodytext="data.hero.bodytext"
     />
-    <div class="grid-w spacing-b">
-      <ul v-if="data.images" class="reset-ul grid-r">
-        <li
-          v-for="(item, i) in data.images"
-          :key="i"
-          class="grid-c-4 grid-c-sm-6"
-        >
-          <ui-image :data="item" :sizes="'sm:50vw lg:500px'" />
-        </li>
-      </ul>
-    </div>
+
+    <image-gallery :images="data.images" />
 
     <lazy-grid-handler
       v-if="data.dynamicBlockSectionCollection"
