@@ -1,11 +1,15 @@
 .image-gallery {
   overflow: hidden;
+  img {
+    cursor: pointer;
+  }
 }
 .image-gallery-enlarged {
   margin: 0;
   padding: 0;
   position: relative;
   white-space: nowrap;
+  transition: all $transition;
   .is-active {
     padding: 2rem;
     background-color: red;
@@ -13,4 +17,8 @@
   li {
     display: inline-block;
   }
+}
+.is-inactive {
+  opacity: 0.3;
+  pointer-events: none;
 }

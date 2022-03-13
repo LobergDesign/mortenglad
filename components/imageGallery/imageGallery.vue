@@ -18,6 +18,19 @@
         </div>
       </li>
     </ul>
+    <div class="grid-w">
+      <div class="grid-r">
+        <div class="grid-c-6">
+          <button type="button" :class="{ 'is-inactive': !less }" @click="prev">
+            Prev
+          </button>
+          <button type="button" :class="{ 'is-inactive': !more }" @click="next">
+            next {{ !more }}
+          </button>
+        </div>
+        <div class="grid-c-6"></div>
+      </div>
+    </div>
     <ul ref="gallery" class="image-gallery-enlarged">
       <li
         v-for="(item, i) in images"
@@ -53,21 +66,42 @@ export default Vue.extend({
     return {
       activeIndex: 0,
       imageAmount: this.images.length,
+      more: true,
+      less: false,
     };
   },
   methods: {
+    moreLess() {
+      // more
+      this.activeIndex === this.imageAmount - 1
+        ? (this.more = false)
+        : (this.more = true);
+      // less
+      this.activeIndex === 0 ? (this.less = false) : (this.less = true);
+    },
     setActiveIndex(i: number) {
       this.activeIndex = i;
       this.setActiveImage(i);
+      this.moreLess();
     },
     setActiveImage(index: number) {
-      console.log("images", this.imageAmount);
-      console.log("index", index);
       const imageGallery = this.$refs.gallery as HTMLElement;
       const transform = index * 100;
-      console.log(transform);
       imageGallery.style.transform = `translateX(-${transform}%)`;
-      console.log("imageGallery", imageGallery);
+    },
+    next() {
+      const imageGallery = this.$refs.gallery as HTMLElement;
+      this.activeIndex = ++this.activeIndex;
+      const transform = this.activeIndex * 100;
+      imageGallery.style.transform = `translateX(-${transform}%)`;
+      this.moreLess();
+    },
+    prev() {
+      const imageGallery = this.$refs.gallery as HTMLElement;
+      this.activeIndex = --this.activeIndex;
+      const transform = this.activeIndex / 100;
+      imageGallery.style.transform = `translateX(-${transform}%)`;
+      this.moreLess();
     },
   },
 });
