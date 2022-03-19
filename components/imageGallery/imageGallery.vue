@@ -1,9 +1,6 @@
 <template>
   <div class="grid-w spacing-b image-gallery">
-    <!-- <pre>
-      {{ images }}
-    </pre> -->
-    <ul class="reset-ul grid-r">
+    <ul class="reset-ul grid-r image-gallery__list">
       <li v-for="(item, i) in images" :key="i" class="grid-c-4 grid-c-sm-6">
         <div class="image" @click="setActiveIndex(i)">
           <nuxt-img
@@ -12,58 +9,68 @@
             :src="item.secure_url"
             sizes="sm:100vw md:50vw lg:400px"
           />
-          <h3>
-            {{ i }}
-          </h3>
         </div>
       </li>
     </ul>
-    <div class="grid-w">
-      <div class="grid-r">
-        <div class="grid-c-6">
-          <button type="button" :class="{ 'is-inactive': !less }" @click="prev">
-            Prev
-          </button>
-          <button type="button" :class="{ 'is-inactive': !more }" @click="next">
-            next {{ !more }}
-          </button>
-        </div>
-        <div class="grid-c-6"></div>
-      </div>
-    </div>
-    <ul ref="gallery" class="image-gallery-enlarged">
-      <li
-        v-for="(item, i) in images"
-        :key="i"
-        :class="{ 'is-active': activeIndex === i }"
+
+    <div v-if="isActive" class="image-gallery-enlarged">
+      <button
+        type="button"
+        class="image-gallery-enlarged__close"
+        @click="closeGallery"
       >
-        <div class="image">
-          <nuxt-img
-            v-if="item.original_secure_url"
-            provider="cloudinary"
-            :src="item.original_secure_url"
-          />
-          <h3>
-            {{ i }}
-          </h3>
-        </div>
-      </li>
-    </ul>
+        <Cross />
+      </button>
+      <div class="image-gallery-enlarged__backdrop" @click="closeGallery"></div>
+      <button
+        type="button"
+        class="image-gallery-enlarged__btn"
+        :class="{ 'is-inactive': !less }"
+        @click="prev"
+      >
+        <Arrow />
+      </button>
+      <ul ref="gallery" class="image-gallery-enlarged__list">
+        <li v-for="(item, i) in images" :key="i">
+          <div class="image" :class="{ 'is-active': activeIndex === i }">
+            <nuxt-img
+              v-if="item.original_secure_url"
+              provider="cloudinary"
+              :src="item.original_secure_url"
+            />
+          </div>
+        </li>
+      </ul>
+      <button
+        type="button"
+        class="image-gallery-enlarged__btn image-gallery-enlarged__btn--next"
+        :class="{ 'is-inactive': !more }"
+        @click="next"
+      >
+        <Arrow />
+      </button>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-
+import Arrow from "~/assets/svg/arrow.svg?inline";
+import Cross from "~/assets/svg/cross.svg?inline";
 export default Vue.extend({
   name: "ImageGallery",
+  components: {
+    Arrow,
+    Cross,
+  },
   props: {
     images: {
-      type: Array,
+      type: Array as () => NGlobal.IMedia[],
       default: null,
     },
   },
   data() {
     return {
+      isActive: false,
       activeIndex: 0,
       imageAmount: this.images.length,
       more: true,
@@ -83,18 +90,27 @@ export default Vue.extend({
     // set active slide index
     setActiveIndex(i: number) {
       this.activeIndex = i;
-      this.setActiveImage(i);
+      this.slideGallery(false);
       this.moreLess();
+      this.isActive = true;
     },
     // slide gallery
-    slideGallery() {
+    slideGallery(animate: boolean = true) {
       const imageGallery = this.$refs.gallery as HTMLElement;
       const transform = this.activeIndex * 100;
-      imageGallery.style.transform = `translateX(-${transform}%)`;
-    },
-    // set inital active image on click
-    setActiveImage() {
-      this.slideGallery();
+      const gsap = this.$gsap as NLib.IGsap;
+      if (animate) {
+        gsap.to(imageGallery, {
+          duration: 0.7,
+          xPercent: "-" + transform,
+          ease: "power4.out",
+        });
+      } else {
+        gsap.to(imageGallery, {
+          duration: 0,
+          xPercent: "-" + transform,
+        });
+      }
     },
     // slide next
     next() {
@@ -107,6 +123,10 @@ export default Vue.extend({
       this.activeIndex = --this.activeIndex;
       this.slideGallery();
       this.moreLess();
+    },
+    // close gallery
+    closeGallery() {
+      this.isActive = false;
     },
   },
 });

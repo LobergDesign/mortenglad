@@ -33,6 +33,11 @@ img {
   height: 100%;
   object-fit: cover;
 }
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
 .video-list {
   .video__item {
     margin-top: 0;
