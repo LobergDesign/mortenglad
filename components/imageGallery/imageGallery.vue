@@ -71,6 +71,7 @@ export default Vue.extend({
     };
   },
   methods: {
+    // method to show/hide prev/next
     moreLess() {
       // more
       this.activeIndex === this.imageAmount - 1
@@ -79,28 +80,32 @@ export default Vue.extend({
       // less
       this.activeIndex === 0 ? (this.less = false) : (this.less = true);
     },
+    // set active slide index
     setActiveIndex(i: number) {
       this.activeIndex = i;
       this.setActiveImage(i);
       this.moreLess();
     },
-    setActiveImage(index: number) {
+    // slide gallery
+    slideGallery() {
       const imageGallery = this.$refs.gallery as HTMLElement;
-      const transform = index * 100;
-      imageGallery.style.transform = `translateX(-${transform}%)`;
-    },
-    next() {
-      const imageGallery = this.$refs.gallery as HTMLElement;
-      this.activeIndex = ++this.activeIndex;
       const transform = this.activeIndex * 100;
       imageGallery.style.transform = `translateX(-${transform}%)`;
+    },
+    // set inital active image on click
+    setActiveImage() {
+      this.slideGallery();
+    },
+    // slide next
+    next() {
+      this.activeIndex = ++this.activeIndex;
+      this.slideGallery();
       this.moreLess();
     },
+    // slide prev
     prev() {
-      const imageGallery = this.$refs.gallery as HTMLElement;
       this.activeIndex = --this.activeIndex;
-      const transform = this.activeIndex / 100;
-      imageGallery.style.transform = `translateX(-${transform}%)`;
+      this.slideGallery();
       this.moreLess();
     },
   },
