@@ -89,6 +89,9 @@
   .text-right--reset-md {
     text-align: left;
   }
+  .reset-flex-end-md {
+    justify-content: left;
+  }
 }
 
 @include viewport-small {

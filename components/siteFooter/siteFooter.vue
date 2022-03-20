@@ -23,7 +23,7 @@
             </li>
           </ul>
         </div>
-        <div class="grid-c-3 grid-c-sm-12 flex-end">
+        <div class="grid-c-3 grid-c-sm-12 flex-end reset-flex-end-md">
           <ul class="reset-ul footer__social">
             <li v-if="data.facebook">
               <a :href="data.facebook" target="_blank">Facebook</a>
