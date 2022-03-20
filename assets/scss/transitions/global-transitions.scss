@@ -4,3 +4,17 @@
     will-change: transform, opacity;
   }
 }
+[data-load-split-char-effect] {
+  > div {
+    will-change: font-weight, opacity, transform;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

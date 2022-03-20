@@ -100,10 +100,7 @@ export default {
       {
         from: "https://morten-glad-prod.netlify.app/",
         to: "https://mortenglad.dk/",
-      },
-      {
-        from: "http://morten-glad-prod.netlify.app/",
-        to: "https://mortenglad.dk/",
+        force: true,
       },
     ],
     headers: {

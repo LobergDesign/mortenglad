@@ -59,10 +59,17 @@ export default Vue.extend({
       isUXOptimized: false,
     };
   },
+  // watch on route changes
+  watch: {
+    $route() {
+      this.isMenuActive = false;
+    },
+  },
   mounted() {
     this.resize();
     this.handleScroll();
     window.addEventListener("scroll", this.handleScroll);
+    this.handleOptimized();
   },
   methods: {
     toggleMenu() {
@@ -79,18 +86,23 @@ export default Vue.extend({
       }
     },
     handleOptimized() {
-      this.isDevices
+      this.isDevices()
         ? (this.isUXOptimized = true)
         : (this.isUXOptimized = false);
     },
     handleScroll() {
-      const scrollTop =
-        window.pageYOffset ||
-        (document.documentElement || document.body.parentNode || document.body)
-          .scrollTop;
-      scrollTop > 290
-        ? (this.isUXOptimized = true)
-        : (this.isUXOptimized = false);
+      if (!this.isDevices()) {
+        const scrollTop =
+          window.pageYOffset ||
+          (
+            document.documentElement ||
+            document.body.parentNode ||
+            document.body
+          ).scrollTop;
+        scrollTop > 290
+          ? (this.isUXOptimized = true)
+          : (this.isUXOptimized = false);
+      }
     },
   },
 });

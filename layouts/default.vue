@@ -19,6 +19,7 @@ export default Vue.extend({
       footer: {},
     };
   },
+
   async fetch() {
     await this.$store.dispatch("global/fetchGlobalSettings");
     const globalData = this.$store.state.global.globalSettings;
