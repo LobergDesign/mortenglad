@@ -1,5 +1,7 @@
-$gallary-btn-size: clamp(3rem, 4vw, 5rem);
-
+$gallary-btn-size: clamp(4rem, 4vw, 5rem);
+$gallery-width-size: 80vw;
+$gallery-height-size: 80vh;
+$gallery-width-size-sm: 92vw;
 .image-gallery {
   overflow: hidden;
   &__list {
@@ -45,14 +47,14 @@ $gallary-btn-size: clamp(3rem, 4vw, 5rem);
     white-space: nowrap;
     margin: 0;
     padding: 0;
-    height: 80vh;
-    width: 80vw;
+    height: $gallery-height-size;
+    width: $gallery-width-size;
     z-index: 2;
   }
   &__list img {
-    width: 80vw;
+    width: $gallery-width-size;
     height: auto;
-    max-height: 80vh;
+    max-height: $gallery-height-size;
   }
   li {
     display: inline-block;
@@ -78,7 +80,7 @@ $gallary-btn-size: clamp(3rem, 4vw, 5rem);
     }
     // inactive buttons
     &.is-inactive {
-      opacity: 0.3;
+      opacity: 0.2;
       pointer-events: none;
     }
   }
@@ -98,5 +100,34 @@ $gallary-btn-size: clamp(3rem, 4vw, 5rem);
   &.is-active {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@include viewport-small {
+  .image-gallery-enlarged {
+    &__close {
+      top: 3.5vh;
+      right: 5vw;
+    }
+    &__list {
+      top: 10vh;
+      left: 4vw;
+      width: $gallery-width-size-sm;
+    }
+    &__list img {
+      width: $gallery-width-size-sm;
+    }
+    &__btn {
+      left: 4vw;
+      // hover
+      &:hover svg {
+        transform: scale(1);
+      }
+    }
+    // button modifyer
+    &__btn--next {
+      left: auto;
+      right: 3vw;
+    }
   }
 }

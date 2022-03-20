@@ -44,5 +44,40 @@
   }
 }
 
-@include viewport-large {
+@include viewport-medium {
+  .hero-large {
+    &__images > div {
+      max-height: 30vh;
+    }
+    &__images > div:nth-child(1) {
+      .image {
+        height: clamp(30rem, 30vh, 70rem);
+      }
+    }
+    &__images > div:nth-child(3) {
+      bottom: -12rem;
+      .image {
+        height: clamp(10rem, 30vw, 50rem);
+      }
+    }
+  }
+}
+@include viewport-small {
+  .hero-large {
+    &__images > div {
+      max-height: 25vh;
+    }
+    &__images > div:nth-child(1) {
+      .image {
+        height: 22rem;
+      }
+    }
+    &__images > div:nth-child(3) {
+      bottom: -5rem;
+      right: 0;
+      .image {
+        width: 20rem;
+      }
+    }
+  }
 }
