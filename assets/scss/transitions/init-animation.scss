@@ -1,0 +1,27 @@
+.app-init-effect {
+  background-color: var(--color-primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  // gør baggrund mørkere og mørkere, ved hver animation
+  // Action kan evt være CTA farve
+  // evt skal de komme én efter en "ovenpå" hinanden, eller forskudt på række eller "skrå"
+  &__text-wrap {
+    margin-left: clamp(4rem, 6vw, 10rem);
+  }
+  &__text-wrap:nth-of-type(2) {
+    margin-left: clamp(12rem, 18vw, 30rem);
+  }
+  &__text-wrap:nth-of-type(3) {
+    margin-left: clamp(24rem, 36vw, 60rem);
+  }
+  &__text {
+    font-size: clamp(8rem, 12vw, 20rem);
+  }
+}
