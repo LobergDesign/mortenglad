@@ -14,12 +14,19 @@
   // evt skal de komme én efter en "ovenpå" hinanden, eller forskudt på række eller "skrå"
   &__text-wrap {
     margin-left: clamp(4rem, 6vw, 10rem);
+    span {
+      color: var(--color-cta);
+    }
   }
   &__text-wrap:nth-of-type(2) {
-    margin-left: clamp(12rem, 18vw, 30rem);
+    span {
+      color: var(--color-secondary);
+    }
   }
   &__text-wrap:nth-of-type(3) {
-    margin-left: clamp(24rem, 36vw, 60rem);
+    span {
+      color: var(--color-secondary);
+    }
   }
   &__text {
     font-size: clamp(8rem, 12vw, 20rem);

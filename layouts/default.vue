@@ -3,12 +3,12 @@
     <transition appear :css="false" @appear="customBeforeAppear">
       <div class="app-init-effect">
         <span class="app-init-effect__text-wrap">
-          <span class="app-init-effect__text" data-init-text-first> Actor</span>
+          <span class="app-init-effect__text" data-init-text> Actor</span>
         </span>
-        <span class="app-init-effect__text-wrap">
+        <span class="app-init-effect__text-wrap" data-init-text>
           <span class="app-init-effect__text"> Morten</span></span
         >
-        <span class="app-init-effect__text-wrap">
+        <span class="app-init-effect__text-wrap" data-init-text>
           <span class="app-init-effect__text"> Glad</span>
         </span>
       </div>
@@ -59,22 +59,19 @@ export default Vue.extend({
     }
   },
   methods: {
-    customBeforeAppear() {
+    textAnimation(target: HTMLElement, animationDelay: number = 0) {
       const SplitText = this.$SplitText;
       const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelector(
-        "[data-init-text-first]"
-      ) as HTMLElement;
 
       const tl = gsap.timeline();
       // @ts-ignore
       const mySplitText = new SplitText(target, { type: "chars" });
       const chars = mySplitText.chars;
-
       tl.fromTo(
         chars,
         { opacity: 0, x: -80, fontWeight: 100 },
         {
+          delay: animationDelay,
           fontWeight: 400,
           x: 0,
           opacity: 1,
@@ -84,11 +81,17 @@ export default Vue.extend({
         }
       ).to(chars, {
         fontWeight: 100,
-        x: 80,
+        x: 100,
         opacity: 0,
         duration: 1.2,
         stagger: -0.05,
         ease: this.ease,
+      });
+    },
+    customBeforeAppear() {
+      const targets = document.querySelectorAll("[data-init-text]") as NodeList;
+      targets.forEach((element, i) => {
+        this.textAnimation(element, i * 0.22);
       });
     },
   },
