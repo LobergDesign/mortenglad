@@ -1,16 +1,15 @@
 <template>
   <div class="app">
     <transition appear :css="false" @appear="customBeforeAppear">
-      <div class="app-init-effect">
-        <span class="app-init-effect__text-wrap">
-          <span class="app-init-effect__text" data-init-text-first> Actor</span>
-        </span>
-        <span class="app-init-effect__text-wrap">
-          <span class="app-init-effect__text"> Morten</span></span
+      <div class="app-init-effect" data-init-effect-bg>
+        <span class="app-init-effect__text-wrap" data-init-text>
+          <span class="app-init-effect__text">Morten Glad </span></span
         >
-        <span class="app-init-effect__text-wrap">
-          <span class="app-init-effect__text"> Glad</span>
-        </span>
+        <span class="app-init-effect__text-wrap" data-init-text>
+          <span class="app-init-effect__text app-init-effect__text--small-cta">
+            Actor</span
+          ></span
+        >
       </div>
     </transition>
     <site-header v-if="!$fetchState.pending" :data="header" />
@@ -30,6 +29,8 @@ export default Vue.extend({
       header: {},
       footer: {},
       ease: "power4.out",
+      dark: "#151515",
+      light: "#e9f1f7",
     };
   },
 
@@ -59,37 +60,64 @@ export default Vue.extend({
     }
   },
   methods: {
-    customBeforeAppear() {
+    bgAnimation() {
+      const initApp = () => {
+        this.$store.commit("global/initApplication");
+      };
+      const gsap = this.$gsap as NLib.IGsap;
+      const tl = gsap.timeline();
+      const target = document.querySelector("[data-init-effect-bg]");
+      tl.fromTo(
+        target,
+        { backgroundColor: this.light },
+        {
+          duration: 2.5,
+          ease: this.ease,
+          backgroundColor: this.dark,
+          onComplete: initApp,
+        }
+      ).to(target, {
+        autoAlpha: 0,
+      });
+    },
+    textAnimation() {
       const SplitText = this.$SplitText;
       const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelector(
-        "[data-init-text-first]"
-      ) as HTMLElement;
-
+      const target = document.querySelectorAll("[data-init-text]") as NodeList;
       const tl = gsap.timeline();
       // @ts-ignore
       const mySplitText = new SplitText(target, { type: "chars" });
       const chars = mySplitText.chars;
+      tl.to(target, {
+        duration: 0,
+        autoAlpha: 1,
+      });
 
       tl.fromTo(
         chars,
-        { opacity: 0, x: -80, fontWeight: 100 },
+        { opacity: 0, x: 110, fontWeight: 100, color: this.dark },
         {
           fontWeight: 400,
           x: 0,
           opacity: 1,
-          duration: 1.1,
+          duration: 1.3,
           stagger: 0.05,
+          color: this.light,
           ease: this.ease,
+          autoAlpha: 1,
         }
       ).to(chars, {
         fontWeight: 100,
-        x: 80,
+        x: 50,
         opacity: 0,
-        duration: 1.2,
+        duration: 0.8,
         stagger: -0.05,
         ease: this.ease,
       });
+    },
+    customBeforeAppear() {
+      this.bgAnimation();
+      this.textAnimation();
     },
   },
 });

@@ -14,5 +14,6 @@ declare namespace NStates {
   }
   export interface IGlobalSettingsState {
     globalSettings: IGlobalSettings;
+    isApplicationReady: Boolean;
   }
 }

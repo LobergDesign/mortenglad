@@ -4,7 +4,19 @@
     will-change: transform, opacity;
   }
 }
+
+[data-split-line-effect] {
+  visibility: hidden;
+}
+
+[data-split-line-effect-bodytext] {
+  p {
+    visibility: hidden;
+  }
+}
+
 [data-load-split-char-effect] {
+  visibility: hidden;
   > div {
     will-change: font-weight, opacity, transform;
   }

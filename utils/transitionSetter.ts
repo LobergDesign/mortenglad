@@ -8,23 +8,6 @@ export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
     "[data-inview-split-char-effect]"
   );
 
-  const init = () => {
-    if (splitLineEffects) {
-      splitLineEffects.forEach((element) => {
-        inviewSplitLineEffect(element, gsap, SplitText).init();
-      });
-    }
-    // if (splitCharEffects) {
-    //   splitCharEffects.forEach((element) => {
-    //     loadSplitCharEffect(element, gsap, SplitText).init();
-    //   });
-    // }
-    if (splitCharEffects) {
-      splitCharEffects.forEach((element) => {
-        inviewSplitLineEffect(element, gsap, SplitText).init();
-      });
-    }
-  };
   const action = () => {
     const initIo = (target: any) => {
       const io = new IntersectionObserver(
@@ -32,8 +15,6 @@ export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
           const entry = entries[0] as IntersectionObserverEntry;
           if (entry.isIntersecting) {
             const e = entry.target as HTMLElement;
-            // split line effect
-
             splitLineEffects &&
               inviewSplitLineEffect(e, gsap, SplitText).action();
 
@@ -49,9 +30,7 @@ export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
           const entry = entries[0] as IntersectionObserverEntry;
           if (entry.isIntersecting) {
             const e = entry.target as HTMLElement;
-            // split char effect
-            // splitCharEffects &&
-            //   loadSplitCharEffect(e, gsap, SplitText).action();
+
             splitCharEffects &&
               inviewSplitLineEffect(e, gsap, SplitText).action();
 
@@ -71,5 +50,5 @@ export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
       splitCharEffects.forEach(nextIo);
     }
   };
-  return { action, init };
+  return { action };
 }
