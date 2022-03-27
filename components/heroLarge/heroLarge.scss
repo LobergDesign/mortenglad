@@ -5,12 +5,12 @@
   &__title-w {
     @include position-center-y;
     top: 42%;
+    z-index: 2;
   }
   &__images > div {
     position: absolute;
     bottom: 0;
     max-height: 45vh;
-    z-index: -1;
     overflow: hidden;
     .image {
       height: 100%;

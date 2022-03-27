@@ -3,14 +3,18 @@ import { query } from "~/queries/global";
 
 export const state = (): NStates.IGlobalSettingsState => ({
   globalSettings: {} as NStates.IGlobalSettings,
+  isApplicationReady: false,
 });
 
 export const mutations = {
-  SET_GLOBALE_SETTINGS(
+  setGlobalSettings(
     state: NStates.IGlobalSettingsState,
     globalSettings: NStates.IGlobalSettings
   ) {
     state.globalSettings = globalSettings;
+  },
+  initApplication(state: NStates.IGlobalSettingsState) {
+    state.isApplicationReady = true;
   },
 };
 
@@ -19,7 +23,7 @@ export const actions = {
     try {
       // @ts-ignore
       const globalSettings = await this.$graphql.default.request(query);
-      commit("SET_GLOBALE_SETTINGS", globalSettings);
+      commit("setGlobalSettings", globalSettings);
     } catch (errors) {
       // eslint-disable-next-line no-console
       console.log("error from store", errors);

@@ -2,6 +2,8 @@
   background-color: var(--color-alternative);
   padding-top: clamp(4.5rem, 7vw, 11rem);
   padding-bottom: clamp(2rem, 3vw, 4rem);
+  position: relative;
+  z-index: 1;
   ul li {
     display: inline-block;
   }

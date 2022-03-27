@@ -1,6 +1,9 @@
 <template>
   <div class="overflow-hidden">
     <hero-large v-if="hero" :data="hero" />
+    <h1>
+      {{ appIsReady }}
+    </h1>
     <lazy-intro v-if="intro" :data="intro" />
     <lazy-cv-collections
       v-if="cvCollection && cvCollection.cvListCollection"
@@ -72,18 +75,34 @@ export default Vue.extend({
   head(): any {
     return setHead(this.seo || null);
   },
+
+  computed: {
+    appIsReady() {
+      const isAppReady = this.$store.state.global.isApplicationReady;
+      return isAppReady;
+    },
+  },
+  watch: {
+    appIsReady() {
+      this.appIsReady && this.loadAnimation();
+    },
+  },
   mounted() {
-    const SplitText = this.$SplitText;
-    const gsap = this.$gsap as NLib.IGsap;
-    const target = document.querySelector(
-      "[data-load-split-char-effect]"
-    ) as HTMLElement;
-    target && ioTransitions(gsap, SplitText).init();
-    loadSplitCharEffect(target, gsap, SplitText).init();
-    this.$nextTick(() => {
-      ioTransitions(gsap, SplitText).action();
-      target && loadSplitCharEffect(target, gsap, SplitText).action();
-    });
+    // this will only trigger on route changes
+    this.appIsReady && this.loadAnimation();
+  },
+  methods: {
+    loadAnimation() {
+      const SplitText = this.$SplitText;
+      const gsap = this.$gsap as NLib.IGsap;
+      const target = document.querySelector(
+        "[data-load-split-char-effect]"
+      ) as HTMLElement;
+      this.$nextTick(() => {
+        ioTransitions(gsap, SplitText).action();
+        target && loadSplitCharEffect(target, gsap, SplitText).action();
+      });
+    },
   },
 });
 </script>

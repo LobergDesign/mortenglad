@@ -5,7 +5,6 @@
       :title="data.hero.title"
       :bodytext="data.hero.bodytext"
     />
-
     <section
       v-for="(item, i) in data.videoListCollection.items"
       :key="i"
@@ -34,7 +33,6 @@ export default Vue.extend({
 
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
-
     if (!response) {
       return error;
     } else {
@@ -49,21 +47,37 @@ export default Vue.extend({
       data: ({} as NPage.IStandardPage) || {},
     };
   },
+
   head(): any {
     return setHead(this.seo || null);
   },
+  computed: {
+    appIsReady() {
+      const isAppReady = this.$store.state.global.isApplicationReady;
+      return isAppReady;
+    },
+  },
+  watch: {
+    appIsReady() {
+      this.appIsReady && this.loadAnimation();
+    },
+  },
   mounted() {
-    const SplitText = this.$SplitText;
-    const gsap = this.$gsap as NLib.IGsap;
-    const target = document.querySelector(
-      "[data-load-split-char-effect]"
-    ) as HTMLElement;
-    target && ioTransitions(gsap, SplitText).init();
-    loadSplitCharEffect(target, gsap, SplitText).init();
-    this.$nextTick(() => {
-      ioTransitions(gsap, SplitText).action();
-      target && loadSplitCharEffect(target, gsap, SplitText).action();
-    });
+    // this will only trigger on route changes
+    this.appIsReady && this.loadAnimation();
+  },
+  methods: {
+    loadAnimation() {
+      const SplitText = this.$SplitText;
+      const gsap = this.$gsap as NLib.IGsap;
+      const target = document.querySelector(
+        "[data-load-split-char-effect]"
+      ) as HTMLElement;
+      this.$nextTick(() => {
+        ioTransitions(gsap, SplitText).action();
+        target && loadSplitCharEffect(target, gsap, SplitText).action();
+      });
+    },
   },
 });
 </script>
