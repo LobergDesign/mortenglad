@@ -52,17 +52,24 @@ export default Vue.extend({
   computed: {
     appIsReady() {
       const isAppReady = this.$store.state.global.isApplicationReady;
+      console.log("computed", isAppReady);
       return isAppReady;
     },
   },
   watch: {
     appIsReady() {
-      this.appIsReady && this.loadAnimation();
+      this.$nextTick(() => {
+        console.log("watch", this.appIsReady);
+        this.appIsReady && this.loadAnimation();
+      });
     },
   },
   mounted() {
-    // this will only trigger on route changes
-    this.appIsReady && this.loadAnimation();
+    this.$nextTick(() => {
+      // this will only trigger on route changes
+      console.log("mounted", this.appIsReady);
+      this.appIsReady && this.loadAnimation();
+    });
   },
   methods: {
     loadAnimation() {
