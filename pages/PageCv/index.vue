@@ -73,15 +73,15 @@ export default Vue.extend({
   },
   methods: {
     loadAnimation() {
-      const SplitText = this.$SplitText;
-      const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelector(
-        "[data-load-split-char-effect]"
-      ) as HTMLElement;
-      console.log("SplitText", SplitText);
-      console.log("gsap", gsap);
-      console.log("target", target);
       this.$nextTick(() => {
+        const SplitText = this.$SplitText;
+        const gsap = this.$gsap as NLib.IGsap;
+        const target = document.querySelector(
+          "[data-load-split-char-effect]"
+        ) as HTMLElement;
+        console.log("SplitText", SplitText);
+        console.log("gsap", gsap);
+        console.log("target", target);
         ioTransitions(gsap, SplitText).action();
         target && loadSplitCharEffect(target, gsap, SplitText).action();
       });
