@@ -52,41 +52,30 @@ export default Vue.extend({
   computed: {
     appIsReady() {
       const isAppReady = this.$store.state.global.isApplicationReady;
-      console.log("computed", isAppReady);
       return isAppReady;
     },
   },
   watch: {
     appIsReady() {
-      this.$nextTick(() => {
-        console.log("watchaaa", this.appIsReady);
-        this.appIsReady && this.loadAnimation();
-      });
+      this.appIsReady && this.loadAnimation();
     },
   },
   mounted() {
     this.$nextTick(() => {
       setTimeout(() => {
-        // this will only trigger on route changes
-        console.log("mounted", this.appIsReady);
         this.appIsReady && this.loadAnimation();
-      }, 500);
+      }, 100);
     });
   },
   methods: {
     loadAnimation() {
-      this.$nextTick(() => {
-        const SplitText = this.$SplitText;
-        const gsap = this.$gsap as NLib.IGsap;
-        const target = document.querySelector(
-          "[data-load-split-char-effect]"
-        ) as HTMLElement;
-        console.log("SplitText", SplitText);
-        console.log("gsap", gsap);
-        console.log("target", target);
-        ioTransitions(gsap, SplitText).action();
-        target && loadSplitCharEffect(target, gsap, SplitText).action();
-      });
+      const SplitText = this.$SplitText;
+      const gsap = this.$gsap as NLib.IGsap;
+      const target = document.querySelector(
+        "[data-load-split-char-effect]"
+      ) as HTMLElement;
+      ioTransitions(gsap, SplitText).action();
+      target && loadSplitCharEffect(target, gsap, SplitText).action();
     },
   },
 });
