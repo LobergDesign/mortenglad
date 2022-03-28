@@ -66,9 +66,11 @@ export default Vue.extend({
   },
   mounted() {
     this.$nextTick(() => {
-      // this will only trigger on route changes
-      console.log("mounted", this.appIsReady);
-      this.appIsReady && this.loadAnimation();
+      setTimeout(() => {
+        // this will only trigger on route changes
+        console.log("mounted", this.appIsReady);
+        this.appIsReady && this.loadAnimation();
+      }, 500);
     });
   },
   methods: {
