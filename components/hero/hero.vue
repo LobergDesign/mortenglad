@@ -3,14 +3,20 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-10 grid-sm-12">
-          <h1
+          <ui-headline
+            class="hero__title"
+            :data="{
+              heroTitle: title,
+            }"
+          />
+          <!-- <h1
             v-if="title"
             class="hero__title"
             data-load-split-char-effect
             ref="testref"
           >
             {{ title }}
-          </h1>
+          </h1> -->
         </div>
         <div class="grid-c-6 grid-c-sm-12">
           <ui-bodytext v-if="bodytext" :data="bodytext" />

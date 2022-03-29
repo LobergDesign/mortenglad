@@ -5,6 +5,7 @@
         <div class="grid-c-12">
           <div class="hero-large__title-w">
             <ui-headline
+              class="xl"
               :data="{
                 heroTitle: data.heroTitle,
                 heroTitleExtension: data.heroTitleExtension,

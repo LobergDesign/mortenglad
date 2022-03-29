@@ -1,9 +1,6 @@
 <template>
   <div class="overflow-hidden">
     <hero-large v-if="hero" :data="hero" />
-    <h1>
-      {{ appIsReady }}
-    </h1>
     <lazy-intro v-if="intro" :data="intro" />
     <lazy-cv-collections
       v-if="cvCollection && cvCollection.cvListCollection"
@@ -22,12 +19,13 @@ import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/frontpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
-import ioTransitions from "~/utils/transitionSetter";
-import { loadSplitCharEffect } from "~/utils/transitions";
+
 import setHead from "~/config/head";
+import test from "~/mixins/loadAnimations";
 export default Vue.extend({
   name: "IndexPage",
 
+  mixins: [test],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(
@@ -74,35 +72,6 @@ export default Vue.extend({
   },
   head(): any {
     return setHead(this.seo || null);
-  },
-
-  computed: {
-    appIsReady() {
-      const isAppReady = this.$store.state.global.isApplicationReady;
-      return isAppReady;
-    },
-  },
-  watch: {
-    appIsReady() {
-      this.appIsReady && this.loadAnimation();
-    },
-  },
-  mounted() {
-    // this will only trigger on route changes
-    this.appIsReady && this.loadAnimation();
-  },
-  methods: {
-    loadAnimation() {
-      const SplitText = this.$SplitText;
-      const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelector(
-        "[data-load-split-char-effect]"
-      ) as HTMLElement;
-      this.$nextTick(() => {
-        ioTransitions(gsap, SplitText).action();
-        target && loadSplitCharEffect(target, gsap, SplitText).action();
-      });
-    },
   },
 });
 </script>
