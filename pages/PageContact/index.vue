@@ -17,12 +17,11 @@
 import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/contactpage";
-import { loadSplitCharEffect } from "~/utils/transitions";
-import ioTransitions from "~/utils/transitionSetter";
+import animations from "~/mixins/loadAnimations";
 import setHead from "~/config/head";
 export default Vue.extend({
   name: "ContactPage",
-
+  mixins: [animations],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
 
@@ -49,34 +48,6 @@ export default Vue.extend({
   },
   head(): any {
     return setHead(this.seo || null);
-  },
-  computed: {
-    appIsReady() {
-      const isAppReady = this.$store.state.global.isApplicationReady;
-      return isAppReady;
-    },
-  },
-  watch: {
-    appIsReady() {
-      this.appIsReady && this.loadAnimation();
-    },
-  },
-  mounted() {
-    // this will only trigger on route changes
-    this.appIsReady && this.loadAnimation();
-  },
-  methods: {
-    loadAnimation() {
-      const SplitText = this.$SplitText;
-      const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelector(
-        "[data-load-split-char-effect]"
-      ) as HTMLElement;
-      this.$nextTick(() => {
-        ioTransitions(gsap, SplitText).action();
-        target && loadSplitCharEffect(target, gsap, SplitText).action();
-      });
-    },
   },
 });
 </script>

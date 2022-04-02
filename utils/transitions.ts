@@ -4,7 +4,7 @@ const gsapConfig = {
 };
 
 // initial h1 animation
-const loadSplitCharEffect = (
+const splitCharEffect = (
   target: Element | Vue | (Element | Vue)[] | undefined,
   gsap: NLib.IGsap,
   SplitText: NLib.ISplitText
@@ -69,4 +69,4 @@ const inviewSplitLineEffect = (
   };
   return { action };
 };
-export { inviewSplitLineEffect, loadSplitCharEffect };
+export { inviewSplitLineEffect, splitCharEffect };

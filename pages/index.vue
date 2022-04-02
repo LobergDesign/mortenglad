@@ -19,13 +19,11 @@ import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/frontpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
-
 import setHead from "~/config/head";
-import test from "~/mixins/loadAnimations";
+import animations from "~/mixins/loadAnimations";
 export default Vue.extend({
   name: "IndexPage",
-
-  mixins: [test],
+  mixins: [animations],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(

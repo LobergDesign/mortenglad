@@ -1,5 +1,5 @@
 import ioTransitions from "~/utils/transitionSetter";
-import { loadSplitCharEffect } from "~/utils/transitions";
+import { splitCharEffect } from "~/utils/transitions";
 export default {
   computed: {
     appIsReady() {
@@ -9,23 +9,29 @@ export default {
   },
   watch: {
     appIsReady() {
-      this.appIsReady && this.loadAnimation();
+      this.appIsReady && this.animations();
     },
   },
   mounted() {
     // this will only trigger on route changes
-    this.appIsReady && this.loadAnimation();
+    this.appIsReady && this.animations();
+    if (this.appIsReady) {
+      this.$nextTick(() => {
+        this.animations();
+      });
+    }
   },
   methods: {
-    loadAnimation() {
+    animations() {
       const SplitText = this.$SplitText;
       const gsap = this.$gsap as NLib.IGsap;
       const target = document.querySelector(
         "[data-load-split-char-effect]"
       ) as HTMLElement;
+
       this.$nextTick(() => {
         ioTransitions(gsap, SplitText).action();
-        target && loadSplitCharEffect(target, gsap, SplitText).action();
+        target && splitCharEffect(target, gsap, SplitText).action();
       });
     },
   },

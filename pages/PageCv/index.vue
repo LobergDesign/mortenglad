@@ -17,12 +17,11 @@ import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/cvpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
-import ioTransitions from "~/utils/transitionSetter";
-import { loadSplitCharEffect } from "~/utils/transitions";
+import animations from "~/mixins/loadAnimations";
 import setHead from "~/config/head";
 export default Vue.extend({
   name: "CvPage",
-
+  mixins: [animations],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(
@@ -48,29 +47,6 @@ export default Vue.extend({
   },
   head(): any {
     return setHead(this.seo || null);
-  },
-  computed: {
-    appIsReady() {
-      const isAppReady = this.$store.state.global.isApplicationReady;
-      return isAppReady;
-    },
-  },
-  watch: {
-    appIsReady() {
-      this.appIsReady && this.loadAnimation();
-    },
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.appIsReady && this.loadAnimation();
-    });
-  },
-  methods: {
-    loadAnimation() {
-      const SplitText = this.$SplitText;
-      const gsap = this.$gsap as NLib.IGsap;
-      ioTransitions(gsap, SplitText).action();
-    },
   },
 });
 </script>
