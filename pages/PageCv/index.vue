@@ -22,6 +22,17 @@ import setHead from "~/config/head";
 export default Vue.extend({
   name: "CvPage",
   mixins: [animations],
+  transition: {
+    beforeLeave(el) {
+      console.log("beforeLeave", el);
+    },
+    afterLeave(el) {
+      console.log("afterLeave", el);
+    },
+    enter(el) {
+      console.log("enter", el);
+    },
+  },
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(

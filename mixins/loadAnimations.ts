@@ -9,15 +9,17 @@ export default {
   },
   watch: {
     appIsReady() {
+      // will run on first load after init load is done
       this.appIsReady && this.animations();
     },
   },
   mounted() {
     // this will only trigger on route changes
-    this.appIsReady && this.animations();
     if (this.appIsReady) {
       this.$nextTick(() => {
-        this.animations();
+        setTimeout(() => {
+          this.animations();
+        }, 200);
       });
     }
   },

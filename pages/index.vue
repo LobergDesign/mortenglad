@@ -24,6 +24,7 @@ import animations from "~/mixins/loadAnimations";
 export default Vue.extend({
   name: "IndexPage",
   mixins: [animations],
+  transition: "intro",
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(
@@ -63,7 +64,7 @@ export default Vue.extend({
     return {
       hero: null,
       intro: null,
-      cvCollection: null,
+      cvCollection: ({} as NCVCollection.ICVItems) || {},
       cvLink: null,
       data: ({} as NPage.IStandardPage) || {},
     };
