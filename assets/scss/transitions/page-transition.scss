@@ -1,0 +1,65 @@
+$t-duration: 800ms;
+
+.warm-blanket {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  will-change: transform;
+}
+.all-that-content {
+  will-change: transform;
+}
+
+.intro-enter-active,
+.intro-leave-active {
+  transition-duration: $t-duration * 2;
+
+  &::before {
+    background-color: var(--color-primary);
+  }
+}
+
+.intro-leave {
+  &::before {
+    transform: scaleX(0);
+  }
+}
+
+.intro-leave-active {
+  // transform: translateX(60%);
+  .all-that-content {
+    transform: translateY(-30%);
+  }
+  &::before {
+    transition-duration: $t-duration;
+  }
+}
+
+.intro-leave-to {
+  &::before {
+    transform: scale(1);
+    transform-origin: left;
+  }
+}
+
+.intro-enter {
+  background-color: var(--color-secondary);
+  &::before {
+    transform: scaleY(1);
+  }
+}
+
+.intro-enter-active {
+  &::before {
+    transition-duration: $t-duration;
+  }
+}
+
+.intro-enter-to {
+  &::before {
+    transform: scaleY(0);
+    transform-origin: right;
+  }
+}

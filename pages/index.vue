@@ -1,16 +1,18 @@
 <template>
-  <div class="overflow-hidden">
-    <hero-large v-if="hero" :data="hero" />
-    <lazy-intro v-if="intro" :data="intro" />
-    <lazy-cv-collections
-      v-if="cvCollection && cvCollection.cvListCollection"
-      :data="cvCollection.cvListCollection.items"
-      :link="cvLink"
-    />
-    <lazy-grid-handler
-      v-if="data && data.dynamicBlockSectionCollection"
-      :data="data.dynamicBlockSectionCollection"
-    />
+  <div class="overflow-hidden warm-blanket">
+    <div class="all-that-content">
+      <hero-large v-if="hero" :data="hero" />
+      <lazy-intro v-if="intro" :data="intro" />
+      <lazy-cv-collections
+        v-if="cvCollection && cvCollection.cvListCollection"
+        :data="cvCollection.cvListCollection.items"
+        :link="cvLink"
+      />
+      <lazy-grid-handler
+        v-if="data && data.dynamicBlockSectionCollection"
+        :data="data.dynamicBlockSectionCollection"
+      />
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,44 @@ import animations from "~/mixins/loadAnimations";
 export default Vue.extend({
   name: "IndexPage",
   mixins: [animations],
-  transition: "intro",
+  transition: {
+    mode: "in-out",
+    css: false,
+    leave(el, done) {
+      console.log("frontpage page leave", el);
+      done();
+    },
+    beforeLeave(el) {
+      console.log("frontpage page beforeLeave", el);
+    },
+    afterLeave(el) {
+      console.log("frontpage page afterLeave", el);
+    },
+
+    beforeEnter(el) {
+      console.log("frontpage page beforeEnter", el);
+    },
+    enter(el, done) {
+      console.log("frontpage page enter", el);
+      const gsap = this.$gsap as NLib.IGsap;
+      const tl = gsap.timeline();
+      tl.fromTo(
+        el,
+        { yPercent: 100, opacity: 0, autoAlpha: 1 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          autoAlpha: 1,
+          duration: 3,
+          ease: "power4.out",
+          onComplete: () => done(),
+        }
+      );
+    },
+    afterEnter(el) {
+      console.log("frontpage page afterEnter", el);
+    },
+  },
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(

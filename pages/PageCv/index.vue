@@ -23,16 +23,41 @@ export default Vue.extend({
   name: "CvPage",
   mixins: [animations],
   transition: {
+    mode: "in-out",
+    css: false,
     beforeLeave(el) {
-      console.log("beforeLeave", el);
+      console.log("cv page beforeLeave", el);
     },
+    leave(el, done) {
+      console.log("cv page leave", el);
+      const gsap = this.$gsap as NLib.IGsap;
+      const tl = gsap.timeline();
+      tl.to(el, {
+        yPercent: -40,
+        autoAlpha: 0,
+        opacity: 0.4,
+        duration: 3,
+        ease: "power4.out",
+        onComplete: () => done(),
+      });
+    },
+
     afterLeave(el) {
-      console.log("afterLeave", el);
+      console.log("cv page afterLeave", el);
     },
-    enter(el) {
-      console.log("enter", el);
+
+    beforeEnter(el) {
+      console.log("cv page beforeEnter", el);
+    },
+    enter(el, done) {
+      console.log("cv page enter", el);
+      done();
+    },
+    afterEnter(el) {
+      console.log("cv page afterEnter", el);
     },
   },
+
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(
