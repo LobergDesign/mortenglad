@@ -1,14 +1,21 @@
 <template>
-  <div v-if="data">
-    <hero
-      v-if="data.hero"
-      :title="data.hero.title"
-      :bodytext="data.hero.bodytext"
-    />
-    <lazy-accordion
-      v-if="cvCollection"
-      :data="cvCollection.cvListCollection.items"
-    />
+  <div class="overflow-hidden">
+    <div class="aaaaand-action" data-aaaaand-action>
+      <h1 id="look-at-me-mom"></h1>
+    </div>
+    <div class="warm-blanket">
+      <div v-if="data">
+        <hero
+          v-if="data.hero"
+          :title="data.hero.title"
+          :bodytext="data.hero.bodytext"
+        />
+        <lazy-accordion
+          v-if="cvCollection"
+          :data="cvCollection.cvListCollection.items"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,7 +30,6 @@ export default Vue.extend({
   name: "CvPage",
   mixins: [animations],
   transition: {
-    mode: "in-out",
     css: false,
     beforeLeave(el) {
       console.log("cv page beforeLeave", el);
@@ -31,15 +37,31 @@ export default Vue.extend({
     leave(el, done) {
       console.log("cv page leave", el);
       const gsap = this.$gsap as NLib.IGsap;
-      const tl = gsap.timeline();
-      tl.to(el, {
-        yPercent: -40,
-        autoAlpha: 0,
-        opacity: 0.4,
-        duration: 3,
-        ease: "power4.out",
-        onComplete: () => done(),
+      const newEl = el.querySelector(".warm-blanket");
+      const elChild = el.querySelector("[data-aaaaand-action]");
+      const tl = gsap;
+      tl.to(newEl, {
+        xPercent: 40,
+        opacity: 0,
+        duration: 2,
+        ease: "power2.inOut",
       });
+
+      tl.timeline()
+        .fromTo(
+          elChild,
+          { xPercent: -100, backgroundColor: "#e9f1f7" },
+          {
+            xPercent: 0,
+            backgroundColor: "#151515",
+            duration: 1,
+            ease: "power4.out",
+          }
+        )
+        .to(elChild, {
+          xPercent: 100,
+          onComplete: () => done(),
+        });
     },
 
     afterLeave(el) {

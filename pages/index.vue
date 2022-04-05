@@ -1,18 +1,16 @@
 <template>
   <div class="overflow-hidden warm-blanket">
-    <div class="all-that-content">
-      <hero-large v-if="hero" :data="hero" />
-      <lazy-intro v-if="intro" :data="intro" />
-      <lazy-cv-collections
-        v-if="cvCollection && cvCollection.cvListCollection"
-        :data="cvCollection.cvListCollection.items"
-        :link="cvLink"
-      />
-      <lazy-grid-handler
-        v-if="data && data.dynamicBlockSectionCollection"
-        :data="data.dynamicBlockSectionCollection"
-      />
-    </div>
+    <hero-large v-if="hero" :data="hero" />
+    <lazy-intro v-if="intro" :data="intro" />
+    <lazy-cv-collections
+      v-if="cvCollection && cvCollection.cvListCollection"
+      :data="cvCollection.cvListCollection.items"
+      :link="cvLink"
+    />
+    <lazy-grid-handler
+      v-if="data && data.dynamicBlockSectionCollection"
+      :data="data.dynamicBlockSectionCollection"
+    />
   </div>
 </template>
 
@@ -27,7 +25,6 @@ export default Vue.extend({
   name: "IndexPage",
   mixins: [animations],
   transition: {
-    mode: "in-out",
     css: false,
     leave(el, done) {
       console.log("frontpage page leave", el);
