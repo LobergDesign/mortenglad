@@ -147,6 +147,66 @@ export default {
       silent: true,
     },
   },
+
+  transition: {
+    css: false,
+    beforeLeave(el: any) {
+      console.log(" beforeLeave", el);
+    },
+    leave(el: any, done: any) {
+      console.log("cv page leave", el);
+      const gsap = this.$gsap as NLib.IGsap;
+      const newEl = el.querySelector(".warm-blanket");
+      const elChild = el.querySelector("[data-aaaaand-action]");
+      const tl = gsap;
+      tl.to(newEl, {
+        yPercent: -30,
+        opacity: 0,
+        duration: 2,
+        ease: "power4.inOut",
+      });
+
+      tl.timeline()
+        .fromTo(
+          elChild,
+          { visibility: "visible", yPercent: 100, backgroundColor: "#151515" },
+          {
+            yPercent: 0,
+            backgroundColor: "#e9f1f7",
+            duration: 1.3,
+            ease: "power4.inOut",
+          }
+        )
+        .to(elChild, {
+          yPercent: -100,
+          duration: 1,
+          ease: "power4.inOut",
+          onComplete: () => done(),
+        });
+    },
+    beforeEnter(el: any) {
+      console.log("beforeEnter", el);
+    },
+    enter(el: any, done: any) {
+      console.log("page enter", el);
+      const gsap = this.$gsap as NLib.IGsap;
+      const newEl = el.querySelector(".warm-blanket");
+      const tl = gsap;
+      tl.fromTo(
+        newEl,
+        { visibility: "hidden", yPercent: 10 },
+        {
+          yPercent: 0,
+          visibility: "visible",
+          opacity: 1,
+          duration: 0.5,
+          ease: "power4.inOut",
+          onComplete: () => done(),
+        }
+      );
+    },
+  },
+
   // google fonts
   googleFonts: {
     families: {
