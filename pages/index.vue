@@ -1,9 +1,9 @@
 <template>
-  <div class="overflow-hidden warm-blanket">
-    <div class="aaaaand-action" data-aaaaand-action>
+  <div class="overflow-hidden">
+    <div data-aaaaand-action>
       <h1 id="look-at-me-mom"></h1>
     </div>
-    <div class="warm-blanket">
+    <div data-warm-blanket>
       <hero-large v-if="hero" :data="hero" />
       <lazy-intro v-if="intro" :data="intro" />
       <lazy-cv-collections

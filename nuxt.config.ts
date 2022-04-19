@@ -152,54 +152,65 @@ export default {
     css: false,
     beforeLeave(el: any) {
       console.log(" beforeLeave", el);
+      console.log(" leave", this.$route);
+      // set chars
     },
     leave(el: any, done: any) {
-      console.log("cv page leave", el);
+      // anitmate chars
+      console.log(" leave", el);
+      console.log(" leave", this.$route);
       const gsap = this.$gsap as NLib.IGsap;
-      const newEl = el.querySelector(".warm-blanket");
+      const newEl = el.querySelector("[data-warm-blanket]");
       const elChild = el.querySelector("[data-aaaaand-action]");
       const tl = gsap;
       tl.to(newEl, {
-        yPercent: -30,
+        y: -350,
         opacity: 0,
-        duration: 2,
-        ease: "power4.inOut",
+        duration: 1.2,
+        ease: "power2.inOut",
       });
 
-      tl.timeline()
-        .fromTo(
-          elChild,
-          { visibility: "visible", yPercent: 100, backgroundColor: "#151515" },
-          {
-            yPercent: 0,
-            backgroundColor: "#e9f1f7",
-            duration: 1.3,
-            ease: "power4.inOut",
-          }
-        )
-        .to(elChild, {
-          yPercent: -100,
+      tl.timeline().fromTo(
+        elChild,
+        { visibility: "visible", yPercent: 100, backgroundColor: "#151515" },
+        {
+          yPercent: 0,
+          backgroundColor: "#e9f1f7",
           duration: 1,
           ease: "power4.inOut",
           onComplete: () => done(),
-        });
+        }
+      );
     },
     beforeEnter(el: any) {
       console.log("beforeEnter", el);
+      const elChild = el.querySelector("[data-aaaaand-action]");
+      const gsap = this.$gsap as NLib.IGsap;
+      const tl = gsap;
+      tl.set(elChild, {
+        visibility: "visible",
+        duration: 0,
+        ease: "none",
+      });
     },
     enter(el: any, done: any) {
       console.log("page enter", el);
       const gsap = this.$gsap as NLib.IGsap;
-      const newEl = el.querySelector(".warm-blanket");
+      const newEl = el.querySelector("[data-warm-blanket]");
+      const elChild = el.querySelector("[data-aaaaand-action]");
       const tl = gsap;
+      tl.to(elChild, {
+        yPercent: -100,
+        duration: 1,
+        ease: "power4.inOut",
+      });
       tl.fromTo(
         newEl,
-        { visibility: "hidden", yPercent: 10 },
+        { y: 250, opacity: 0 },
         {
-          yPercent: 0,
-          visibility: "visible",
+          y: 0,
           opacity: 1,
-          duration: 0.5,
+          duration: 1.1,
           ease: "power4.inOut",
           onComplete: () => done(),
         }

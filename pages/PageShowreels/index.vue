@@ -1,22 +1,29 @@
 <template>
-  <div v-if="data">
-    <hero
-      v-if="data.hero"
-      :title="data.hero.title"
-      :bodytext="data.hero.bodytext"
-    />
-    <section
-      v-for="(item, i) in data.videoListCollection.items"
-      :key="i"
-      class="video-list"
-    >
-      <ui-video :data="item" :small-headline="true" />
-    </section>
+  <div class="overflow-hidden">
+    <div class="aaaaand-action" data-aaaaand-action>
+      <h1 id="look-at-me-mom"></h1>
+    </div>
+    <div data-warm-blanket>
+      <div v-if="data">
+        <hero
+          v-if="data.hero"
+          :title="data.hero.title"
+          :bodytext="data.hero.bodytext"
+        />
+        <section
+          v-for="(item, i) in data.videoListCollection.items"
+          :key="i"
+          class="video-list"
+        >
+          <ui-video :data="item" :small-headline="true" />
+        </section>
 
-    <lazy-grid-handler
-      v-if="data.dynamicBlockSectionCollection"
-      :data="data.dynamicBlockSectionCollection"
-    />
+        <lazy-grid-handler
+          v-if="data.dynamicBlockSectionCollection"
+          :data="data.dynamicBlockSectionCollection"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

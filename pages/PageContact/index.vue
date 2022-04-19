@@ -1,15 +1,22 @@
 <template>
-  <div v-if="data">
-    <hero
-      v-if="data.hero"
-      :title="data.hero.title"
-      :bodytext="data.hero.bodytext"
-    />
-    <contact-section :data="global" />
-    <lazy-grid-handler
-      v-if="data.dynamicBlockSectionCollection"
-      :data="data.dynamicBlockSectionCollection"
-    />
+  <div class="overflow-hidden">
+    <div class="aaaaand-action" data-aaaaand-action>
+      <h1 id="look-at-me-mom"></h1>
+    </div>
+    <div data-warm-blanket>
+      <div v-if="data">
+        <hero
+          v-if="data.hero"
+          :title="data.hero.title"
+          :bodytext="data.hero.bodytext"
+        />
+        <contact-section :data="global" />
+        <lazy-grid-handler
+          v-if="data.dynamicBlockSectionCollection"
+          :data="data.dynamicBlockSectionCollection"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <div class="aaaaand-action" data-aaaaand-action>
       <h1 id="look-at-me-mom"></h1>
     </div>
-    <div class="warm-blanket">
+    <div data-warm-blanket>
       <div v-if="data">
         <hero
           v-if="data.hero"
