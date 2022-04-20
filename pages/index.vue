@@ -1,8 +1,7 @@
 <template>
   <div class="overflow-hidden">
-    <div data-aaaaand-action>
-      <h1 id="look-at-me-mom"></h1>
-    </div>
+    <div data-aaaaand-action></div>
+    <span data-look-at-me-mom></span>
     <div data-warm-blanket>
       <hero-large v-if="hero" :data="hero" />
       <lazy-intro v-if="intro" :data="intro" />

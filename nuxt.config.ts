@@ -148,29 +148,68 @@ export default {
     },
   },
 
-  transition: {
+  pageTransition: {
     css: false,
     beforeLeave(el: any) {
       console.log(" beforeLeave", el);
-      console.log(" leave", this.$route);
       // set chars
+
+      const routeTitle = document.querySelector(
+        "[data-look-at-me-mom]"
+      ) as HTMLDivElement;
+      routeTitle.innerHTML = this.$route.name;
     },
     leave(el: any, done: any) {
-      // anitmate chars
-      console.log(" leave", el);
-      console.log(" leave", this.$route);
       const gsap = this.$gsap as NLib.IGsap;
+      const SplitText = this.$SplitText;
+      const routeChars = el.querySelector("[data-look-at-me-mom]");
+      // anitmate chars
+      const tl = gsap.timeline();
+      gsap.to(routeChars, { autoAlpha: 1, duration: 0 });
+      // @ts-ignore
+      const mySplitText = new SplitText(routeChars, { type: "chars" });
+      const chars = mySplitText.chars;
+
+      tl.fromTo(
+        chars,
+        { opacity: 0, x: -190, fontWeight: 100 },
+        {
+          fontWeight: 400,
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: -0.05,
+          ease: "power4.inOut",
+        }
+      )
+        .to(chars, {
+          fontWeight: 100,
+          x: 50,
+          opacity: 0,
+          duration: 1,
+          stagger: -0.05,
+          ease: "power4.out",
+        })
+        .to(chars, {
+          opacity: 0,
+          duration: 0,
+          delay: -0.89,
+          onComplete: () => done(),
+        });
+
+      console.log(" leave", el);
+
       const newEl = el.querySelector("[data-warm-blanket]");
       const elChild = el.querySelector("[data-aaaaand-action]");
-      const tl = gsap;
-      tl.to(newEl, {
+
+      gsap.to(newEl, {
         y: -350,
         opacity: 0,
         duration: 1.2,
         ease: "power2.inOut",
       });
 
-      tl.timeline().fromTo(
+      gsap.timeline().fromTo(
         elChild,
         { visibility: "visible", yPercent: 100, backgroundColor: "#151515" },
         {
@@ -178,7 +217,6 @@ export default {
           backgroundColor: "#e9f1f7",
           duration: 1,
           ease: "power4.inOut",
-          onComplete: () => done(),
         }
       );
     },
@@ -186,8 +224,7 @@ export default {
       console.log("beforeEnter", el);
       const elChild = el.querySelector("[data-aaaaand-action]");
       const gsap = this.$gsap as NLib.IGsap;
-      const tl = gsap;
-      tl.set(elChild, {
+      gsap.set(elChild, {
         visibility: "visible",
         duration: 0,
         ease: "none",
@@ -198,13 +235,12 @@ export default {
       const gsap = this.$gsap as NLib.IGsap;
       const newEl = el.querySelector("[data-warm-blanket]");
       const elChild = el.querySelector("[data-aaaaand-action]");
-      const tl = gsap;
-      tl.to(elChild, {
+      gsap.to(elChild, {
         yPercent: -100,
         duration: 1,
         ease: "power4.inOut",
       });
-      tl.fromTo(
+      gsap.fromTo(
         newEl,
         { y: 250, opacity: 0 },
         {
