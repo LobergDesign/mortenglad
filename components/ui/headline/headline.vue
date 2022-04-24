@@ -8,7 +8,11 @@
       {{ data.heroTitle }}
     </h1>
 
-    <span v-if="data.heroTitleExtension" class="headline__title-extension">
+    <span
+      v-if="data.heroTitleExtension"
+      class="headline__title-extension"
+      data-split-line-effect
+    >
       {{ data.heroTitleExtension }}
     </span>
   </div>

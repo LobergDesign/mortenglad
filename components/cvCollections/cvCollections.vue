@@ -1,7 +1,12 @@
 <template>
   <div class="cv-collections">
     <div class="grid-w">
-      <section v-for="(item, i) in data" :key="i" class="grid-r">
+      <section
+        v-for="(item, i) in data"
+        :key="i"
+        class="grid-r"
+        data-inview-simple-show-effect
+      >
         <div
           class="grid-c-md-12 grid-c-4"
           :class="{ 'text-right text-right--reset-md': i === 1 }"

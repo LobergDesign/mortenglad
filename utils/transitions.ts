@@ -69,4 +69,27 @@ const inviewSplitLineEffect = (
   };
   return { action };
 };
-export { inviewSplitLineEffect, splitCharEffect };
+
+// initial h1 animation
+const simpleInviewEffect = (
+  target: Element | Vue | (Element | Vue)[] | undefined,
+  gsap: NLib.IGsap
+) => {
+  const action = () => {
+    const tl = gsap.timeline();
+    gsap.to(target, { autoAlpha: 1, duration: 0 });
+
+    tl.fromTo(
+      target,
+      { opacity: 0, y: 50 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: gsapConfig.ease,
+      }
+    );
+  };
+  return { action };
+};
+export { inviewSplitLineEffect, splitCharEffect, simpleInviewEffect };

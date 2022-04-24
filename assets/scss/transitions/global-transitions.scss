@@ -4,17 +4,12 @@
     will-change: transform, opacity;
   }
 }
-[data-look-at-me-mom] {
-  font-size: 8rem;
-  color: var(--color-primary);
-  position: fixed;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  z-index: 99;
-}
 
-[data-split-line-effect] {
+[data-inview-simple-show-effect] {
+  will-change: transform, opacity, visibility;
+}
+[data-split-line-effect],
+[data-inview-simple-show-effect] {
   visibility: hidden;
 }
 

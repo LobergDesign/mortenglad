@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div ref="slider" class="keen-slider">
+    <div ref="slider" class="keen-slider" data-inview-simple-show-effect>
       <div
         v-for="(item, i) in data.images"
         :key="i"

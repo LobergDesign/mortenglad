@@ -150,54 +150,8 @@ export default {
 
   pageTransition: {
     css: false,
-    beforeLeave(el: any) {
-      console.log(" beforeLeave", el);
-      // set chars
-
-      const routeTitle = document.querySelector(
-        "[data-look-at-me-mom]"
-      ) as HTMLDivElement;
-      routeTitle.innerHTML = this.$route.name;
-    },
-    leave(el: any, done: any) {
+    leave(el: HTMLElement, done: Function) {
       const gsap = this.$gsap as NLib.IGsap;
-      const SplitText = this.$SplitText;
-      const routeChars = el.querySelector("[data-look-at-me-mom]");
-      // anitmate chars
-      const tl = gsap.timeline();
-      gsap.to(routeChars, { autoAlpha: 1, duration: 0 });
-      // @ts-ignore
-      const mySplitText = new SplitText(routeChars, { type: "chars" });
-      const chars = mySplitText.chars;
-
-      tl.fromTo(
-        chars,
-        { opacity: 0, x: -190, fontWeight: 100 },
-        {
-          fontWeight: 400,
-          x: 0,
-          opacity: 1,
-          duration: 1,
-          stagger: -0.05,
-          ease: "power4.inOut",
-        }
-      )
-        .to(chars, {
-          fontWeight: 100,
-          x: 50,
-          opacity: 0,
-          duration: 1,
-          stagger: -0.05,
-          ease: "power4.out",
-        })
-        .to(chars, {
-          opacity: 0,
-          duration: 0,
-          delay: -0.89,
-          onComplete: () => done(),
-        });
-
-      console.log(" leave", el);
 
       const newEl = el.querySelector("[data-warm-blanket]");
       const elChild = el.querySelector("[data-aaaaand-action]");
@@ -217,11 +171,11 @@ export default {
           backgroundColor: "#e9f1f7",
           duration: 1,
           ease: "power4.inOut",
+          onComplete: () => done(),
         }
       );
     },
-    beforeEnter(el: any) {
-      console.log("beforeEnter", el);
+    beforeEnter(el: HTMLElement) {
       const elChild = el.querySelector("[data-aaaaand-action]");
       const gsap = this.$gsap as NLib.IGsap;
       gsap.set(elChild, {
@@ -230,8 +184,7 @@ export default {
         ease: "none",
       });
     },
-    enter(el: any, done: any) {
-      console.log("page enter", el);
+    enter(el: HTMLElement, done: Function) {
       const gsap = this.$gsap as NLib.IGsap;
       const newEl = el.querySelector("[data-warm-blanket]");
       const elChild = el.querySelector("[data-aaaaand-action]");
@@ -242,10 +195,9 @@ export default {
       });
       gsap.fromTo(
         newEl,
-        { y: 250, opacity: 0 },
+        { y: 250 },
         {
           y: 0,
-          opacity: 1,
           duration: 1.1,
           ease: "power4.inOut",
           onComplete: () => done(),

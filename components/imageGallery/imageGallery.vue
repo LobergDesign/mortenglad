@@ -1,7 +1,12 @@
 <template>
   <div class="grid-w spacing-b image-gallery">
     <ul class="reset-ul grid-r image-gallery__list">
-      <li v-for="(item, i) in images" :key="i" class="grid-c-4 grid-c-sm-6">
+      <li
+        v-for="(item, i) in images"
+        :key="i"
+        class="grid-c-4 grid-c-sm-6"
+        data-inview-simple-show-effect
+      >
         <div class="image" @click="setActiveIndex(i)">
           <nuxt-img
             v-if="item.secure_url"
