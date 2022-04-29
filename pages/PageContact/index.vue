@@ -9,7 +9,7 @@
           :title="data.hero.title"
           :bodytext="data.hero.bodytext"
         />
-        <contact-section :data="global" />
+        <contact-section v-if="!$fetchState.pending" :data="global" />
         <lazy-grid-handler
           v-if="data.dynamicBlockSectionCollection"
           :data="data.dynamicBlockSectionCollection"

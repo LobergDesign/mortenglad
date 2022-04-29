@@ -152,11 +152,10 @@ export default {
     css: false,
     leave(el: HTMLElement, done: Function) {
       const gsap = this.$gsap as NLib.IGsap;
+      const contentWrap = el.querySelector("[data-warm-blanket]");
+      const polygonElm = el.querySelector("[data-aaaaand-action]");
 
-      const newEl = el.querySelector("[data-warm-blanket]");
-      const elChild = el.querySelector("[data-aaaaand-action]");
-
-      gsap.to(newEl, {
+      gsap.to(contentWrap, {
         y: -350,
         opacity: 0,
         duration: 1.2,
@@ -164,42 +163,53 @@ export default {
       });
 
       gsap.timeline().fromTo(
-        elChild,
-        { visibility: "visible", yPercent: 100, backgroundColor: "#151515" },
+        polygonElm,
         {
+          visibility: "visible",
+          yPercent: 100,
+          backgroundColor: "#151515",
+          clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 100%)",
+        },
+        {
+          clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
           yPercent: 0,
           backgroundColor: "#e9f1f7",
           duration: 1,
           ease: "power4.inOut",
+
           onComplete: () => done(),
         }
       );
     },
     beforeEnter(el: HTMLElement) {
-      const elChild = el.querySelector("[data-aaaaand-action]");
+      const polygonElm = el.querySelector("[data-aaaaand-action]");
       const gsap = this.$gsap as NLib.IGsap;
-      gsap.set(elChild, {
+      gsap.set(polygonElm, {
         visibility: "visible",
         duration: 0,
         ease: "none",
+        clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
       });
     },
     enter(el: HTMLElement, done: Function) {
       const gsap = this.$gsap as NLib.IGsap;
-      const newEl = el.querySelector("[data-warm-blanket]");
-      const elChild = el.querySelector("[data-aaaaand-action]");
-      gsap.to(elChild, {
+      const contentWrap = el.querySelector("[data-warm-blanket]");
+      const polygonElm = el.querySelector("[data-aaaaand-action]");
+      gsap.to(polygonElm, {
         yPercent: -100,
         duration: 1,
         ease: "power4.inOut",
+        clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 90%)",
+        clearProps: true,
       });
       gsap.fromTo(
-        newEl,
+        contentWrap,
         { y: 250 },
         {
           y: 0,
           duration: 1.1,
           ease: "power4.inOut",
+          clearProps: true,
           onComplete: () => done(),
         }
       );

@@ -7,7 +7,7 @@
   z-index: 99;
   background-color: var(--color-secondary);
   visibility: hidden;
-  will-change: background-color, transform, opacity;
+  will-change: background-color, transform, opacity, clipPath;
 }
 [data-look-at-me-mom] {
   font-size: 8rem;
