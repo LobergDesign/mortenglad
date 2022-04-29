@@ -2,11 +2,14 @@
   <div class="stats spacing-b">
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c-5 grid-c-sm-12 text-center">
+        <div
+          class="grid-c-5 grid-c-sm-12 text-center"
+          data-inview-simple-show-effect
+        >
           <man class="stats__icon" />
         </div>
         <div class="grid-c-7 grid-c-sm-12">
-          <ul class="reset-ul grid-r">
+          <ul class="reset-ul grid-r" data-inview-simple-show-effect>
             <li
               v-for="(item, i) in profileCollection.items"
               :key="i"
@@ -22,7 +25,10 @@
               </div>
             </li>
           </ul>
-          <ul class="reset-ul grid-r stats__list">
+          <ul
+            class="reset-ul grid-r stats__list"
+            data-inview-simple-show-effect
+          >
             <li
               v-for="(item, i) in profileAdditionalCollection.items"
               :key="i"

@@ -147,6 +147,75 @@ export default {
       silent: true,
     },
   },
+
+  pageTransition: {
+    css: false,
+    leave(el: HTMLElement, done: Function) {
+      const gsap = this.$gsap as NLib.IGsap;
+      const contentWrap = el.querySelector("[data-warm-blanket]");
+      const polygonElm = el.querySelector("[data-aaaaand-action]");
+
+      gsap.to(contentWrap, {
+        y: -350,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power2.inOut",
+      });
+
+      gsap.timeline().fromTo(
+        polygonElm,
+        {
+          visibility: "visible",
+          yPercent: 100,
+          backgroundColor: "#151515",
+          clipPath: "polygon(0 20%, 100% 0, 100% 100%, 0 100%)",
+        },
+        {
+          clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
+          yPercent: 0,
+          backgroundColor: "#e9f1f7",
+          duration: 1,
+          ease: "power4.inOut",
+
+          onComplete: () => done(),
+        }
+      );
+    },
+    beforeEnter(el: HTMLElement) {
+      const polygonElm = el.querySelector("[data-aaaaand-action]");
+      const gsap = this.$gsap as NLib.IGsap;
+      gsap.set(polygonElm, {
+        visibility: "visible",
+        duration: 0,
+        ease: "none",
+        clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
+      });
+    },
+    enter(el: HTMLElement, done: Function) {
+      const gsap = this.$gsap as NLib.IGsap;
+      const contentWrap = el.querySelector("[data-warm-blanket]");
+      const polygonElm = el.querySelector("[data-aaaaand-action]");
+      gsap.to(polygonElm, {
+        yPercent: -100,
+        duration: 1,
+        ease: "power4.inOut",
+        clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 90%)",
+        clearProps: true,
+      });
+      gsap.fromTo(
+        contentWrap,
+        { y: 250 },
+        {
+          y: 0,
+          duration: 1.1,
+          ease: "power4.inOut",
+          clearProps: true,
+          onComplete: () => done(),
+        }
+      );
+    },
+  },
+
   // google fonts
   googleFonts: {
     families: {
@@ -155,6 +224,8 @@ export default {
     display: "swap",
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ["gsap"],
+  },
   loading: false,
 };

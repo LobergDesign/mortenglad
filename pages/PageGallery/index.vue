@@ -1,17 +1,23 @@
 <template>
-  <div v-if="data">
-    <hero
-      v-if="data.hero"
-      :title="data.hero.title"
-      :bodytext="data.hero.bodytext"
-    />
+  <div class="overflow-hidden">
+    <div class="aaaaand-action" data-aaaaand-action></div>
+    <span data-look-at-me-mom></span>
+    <div data-warm-blanket>
+      <div v-if="data">
+        <hero
+          v-if="data.hero"
+          :title="data.hero.title"
+          :bodytext="data.hero.bodytext"
+        />
 
-    <image-gallery :images="data.images" />
+        <image-gallery :images="data.images" />
 
-    <lazy-grid-handler
-      v-if="data.dynamicBlockSectionCollection"
-      :data="data.dynamicBlockSectionCollection"
-    />
+        <lazy-grid-handler
+          v-if="data.dynamicBlockSectionCollection"
+          :data="data.dynamicBlockSectionCollection"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,12 +25,11 @@
 import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/gallerypage";
-import { loadSplitCharEffect } from "~/utils/transitions";
-import ioTransitions from "~/utils/transitionSetter";
+import animations from "~/mixins/loadAnimations";
 import setHead from "~/config/head";
 export default Vue.extend({
   name: "GalleryPage",
-
+  mixins: [animations],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
 
@@ -44,19 +49,6 @@ export default Vue.extend({
   },
   head(): any {
     return setHead(this.seo || null);
-  },
-  mounted() {
-    const SplitText = this.$SplitText;
-    const gsap = this.$gsap as NLib.IGsap;
-    const target = document.querySelector(
-      "[data-load-split-char-effect]"
-    ) as HTMLElement;
-    target && ioTransitions(gsap, SplitText).init();
-    loadSplitCharEffect(target, gsap, SplitText).init();
-    this.$nextTick(() => {
-      ioTransitions(gsap, SplitText).action();
-      target && loadSplitCharEffect(target, gsap, SplitText).action();
-    });
   },
 });
 </script>

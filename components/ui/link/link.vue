@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="data.link.slug">
+  <nuxt-link :to="data.link.slug" data-inview-simple-show-effect>
     <template v-if="data.linktext">
       {{ data.linktext }}
     </template>

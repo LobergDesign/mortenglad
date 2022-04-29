@@ -5,6 +5,7 @@
         <div class="grid-c-12">
           <div class="hero-large__title-w">
             <ui-headline
+              class="xl"
               :data="{
                 heroTitle: data.heroTitle,
                 heroTitleExtension: data.heroTitleExtension,
@@ -14,7 +15,11 @@
         </div>
       </div>
       <div class="hero-large__images">
-        <div v-for="(image, i) in data.heroImages" :key="i">
+        <div
+          v-for="(image, i) in data.heroImages"
+          :key="i"
+          data-inview-simple-show-effect
+        >
           <ui-image :data="image" :sizes="'sm:100vw md:50vw lg:40vw'" />
         </div>
       </div>

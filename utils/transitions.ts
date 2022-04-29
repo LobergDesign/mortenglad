@@ -4,36 +4,33 @@ const gsapConfig = {
 };
 
 // initial h1 animation
-const loadSplitCharEffect = (
+const splitCharEffect = (
   target: Element | Vue | (Element | Vue)[] | undefined,
   gsap: NLib.IGsap,
   SplitText: NLib.ISplitText
 ) => {
-  const init = () => {
-    gsap.set(target, { opacity: 0 });
-  };
   const action = () => {
     const tl = gsap.timeline();
+    gsap.to(target, { autoAlpha: 1, duration: 0 });
     // @ts-ignore
     const mySplitText = new SplitText(target, { type: "chars" });
     const chars = mySplitText.chars;
-    gsap.to(target, { opacity: 1 });
 
     tl.fromTo(
       chars,
-      { opacity: 0, x: -150, fontWeight: 100 },
+      { opacity: 0, x: -190, fontWeight: 100 },
       {
         fontWeight: 400,
         x: 0,
         opacity: 1,
         force3D: true,
-        duration: 0.9,
-        stagger: 0.05,
+        duration: 1.1,
+        stagger: -0.05,
         ease: gsapConfig.ease,
       }
     );
   };
-  return { init, action };
+  return { action };
 };
 
 /// USED IN TRANSITION SETTER
@@ -43,12 +40,9 @@ const inviewSplitLineEffect = (
   gsap: NLib.IGsap,
   SplitText: NLib.ISplitText
 ) => {
-  const init = () => {
-    gsap.set(target, { opacity: 0 });
-  };
   const action = () => {
     const t1 = gsap.timeline();
-    gsap.to(target, { opacity: 1 });
+    gsap.to(target, { autoAlpha: 1, duration: 0 });
     // eslint-disable-next-line no-new
     new (SplitText as any)(target, {
       type: "lines",
@@ -73,6 +67,29 @@ const inviewSplitLineEffect = (
       }
     );
   };
-  return { init, action };
+  return { action };
 };
-export { inviewSplitLineEffect, loadSplitCharEffect };
+
+// initial h1 animation
+const simpleInviewEffect = (
+  target: Element | Vue | (Element | Vue)[] | undefined,
+  gsap: NLib.IGsap
+) => {
+  const action = () => {
+    const tl = gsap.timeline();
+    gsap.to(target, { autoAlpha: 1, duration: 0 });
+
+    tl.fromTo(
+      target,
+      { opacity: 0, y: 50 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: gsapConfig.ease,
+      }
+    );
+  };
+  return { action };
+};
+export { inviewSplitLineEffect, splitCharEffect, simpleInviewEffect };

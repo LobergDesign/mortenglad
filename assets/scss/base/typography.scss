@@ -13,10 +13,11 @@ h1,
   margin-top: 0;
   margin-bottom: clamp(2rem, 2vw, 3rem);
 }
-.h1.xl,
-h1.xl {
+.xl .h1,
+.xl h1 {
   font-size: clamp(10rem, 21vw, 30rem);
   margin-bottom: 0;
+  display: inline-block;
 }
 h2,
 .h2 {

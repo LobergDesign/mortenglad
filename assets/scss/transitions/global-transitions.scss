@@ -4,17 +4,24 @@
     will-change: transform, opacity;
   }
 }
-[data-load-split-char-effect] {
-  > div {
-    will-change: font-weight, opacity, transform;
+
+[data-inview-simple-show-effect] {
+  will-change: transform, opacity;
+}
+[data-split-line-effect],
+[data-inview-simple-show-effect] {
+  visibility: hidden;
+}
+
+[data-split-line-effect-bodytext] {
+  p {
+    visibility: hidden;
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity $transition;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+[data-load-split-char-effect] {
+  visibility: hidden;
+  > div {
+    will-change: font-weight, opacity, transform;
+  }
 }

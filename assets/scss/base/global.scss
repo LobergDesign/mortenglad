@@ -25,6 +25,7 @@ body {
 }
 
 main {
+  overflow: hidden;
   margin-top: $header-height;
 }
 img {

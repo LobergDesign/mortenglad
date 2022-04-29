@@ -6,11 +6,16 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-4">
-          <nuxt-link v-if="data.logo" class="header__logo" :to="'/'">
+          <nuxt-link
+            v-if="data.logo"
+            class="header__logo"
+            :to="'/'"
+            data-split-line-effect
+          >
             {{ data.logo }}
           </nuxt-link>
         </div>
-        <div class="grid-c-8 flex-end">
+        <div class="grid-c-8 flex-end" data-inview-simple-show-effect>
           <button type="button" class="header__menu-icon" @click="toggleMenu">
             Menu
           </button>

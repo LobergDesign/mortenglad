@@ -12,6 +12,7 @@
         </div>
         <div class="grid-c-12">
           <accordion-item
+            data-inview-simple-show-effect
             :headlines="item.tabelHeadlines"
             :items="item.itemsCollection.items"
           />

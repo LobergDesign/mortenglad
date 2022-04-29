@@ -1,5 +1,9 @@
 <template>
-  <div class="image" :class="{ 'no-aspect-ratio': !aspectRatio }">
+  <div
+    class="image"
+    :class="{ 'no-aspect-ratio': !aspectRatio }"
+    data-inview-simple-show-effect
+  >
     <nuxt-img
       v-if="data.url"
       provider="cloudinary"

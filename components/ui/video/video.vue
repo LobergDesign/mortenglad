@@ -1,5 +1,5 @@
 <template>
-  <div class="video">
+  <div class="video" data-inview-simple-show-effect>
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-12">

@@ -1,39 +1,20 @@
-import { inviewSplitLineEffect } from "./transitions";
+import { inviewSplitLineEffect, simpleInviewEffect } from "./transitions";
 
 export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
   const splitLineEffects = document.querySelectorAll(
     "[data-split-line-effect], [data-split-line-effect-bodytext] p"
   );
-  const splitCharEffects = document.querySelectorAll(
-    "[data-inview-split-char-effect]"
+  const simpleEffect = document.querySelectorAll(
+    "[data-inview-simple-show-effect]"
   );
 
-  const init = () => {
-    if (splitLineEffects) {
-      splitLineEffects.forEach((element) => {
-        inviewSplitLineEffect(element, gsap, SplitText).init();
-      });
-    }
-    // if (splitCharEffects) {
-    //   splitCharEffects.forEach((element) => {
-    //     loadSplitCharEffect(element, gsap, SplitText).init();
-    //   });
-    // }
-    if (splitCharEffects) {
-      splitCharEffects.forEach((element) => {
-        inviewSplitLineEffect(element, gsap, SplitText).init();
-      });
-    }
-  };
   const action = () => {
-    const initIo = (target: any) => {
+    const splitLineEffectsIO = (target: any) => {
       const io = new IntersectionObserver(
         (entries: IntersectionObserverEntry[], observer) => {
           const entry = entries[0] as IntersectionObserverEntry;
           if (entry.isIntersecting) {
             const e = entry.target as HTMLElement;
-            // split line effect
-
             splitLineEffects &&
               inviewSplitLineEffect(e, gsap, SplitText).action();
 
@@ -43,17 +24,14 @@ export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
       );
       io.observe(target);
     };
-    const nextIo = (target: any) => {
+    const simpleShowEffect = (target: any) => {
       const io = new IntersectionObserver(
         (entries: IntersectionObserverEntry[], observer) => {
           const entry = entries[0] as IntersectionObserverEntry;
           if (entry.isIntersecting) {
             const e = entry.target as HTMLElement;
-            // split char effect
-            // splitCharEffects &&
-            //   loadSplitCharEffect(e, gsap, SplitText).action();
-            splitCharEffects &&
-              inviewSplitLineEffect(e, gsap, SplitText).action();
+
+            simpleEffect && simpleInviewEffect(e, gsap).action();
 
             observer.unobserve(target);
           }
@@ -64,12 +42,12 @@ export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
     };
     // split line effect
     if (splitLineEffects) {
-      splitLineEffects.forEach(initIo);
+      splitLineEffects.forEach(splitLineEffectsIO);
     }
 
-    if (splitCharEffects) {
-      splitCharEffects.forEach(nextIo);
+    if (simpleEffect) {
+      simpleEffect.forEach(simpleShowEffect);
     }
   };
-  return { action, init };
+  return { action };
 }

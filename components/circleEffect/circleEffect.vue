@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :to="{ path: '/', hash: '#intro' }">
-    <div class="circular-effect">
+    <div class="circular-effect" data-inview-simple-show-effect>
       <svg viewBox="0 0 200 200">
         <path
           id="circle"

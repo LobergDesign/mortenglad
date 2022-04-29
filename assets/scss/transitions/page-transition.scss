@@ -1,0 +1,20 @@
+[data-aaaaand-action] {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: var(--color-secondary);
+  visibility: hidden;
+  will-change: background-color, transform, opacity, clipPath;
+}
+[data-look-at-me-mom] {
+  font-size: 8rem;
+  color: var(--color-primary);
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 99;
+}
