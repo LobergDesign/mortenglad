@@ -39,6 +39,9 @@ declare namespace NGlobal {
     openGraphType: string;
     openGraphimage: IMedia;
   }
+  export interface IGsapSettings {
+    ease: string;
+  }
 }
 
 declare module "*.svg?inline" {
