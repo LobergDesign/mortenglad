@@ -118,6 +118,7 @@ $gallery-width-size-sm: 92vw;
       width: $gallery-width-size-sm;
     }
     &__btn {
+      top: 55%;
       left: 4vw;
       // hover
       &:hover svg {

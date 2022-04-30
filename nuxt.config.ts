@@ -41,6 +41,7 @@ export default {
     // https://go.nuxtjs.dev/typescript
     "@nuxt/typescript-build",
     "@nuxtjs/google-fonts",
+    "nuxt-purgecss",
     "nuxt-graphql-request",
     "@aceforth/nuxt-netlify",
     "nuxt-gsap-module",
@@ -76,6 +77,30 @@ export default {
     ],
     crawler: false,
     routes: async () => await generate(),
+  },
+  purgeCSS: {
+    // whitelist spicific classes
+    whitelist: ["child"],
+    // whitelist spicific classes and all that contains that naming
+    whitelistPatterns: [
+      /__layout/,
+      /__nuxt/,
+      /cls/,
+      /hooper/,
+      /is/,
+      /img/,
+      /strong/,
+      /input/,
+      /b/,
+      /svg/,
+      /path/,
+      /rect/,
+      /fade-out/,
+      /ol/,
+      /is/,
+      /is-/,
+      /keen/,
+    ],
   },
   sitemap: {
     hostname: process.env.BASE_URL || "http://localhost:3000",
