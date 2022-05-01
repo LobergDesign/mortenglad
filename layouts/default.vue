@@ -71,7 +71,7 @@ export default Vue.extend({
         target,
         { backgroundColor: this.light },
         {
-          duration: 2.5,
+          duration: 2.1,
           ease: this.ease,
           backgroundColor: this.dark,
           onComplete: initApp,
@@ -100,7 +100,7 @@ export default Vue.extend({
           fontWeight: 400,
           x: 0,
           opacity: 1,
-          duration: 1.3,
+          duration: 0.9,
           stagger: 0.05,
           color: this.light,
           ease: this.ease,
@@ -110,7 +110,7 @@ export default Vue.extend({
         fontWeight: 100,
         x: 50,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.5,
         stagger: -0.05,
         ease: this.ease,
       });
