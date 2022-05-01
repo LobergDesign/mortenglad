@@ -1,7 +1,6 @@
 <template>
   <div class="overflow-hidden">
     <div class="aaaaand-action" data-aaaaand-action></div>
-    <span data-look-at-me-mom></span>
     <div data-warm-blanket>
       <div v-if="data">
         <hero

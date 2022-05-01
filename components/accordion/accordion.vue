@@ -10,9 +10,8 @@
         <div class="grid-c-12">
           <lazy-ui-headline-medium :data="item.title" />
         </div>
-        <div class="grid-c-12">
-          <accordion-item
-            data-inview-simple-show-effect
+        <div class="grid-c-12" data-inview-simple-show-effect>
+          <lazy-accordion-item
             :headlines="item.tabelHeadlines"
             :items="item.itemsCollection.items"
           />

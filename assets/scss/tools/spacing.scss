@@ -1,6 +1,12 @@
 .spacing-b {
   margin-bottom: clamp(10rem, 17vw, 24rem);
 }
+.spacing-t {
+  margin-top: clamp(10rem, 17vw, 24rem);
+}
+.spacing-t-large {
+  margin-top: clamp(20rem, 22vw, 35rem);
+}
 .spacing-b-medium {
   margin-bottom: clamp(8rem, 15vw, 20rem);
 }
