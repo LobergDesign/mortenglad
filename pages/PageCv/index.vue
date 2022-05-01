@@ -1,18 +1,14 @@
 <template>
   <div class="overflow-hidden">
     <div class="aaaaand-action" data-aaaaand-action></div>
-    <span data-look-at-me-mom></span>
     <div data-warm-blanket>
-      <div v-if="data">
+      <div v-if="data && cvCollection">
         <hero
           v-if="data.hero"
           :title="data.hero.title"
           :bodytext="data.hero.bodytext"
         />
-        <lazy-accordion
-          v-if="cvCollection"
-          :data="cvCollection.cvListCollection.items"
-        />
+        <lazy-accordion :data="cvCollection.cvListCollection.items" />
       </div>
     </div>
   </div>

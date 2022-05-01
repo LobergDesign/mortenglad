@@ -1,19 +1,20 @@
 <template>
   <div class="overflow-hidden">
     <div data-aaaaand-action></div>
-    <span data-look-at-me-mom></span>
     <div data-warm-blanket>
       <hero-large v-if="hero" :data="hero" />
-      <lazy-intro v-if="intro" :data="intro" />
-      <lazy-cv-collections
-        v-if="cvCollection && cvCollection.cvListCollection"
-        :data="cvCollection.cvListCollection.items"
-        :link="cvLink"
-      />
-      <lazy-grid-handler
-        v-if="data && data.dynamicBlockSectionCollection"
-        :data="data.dynamicBlockSectionCollection"
-      />
+      <div class="spacing-t-large">
+        <lazy-intro v-if="intro.introBodytext" :data="intro" />
+        <lazy-cv-collections
+          v-if="cvCollection && cvCollection.cvListCollection"
+          :data="cvCollection.cvListCollection.items"
+          :link="cvLink"
+        />
+        <lazy-grid-handler
+          v-if="data && data.dynamicBlockSectionCollection"
+          :data="data.dynamicBlockSectionCollection"
+        />
+      </div>
     </div>
   </div>
 </template>

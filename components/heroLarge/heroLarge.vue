@@ -20,7 +20,7 @@
           :key="i"
           data-inview-simple-show-effect
         >
-          <ui-image :data="image" :sizes="'sm:100vw md:50vw lg:40vw'" />
+          <ui-image :data="image" :sizes="'sm:100vw md:50vw lg:60vw'" />
         </div>
       </div>
     </div>
