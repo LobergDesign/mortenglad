@@ -199,9 +199,8 @@ export default {
           clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
           yPercent: 0,
           backgroundColor: "#e9f1f7",
-          duration: 0.8,
+          duration: 0.9,
           ease: "power4.inOut",
-
           onComplete: () => done(),
         }
       );
@@ -222,7 +221,7 @@ export default {
       const polygonElm = el.querySelector("[data-aaaaand-action]");
       gsap.to(polygonElm, {
         yPercent: -100,
-        duration: 0.8,
+        duration: 0.9,
         ease: "power4.inOut",
         clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 90%)",
         clearProps: true,
@@ -232,7 +231,7 @@ export default {
         { y: 250 },
         {
           y: 0,
-          duration: 0.9,
+          duration: 1,
           ease: "power4.inOut",
           clearProps: true,
           onComplete: () => done(),

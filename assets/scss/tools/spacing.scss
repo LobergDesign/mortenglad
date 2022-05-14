@@ -7,6 +7,9 @@
 .spacing-t-large {
   margin-top: clamp(20rem, 22vw, 35rem);
 }
+.spacing-t-small {
+  margin-top: clamp(1.5rem, 2vw, 3rem);
+}
 .spacing-b-medium {
   margin-bottom: clamp(8rem, 15vw, 20rem);
 }

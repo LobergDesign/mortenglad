@@ -28,8 +28,7 @@
   &__images > div:nth-child(2) {
     width: clamp(10rem, 32vw, 82rem);
     left: 45vw;
-    @include position-center-y;
-    top: 40%;
+    top: 15%;
     .image {
       width: clamp(10rem, 32vw, 82rem);
     }
