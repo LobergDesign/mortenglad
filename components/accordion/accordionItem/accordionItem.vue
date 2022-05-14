@@ -1,5 +1,5 @@
 <template>
-  <div class="accordion-item spacing-b">
+  <div class="accordion-item">
     <!-- IF THERE IS 4 HEADLINES -->
     <template v-if="headlines.length <= 4">
       <div class="grid-r last-text-align-right accordion-item__title-list">
@@ -26,7 +26,7 @@
       </div>
       <ul class="reset-ul">
         <li v-for="(item, i) in items" :key="i">
-          <lazy-accordion-nested-item
+          <accordion-nested-item
             :data="item"
             :len="headlines.length"
             :headlines="headlines"

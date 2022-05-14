@@ -5,11 +5,18 @@
       <hero-large v-if="hero" :data="hero" />
       <div class="spacing-t-large">
         <lazy-intro v-if="intro.introBodytext" :data="intro" />
-        <lazy-cv-collections
+
+        <lazy-accordion
+          v-if="cvCollection"
+          :data="cvCollection.cvListCollection.items"
+          :link="cvLink"
+          :alternative="true"
+        />
+        <!-- <lazy-cv-collections
           v-if="cvCollection && cvCollection.cvListCollection"
           :data="cvCollection.cvListCollection.items"
           :link="cvLink"
-        />
+        /> -->
         <lazy-grid-handler
           v-if="data && data.dynamicBlockSectionCollection"
           :data="data.dynamicBlockSectionCollection"

@@ -100,7 +100,7 @@ export default Vue.extend({
           fontWeight: 400,
           x: 0,
           opacity: 1,
-          duration: 0.9,
+          duration: 0.7,
           stagger: 0.05,
           color: this.light,
           ease: this.ease,
@@ -110,7 +110,7 @@ export default Vue.extend({
         fontWeight: 100,
         x: 50,
         opacity: 0,
-        duration: 0.5,
+        duration: 0.4,
         stagger: -0.05,
         ease: this.ease,
       });

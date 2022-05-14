@@ -2,13 +2,16 @@
   <div class="overflow-hidden">
     <div class="aaaaand-action" data-aaaaand-action></div>
     <div data-warm-blanket>
-      <div v-if="data && cvCollection">
+      <div v-if="data">
         <hero
           v-if="data.hero"
           :title="data.hero.title"
           :bodytext="data.hero.bodytext"
         />
-        <lazy-accordion :data="cvCollection.cvListCollection.items" />
+        <accordion
+          v-if="cvCollection"
+          :data="cvCollection.cvListCollection.items"
+        />
       </div>
     </div>
   </div>
@@ -37,16 +40,10 @@ export default Vue.extend({
       const data = response.page;
       return {
         data,
-        cvCollection: cvCollection.page || null,
+        cvCollection: cvCollection.page,
         seo: data.seo,
       };
     }
-  },
-  data() {
-    return {
-      data: ({} as NPage.IStandardPage) || {},
-      cvCollection: null,
-    };
   },
   head(): any {
     return setHead(this.seo || null);
