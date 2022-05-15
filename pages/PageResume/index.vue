@@ -2,21 +2,46 @@
   <div class="overflow-hidden">
     <div class="aaaaand-action" data-aaaaand-action></div>
     <div data-warm-blanket>
-      <div v-if="data">
-        <hero
-          v-if="data.hero"
-          :title="data.hero.title"
-          :bodytext="data.hero.bodytext"
-        />
-        <stats
-          :profile-additional-collection="data.profileAdditionalCollection"
-          :profile-collection="data.profileCollection"
-        />
-        <lazy-grid-handler
-          v-if="data.dynamicBlockSectionCollection"
-          :data="data.dynamicBlockSectionCollection"
-        />
-      </div>
+      <LocomotiveScroll
+        ref="scroller"
+        :getted-options="{
+          smooth: true,
+          direction: 'vertical',
+          smartphone: {
+            smooth: true,
+            direction: 'vertical',
+          },
+          tablet: {
+            smooth: true,
+            direction: 'vertical',
+          },
+        }"
+      >
+        <!-- My Content:
+    Html elements, Components...
+    -->
+        <div v-if="data">
+          <div class="example vertical">
+            <div data-scroll-section>
+              <hero
+                v-if="data.hero"
+                :title="data.hero.title"
+                :bodytext="data.hero.bodytext"
+              />
+              <stats
+                :profile-additional-collection="
+                  data.profileAdditionalCollection
+                "
+                :profile-collection="data.profileCollection"
+              />
+              <lazy-grid-handler
+                v-if="data.dynamicBlockSectionCollection"
+                :data="data.dynamicBlockSectionCollection"
+              />
+            </div>
+          </div>
+        </div>
+      </LocomotiveScroll>
     </div>
   </div>
 </template>

@@ -31,7 +31,11 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~/plugins/cms"],
+  plugins: [
+    "~/plugins/cms",
+    "~/plugins/smooth",
+    { src: "~/plugins/client", mode: "client" },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [{ path: "~/components", extensions: ["vue"] }],
