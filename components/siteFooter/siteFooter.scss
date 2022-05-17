@@ -2,8 +2,12 @@
   background-color: var(--color-alternative);
   padding-top: clamp(4.5rem, 7vw, 11rem);
   padding-bottom: clamp(2rem, 3vw, 4rem);
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 10px;
+  opacity: 0;
+  transition: opacity $transition;
   ul li {
     display: inline-block;
   }

@@ -31,11 +31,7 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    "~/plugins/cms",
-    "~/plugins/smooth",
-    { src: "~/plugins/client", mode: "client" },
-  ],
+  plugins: ["~/plugins/cms"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [{ path: "~/components", extensions: ["vue"] }],
@@ -90,7 +86,6 @@ export default {
       /__layout/,
       /__nuxt/,
       /cls/,
-      /hooper/,
       /is/,
       /img/,
       /strong/,
@@ -104,6 +99,8 @@ export default {
       /is/,
       /is-/,
       /keen/,
+      /scroll-content/,
+      /smooth-container/,
     ],
   },
   sitemap: {
@@ -181,11 +178,11 @@ export default {
     css: false,
     leave(el: HTMLElement, done: Function) {
       const gsap = this.$gsap as NLib.IGsap;
-      const contentWrap = el.querySelector("[data-warm-blanket]");
+      const contentWrap = el.querySelector(".scroll-content");
       const polygonElm = el.querySelector("[data-aaaaand-action]");
 
       gsap.to(contentWrap, {
-        y: -350,
+        yPercent: -20,
         opacity: 0,
         duration: 1,
         ease: "power2.inOut",

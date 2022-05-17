@@ -3,15 +3,17 @@
     <div class="aaaaand-action" data-aaaaand-action></div>
     <div data-warm-blanket>
       <div v-if="data">
-        <hero
-          v-if="data.hero"
-          :title="data.hero.title"
-          :bodytext="data.hero.bodytext"
-        />
-        <accordion
-          v-if="cvCollection"
-          :data="cvCollection.cvListCollection.items"
-        />
+        <div class="smooth-container">
+          <hero
+            v-if="data.hero"
+            :title="data.hero.title"
+            :bodytext="data.hero.bodytext"
+          />
+          <accordion
+            v-if="cvCollection"
+            :data="cvCollection.cvListCollection.items"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -23,10 +25,11 @@ import Vue from "vue";
 import { query } from "~/queries/cvpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
 import animations from "~/mixins/loadAnimations";
+import smooth from "~/mixins/smooth";
 import setHead from "~/config/head";
 export default Vue.extend({
   name: "CvPage",
-  mixins: [animations],
+  mixins: [animations, smooth],
 
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);

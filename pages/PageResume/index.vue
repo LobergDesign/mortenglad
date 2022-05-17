@@ -2,46 +2,23 @@
   <div class="overflow-hidden">
     <div class="aaaaand-action" data-aaaaand-action></div>
     <div data-warm-blanket>
-      <LocomotiveScroll
-        ref="scroller"
-        :getted-options="{
-          smooth: true,
-          direction: 'vertical',
-          smartphone: {
-            smooth: true,
-            direction: 'vertical',
-          },
-          tablet: {
-            smooth: true,
-            direction: 'vertical',
-          },
-        }"
-      >
-        <!-- My Content:
-    Html elements, Components...
-    -->
-        <div v-if="data">
-          <div class="example vertical">
-            <div data-scroll-section>
-              <hero
-                v-if="data.hero"
-                :title="data.hero.title"
-                :bodytext="data.hero.bodytext"
-              />
-              <stats
-                :profile-additional-collection="
-                  data.profileAdditionalCollection
-                "
-                :profile-collection="data.profileCollection"
-              />
-              <lazy-grid-handler
-                v-if="data.dynamicBlockSectionCollection"
-                :data="data.dynamicBlockSectionCollection"
-              />
-            </div>
-          </div>
+      <div v-if="data">
+        <div class="smooth-container">
+          <hero
+            v-if="data.hero"
+            :title="data.hero.title"
+            :bodytext="data.hero.bodytext"
+          />
+          <stats
+            :profile-additional-collection="data.profileAdditionalCollection"
+            :profile-collection="data.profileCollection"
+          />
+          <lazy-grid-handler
+            v-if="data.dynamicBlockSectionCollection"
+            :data="data.dynamicBlockSectionCollection"
+          />
         </div>
-      </LocomotiveScroll>
+      </div>
     </div>
   </div>
 </template>
@@ -51,10 +28,11 @@ import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/resumepage";
 import animations from "~/mixins/loadAnimations";
+import smooth from "~/mixins/smooth";
 import setHead from "~/config/head";
 export default Vue.extend({
   name: "ResumePage",
-  mixins: [animations],
+  mixins: [animations, smooth],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
 

@@ -22,20 +22,9 @@ body {
   color: var(--color-secondary);
   font-size: 1.6rem;
   margin: 0;
-}
-
-main {
-  overflow: hidden;
-  margin-top: $header-height;
-}
-.has-scroll-smooth body {
   overflow: hidden;
 }
 
-.has-scroll-smooth .js-locomotive {
-  min-height: 100%;
-  width: 100%;
-}
 img {
   display: block;
   width: 100%;
@@ -47,6 +36,20 @@ button {
   outline: none;
   cursor: pointer;
 }
+
+.smooth-container {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding-bottom: $footer-height;
+  padding-top: $header-height;
+}
+.scroll-content {
+  will-change: transform;
+}
+
 .video-list {
   .video__item {
     margin-top: 0;
