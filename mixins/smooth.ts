@@ -5,10 +5,29 @@ export default {
     this.setSmoothScroll();
   },
   methods: {
+    controlFooter(visible: boolean) {
+      const gsap = this.$gsap as NLib.IGsap;
+      const footer = document.querySelector(".footer") as HTMLElement;
+
+      if (visible) {
+        gsap.to(footer, {
+          duration: 0,
+          yPercent: -100,
+          ease: "power4.inOut",
+        });
+      } else {
+        gsap.to(footer, {
+          duration: 0,
+          yPercent: 0,
+          ease: "power4.inOut",
+        });
+      }
+    },
     setSmoothScroll() {
       const smoothWrap = document.querySelector(
         ".smooth-container"
       ) as HTMLElement;
+
       //   const blanket = document.querySelector(
       //     "[data-warm-blanket]"
       //   ) as HTMLElement;
@@ -32,11 +51,10 @@ export default {
           const limit = status.limit.y;
           const offset = status.offset.y;
           const footerTriggerPoint = limit - 200;
-          const footer = document.querySelector(".footer") as HTMLElement;
           if (offset > footerTriggerPoint) {
-            footer.style.opacity = "1";
+            this.controlFooter(true);
           } else {
-            footer.style.opacity = "0";
+            this.controlFooter(false);
           }
         });
       }, 1000);
