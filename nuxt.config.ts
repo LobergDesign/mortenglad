@@ -181,11 +181,11 @@ export default {
     css: false,
     leave(el: HTMLElement, done: Function) {
       const gsap = this.$gsap as NLib.IGsap;
-      const contentWrap = el.querySelector(".scroll-content");
+      const contentWrap = el.querySelector(".smooth-container");
       const polygonElm = el.querySelector("[data-aaaaand-action]");
 
       gsap.to(contentWrap, {
-        yPercent: -20,
+        y: -300,
         opacity: 0,
         duration: 1,
         ease: "power2.inOut",
@@ -203,7 +203,7 @@ export default {
           clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 100%)",
           yPercent: 0,
           backgroundColor: "#e9f1f7",
-          duration: 0.9,
+          duration: 1.1,
           ease: "power4.inOut",
           onComplete: () => done(),
         }
@@ -225,7 +225,7 @@ export default {
       const polygonElm = el.querySelector("[data-aaaaand-action]");
       gsap.to(polygonElm, {
         yPercent: -100,
-        duration: 0.9,
+        duration: 1.05,
         ease: "power4.inOut",
         clipPath: "polygon(0 0%, 100% 0, 100% 100%, 0 90%)",
         clearProps: true,

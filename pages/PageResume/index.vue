@@ -17,6 +17,7 @@
             v-if="data.dynamicBlockSectionCollection"
             :data="data.dynamicBlockSectionCollection"
           />
+          <site-footer />
         </div>
       </div>
     </div>

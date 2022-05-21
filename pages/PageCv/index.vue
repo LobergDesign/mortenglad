@@ -13,6 +13,7 @@
             v-if="cvCollection"
             :data="cvCollection.cvListCollection.items"
           />
+          <site-footer />
         </div>
       </div>
     </div>

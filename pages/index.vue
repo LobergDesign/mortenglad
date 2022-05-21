@@ -18,6 +18,7 @@
             :data="data.dynamicBlockSectionCollection"
           />
         </div>
+        <site-footer />
       </div>
     </div>
   </div>

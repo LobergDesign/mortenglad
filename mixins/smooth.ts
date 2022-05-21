@@ -5,40 +5,16 @@ export default {
     this.setSmoothScroll();
   },
   methods: {
-    controlFooter(visible: boolean) {
-      const gsap = this.$gsap as NLib.IGsap;
-      const footer = document.querySelector(".footer") as HTMLElement;
-
-      if (visible) {
-        gsap.to(footer, {
-          duration: 0,
-          yPercent: -100,
-          ease: "power4.inOut",
-        });
-      } else {
-        gsap.to(footer, {
-          duration: 0,
-          yPercent: 0,
-          ease: "power4.inOut",
-        });
-      }
-    },
     setSmoothScroll() {
       const smoothWrap = document.querySelector(
         ".smooth-container"
       ) as HTMLElement;
 
-      //   const blanket = document.querySelector(
-      //     "[data-warm-blanket]"
-      //   ) as HTMLElement;
-      //   const blanketHeight = blanket.clientHeight;
-      //   console.log("blanketHeight", blanketHeight);
-      //   smoothWrap.style.height = blanketHeight + "px";
       const scrollbar = () => {
         return Scrollbar.init(smoothWrap, {
           continuousScrolling: true,
           renderByPixels: true,
-          damping: 0.1,
+          damping: 0.09,
           thumbMinSize: 20,
         });
       };
@@ -46,17 +22,37 @@ export default {
         smoothWrap.style.position = "absolute";
 
         scrollbar();
-        scrollbar().addListener((status) => {
-          // console.log("status", status);
-          const limit = status.limit.y;
-          const offset = status.offset.y;
-          const footerTriggerPoint = limit - 200;
-          if (offset > footerTriggerPoint) {
-            this.controlFooter(true);
-          } else {
-            this.controlFooter(false);
-          }
-        });
+        // scrollbar().addListener((status: any) => {
+        //   function roundUpNearest10(num: number) {
+        //     return Math.ceil(num / 10) * 10;
+        //   }
+        //   const footerHeight = 460;
+        //   // console.log("status", status);
+        //   const limit = status.limit.y; // SLUT
+        //   const offset = Math.round(status.offset.y);
+        //   const footerTriggerPoint = limit - footerHeight; // START
+        //   const footer = document.querySelector(".footer") as HTMLElement;
+        //   const gsap = this.$gsap as NLib.IGsap;
+        //   if (offset > footerTriggerPoint) {
+        //     // this.controlFooter(true);
+        //     const val = Math.round(limit - offset);
+        //     // footer.style.transform = `translateY(${val}px)`;
+        //     console.log("roundUpNearest10(val)", roundUpNearest10(val));
+        //     gsap.to(footer, {
+        //       opacity: 1,
+        //       duration: 0.1,
+        //       y: roundUpNearest10(val),
+        //       ease: "none",
+        //     });
+        //   } else {
+        //     gsap.to(footer, {
+        //       opacity: 0,
+        //       duration: 0,
+        //       y: footerHeight,
+        //       ease: "none",
+        //     });
+        //   }
+        // });
       }, 1000);
     },
   },
