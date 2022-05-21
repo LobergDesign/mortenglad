@@ -3,19 +3,22 @@
     <div class="aaaaand-action" data-aaaaand-action></div>
     <div data-warm-blanket>
       <div v-if="data">
-        <hero
-          v-if="data.hero"
-          :title="data.hero.title"
-          :bodytext="data.hero.bodytext"
-        />
-        <stats
-          :profile-additional-collection="data.profileAdditionalCollection"
-          :profile-collection="data.profileCollection"
-        />
-        <lazy-grid-handler
-          v-if="data.dynamicBlockSectionCollection"
-          :data="data.dynamicBlockSectionCollection"
-        />
+        <div class="smooth-container">
+          <hero
+            v-if="data.hero"
+            :title="data.hero.title"
+            :bodytext="data.hero.bodytext"
+          />
+          <stats
+            :profile-additional-collection="data.profileAdditionalCollection"
+            :profile-collection="data.profileCollection"
+          />
+          <lazy-grid-handler
+            v-if="data.dynamicBlockSectionCollection"
+            :data="data.dynamicBlockSectionCollection"
+          />
+          <site-footer />
+        </div>
       </div>
     </div>
   </div>
@@ -26,10 +29,11 @@ import { Context } from "@nuxt/types";
 import Vue from "vue";
 import { query } from "~/queries/resumepage";
 import animations from "~/mixins/loadAnimations";
+import smooth from "~/mixins/smooth";
 import setHead from "~/config/head";
 export default Vue.extend({
   name: "ResumePage",
-  mixins: [animations],
+  mixins: [animations, smooth],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
 

@@ -25,13 +25,13 @@ export default {
   },
   methods: {
     animations() {
-      const SplitText = this.$SplitText;
-      const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelector(
-        "[data-load-split-char-effect]"
-      ) as HTMLElement;
-
       this.$nextTick(() => {
+        const SplitText = this.$SplitText;
+        const gsap = this.$gsap as NLib.IGsap;
+        const target = document.querySelector(
+          "[data-load-split-char-effect]"
+        ) as HTMLElement;
+
         ioTransitions(gsap, SplitText).action();
         target && splitCharEffect(target, gsap, SplitText).action();
       });

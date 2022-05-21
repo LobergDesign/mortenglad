@@ -22,12 +22,9 @@ body {
   color: var(--color-secondary);
   font-size: 1.6rem;
   margin: 0;
+  overflow: hidden;
 }
 
-main {
-  overflow: hidden;
-  margin-top: $header-height;
-}
 img {
   display: block;
   width: 100%;
@@ -39,6 +36,20 @@ button {
   outline: none;
   cursor: pointer;
 }
+
+.smooth-container {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding-top: $header-height;
+  will-change: transform;
+}
+.scroll-content {
+  will-change: transform;
+}
+
 .video-list {
   .video__item {
     margin-top: 0;

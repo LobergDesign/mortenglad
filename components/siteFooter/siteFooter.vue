@@ -1,43 +1,43 @@
 <template>
-  <footer class="footer">
+  <footer v-if="!$fetchState.pending" class="footer">
     <lazy-contact-form
-      :title="data.contactFormTitle"
-      :success-message="data.contactFormSuccessMessage"
+      :title="footer.contactFormTitle"
+      :success-message="footer.contactFormSuccessMessage"
     />
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-9 grid-c-sm-12">
           <ul class="reset-ul footer__info">
-            <li v-if="data.address">
+            <li v-if="footer.address">
               <address>
-                {{ data.address }}
+                {{ footer.address }}
               </address>
             </li>
-            <li v-if="data.telephonenumber">
-              <a :href="'tel:' + data.telephonenumber"
-                >+45 {{ data.telephonenumber }}</a
+            <li v-if="footer.telephonenumber">
+              <a :href="'tel:' + footer.telephonenumber"
+                >+45 {{ footer.telephonenumber }}</a
               >
             </li>
-            <li v-if="data.email">
-              <a :href="'mailto:' + data.email">{{ data.email }}</a>
+            <li v-if="footer.email">
+              <a :href="'mailto:' + footer.email">{{ footer.email }}</a>
             </li>
           </ul>
         </div>
         <div class="grid-c-3 grid-c-sm-12 flex-end reset-flex-end-md">
           <ul class="reset-ul footer__social">
-            <li v-if="data.facebook">
-              <a :href="data.facebook" target="_blank">Facebook</a>
+            <li v-if="footer.facebook">
+              <a :href="footer.facebook" target="_blank">Facebook</a>
             </li>
-            <li v-if="data.linkedIn">
-              <a :href="data.linkedIn" target="_blank"> LinkedIn </a>
+            <li v-if="footer.linkedIn">
+              <a :href="footer.linkedIn" target="_blank"> LinkedIn </a>
             </li>
-            <li v-if="data.instagram">
-              <a :href="data.instagram" target="_blank" class="reset-fill">
+            <li v-if="footer.instagram">
+              <a :href="footer.instagram" target="_blank" class="reset-fill">
                 Instagram
               </a>
             </li>
-            <li v-if="data.youtube">
-              <a :href="data.youtube" target="_blank"> Youtube </a>
+            <li v-if="footer.youtube">
+              <a :href="footer.youtube" target="_blank"> Youtube </a>
             </li>
           </ul>
         </div>
@@ -50,11 +50,29 @@
 import Vue from "vue";
 export default Vue.extend({
   name: "SiteFooter",
-  props: {
-    data: {
-      type: Object as () => NFooter.IFooterData,
-      default: null,
-    },
+  data() {
+    return {
+      footer: {},
+    };
+  },
+  fetch() {
+    const globalData = this.$store.state.global.globalSettings;
+
+    if (globalData) {
+      const footer = {
+        telephonenumber: globalData.globalSettings?.telephonenumber,
+        email: globalData.globalSettings?.email,
+        address: globalData.globalSettings?.address,
+        linkedIn: globalData.globalSettings?.linkedIn,
+        facebook: globalData.globalSettings?.facebook,
+        instagram: globalData.globalSettings?.instagram,
+        youtube: globalData.globalSettings?.youtube,
+        contactFormTitle: globalData.globalSettings?.contactFormTitle,
+        contactFormSuccessMessage:
+          globalData.globalSettings?.contactFormSuccessMessage,
+      };
+      this.footer = footer;
+    }
   },
 });
 </script>

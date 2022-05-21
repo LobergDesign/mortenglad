@@ -2,25 +2,23 @@
   <div class="overflow-hidden">
     <div data-aaaaand-action></div>
     <div data-warm-blanket>
-      <hero-large v-if="hero" :data="hero" />
-      <div class="spacing-t-large">
-        <lazy-intro v-if="intro.introBodytext" :data="intro" />
+      <div class="smooth-container">
+        <hero-large v-if="hero" :data="hero" />
+        <div class="spacing-t-large">
+          <lazy-intro v-if="intro.introBodytext" :data="intro" />
 
-        <lazy-accordion
-          v-if="cvCollection"
-          :data="cvCollection.cvListCollection.items"
-          :link="cvLink"
-          :alternative="true"
-        />
-        <!-- <lazy-cv-collections
-          v-if="cvCollection && cvCollection.cvListCollection"
-          :data="cvCollection.cvListCollection.items"
-          :link="cvLink"
-        /> -->
-        <lazy-grid-handler
-          v-if="data && data.dynamicBlockSectionCollection"
-          :data="data.dynamicBlockSectionCollection"
-        />
+          <lazy-accordion
+            v-if="cvCollection"
+            :data="cvCollection.cvListCollection.items"
+            :link="cvLink"
+            :alternative="true"
+          />
+          <lazy-grid-handler
+            v-if="data && data.dynamicBlockSectionCollection"
+            :data="data.dynamicBlockSectionCollection"
+          />
+        </div>
+        <site-footer />
       </div>
     </div>
   </div>
@@ -33,9 +31,10 @@ import { query } from "~/queries/frontpage";
 import { query as cvCollectionQuery } from "~/queries/cvCollections";
 import setHead from "~/config/head";
 import animations from "~/mixins/loadAnimations";
+import smooth from "~/mixins/smooth";
 export default Vue.extend({
   name: "IndexPage",
-  mixins: [animations],
+  mixins: [animations, smooth],
   async asyncData({ $apiResource, error }: Context) {
     const response = await $apiResource.getData(query);
     const cvCollection = await $apiResource.getDataWithLimit(
