@@ -5,13 +5,8 @@
   >
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c-4">
-          <nuxt-link
-            v-if="data.logo"
-            class="header__logo"
-            :to="'/'"
-            data-split-line-effect
-          >
+        <div class="grid-c-4" data-split-line-effect>
+          <nuxt-link v-if="data.logo" class="header__logo" :to="'/'">
             {{ data.logo }}
           </nuxt-link>
         </div>
@@ -84,11 +79,7 @@ export default Vue.extend({
       window.addEventListener("resize", this.handleOptimized);
     },
     isDevices() {
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        return true;
-      } else {
-        return false;
-      }
+      return !!window.matchMedia("(max-width: 768px)").matches;
     },
     handleOptimized() {
       this.isDevices()

@@ -1,0 +1,26 @@
+.smooth-container {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding-top: $header-height;
+  will-change: transform;
+}
+.scroll-content {
+  will-change: transform;
+}
+@include viewport-large {
+  .smooth-container {
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    overflow: auto;
+    padding-top: 0;
+    will-change: none;
+  }
+  .scroll-content {
+    will-change: none;
+  }
+}

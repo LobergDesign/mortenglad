@@ -9,13 +9,10 @@
             :title="data.hero.title"
             :bodytext="data.hero.bodytext"
           />
-          <section
-            v-for="(item, i) in data.videoListCollection.items"
-            :key="i"
-            class="video-list"
-          >
-            <ui-video :data="item" :small-headline="true" />
-          </section>
+          <lazy-video-list
+            v-if="data.videoListCollection"
+            :data="data.videoListCollection.items"
+          />
 
           <lazy-grid-handler
             v-if="data.dynamicBlockSectionCollection"

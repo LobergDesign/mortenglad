@@ -1,0 +1,22 @@
+.video-list {
+  .video__item {
+    margin-top: 0;
+    margin-bottom: clamp(10rem, 17vw, 24rem);
+  }
+  h3 {
+    width: 33vw;
+  }
+  &:nth-of-type(even) {
+    text-align: right;
+    h3 {
+      margin-left: auto;
+    }
+  }
+}
+@include viewport-small {
+  .video-list {
+    h3 {
+      width: 100%;
+    }
+  }
+}

@@ -19,7 +19,7 @@ export default {
       this.$nextTick(() => {
         setTimeout(() => {
           this.animations();
-        }, 200);
+        }, 300);
       });
     }
   },
@@ -31,8 +31,9 @@ export default {
         const target = document.querySelector(
           "[data-load-split-char-effect]"
         ) as HTMLElement;
-
-        ioTransitions(gsap, SplitText).action();
+        setTimeout(() => {
+          ioTransitions(gsap, SplitText).action();
+        }, 100);
         target && splitCharEffect(target, gsap, SplitText).action();
       });
     },

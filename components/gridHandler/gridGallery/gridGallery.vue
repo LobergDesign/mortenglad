@@ -77,7 +77,9 @@ export default Vue.extend({
     });
   },
   beforeDestroy() {
-    if (this.slider) (this.slider as any).destroy();
+    setTimeout(() => {
+      if (this.slider) (this.slider as any).destroy();
+    }, 1200);
   },
 });
 </script>

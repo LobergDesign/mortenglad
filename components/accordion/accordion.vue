@@ -30,10 +30,7 @@
           <nuxt-link
             v-if="alternative && link"
             class="spacing-t-small display-block"
-            :to="{
-              path: link.cvLink.slug + '/',
-              hash: '#' + item.collectionType,
-            }"
+            :to="link.cvLink.slug + '/'"
           >
             <template v-if="link.cvLinkText">
               {{ link.cvLinkText }}

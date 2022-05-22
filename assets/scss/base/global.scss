@@ -37,38 +37,8 @@ button {
   cursor: pointer;
 }
 
-.smooth-container {
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: auto;
-  padding-top: $header-height;
-  will-change: transform;
-}
-.scroll-content {
-  will-change: transform;
-}
-
-.video-list {
-  .video__item {
-    margin-top: 0;
-    margin-bottom: clamp(10rem, 17vw, 24rem);
-  }
-  h3 {
-    width: 33vw;
-  }
-  &:nth-of-type(even) {
-    text-align: right;
-    h3 {
-      margin-left: auto;
-    }
-  }
-}
-@include viewport-small {
-  .video-list {
-    h3 {
-      width: 100%;
-    }
+@include viewport-large {
+  body {
+    overflow: initial;
   }
 }

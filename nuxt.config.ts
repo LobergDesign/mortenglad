@@ -155,9 +155,6 @@ export default {
   },
   // GSAP
   gsap: {
-    extraPlugins: {
-      scrollTrigger: true,
-    },
     clubPlugins: {
       splitText: true,
     },

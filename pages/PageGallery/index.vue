@@ -9,8 +9,11 @@
             :title="data.hero.title"
             :bodytext="data.hero.bodytext"
           />
-
-          <image-gallery :images="data.images" />
+          <image-gallery
+            v-if="data.images"
+            :images="data.images"
+            @active-gallery="activeIndex"
+          />
 
           <lazy-grid-handler
             v-if="data.dynamicBlockSectionCollection"
@@ -18,6 +21,10 @@
           />
           <site-footer />
         </div>
+        <lazy-image-gallery-enlarged
+          :images="data.images"
+          :activate-gallery="activateGallery"
+        />
       </div>
     </div>
   </div>
@@ -48,10 +55,19 @@ export default Vue.extend({
   data() {
     return {
       data: ({} as NPage.IStandardPage) || {},
+      activateGallery: null,
     };
   },
   head(): any {
     return setHead(this.seo || null);
+  },
+  methods: {
+    activeIndex(i: number) {
+      this.activateGallery = -1;
+      setTimeout(() => {
+        this.activateGallery = i;
+      }, 100);
+    },
   },
 });
 </script>
