@@ -1,4 +1,6 @@
 .grid-gallery {
+  padding-bottom: clamp(2rem, 5vw, 24rem);
+  overflow: hidden;
   a {
     display: block;
     margin-top: -1.5rem;

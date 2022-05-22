@@ -22,12 +22,9 @@ body {
   color: var(--color-secondary);
   font-size: 1.6rem;
   margin: 0;
+  overflow: hidden;
 }
 
-main {
-  overflow: hidden;
-  margin-top: $header-height;
-}
 img {
   display: block;
   width: 100%;
@@ -39,25 +36,9 @@ button {
   outline: none;
   cursor: pointer;
 }
-.video-list {
-  .video__item {
-    margin-top: 0;
-    margin-bottom: clamp(10rem, 17vw, 24rem);
-  }
-  h3 {
-    width: 33vw;
-  }
-  &:nth-of-type(even) {
-    text-align: right;
-    h3 {
-      margin-left: auto;
-    }
-  }
-}
-@include viewport-small {
-  .video-list {
-    h3 {
-      width: 100%;
-    }
+
+@include viewport-large {
+  body {
+    overflow: initial;
   }
 }

@@ -16,12 +16,10 @@
     <main>
       <Nuxt />
     </main>
-    <site-footer v-if="!$fetchState.pending" :data="footer" />
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-
 export default Vue.extend({
   name: "MainLayout",
   data() {
@@ -43,20 +41,8 @@ export default Vue.extend({
         menu: globalData.globalSettings?.mainMenuCollection,
         logo: globalData.globalSettings?.headerLogo,
       };
-      const footer = {
-        telephonenumber: globalData.globalSettings?.telephonenumber,
-        email: globalData.globalSettings?.email,
-        address: globalData.globalSettings?.address,
-        linkedIn: globalData.globalSettings?.linkedIn,
-        facebook: globalData.globalSettings?.facebook,
-        instagram: globalData.globalSettings?.instagram,
-        youtube: globalData.globalSettings?.youtube,
-        contactFormTitle: globalData.globalSettings?.contactFormTitle,
-        contactFormSuccessMessage:
-          globalData.globalSettings?.contactFormSuccessMessage,
-      };
+
       this.header = header;
-      this.footer = footer;
     }
   },
   methods: {

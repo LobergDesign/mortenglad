@@ -3,7 +3,7 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-4 grid-c-sm-12">
-          <h3 v-if="!showSucces && !showError && title">
+          <h3 v-if="!showSucces && !showError && title" data-split-line-effect>
             {{ title }}
           </h3>
         </div>
@@ -26,6 +26,7 @@
               <div class="grid-r">
                 <div class="grid-c-6 grid-c-sm-12">
                   <input
+                    data-inview-simple-show-effect
                     type="text"
                     placeholder="Full name"
                     name="name"
@@ -34,6 +35,7 @@
                 </div>
                 <div class="grid-c-6 grid-c-sm-12">
                   <input
+                    data-inview-simple-show-effect
                     type="email"
                     placeholder="Email"
                     name="email"
@@ -42,13 +44,20 @@
                 </div>
                 <div class="grid-c-12">
                   <textarea
+                    data-inview-simple-show-effect
                     placeholder="Message"
                     name="message"
                     required
                   ></textarea>
                 </div>
                 <div class="grid-c-16">
-                  <button class="btn" type="submit">Send message</button>
+                  <button
+                    class="btn"
+                    type="submit"
+                    data-inview-simple-show-effect
+                  >
+                    Send message
+                  </button>
                 </div>
                 <input
                   type="hidden"

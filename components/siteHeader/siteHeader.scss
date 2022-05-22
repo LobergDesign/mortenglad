@@ -9,7 +9,7 @@
   &__logo {
     @include font-main;
     color: var(--color-secondary);
-    font-size: clamp(1.4rem, 1.3vw, 1.55rem);
+    font-size: clamp(1.4rem, 1.3vw, 1.5rem);
   }
 
   // menu
