@@ -9,35 +9,48 @@
         <div class="grid-c-9 grid-c-sm-12">
           <ul class="reset-ul footer__info">
             <li v-if="footer.address">
-              <address>
+              <address data-split-line-effect>
                 {{ footer.address }}
               </address>
             </li>
             <li v-if="footer.telephonenumber">
-              <a :href="'tel:' + footer.telephonenumber"
+              <a data-split-line-effect :href="'tel:' + footer.telephonenumber"
                 >+45 {{ footer.telephonenumber }}</a
               >
             </li>
             <li v-if="footer.email">
-              <a :href="'mailto:' + footer.email">{{ footer.email }}</a>
+              <a data-split-line-effect :href="'mailto:' + footer.email">{{
+                footer.email
+              }}</a>
             </li>
           </ul>
         </div>
         <div class="grid-c-3 grid-c-sm-12 flex-end reset-flex-end-md">
           <ul class="reset-ul footer__social">
             <li v-if="footer.facebook">
-              <a :href="footer.facebook" target="_blank">Facebook</a>
+              <a :href="footer.facebook" target="_blank" data-split-line-effect
+                >Facebook</a
+              >
             </li>
             <li v-if="footer.linkedIn">
-              <a :href="footer.linkedIn" target="_blank"> LinkedIn </a>
+              <a :href="footer.linkedIn" target="_blank" data-split-line-effect>
+                LinkedIn
+              </a>
             </li>
             <li v-if="footer.instagram">
-              <a :href="footer.instagram" target="_blank" class="reset-fill">
+              <a
+                :href="footer.instagram"
+                target="_blank"
+                class="reset-fill"
+                data-split-line-effect
+              >
                 Instagram
               </a>
             </li>
             <li v-if="footer.youtube">
-              <a :href="footer.youtube" target="_blank"> Youtube </a>
+              <a :href="footer.youtube" target="_blank" data-split-line-effect>
+                Youtube
+              </a>
             </li>
           </ul>
         </div>
@@ -55,6 +68,7 @@ export default Vue.extend({
       footer: {},
     };
   },
+
   fetch() {
     const globalData = this.$store.state.global.globalSettings;
 

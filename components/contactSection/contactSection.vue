@@ -4,7 +4,10 @@
       <div class="grid-c-6 grid-c-sm-8 grid-c-xs-12">
         <div class="contact-section">
           <ui-headline-small v-if="data.headerLogo" :data="data.headerLogo" />
-          <ul class="reset-ul contact-section__info">
+          <ul
+            class="reset-ul contact-section__info"
+            data-inview-simple-show-effect
+          >
             <li v-if="data.address">
               <span>
                 {{ data.address }}
@@ -21,8 +24,13 @@
               ><a :href="'mailto:' + data.email">{{ data.email }}</a>
             </li>
           </ul>
-          <h5 class="contact-section__small-title">Social:</h5>
-          <ul class="reset-ul contact-section__social">
+          <h5 class="contact-section__small-title" data-split-line-effect>
+            Social:
+          </h5>
+          <ul
+            class="reset-ul contact-section__social"
+            data-inview-simple-show-effect
+          >
             <li v-if="data.facebook">
               <a :href="data.facebook" target="_blank">Facebook</a>
             </li>

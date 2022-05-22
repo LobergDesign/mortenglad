@@ -5,7 +5,6 @@
 }
 .header.is-ux-optimized {
   .header__menu-icon {
-    margin-top: clamp(0rem, 0.5vw, 1rem);
     color: var(--color-primary);
     @include font-main;
     display: block;
@@ -21,7 +20,7 @@
   // menu
   .header {
     &__menu {
-      top: clamp(4.5rem, 6vw, 8rem);
+      top: clamp(4.5rem, 5vw, 6rem);
       right: 2rem;
       opacity: 0;
       visibility: hidden;

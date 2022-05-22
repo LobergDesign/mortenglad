@@ -45,6 +45,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Scrollbar from "smooth-scrollbar";
 export default Vue.extend({
   name: "SiteHeader",
   props: {
@@ -62,13 +63,21 @@ export default Vue.extend({
   // watch on route changes
   watch: {
     $route() {
+      if (!this.isDevices()) {
+        setTimeout(() => {
+          this.handleScroll();
+        }, 2600);
+      }
       this.isMenuActive = false;
     },
   },
   mounted() {
     this.resize();
-    this.handleScroll();
-    window.addEventListener("scroll", this.handleScroll);
+    if (!this.isDevices()) {
+      setTimeout(() => {
+        this.handleScroll();
+      }, 1200);
+    }
     this.handleOptimized();
   },
   methods: {
@@ -87,18 +96,19 @@ export default Vue.extend({
         : (this.isUXOptimized = false);
     },
     handleScroll() {
-      if (!this.isDevices()) {
-        const scrollTop =
-          window.pageYOffset ||
-          (
-            document.documentElement ||
-            document.body.parentNode ||
-            document.body
-          ).scrollTop;
-        scrollTop > 290
-          ? (this.isUXOptimized = true)
-          : (this.isUXOptimized = false);
-      }
+      const smoothWrap = document.querySelector(
+        ".smooth-container"
+      ) as HTMLElement;
+      const smoothScroll = Scrollbar.get(smoothWrap);
+
+      const myListener = () => {
+        smoothScroll!.addListener((status) => {
+          status.offset.y > 290
+            ? (this.isUXOptimized = true)
+            : (this.isUXOptimized = false);
+        });
+      };
+      myListener();
     },
   },
 });
