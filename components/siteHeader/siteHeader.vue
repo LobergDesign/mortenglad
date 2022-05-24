@@ -11,9 +11,10 @@
           </nuxt-link>
         </div>
         <div class="grid-c-8 flex-end" data-inview-simple-show-effect>
-          <button type="button" class="header__menu-icon" @click="toggleMenu">
-            Menu
-          </button>
+          <div class="header__menu-icon" @click="toggleMenu">
+            <button type="button">Menu</button>
+          </div>
+
           <ul
             class="reset-ul header__menu"
             :class="{ 'is-active': isMenuActive }"

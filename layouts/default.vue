@@ -96,7 +96,7 @@ export default Vue.extend({
         fontWeight: 100,
         x: 50,
         opacity: 0,
-        duration: 0.4,
+        duration: 0.5,
         stagger: -0.05,
         ease: this.ease,
       });
