@@ -3,12 +3,12 @@
     <transition appear :css="false" @appear="customBeforeAppear">
       <div class="app-init-effect" data-init-effect-bg>
         <span class="app-init-effect__text-wrap" data-init-text>
-          <span class="app-init-effect__text">Morten Glad </span></span
-        >
-        <span class="app-init-effect__text-wrap" data-init-text>
           <span class="app-init-effect__text app-init-effect__text--small-cta">
             Actor</span
           ></span
+        >
+        <span class="app-init-effect__text-wrap" data-init-text>
+          <span class="app-init-effect__text">Morten Glad </span></span
         >
       </div>
     </transition>
@@ -25,7 +25,6 @@ export default Vue.extend({
   data() {
     return {
       header: {},
-      footer: {},
       ease: "power4.out",
       dark: "#151515",
       light: "#e9f1f7",
@@ -57,7 +56,7 @@ export default Vue.extend({
         target,
         { backgroundColor: this.light },
         {
-          duration: 2.1,
+          duration: 2.4,
           ease: this.ease,
           backgroundColor: this.dark,
           onComplete: initApp,
@@ -86,7 +85,7 @@ export default Vue.extend({
           fontWeight: 400,
           x: 0,
           opacity: 1,
-          duration: 0.7,
+          duration: 0.9,
           stagger: 0.05,
           color: this.light,
           ease: this.ease,

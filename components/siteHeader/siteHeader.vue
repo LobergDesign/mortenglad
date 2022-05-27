@@ -12,7 +12,7 @@
         </div>
         <div class="grid-c-8 flex-end" data-inview-simple-show-effect>
           <div class="header__menu-icon" @click="toggleMenu">
-            <button type="button">Menu</button>
+            <button type="button">menu</button>
           </div>
 
           <ul
