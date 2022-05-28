@@ -11,14 +11,35 @@
           </nuxt-link>
         </div>
         <div class="grid-c-8 flex-end" data-inview-simple-show-effect>
-          <div class="header__menu-icon" @click="toggleMenu">
+          <div ref="menuIcon" class="header__menu-icon" @click="toggleMenu">
             <button type="button">menu</button>
           </div>
 
-          <ul
-            class="reset-ul header__menu"
-            :class="{ 'is-active': isMenuActive }"
-          >
+          <ul ref="mainMenu" class="reset-ul header__menu">
+            <li
+              v-for="(item, index) in data.menu.items"
+              :key="index"
+              data-main-menu-item
+            >
+              <nuxt-link
+                :to="item.slug === '/' ? '/' : `/${item.slug}/`"
+                class="header__menu-item"
+                :class="{ 'is-medium-string': item.title.length > 4 }"
+              >
+                <span class="header__menu-item-inner">
+                  <span v-for="(char, i) in item.title" :key="i">{{
+                    char
+                  }}</span>
+                </span>
+                <span class="header__menu-item-inner">
+                  <span v-for="(char, i) in item.title" :key="i">{{
+                    char
+                  }}</span>
+                </span>
+              </nuxt-link>
+            </li>
+          </ul>
+          <ul ref="optimizedMenu" class="reset-ul header__menu optimized-menu">
             <li v-for="(item, index) in data.menu.items" :key="index">
               <nuxt-link
                 :to="item.slug === '/' ? '/' : `/${item.slug}/`"
@@ -59,6 +80,8 @@ export default Vue.extend({
     return {
       isMenuActive: false,
       isUXOptimized: false,
+      ease: "power4.out",
+      duration: 0.5,
     };
   },
   // watch on route changes
@@ -71,19 +94,47 @@ export default Vue.extend({
       }
       this.isMenuActive = false;
     },
+    isUXOptimized(isOptimized: boolean) {
+      this.handleMenuIcon(isOptimized);
+      this.handleMenuList(isOptimized);
+    },
   },
   mounted() {
     this.resize();
     if (!this.isDevices()) {
       setTimeout(() => {
         this.handleScroll();
+        this.handleMenuIcon();
       }, 1200);
     }
     this.handleOptimized();
   },
+
   methods: {
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
+      const optimizedMenu = this.$refs.optimizedMenu as HTMLElement;
+      const gsap = this.$gsap;
+      gsap.set(optimizedMenu, {
+        opacity: 0,
+        y: -50,
+        duration: this.duration,
+
+        ease: this.ease,
+      });
+      if (this.isMenuActive) {
+        gsap.to(optimizedMenu, {
+          opacity: 1,
+          y: 0,
+        });
+      } else {
+        gsap.to(optimizedMenu, {
+          opacity: 0,
+          y: -50,
+          duration: this.duration,
+          ease: this.ease,
+        });
+      }
     },
     resize() {
       window.addEventListener("resize", this.handleOptimized);
@@ -95,6 +146,62 @@ export default Vue.extend({
       this.isDevices()
         ? (this.isUXOptimized = true)
         : (this.isUXOptimized = false);
+    },
+    /// MENU ICON
+    handleMenuIcon(isOptimized: boolean = false) {
+      const menuIcon = this.$refs.menuIcon as HTMLDivElement;
+      const gsap = this.$gsap;
+      if (isOptimized) {
+        setTimeout(() => {
+          gsap.set(menuIcon, {
+            scale: 0.8,
+          });
+          gsap.to(menuIcon, {
+            autoAlpha: 1,
+            opacity: 1,
+            duration: this.duration,
+            scale: 1,
+            ease: this.ease,
+          });
+        }, 320);
+      } else {
+        gsap.to(menuIcon, {
+          autoAlpha: 0,
+          opacity: 0,
+          scale: 0.8,
+        });
+      }
+    },
+    handleMenuList(isOptimized: boolean = false) {
+      const mainMenu = this.$refs.mainMenu as HTMLElement;
+
+      const menuItems = mainMenu.querySelectorAll("[data-main-menu-item]");
+      const tl = this.$gsap.timeline();
+      if (isOptimized) {
+        tl.to(menuItems, {
+          duration: this.duration,
+          ease: this.ease,
+          yPercent: -20,
+          opacity: 0,
+          stagger: 0.1,
+          autoAlpha: 0,
+        }).to(mainMenu, {
+          duration: 0,
+          ease: "none",
+          autoAlpha: 0,
+        });
+      } else {
+        tl.to(mainMenu, {
+          duration: 0,
+          ease: "none",
+          autoAlpha: 1,
+        }).to(menuItems, {
+          yPercent: 0,
+          opacity: 1,
+          stagger: -0.1,
+          autoAlpha: 1,
+        });
+      }
     },
     handleScroll() {
       const smoothWrap = document.querySelector(
