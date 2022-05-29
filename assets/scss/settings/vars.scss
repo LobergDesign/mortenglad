@@ -9,7 +9,7 @@ $color-alternative: #0f0f0f;
 $header-height: clamp(4rem, 6vw, 8rem);
 $cv-list-item-spacing: 1.6rem;
 // transitions
-$transition--cubic: cubic-bezier(0.38, 0.005, 0.215, 1);
+$transition--cubic: cubic-bezier(0.32, 0.94, 0.6, 1);
 $transition: 0.5s $transition--cubic;
 $transition--slow: 0.7s $transition--cubic;
 $transition--fast: 0.4s $transition--cubic;

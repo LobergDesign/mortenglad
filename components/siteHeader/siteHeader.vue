@@ -1,8 +1,5 @@
 <template>
-  <header
-    class="header flex-vertical-center"
-    :class="{ ' is-ux-optimized ': isUXOptimized }"
-  >
+  <header class="header flex-vertical-center">
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-4" data-split-line-effect>
@@ -39,24 +36,27 @@
               </nuxt-link>
             </li>
           </ul>
+
           <ul ref="optimizedMenu" class="reset-ul header__menu optimized-menu">
             <li v-for="(item, index) in data.menu.items" :key="index">
-              <nuxt-link
-                :to="item.slug === '/' ? '/' : `/${item.slug}/`"
-                class="header__menu-item"
-                :class="{ 'is-medium-string': item.title.length > 4 }"
-              >
-                <span class="header__menu-item-inner">
-                  <span v-for="(char, i) in item.title" :key="i">{{
-                    char
-                  }}</span>
-                </span>
-                <span class="header__menu-item-inner">
-                  <span v-for="(char, i) in item.title" :key="i">{{
-                    char
-                  }}</span>
-                </span>
-              </nuxt-link>
+              <div data-main-menu-item>
+                <nuxt-link
+                  :to="item.slug === '/' ? '/' : `/${item.slug}/`"
+                  class="header__menu-item"
+                  :class="{ 'is-medium-string': item.title.length > 4 }"
+                >
+                  <span class="header__menu-item-inner">
+                    <span v-for="(char, i) in item.title" :key="i">{{
+                      char
+                    }}</span>
+                  </span>
+                  <span class="header__menu-item-inner">
+                    <span v-for="(char, i) in item.title" :key="i">{{
+                      char
+                    }}</span>
+                  </span>
+                </nuxt-link>
+              </div>
             </li>
           </ul>
         </div>
@@ -81,7 +81,9 @@ export default Vue.extend({
       isMenuActive: false,
       isUXOptimized: false,
       ease: "power4.out",
-      duration: 0.5,
+      duration: 0.8,
+      durationMedium: 1,
+      stagger: 0.03,
     };
   },
   // watch on route changes
@@ -114,23 +116,51 @@ export default Vue.extend({
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
       const optimizedMenu = this.$refs.optimizedMenu as HTMLElement;
+      const optimizedMenuItems = optimizedMenu.querySelectorAll(
+        "[data-main-menu-item]"
+      );
       const gsap = this.$gsap;
-      gsap.set(optimizedMenu, {
-        opacity: 0,
-        y: -50,
-        duration: this.duration,
-
-        ease: this.ease,
-      });
       if (this.isMenuActive) {
+        gsap.set(optimizedMenu, {
+          autoAlpha: 1,
+          duration: 0,
+          opacity: 0,
+          scale: 0.6,
+        });
         gsap.to(optimizedMenu, {
           opacity: 1,
-          y: 0,
+          scale: 1,
+          duration: this.duration,
+          ease: this.ease,
         });
+        gsap.timeline().fromTo(
+          optimizedMenuItems,
+          {
+            opacity: 0,
+            yPercent: 100,
+          },
+          {
+            delay: 0.08,
+            duration: this.durationMedium,
+            ease: this.ease,
+            opacity: 1,
+            yPercent: 0,
+            stagger: this.stagger,
+          }
+        );
       } else {
-        gsap.to(optimizedMenu, {
+        gsap.to(optimizedMenuItems, {
+          duration: this.durationMedium,
+          ease: this.ease,
+          yPercent: 100,
           opacity: 0,
-          y: -50,
+          stagger: this.stagger,
+        });
+        gsap.to(optimizedMenu, {
+          delay: 0.19,
+          opacity: 0,
+          autoAlpha: 0,
+          scale: 0.6,
           duration: this.duration,
           ease: this.ease,
         });
@@ -174,7 +204,6 @@ export default Vue.extend({
     },
     handleMenuList(isOptimized: boolean = false) {
       const mainMenu = this.$refs.mainMenu as HTMLElement;
-
       const menuItems = mainMenu.querySelectorAll("[data-main-menu-item]");
       const tl = this.$gsap.timeline();
       if (isOptimized) {
@@ -211,6 +240,7 @@ export default Vue.extend({
 
       const myListener = () => {
         smoothScroll!.addListener((status) => {
+          console.log("status.offset.y", status.offset.y);
           status.offset.y > 290
             ? (this.isUXOptimized = true)
             : (this.isUXOptimized = false);
