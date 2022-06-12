@@ -116,54 +116,73 @@ export default Vue.extend({
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
       const optimizedMenu = this.$refs.optimizedMenu as HTMLElement;
-      const optimizedMenuItems = optimizedMenu.querySelectorAll(
-        "[data-main-menu-item]"
-      );
-      const gsap = this.$gsap;
+      const gsap = this.$gsap.timeline({ reversed: true });
+
+      const tween = gsap.to(optimizedMenu, {
+        autoAlpha: 0,
+        scale: 0,
+        opacity: 0,
+        duration: this.duration,
+        ease: this.ease,
+      });
+      // const optimizedMenuItems = optimizedMenu.querySelectorAll(
+      //   "[data-main-menu-item]"
+      // );
+
+      // tl.fromTo(
+      //   optimizedMenu,
+      //   {
+      //     autoAlpha: 0,
+      //     opacity: 0,
+      //     scale: 0.6,
+      //     duration: this.duration,
+      //     ease: this.ease,
+      //   },
+      //   {
+      //     autoAlpha: 1,
+      //     opacity: 1,
+      //     scale: 1,
+      //     duration: this.duration,
+      //     ease: this.ease,
+      //   }
+      // );
+
       if (this.isMenuActive) {
-        gsap.set(optimizedMenu, {
-          autoAlpha: 1,
-          duration: 0,
-          opacity: 0,
-          scale: 0.6,
-        });
-        gsap.to(optimizedMenu, {
-          opacity: 1,
-          scale: 1,
-          duration: this.duration,
-          ease: this.ease,
-        });
-        gsap.timeline().fromTo(
-          optimizedMenuItems,
-          {
-            opacity: 0,
-            yPercent: 100,
-          },
-          {
-            delay: 0.08,
-            duration: this.durationMedium,
-            ease: this.ease,
-            opacity: 1,
-            yPercent: 0,
-            stagger: this.stagger,
-          }
-        );
+        tween.play();
+        // tl.reversed(false);
+        // tl.fromTo(
+        //   optimizedMenuItems,
+        //   {
+        //     opacity: 0,
+        //     yPercent: 100,
+        //   },
+        //   {
+        //     delay: 0.08,
+        //     duration: this.durationMedium,
+        //     ease: this.ease,
+        //     opacity: 1,
+        //     yPercent: 0,
+        //     stagger: this.stagger,
+        //   }
+        // );
       } else {
-        gsap.to(optimizedMenuItems, {
-          duration: this.durationMedium,
-          ease: this.ease,
-          yPercent: 100,
-          opacity: 0,
-          stagger: this.stagger,
-        });
-        gsap.to(optimizedMenu, {
-          delay: 0.19,
-          opacity: 0,
-          autoAlpha: 0,
-          scale: 0.6,
-          duration: this.duration,
-          ease: this.ease,
-        });
+        tween.reverse();
+        // tl.reversed(true);
+        // gsap.to(optimizedMenuItems, {
+        //   duration: this.durationMedium,
+        //   ease: this.ease,
+        //   yPercent: 100,
+        //   opacity: 0,
+        //   stagger: this.stagger,
+        // });
+        // gsap.to(optimizedMenu, {
+        //   delay: 0.19,
+        //   opacity: 0,
+        //   autoAlpha: 0,
+        //   scale: 0.6,
+        //   duration: this.duration,
+        //   ease: this.ease,
+        // });
       }
     },
     resize() {
@@ -240,7 +259,6 @@ export default Vue.extend({
 
       const myListener = () => {
         smoothScroll!.addListener((status) => {
-          console.log("status.offset.y", status.offset.y);
           status.offset.y > 290
             ? (this.isUXOptimized = true)
             : (this.isUXOptimized = false);
