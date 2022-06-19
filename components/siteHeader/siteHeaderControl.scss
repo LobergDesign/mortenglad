@@ -26,7 +26,7 @@
 // menu
 
 .optimized-menu {
-  // visibility: hidden;
+  visibility: hidden;
   // will-change: transform;
   &.header__menu {
     top: clamp(4rem, 5vw, 6rem);

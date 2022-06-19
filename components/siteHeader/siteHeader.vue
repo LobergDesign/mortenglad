@@ -115,74 +115,37 @@ export default Vue.extend({
   methods: {
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
+      this.handleToggleItem();
+    },
+    handleToggleItem() {
       const optimizedMenu = this.$refs.optimizedMenu as HTMLElement;
-      const gsap = this.$gsap.timeline({ reversed: true });
-
-      const tween = gsap.to(optimizedMenu, {
-        autoAlpha: 0,
-        scale: 0,
-        opacity: 0,
-        duration: this.duration,
-        ease: this.ease,
+      const gsap = this.$gsap.timeline({
+        defaults: { duration: this.duration, ease: this.ease },
       });
-      // const optimizedMenuItems = optimizedMenu.querySelectorAll(
-      //   "[data-main-menu-item]"
-      // );
-
-      // tl.fromTo(
-      //   optimizedMenu,
-      //   {
-      //     autoAlpha: 0,
-      //     opacity: 0,
-      //     scale: 0.6,
-      //     duration: this.duration,
-      //     ease: this.ease,
-      //   },
-      //   {
-      //     autoAlpha: 1,
-      //     opacity: 1,
-      //     scale: 1,
-      //     duration: this.duration,
-      //     ease: this.ease,
-      //   }
-      // );
 
       if (this.isMenuActive) {
-        tween.play();
-        // tl.reversed(false);
-        // tl.fromTo(
-        //   optimizedMenuItems,
-        //   {
-        //     opacity: 0,
-        //     yPercent: 100,
-        //   },
-        //   {
-        //     delay: 0.08,
-        //     duration: this.durationMedium,
-        //     ease: this.ease,
-        //     opacity: 1,
-        //     yPercent: 0,
-        //     stagger: this.stagger,
-        //   }
-        // );
+        gsap.fromTo(
+          optimizedMenu,
+          {
+            autoAlpha: 0,
+            scale: 0.5,
+          },
+          {
+            autoAlpha: 1,
+            scale: 1,
+          }
+        );
       } else {
-        tween.reverse();
-        // tl.reversed(true);
-        // gsap.to(optimizedMenuItems, {
-        //   duration: this.durationMedium,
-        //   ease: this.ease,
-        //   yPercent: 100,
-        //   opacity: 0,
-        //   stagger: this.stagger,
-        // });
-        // gsap.to(optimizedMenu, {
-        //   delay: 0.19,
-        //   opacity: 0,
-        //   autoAlpha: 0,
-        //   scale: 0.6,
-        //   duration: this.duration,
-        //   ease: this.ease,
-        // });
+        gsap.fromTo(
+          optimizedMenu,
+          {
+            opacity: 1,
+          },
+          {
+            autoAlpha: 0,
+            scale: 0.5,
+          }
+        );
       }
     },
     resize() {
@@ -199,8 +162,9 @@ export default Vue.extend({
     /// MENU ICON
     handleMenuIcon(isOptimized: boolean = false) {
       const menuIcon = this.$refs.menuIcon as HTMLDivElement;
-      const gsap = this.$gsap;
+      const gsap = this.$gsap.timeline();
       if (isOptimized) {
+        console.log("if");
         setTimeout(() => {
           gsap.set(menuIcon, {
             scale: 0.8,
@@ -214,6 +178,7 @@ export default Vue.extend({
           });
         }, 320);
       } else {
+        console.log("else");
         gsap.to(menuIcon, {
           autoAlpha: 0,
           opacity: 0,
@@ -222,13 +187,14 @@ export default Vue.extend({
       }
     },
     handleMenuList(isOptimized: boolean = false) {
+      console.log("slfbsdljfdb");
       const mainMenu = this.$refs.mainMenu as HTMLElement;
       const menuItems = mainMenu.querySelectorAll("[data-main-menu-item]");
-      const tl = this.$gsap.timeline();
+      const tl = this.$gsap.timeline({
+        defaults: { duration: this.duration, ease: this.ease },
+      });
       if (isOptimized) {
         tl.to(menuItems, {
-          duration: this.duration,
-          ease: this.ease,
           yPercent: -20,
           opacity: 0,
           stagger: 0.1,
@@ -259,6 +225,11 @@ export default Vue.extend({
 
       const myListener = () => {
         smoothScroll!.addListener((status) => {
+          if (this.isMenuActive) {
+            this.isMenuActive = false;
+            this.handleToggleItem();
+          }
+          console.log("status.offset.y", status.offset.y);
           status.offset.y > 290
             ? (this.isUXOptimized = true)
             : (this.isUXOptimized = false);
