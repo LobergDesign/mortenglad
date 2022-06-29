@@ -94,7 +94,10 @@ export default Vue.extend({
           this.handleScroll();
         }, 2600);
       }
-      this.isMenuActive = false;
+      setTimeout(() => {
+        this.isMenuActive = false;
+        this.handleToggleItem();
+      }, 1000);
     },
     isUXOptimized(isOptimized: boolean) {
       this.handleMenuIcon(isOptimized);
@@ -128,7 +131,7 @@ export default Vue.extend({
           optimizedMenu,
           {
             autoAlpha: 0,
-            scale: 0.5,
+            scale: 0.6,
           },
           {
             autoAlpha: 1,
@@ -136,16 +139,10 @@ export default Vue.extend({
           }
         );
       } else {
-        gsap.fromTo(
-          optimizedMenu,
-          {
-            opacity: 1,
-          },
-          {
-            autoAlpha: 0,
-            scale: 0.5,
-          }
-        );
+        gsap.to(optimizedMenu, {
+          autoAlpha: 0,
+          scale: 0.6,
+        });
       }
     },
     resize() {
@@ -162,23 +159,26 @@ export default Vue.extend({
     /// MENU ICON
     handleMenuIcon(isOptimized: boolean = false) {
       const menuIcon = this.$refs.menuIcon as HTMLDivElement;
-      const gsap = this.$gsap.timeline();
+      const gsap = this.$gsap.timeline({
+        defaults: { duration: this.duration, ease: this.ease },
+      });
+
       if (isOptimized) {
-        console.log("if");
         setTimeout(() => {
-          gsap.set(menuIcon, {
-            scale: 0.8,
-          });
-          gsap.to(menuIcon, {
-            autoAlpha: 1,
-            opacity: 1,
-            duration: this.duration,
-            scale: 1,
-            ease: this.ease,
-          });
-        }, 320);
+          gsap.fromTo(
+            menuIcon,
+            {
+              autoAlpha: 0,
+              scale: 0.8,
+            },
+            {
+              autoAlpha: 1,
+              opacity: 1,
+              scale: 1,
+            }
+          );
+        }, 250);
       } else {
-        console.log("else");
         gsap.to(menuIcon, {
           autoAlpha: 0,
           opacity: 0,
@@ -187,7 +187,6 @@ export default Vue.extend({
       }
     },
     handleMenuList(isOptimized: boolean = false) {
-      console.log("slfbsdljfdb");
       const mainMenu = this.$refs.mainMenu as HTMLElement;
       const menuItems = mainMenu.querySelectorAll("[data-main-menu-item]");
       const tl = this.$gsap.timeline({
@@ -195,21 +194,13 @@ export default Vue.extend({
       });
       if (isOptimized) {
         tl.to(menuItems, {
-          yPercent: -20,
+          yPercent: -40,
           opacity: 0,
           stagger: 0.1,
           autoAlpha: 0,
-        }).to(mainMenu, {
-          duration: 0,
-          ease: "none",
-          autoAlpha: 0,
         });
       } else {
-        tl.to(mainMenu, {
-          duration: 0,
-          ease: "none",
-          autoAlpha: 1,
-        }).to(menuItems, {
+        tl.to(menuItems, {
           yPercent: 0,
           opacity: 1,
           stagger: -0.1,
