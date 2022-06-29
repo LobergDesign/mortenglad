@@ -1,56 +1,57 @@
-.header {
-  &__menu-icon {
-    display: none;
-  }
-}
-.header.is-ux-optimized {
-  .header__menu-icon {
-    color: var(--color-primary);
+.header__menu-icon {
+  display: block;
+  border-radius: 1.5rem;
+  border: 1px solid rgba($color-white, 0.3);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  background-color: var(--color-primary);
+
+  button {
+    color: var(--color-secondary);
+    background-color: transparent;
     @include font-main;
     display: block;
-    font-size: clamp(1.2rem, 1vw, 1.45rem);
-    background-color: var(--color-secondary);
+    font-weight: 500;
+    font-size: clamp(1.2rem, 1vw, 1.4rem);
     border: none;
-    border-radius: 1.5rem;
     outline: none;
     line-height: 1;
-    padding: 0.6rem 1.4rem;
-    cursor: pointer;
+    will-change: transform;
   }
-  // menu
-  .header {
-    &__menu {
-      top: clamp(4.5rem, 5vw, 6rem);
-      right: 2rem;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10%);
-      transition: opacity $transition, transform $transition,
-        visibility $transition;
-    }
-    &__menu.is-active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-    &__menu:after {
-      content: "";
-      position: absolute;
-      top: -0.4rem;
-      right: -2.5rem;
-      bottom: -1.5rem;
-      left: -0.9rem;
-      background-color: var(--color-primary);
-      box-shadow: 0px 0px 22px 16px rgba(0, 0, 0, 0.25);
-      border-radius: clamp(1.6rem, 1.2vw, 2.1rem);
-      z-index: -1;
-    }
-    &__menu-item {
-      text-align: right;
-    }
-    &__menu-item-inner {
-      width: 100%;
-      left: 0;
-    }
+}
+
+// menu
+
+.optimized-menu {
+  visibility: hidden;
+  // will-change: transform;
+  &.header__menu {
+    top: clamp(4rem, 5vw, 6rem);
+    right: 2rem;
+  }
+  li {
+    overflow: hidden;
+  }
+  &.header__menu:after {
+    content: "";
+    position: absolute;
+    top: -0.4rem;
+    right: -2.5rem;
+    bottom: -1.5rem;
+    left: -0.9rem;
+    background-color: var(--color-primary);
+    box-shadow: 0px 0px 22px 16px rgba(0, 0, 0, 0.25);
+    border-radius: clamp(1.6rem, 1.2vw, 2.1rem);
+    z-index: -1;
+  }
+  .header__menu-item {
+    text-align: right;
+  }
+  .header__menu-item-inner {
+    width: 100%;
+    left: 0;
   }
 }

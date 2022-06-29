@@ -38,13 +38,8 @@ export default Vue.extend({
   methods: {
     // set active slide index
     setActiveIndex(i: number) {
-      // mode to other component - on "activeIndexSet"
       this.$emit("active-gallery", i);
       this.activeIndex = i;
-      console.log("active Index emit", i);
-      //    this.isActive = true;
-      // this.slideGallery(false);
-      // this.moreLess();
     },
   },
 });

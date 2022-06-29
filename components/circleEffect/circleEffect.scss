@@ -25,17 +25,3 @@ text {
   fill: var(--color-secondary);
   transition: fill $transition;
 }
-
-// Initial animation
-// body.is-ready {
-//   .circular-effect {
-//     transition-delay: 0.15s;
-//     transform: scale(1);
-//   }
-// }
-// @include viewport-small {
-//   .circular-effect {
-//     max-width: 200px;
-//     max-height: 200px;
-//   }
-// }

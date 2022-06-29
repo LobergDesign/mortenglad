@@ -5,7 +5,7 @@
         <span class="app-init-effect__text-wrap" data-init-text>
           <span class="app-init-effect__text">Morten Glad </span></span
         >
-        <span class="app-init-effect__text-wrap" data-init-text>
+        <span class="app-init-effect__text-wrap" data-init-small-text>
           <span class="app-init-effect__text app-init-effect__text--small-cta">
             Actor</span
           ></span
@@ -25,7 +25,6 @@ export default Vue.extend({
   data() {
     return {
       header: {},
-      footer: {},
       ease: "power4.out",
       dark: "#151515",
       light: "#e9f1f7",
@@ -35,13 +34,11 @@ export default Vue.extend({
   async fetch() {
     await this.$store.dispatch("global/fetchGlobalSettings");
     const globalData = this.$store.state.global.globalSettings;
-
     if (globalData) {
       const header = {
         menu: globalData.globalSettings?.mainMenuCollection,
         logo: globalData.globalSettings?.headerLogo,
       };
-
       this.header = header;
     }
   },
@@ -57,49 +54,81 @@ export default Vue.extend({
         target,
         { backgroundColor: this.light },
         {
-          duration: 2.1,
+          duration: 3,
           ease: this.ease,
           backgroundColor: this.dark,
           onComplete: initApp,
         }
       ).to(target, {
+        delay: 0.6,
         autoAlpha: 0,
       });
     },
     textAnimation() {
       const SplitText = this.$SplitText;
       const gsap = this.$gsap as NLib.IGsap;
-      const target = document.querySelectorAll("[data-init-text]") as NodeList;
-      const tl = gsap.timeline();
-      // @ts-ignore
+      const target = document.querySelector("[data-init-text]");
+      const targetSmall = document.querySelector("[data-init-small-text]");
+
       const mySplitText = new SplitText(target, { type: "chars" });
+      const mySplitTextSmall = new SplitText(targetSmall, { type: "chars" });
       const chars = mySplitText.chars;
-      tl.to(target, {
+      const charsSmall = mySplitTextSmall.chars;
+      gsap.timeline().to(target, {
+        duration: 0,
+        autoAlpha: 1,
+      });
+      gsap.timeline().to(targetSmall, {
         duration: 0,
         autoAlpha: 1,
       });
 
-      tl.fromTo(
-        chars,
-        { opacity: 0, x: 110, fontWeight: 100, color: this.dark },
-        {
-          fontWeight: 400,
-          x: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.05,
-          color: this.light,
-          ease: this.ease,
-          autoAlpha: 1,
-        }
-      ).to(chars, {
-        fontWeight: 100,
-        x: 50,
-        opacity: 0,
-        duration: 0.4,
-        stagger: -0.05,
-        ease: this.ease,
-      });
+      gsap
+        .timeline({
+          defaults: { ease: this.ease, stagger: -0.05 },
+        })
+        .fromTo(
+          charsSmall,
+          { opacity: 0, x: -180, fontWeight: 100 },
+          {
+            duration: 2.1,
+            fontWeight: 300,
+            x: 0,
+            opacity: 1,
+            autoAlpha: 1,
+          }
+        )
+        .to(charsSmall, {
+          delay: 0.5,
+          duration: 2,
+          fontWeight: 100,
+          x: 120,
+          opacity: 0,
+        });
+
+      gsap
+        .timeline({
+          defaults: { ease: this.ease, stagger: -0.05 },
+        })
+        .fromTo(
+          chars,
+          { opacity: 0, x: -260, fontWeight: 100, color: this.dark },
+          {
+            delay: 0.6,
+            duration: 2,
+            fontWeight: 400,
+            x: 0,
+            opacity: 1,
+            color: this.light,
+            autoAlpha: 1,
+          }
+        )
+        .to(chars, {
+          duration: 1.8,
+          fontWeight: 100,
+          x: 150,
+          opacity: 0,
+        });
     },
     customBeforeAppear() {
       this.bgAnimation();

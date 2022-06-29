@@ -10,7 +10,12 @@ export default {
   watch: {
     appIsReady() {
       // will run on first load after init load is done
-      this.appIsReady && this.animations();
+
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.appIsReady && this.animations();
+        }, 500);
+      });
     },
   },
   mounted() {
