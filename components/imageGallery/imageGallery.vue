@@ -8,10 +8,11 @@
         data-inview-simple-show-effect
       >
         <div class="image" @click="setActiveIndex(i)">
+          {{ item.original_secure_url }}
           <nuxt-img
-            v-if="item.secure_url"
+            v-if="item.original_secure_url"
             provider="cloudinary"
-            :src="item.secure_url"
+            :src="item.original_secure_url"
             sizes="sm:100vw md:50vw lg:400px"
           />
         </div>

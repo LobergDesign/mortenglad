@@ -26,6 +26,7 @@
             <div class="video__icon flex-center-center" @click="play">
               <play-icon />
             </div>
+
             <video
               v-if="data.video"
               ref="video"
@@ -34,8 +35,14 @@
               height="auto"
               @click="pause"
             >
-              <source :src="data.video[0].secure_url" type="video/mp4" />
-              <source :src="data.video[0].secure_url" type="video/ogg" />
+              <source
+                :src="data.video[0].original_secure_url"
+                type="video/mp4"
+              />
+              <source
+                :src="data.video[0].original_secure_url"
+                type="video/ogg"
+              />
               Your browser does not support the video tag.
             </video>
           </div>
