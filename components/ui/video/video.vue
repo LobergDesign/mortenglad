@@ -22,11 +22,10 @@
         </div>
         <div class="grid-c-12">
           <div class="video__item" :class="{ 'is-playing': isPlaying }">
-            <div class="video__overlay"></div>
+            <div class="video__overlay" @click="play"></div>
             <div class="video__icon flex-center-center" @click="play">
               <play-icon />
             </div>
-
             <video
               v-if="data.video"
               ref="video"

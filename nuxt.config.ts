@@ -162,7 +162,7 @@ export default {
   // images
   image: {
     cloudinary: {
-      baseURL: "https://res.cloudinary.com/dzw0r5i7d/image/upload/",
+      baseURL: "https://res.cloudinary.com/dzw0r5i7d/image/fetch/",
     },
   },
 
