@@ -12,7 +12,7 @@
             v-if="item.secure_url"
             provider="cloudinary"
             :src="item.secure_url"
-            sizes="sm:100vw md:50vw lg:400px"
+            sizes="sm:100vw md:50vw lg:800px"
           />
         </div>
       </li>

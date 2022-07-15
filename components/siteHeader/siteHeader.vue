@@ -220,7 +220,6 @@ export default Vue.extend({
             this.isMenuActive = false;
             this.handleToggleItem();
           }
-          console.log("status.offset.y", status.offset.y);
           status.offset.y > 290
             ? (this.isUXOptimized = true)
             : (this.isUXOptimized = false);
