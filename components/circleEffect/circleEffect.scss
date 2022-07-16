@@ -1,7 +1,8 @@
 .circular-effect {
-  @include position-center-x;
-  bottom: 1rem;
-  z-index: 5;
+  position: fixed;
+  top: -70px;
+  left: 0;
+  z-index: 15;
   width: 220px;
   height: 220px;
   svg path {
