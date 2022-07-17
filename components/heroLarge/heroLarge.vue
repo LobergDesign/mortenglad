@@ -25,7 +25,6 @@
           </div>
         </div>
       </div>
-      <circle-effect />
     </div>
   </div>
 </template>

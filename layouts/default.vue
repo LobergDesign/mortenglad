@@ -12,9 +12,11 @@
         >
       </div>
     </transition>
+
     <site-header v-if="!$fetchState.pending" :data="header" />
     <main>
       <Nuxt />
+      <circle-effect />
     </main>
   </div>
 </template>

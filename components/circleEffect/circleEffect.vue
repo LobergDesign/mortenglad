@@ -20,8 +20,8 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import Scrollbar from "smooth-scrollbar";
 import Arrow from "~/assets/svg/arrow.svg?inline";
-
 export default Vue.extend({
   name: "CircleEffect",
   components: {
@@ -30,12 +30,17 @@ export default Vue.extend({
   data() {
     return {
       text: "Scroll to explorer",
+      ease: "power4.out",
+      duration: 1.6,
     };
   },
   mounted() {
     this.$nextTick(() => {
       this.rotate().initRotate();
       this.followMouse();
+      setTimeout(() => {
+        this.handleScroll();
+      }, 2600);
     });
   },
   methods: {
@@ -68,6 +73,7 @@ export default Vue.extend({
       const ySet = gsap.quickSetter(ball, "y", "px");
 
       window.addEventListener("mousemove", (e) => {
+        // console.log("object", e);
         mouse.x = e.x;
         mouse.y = e.y;
       });
@@ -81,6 +87,43 @@ export default Vue.extend({
         xSet(pos.x);
         ySet(pos.y);
       });
+    },
+    showHideElm(isHidden: boolean) {
+      const tl = this.$gsap.timeline();
+      const followElm = "[data-circle-effect]";
+
+      if (isHidden) {
+        tl.to(followElm, {
+          ease: this.ease,
+          duration: this.duration,
+          opacity: 0,
+          scale: 0,
+        });
+      } else {
+        tl.to(followElm, {
+          ease: this.ease,
+          duration: this.duration,
+          scale: 1,
+          opacity: 1,
+        });
+      }
+    },
+    handleScroll() {
+      const smoothWrap = document.querySelector(
+        ".smooth-container"
+      ) as HTMLElement;
+      const smoothScroll = Scrollbar.get(smoothWrap);
+
+      const myListener = () => {
+        smoothScroll!.addListener((status) => {
+          if (status.offset.y > 500) {
+            this.showHideElm(true);
+          } else {
+            this.showHideElm(false);
+          }
+        });
+      };
+      myListener();
     },
   },
 });
