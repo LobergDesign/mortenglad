@@ -97,7 +97,7 @@ export default Vue.extend({
           ease: this.ease,
           duration: this.duration,
           opacity: 0,
-          scale: 0,
+          scale: 0.3,
         });
       } else {
         tl.to(followElm, {
