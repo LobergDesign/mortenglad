@@ -42,6 +42,19 @@ export default Vue.extend({
         this.handleScroll();
       }, 2600);
     });
+
+    const div = document.querySelector(".header__menu");
+    let isOnDiv = false;
+    div.onmouseenter = () => {
+      isOnDiv = true;
+    };
+    div.onmouseout = () => {
+      isOnDiv = false;
+      console.log("sldkjfnlsdkjf");
+    };
+    if (isOnDiv) {
+      console.log("isondiv");
+    }
   },
   methods: {
     rotate() {
@@ -62,50 +75,53 @@ export default Vue.extend({
     followMouse() {
       const gsap = this.$gsap;
       const followElm = "[data-circle-effect]";
-      gsap.set(followElm, { xPercent: -50, yPercent: -50 });
+      if (followElm) {
+        gsap.set(followElm, { xPercent: -50, yPercent: -50 });
 
-      const ball = document.querySelector(followElm);
-      const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-      const mouse = { x: pos.x, y: pos.y };
-      const speed = 0.35;
+        const ball = document.querySelector(followElm);
+        const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+        const mouse = { x: pos.x, y: pos.y };
+        const speed = 0.35;
 
-      const xSet = gsap.quickSetter(ball, "x", "px");
-      const ySet = gsap.quickSetter(ball, "y", "px");
+        const xSet = gsap.quickSetter(ball, "x", "px");
+        const ySet = gsap.quickSetter(ball, "y", "px");
 
-      window.addEventListener("mousemove", (e) => {
-        // console.log("object", e);
-        mouse.x = e.x;
-        mouse.y = e.y;
-      });
+        window.addEventListener("mousemove", (e) => {
+          mouse.x = e.x;
+          mouse.y = e.y;
+        });
 
-      gsap.ticker.add(() => {
-        // adjust speed for higher refresh monitors
-        const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
+        gsap.ticker.add(() => {
+          // adjust speed for higher refresh monitors
+          const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
 
-        pos.x += (mouse.x - pos.x) * dt;
-        pos.y += (mouse.y - pos.y) * dt;
-        xSet(pos.x);
-        ySet(pos.y);
-      });
+          pos.x += (mouse.x - pos.x) * dt;
+          pos.y += (mouse.y - pos.y) * dt;
+          xSet(pos.x);
+          ySet(pos.y);
+        });
+      }
     },
     showHideElm(isHidden: boolean) {
       const tl = this.$gsap.timeline();
       const followElm = "[data-circle-effect]";
 
-      if (isHidden) {
-        tl.to(followElm, {
-          ease: this.ease,
-          duration: this.duration,
-          opacity: 0,
-          scale: 0.3,
-        });
-      } else {
-        tl.to(followElm, {
-          ease: this.ease,
-          duration: this.duration,
-          scale: 1,
-          opacity: 1,
-        });
+      if (followElm) {
+        if (isHidden) {
+          tl.to(followElm, {
+            ease: this.ease,
+            duration: this.duration,
+            opacity: 0,
+            scale: 0.3,
+          });
+        } else {
+          tl.to(followElm, {
+            ease: this.ease,
+            duration: this.duration,
+            scale: 1,
+            opacity: 1,
+          });
+        }
       }
     },
     handleScroll() {
