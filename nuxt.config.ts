@@ -155,8 +155,12 @@ export default {
   },
   // GSAP
   gsap: {
+    extraPlugins: {
+      draggable: true,
+    },
     clubPlugins: {
       splitText: true,
+      inertia: true,
     },
   },
   // images

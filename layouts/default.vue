@@ -16,9 +16,6 @@
     <site-header v-if="!$fetchState.pending" :data="header" />
     <main>
       <Nuxt />
-      <div v-if="isDevices">
-        <circle-effect v-if="visibleRotater" />
-      </div>
     </main>
   </div>
 </template>

@@ -14,19 +14,21 @@
         </div>
       </div>
     </div>
-    <div ref="slider" class="keen-slider" data-inview-simple-show-effect>
-      <div
-        v-for="(item, i) in data.images"
-        :key="i"
-        class="keen-slider__slide number-slide"
-      >
-        <nuxt-img
-          v-if="item.url"
-          loading="lazy"
-          provider="cloudinary"
-          :src="item.url"
-          :sizes="'sm:80vw lg:100vw'"
-        />
+    <div class="grid-slider">
+      <div class="grid-slider__wrap">
+        <div
+          v-for="(item, i) in data.images"
+          :key="i"
+          class="grid-slider__item-wrap"
+        >
+          <nuxt-img
+            v-if="item.url"
+            loading="lazy"
+            provider="cloudinary"
+            :src="item.url"
+            :sizes="'sm:80vw lg:100vw'"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -34,8 +36,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import "keen-slider/keen-slider.min.css";
-import KeenSlider from "keen-slider";
 
 export default Vue.extend({
   name: "GridGallery",
@@ -45,41 +45,32 @@ export default Vue.extend({
       default: null,
     },
   },
-  data() {
-    return {
-      slider: null,
-    };
-  },
   mounted() {
-    const slider = this.$refs.slider as HTMLDivElement;
-    this.slider = new KeenSlider(slider, {
-      loop: true,
-      mode: "free",
-      dragSpeed: 0.5,
-      slides: {
-        perView: 3,
-        spacing: 40,
-      },
-      breakpoints: {
-        "(max-width: 1100px)": {
-          slides: {
-            perView: 2,
-            spacing: 30,
-          },
-        },
-        "(max-width: 700px)": {
-          slides: {
-            perView: 1.4,
-            spacing: 20,
-          },
-        },
-      },
-    });
+    this.customSlider();
   },
-  beforeDestroy() {
-    setTimeout(() => {
-      if (this.slider) (this.slider as any).destroy();
-    }, 1200);
+  methods: {
+    customSlider() {
+      const d = this.$Draggable;
+      const testVar = () => {
+        console.log("hello", this.$inertia);
+      };
+      d.create(".grid-slider .grid-slider__wrap", {
+        type: "x",
+        edgeResistance: 0.5,
+        inertia: true,
+        allowContextMenu: true,
+        onDrag: testVar(),
+        onThrowComplete: function () {
+          console.log(this.x);
+        },
+        bounds: {
+          minX:
+            -document.querySelector(".grid-slider__wrap")!.offsetWidth +
+            document.querySelector(".grid-slider")!.offsetWidth,
+          maxX: 0,
+        },
+      });
+    },
   },
 });
 </script>
