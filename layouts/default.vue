@@ -12,6 +12,7 @@
         >
       </div>
     </transition>
+
     <site-header v-if="!$fetchState.pending" :data="header" />
     <main>
       <Nuxt />
@@ -24,6 +25,8 @@ export default Vue.extend({
   name: "MainLayout",
   data() {
     return {
+      visibleRotater: false,
+      isDevices: false,
       header: {},
       ease: "power4.out",
       dark: "#151515",
@@ -42,7 +45,26 @@ export default Vue.extend({
       this.header = header;
     }
   },
+  watch: {
+    $route() {
+      setTimeout(() => {
+        this.controlVisibleRotater();
+      }, 800);
+    },
+  },
+  mounted() {
+    this.controlVisibleRotater();
+    this.controleIsDevices();
+    window.addEventListener("resize", this.controleIsDevices);
+  },
   methods: {
+    controlVisibleRotater() {
+      const isFrontpage = () => this.$route.path === "/";
+      this.visibleRotater = isFrontpage();
+    },
+    controleIsDevices() {
+      this.isDevices = !!window.matchMedia("(min-width: 768px)").matches;
+    },
     bgAnimation() {
       const initApp = () => {
         this.$store.commit("global/initApplication");

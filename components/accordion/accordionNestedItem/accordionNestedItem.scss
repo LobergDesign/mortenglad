@@ -77,8 +77,14 @@ $accordion-toggle-icon-size: 1rem;
 
 @include viewport-medium {
   .accordion-nested-item {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     &.has-additional-content {
       row-gap: clamp(1.5rem, 1.8vw, 4rem);
+    }
+    &__item {
+      font-size: 1.3rem;
+      color: var(--color-cta);
     }
   }
 }
