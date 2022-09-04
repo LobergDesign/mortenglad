@@ -1,4 +1,5 @@
 .grid-gallery {
+  overflow: hidden;
   a {
     display: block;
     margin-top: -1.5rem;
@@ -10,16 +11,20 @@
   overflow: hidden;
   width: 100vw;
   &__wrap {
-    height: clamp(35rem, 41vw, 55rem);
+    height: clamp(15rem, 41vw, 55rem);
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding-bottom: 20rem;
+    padding-bottom: clamp(5rem, 17vw, 20rem);
+    transition: transform $transition--fast;
+    will-change: transform;
   }
   // items
   &__item-wrap {
     min-width: 40vw;
     margin-right: clamp(1rem, 2vw, 5rem);
+    overflow: hidden;
+    will-change: transform;
   }
   &__item-wrap:last-child {
     margin-right: 0;
@@ -29,5 +34,19 @@
   }
   &__item-wrap:nth-child(4n + 1) {
     transform: translateY(clamp(10rem, 15vw, 10rem));
+  }
+  &__item-wrap img {
+    will-change: transform;
+  }
+}
+
+@include viewport-small {
+  .grid-slider {
+    &__item-wrap:nth-child(4n + 3) {
+      transform: translateY(clamp(2rem, 10vw, 20rem));
+    }
+    &__item-wrap:nth-child(4n + 1) {
+      transform: translateY(clamp(2rem, 10vw, 10rem));
+    }
   }
 }
