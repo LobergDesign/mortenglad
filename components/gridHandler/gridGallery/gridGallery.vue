@@ -52,34 +52,21 @@ export default Vue.extend({
     };
   },
   mounted() {
-    this.customSlider().initSlide();
+    this.customSlider();
+    window.addEventListener("resize", this.customSlider, false);
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.customSlider().initSlide);
-    this.customSlider().disableSlide();
+    window.removeEventListener("resize", this.customSlider, false);
+    this.killSlider();
   },
   methods: {
-    wrapEffect(target: HTMLElement, active: boolean) {
+    effect(target: HTMLElement, active: boolean, scaleDown: boolean = true) {
       const tl = this.$gsap.timeline({
         defaults: { duration: this.duration, ease: this.ease },
       });
       if (active) {
         tl.to(target, {
-          scale: 0.9,
-        });
-      } else {
-        tl.to(target, {
-          scale: 1,
-        });
-      }
-    },
-    imageEffect(target: HTMLElement, active: boolean) {
-      const tl = this.$gsap.timeline({
-        defaults: { duration: this.duration, ease: this.ease },
-      });
-      if (active) {
-        tl.to(target, {
-          scale: 1.3,
+          scale: scaleDown ? 0.9 : 1.3,
         });
       } else {
         tl.to(target, {
@@ -93,37 +80,32 @@ export default Vue.extend({
       const elm = ".grid-slider .grid-slider__wrap";
       const innerElm = ".grid-slider__item-wrap";
       const img = ".grid-slider__item-wrap img";
-      if (document.querySelector(elm)) {
-        const initSlide = () => {
-          d.create(elm, {
-            type: "x",
-            edgeResistance: 0.8,
-            inertia: true,
-            onPress: () => {
-              this.wrapEffect(innerElm, true);
-              this.imageEffect(img, true);
-            },
-            onRelease: () => {
-              this.wrapEffect(innerElm, false);
-              this.imageEffect(img, false);
-            },
-            bounds: {
-              minX:
-                -(
-                  document.querySelector(".grid-slider__wrap") as HTMLDivElement
-                ).offsetWidth +
-                (document.querySelector(".grid-slider") as HTMLDivElement)
-                  .offsetWidth,
-              maxX: 0,
-            },
-          });
-        };
 
-        const disableSlide = () => {
-          this.$Draggable.get(elm).kill();
-        };
-        return { initSlide, disableSlide };
-      }
+      d.create(elm, {
+        type: "x",
+        edgeResistance: 0.8,
+        inertia: true,
+        onPress: () => {
+          this.effect(innerElm, true);
+          this.effect(img, true, false);
+        },
+        onRelease: () => {
+          this.effect(innerElm, false);
+          this.effect(img, false, false);
+        },
+        bounds: {
+          minX:
+            -(document.querySelector(".grid-slider__wrap") as HTMLDivElement)
+              .offsetWidth +
+            (document.querySelector(".grid-slider") as HTMLDivElement)
+              .offsetWidth,
+          maxX: 0,
+        },
+      });
+    },
+    killSlider() {
+      const elm = ".grid-slider .grid-slider__wrap";
+      this.$Draggable.get(elm).kill();
     },
   },
 });

@@ -15,7 +15,7 @@
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding-bottom: clamp(5rem, 17vw, 20rem);
+    padding-bottom: clamp(4rem, 17vw, 20rem);
     transition: transform $transition--fast;
     will-change: transform;
   }
