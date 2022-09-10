@@ -6,7 +6,7 @@
         <hero-large v-if="hero" :data="hero" />
         <div class="spacing-t-large">
           <lazy-intro v-if="intro.introBodytext" :data="intro" />
-
+          <lazy-featured-section :data="featuredSection" />
           <lazy-accordion
             v-if="cvCollection"
             :data="cvCollection.cvListCollection.items"
@@ -56,12 +56,20 @@ export default Vue.extend({
         introLink: data.introLink,
         introLinkText: data.introLinkText,
       };
+      const featuredSection = {
+        featuredTitle: data.featuredTitle,
+        featuredBodytext: data.featuredBodytext,
+        featuredLink: data.featuredLink,
+        featuredLinkText: data.featuredLinkText,
+        featuredVideo: data.featuredVideo,
+      };
       const cvLink = {
         cvLink: data.cvCollectionsLink,
         cvLinkText: data.cvCollectionsLinkText,
       };
       return {
         data,
+        featuredSection,
         hero,
         intro,
         cvLink,
