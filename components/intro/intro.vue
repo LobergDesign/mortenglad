@@ -1,5 +1,5 @@
 <template>
-  <section id="intro" class="intro spacing-b">
+  <section class="intro spacing-b">
     <div class="grid-w">
       <div class="grid-r">
         <div

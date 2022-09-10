@@ -5,6 +5,15 @@ const query = `query($isPreview: Boolean!) {
         heroTitle
         heroImages
         heroTitleExtension
+        featuredTitle
+    featuredBodytext {
+      json
+    }
+    featuredVideo
+    featuredLink{
+      ...referencePagesFragment
+    }
+    featuredLinkText
         introTitle
         introBodytext {
           json
