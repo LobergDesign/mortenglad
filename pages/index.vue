@@ -6,7 +6,10 @@
         <hero-large v-if="hero" :data="hero" />
         <div class="spacing-t-large">
           <lazy-intro v-if="intro.introBodytext" :data="intro" />
-          <lazy-featured-section :data="featuredSection" />
+          <lazy-featured-section
+            v-if="featuredSection.featuredVideo"
+            :data="featuredSection"
+          />
           <lazy-accordion
             v-if="cvCollection"
             :data="cvCollection.cvListCollection.items"
