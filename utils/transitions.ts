@@ -76,6 +76,16 @@ const simpleInviewEffect = (
   gsap: NLib.IGsap
 ) => {
   const action = () => {
+    const t = target as HTMLElement;
+    const accordionTarget = t.querySelector(
+      ".accordion-item"
+    ) as HTMLDivElement;
+
+    if (accordionTarget) {
+      setTimeout(() => {
+        accordionTarget.classList.add("is-in-view");
+      }, 50);
+    }
     const tl = gsap.timeline();
     gsap.to(target, { autoAlpha: 1, duration: 0 });
 
