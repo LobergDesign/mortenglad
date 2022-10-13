@@ -16,11 +16,7 @@
           </div>
         </div>
         <div class="hero-large__images">
-          <div
-            v-for="(image, i) in data.heroImages"
-            :key="i"
-            data-inview-simple-show-effect
-          >
+          <div v-for="(image, i) in data.heroImages" :key="i">
             <ui-image :data="image" :sizes="'sm:100vw md:50vw lg:60vw'" />
           </div>
         </div>
