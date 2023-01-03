@@ -3,7 +3,8 @@ declare namespace NHeroLarge {
     heroTitle: string;
     heroImages: Array<NGlobal.IMedia>;
     heroTitleExtension: string;
-    title?: string;
+    heroVideo?: Array<NGlobal.IMedia>;
     headlineType?: string;
+    backdropOpacity?: number;
   }
 }
