@@ -73,8 +73,7 @@ export default Vue.extend({
     };
   },
   mounted() {
-    console.log("trh", this.data);
-    if (!this.data.heroVideo) {
+    if (!this.data.heroVideo.length) {
       this.heroSlider();
     }
   },
