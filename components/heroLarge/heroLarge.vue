@@ -20,14 +20,36 @@
         class="hero-large__media-backdrop"
         :class="'opacity-' + data.backdropOpacity"
       ></div>
-      <div
-        v-for="(image, i) in data.heroImages"
-        :key="i"
-        class="hero-large__media-image"
-      >
-        <div class="image no-aspect-ratio">
-          <nuxt-img v-if="image.url" provider="cloudinary" :src="image.url" />
+      <div v-if="!data.heroVideo">
+        <div
+          v-for="(image, i) in data.heroImages"
+          :key="i"
+          class="hero-large__media-image"
+        >
+          <div class="image no-aspect-ratio">
+            <nuxt-img v-if="image.url" provider="cloudinary" :src="image.url" />
+          </div>
         </div>
+      </div>
+      <div v-if="data.heroVideo">
+        <video
+          v-if="data.heroVideo"
+          autoplay
+          muted
+          loop
+          class="hero-large__video"
+          provider="cloudinary"
+        >
+          <source
+            :src="data.heroVideo[0].original_secure_url"
+            type="video/mp4"
+          />
+          <source
+            :src="data.heroVideo[0].original_secure_url"
+            type="video/ogg"
+          />
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </div>
@@ -47,16 +69,15 @@ export default Vue.extend({
   data() {
     return {
       ease: "power4.out",
-      duration: "0.65",
+      duration: "3",
     };
   },
   mounted() {
-    this.heroSlider();
+    if (!this.data.heroVideo.length) {
+      this.heroSlider();
+    }
   },
   methods: {
-    initHeroMediaElement() {
-      // create init effect of fade in wrap on load
-    },
     heroSlider() {
       const images = document.querySelectorAll(
         ".hero-large__media-image"
@@ -64,15 +85,28 @@ export default Vue.extend({
       const totalImages = images.length;
       let activeImageIndex: number = 0;
       // hide all images exept first
-      images[0].style.opacity = "1";
+
+      const gsap = this.$gsap as NLib.IGsap;
+
+      gsap.to(images[0], {
+        opacity: 1,
+      });
 
       const setNewOpacity = () => {
         images.forEach((e, i) => {
           if (i !== activeImageIndex) {
-            e.style.opacity = "0";
+            gsap.to(e, {
+              duration: this.duration,
+              ease: this.ease,
+              opacity: 0,
+            });
           }
         });
-        images[activeImageIndex].style.opacity = "1";
+        gsap.to(images[activeImageIndex], {
+          opacity: 1,
+          duration: this.duration,
+          ease: this.ease,
+        });
         activeImageIndex = activeImageIndex + 1;
         if (activeImageIndex === totalImages) {
           activeImageIndex = 0;
