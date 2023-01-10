@@ -4,6 +4,8 @@ const query = `query($isPreview: Boolean!) {
     page: pageHome(id: "3Oln3i9cBK6vV7lvdPPMjc", preview:$isPreview) {
         heroTitle
         heroImages
+        heroVideo
+		    backdropOpacity
         heroTitleExtension
         featuredTitle
     featuredBodytext {

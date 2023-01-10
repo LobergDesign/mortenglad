@@ -51,6 +51,8 @@ export default Vue.extend({
       const hero = {
         heroTitle: data.heroTitle,
         heroImages: data.heroImages,
+        heroVideo: data.heroVideo,
+        backdropOpacity: data.backdropOpacity,
         heroTitleExtension: data.heroTitleExtension,
       };
       const intro = {
