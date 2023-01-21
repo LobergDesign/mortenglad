@@ -112,7 +112,7 @@ export default Vue.extend({
           activeImageIndex = 0;
         }
       };
-      setInterval(setNewOpacity, 5000);
+      setInterval(setNewOpacity, 4000);
     },
   },
 });
