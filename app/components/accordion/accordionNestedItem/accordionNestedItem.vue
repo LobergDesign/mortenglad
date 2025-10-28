@@ -73,56 +73,42 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  props: {
-    data: {
-      type: Object as () => NCVCollection.ICVSingleCollection,
-      default: null,
-    },
-    len: {
-      type: Number,
-      default: null,
-    },
-    headlines: {
-      type: Array,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      $gsap: Object as () => NLib.IGsap,
-      isActive: false,
-    };
-  },
-  methods: {
-    toggleAccordion() {
-      const el = this.$refs.AccordionContent as HTMLElement;
+defineProps<{
+  len: number;
+  data: NCVCollection.ICVSingleCollection;
+  headlines: string[];
+}>();
 
-      if (el) {
-        const elHeight = el.scrollHeight;
+const isActive = ref(false);
+const $gsap = ref<NLib.IGsap>();
+const accordionContent = useTemplateRef('AccordionContent');
 
-        // @ts-ignore
-        const gsap = this.$gsap as NLib.IGsap;
-        if (!this.isActive) {
-          this.isActive = true;
-          gsap.to(el, {
-            duration: 0.7,
-            opacity: 1,
-            height: elHeight,
-            ease: 'power3.out',
-          });
-        } else {
-          this.isActive = false;
-          gsap.to(el, {
-            duration: 0.7,
-            opacity: 0,
-            height: 0,
-            ease: 'power3.out',
-          });
-        }
-      }
-    },
-  },
-});
+const toggleAccordion = () => {
+  const el = accordionContent.value as HTMLElement;
+
+  if (el) {
+    const elHeight = el.scrollHeight;
+
+    // @ts-ignore
+    const gsap = $gsap.value as NLib.IGsap;
+    if (!isActive.value) {
+      isActive.value = true;
+      gsap.to(el, {
+        duration: 0.7,
+        opacity: 1,
+        height: elHeight,
+        ease: 'power3.out',
+      });
+    } else {
+      isActive.value = false;
+      gsap.to(el, {
+        duration: 0.7,
+        opacity: 0,
+        height: 0,
+        ease: 'power3.out',
+      });
+    }
+  }
+};
 </script>
 <style lang="scss" src="./accordionNestedItem.scss"></style>

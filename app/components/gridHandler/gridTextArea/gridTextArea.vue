@@ -17,13 +17,7 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'GridTextArea',
-  props: {
-    data: {
-      type: Object as () => NGrid.IGridTextArea,
-      default: null,
-    },
-  },
-});
+defineProps<{
+  data: NGrid.IGridTextArea;
+}>();
 </script>

@@ -45,21 +45,9 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'AccordionComponent',
-  props: {
-    data: {
-      type: Array as () => NCVCollection.ICVCollection[],
-      default: null,
-    },
-    alternative: {
-      type: Boolean,
-      default: false,
-    },
-    link: {
-      type: Object,
-      default: null,
-    },
-  },
-});
+defineProps<{
+  data: NCVCollection.ICVCollection[] | null;
+  alternative: boolean;
+  link: any;
+}>();
 </script>

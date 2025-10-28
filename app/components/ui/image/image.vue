@@ -14,22 +14,10 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'UIImage',
-  props: {
-    data: {
-      type: Object as () => NGlobal.IMedia,
-      default: null,
-    },
-    sizes: {
-      type: String,
-      default: 'sm:100vw md:50vw lg:400px',
-    },
-    aspectRatio: {
-      type: Boolean,
-      default: true,
-    },
-  },
-});
+defineProps<{
+  data: NGlobal.IMedia;
+  sizes?: string;
+  aspectRatio?: boolean;
+}>();
 </script>
 <style lang="scss" src="./image.scss" scoped></style>

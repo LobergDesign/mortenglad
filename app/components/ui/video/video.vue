@@ -55,16 +55,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-
-interface Props {
+const { data, smallHeadline } = defineProps<{
   data: NShowreels.IShowreel;
   smallHeadline?: boolean;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  smallHeadline: false,
-});
+}>();
 
 const video = ref<HTMLVideoElement | null>(null);
 const isPlaying = ref(false);

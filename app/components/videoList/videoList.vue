@@ -7,14 +7,8 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'VideoList',
-  props: {
-    data: {
-      type: Object,
-      default: null,
-    },
-  },
-});
+defineProps<{
+  data: NShowreels.IShowreel[];
+}>();
 </script>
 <style lang="scss" src="./videoList.scss" scoped></style>

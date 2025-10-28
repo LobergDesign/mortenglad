@@ -35,77 +35,74 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'GridGallery',
-  props: {
-    data: {
-      type: Object as () => NGrid.IGridGallery,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      ease: 'power4.out',
-      duration: '0.65',
-    };
-  },
-  mounted() {
-    this.customSlider();
-    window.addEventListener('resize', this.customSlider, false);
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.customSlider, false);
-    this.killSlider();
-  },
-  methods: {
-    effect(target: HTMLElement, active: boolean, scaleDown: boolean = true) {
-      const tl = this.$gsap.timeline({
-        defaults: { duration: this.duration, ease: this.ease },
-      });
-      if (active) {
-        tl.to(target, {
-          scale: scaleDown ? 0.9 : 1.3,
-        });
-      } else {
-        tl.to(target, {
-          scale: 1,
-        });
-      }
-    },
+defineProps<{
+  data: NGrid.IGridGallery;
+}>();
+const ease = 'power4.out';
+const duration = '0.65';
+const $gsap = (window as any).gsap;
 
-    customSlider() {
-      const d = this.$Draggable;
-      const elm = '.grid-slider .grid-slider__wrap';
-      const innerElm = '.grid-slider__item-wrap';
-      const img = '.grid-slider__item-wrap img';
+const customSlider = () => {
+  const d = (window as any).Draggable;
+  const elm = '.grid-slider .grid-slider__wrap';
+  const innerElm = '.grid-slider__item-wrap';
+  const img = '.grid-slider__item-wrap img';
 
-      d.create(elm, {
-        type: 'x',
-        edgeResistance: 0.8,
-        inertia: true,
-        onPress: () => {
-          this.effect(innerElm, true);
-          this.effect(img, true, false);
-        },
-        onRelease: () => {
-          this.effect(innerElm, false);
-          this.effect(img, false, false);
-        },
-        bounds: {
-          minX:
-            -(document.querySelector('.grid-slider__wrap') as HTMLDivElement)
-              .offsetWidth +
-            (document.querySelector('.grid-slider') as HTMLDivElement)
-              .offsetWidth,
-          maxX: 0,
-        },
-      });
+  d.create(elm, {
+    type: 'x',
+    edgeResistance: 0.8,
+    inertia: true,
+    onPress: () => {
+      effect(innerElm, true);
+      effect(img, true, false);
     },
-    killSlider() {
-      const elm = '.grid-slider .grid-slider__wrap';
-      this.$Draggable.get(elm).kill();
+    onRelease: () => {
+      effect(innerElm, false);
+      effect(img, false, false);
     },
-  },
+    bounds: {
+      minX:
+        -(document.querySelector('.grid-slider__wrap') as HTMLDivElement)
+          .offsetWidth +
+        (document.querySelector('.grid-slider') as HTMLDivElement).offsetWidth,
+      maxX: 0,
+    },
+  });
+};
+
+const killSlider = () => {
+  const elm = '.grid-slider .grid-slider__wrap';
+  // this.$Draggable.get(elm).kill();
+};
+
+onMounted(() => {
+  customSlider();
+  window.addEventListener('resize', customSlider, false);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', customSlider, false);
+  killSlider();
+});
+
+const effect = (
+  target: HTMLElement,
+  active: boolean,
+  scaleDown: boolean = true
+) => {
+  const tl = $gsap.value.timeline({
+    defaults: { duration: duration, ease: ease },
+  });
+  if (active) {
+    tl.to(target, {
+      scale: scaleDown ? 0.9 : 1.3,
+    });
+  } else {
+    tl.to(target, {
+      scale: 1,
+    });
+  }
+  return tl;
+};
 </script>
 <style lang="scss" src="./gridGallery.scss" scoped></style>

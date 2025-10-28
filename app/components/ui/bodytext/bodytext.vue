@@ -15,8 +15,6 @@ defineProps<{
   data: any;
 }>();
 
-const toHtmlString = (content: any) => {
-  return documentToHtmlString(content);
-};
+const toHtmlString = (content: any) => documentToHtmlString(content);
 </script>
 <style lang="scss" src="./bodytext.scss" scoped></style>

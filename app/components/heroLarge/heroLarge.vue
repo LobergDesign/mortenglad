@@ -56,63 +56,53 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'HeroLarge',
-  props: {
-    data: {
-      type: Object as () => NHeroLarge.IHeroLargeData,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      ease: 'power4.out',
-      duration: '3',
-    };
-  },
-  mounted() {
-    if (!this.data.heroVideo?.length) {
-      this.heroSlider();
+const { data } = defineProps<{
+  data: NHeroLarge.IHeroLargeData;
+}>();
+
+const ease = 'power4.out';
+const duration = '3';
+const $gsap = (window as any).gsap;
+
+const heroSlider = () => {
+  const images = document.querySelectorAll(
+    '.hero-large__media-image'
+  ) as NodeListOf<HTMLElement>;
+  const totalImages = images.length;
+  let activeImageIndex: number = 0;
+  // hide all images exept first
+
+  $gsap.to(images[0], {
+    opacity: 1,
+  });
+
+  const setNewOpacity = () => {
+    images.forEach((e, i) => {
+      if (i !== activeImageIndex) {
+        $gsap.to(e, {
+          duration: duration,
+          ease: ease,
+          opacity: 0,
+        });
+      }
+    });
+    $gsap.to(images[activeImageIndex], {
+      opacity: 1,
+      duration: duration,
+      ease: ease,
+    });
+    activeImageIndex = activeImageIndex + 1;
+    if (activeImageIndex === totalImages) {
+      activeImageIndex = 0;
     }
-  },
-  methods: {
-    heroSlider() {
-      const images = document.querySelectorAll(
-        '.hero-large__media-image'
-      ) as NodeListOf<HTMLElement>;
-      const totalImages = images.length;
-      let activeImageIndex: number = 0;
-      // hide all images exept first
+  };
+  setInterval(setNewOpacity, 4000);
+};
 
-      const gsap = this.$gsap as NLib.IGsap;
-
-      gsap.to(images[0], {
-        opacity: 1,
-      });
-
-      const setNewOpacity = () => {
-        images.forEach((e, i) => {
-          if (i !== activeImageIndex) {
-            gsap.to(e, {
-              duration: this.duration,
-              ease: this.ease,
-              opacity: 0,
-            });
-          }
-        });
-        gsap.to(images[activeImageIndex], {
-          opacity: 1,
-          duration: this.duration,
-          ease: this.ease,
-        });
-        activeImageIndex = activeImageIndex + 1;
-        if (activeImageIndex === totalImages) {
-          activeImageIndex = 0;
-        }
-      };
-      setInterval(setNewOpacity, 4000);
-    },
-  },
+onMounted(() => {
+  if (!data.heroVideo?.length) {
+    heroSlider();
+  }
 });
 </script>
 <style lang="scss" src="./heroLarge.scss" scoped></style>

@@ -37,15 +37,9 @@
   </section>
 </template>
 
-<script lang="ts">
-export default Vue.extend({
-  name: 'FeaturedSection',
-  props: {
-    data: {
-      type: Object as () => NFeaturedSection.IData,
-      default: null,
-    },
-  },
-});
+<script setup lang="ts">
+defineProps<{
+  data: NFeaturedSection.IData;
+}>();
 </script>
 <style lang="scss" src="./featuredSection.scss" scoped></style>

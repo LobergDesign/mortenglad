@@ -51,14 +51,8 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'ContactSection',
-  props: {
-    data: {
-      type: (Object as () => NGlobalData.IGlobalData) || {},
-      default: null,
-    },
-  },
-});
+defineProps<{
+  data: NGlobalData.IGlobalData | null;
+}>();
 </script>
 <style lang="scss" src="./contactSection.scss" scoped></style>

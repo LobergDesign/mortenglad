@@ -45,97 +45,82 @@
   </div>
 </template>
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'ImageGallery',
+const { images, activateGallery } = defineProps<{
+  images: NGlobal.IMedia[];
+  activateGallery: number;
+}>();
 
-  props: {
-    images: {
-      type: Array as () => NGlobal.IMedia[],
-      default: null,
-    },
-    activateGallery: {
-      type: Number,
-      default: 0,
-    },
-  },
-  data() {
-    return {
-      isActive: false,
-      activeIndex: 0,
-      imageAmount: this.images.length,
-      more: true,
-      less: false,
-      loaded: false,
-    };
-  },
-  watch: {
-    activateGallery(newValue, _oldValue) {
-      this.isActive = true;
-      this.activeIndex = newValue;
-      this.slideGallery(false);
-      this.moreLess();
-    },
-  },
-  mounted() {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.loaded = true;
-      }, 600);
+const emit = defineEmits<{
+  (e: 'active-gallery', index: number): void;
+}>();
+
+const isActive = ref(false);
+const activeIndex = ref(0);
+const imageAmount = ref(images.length);
+const more = ref(true);
+const less = ref(false);
+const loaded = ref(false);
+const $gsap = (window as any).gsap;
+const gallery = useTemplateRef('gallery');
+
+const moreLess = () => {
+  // more
+  activeIndex.value === imageAmount.value - 1
+    ? (more.value = false)
+    : (more.value = true);
+  // less
+  activeIndex.value === 0 ? (less.value = false) : (less.value = true);
+};
+
+const slideGallery = (animate: boolean = true) => {
+  const imageGallery = gallery.value as unknown as HTMLElement;
+  const transform = activeIndex.value * 100;
+  if (animate) {
+    $gsap.to(imageGallery, {
+      duration: 0.7,
+      xPercent: '-' + transform,
+      ease: 'power4.out',
     });
-  },
-  methods: {
-    // method to show/hide prev/next
-    moreLess() {
-      // more
-      this.activeIndex === this.imageAmount - 1
-        ? (this.more = false)
-        : (this.more = true);
-      // less
-      this.activeIndex === 0 ? (this.less = false) : (this.less = true);
-    },
-    // set active slide index
-    setActiveIndex(i: number) {
-      this.isActive = true;
-      this.activeIndex = i;
-      this.slideGallery(false);
+  } else {
+    $gsap.to(imageGallery, {
+      duration: 0,
+      xPercent: '-' + transform,
+    });
+  }
+};
 
-      this.moreLess();
-    },
-    // slide gallery
-    slideGallery(animate: boolean = true) {
-      const imageGallery = this.$refs.gallery as HTMLElement;
-      const transform = this.activeIndex * 100;
-      const gsap = this.$gsap as NLib.IGsap;
-      if (animate) {
-        gsap.to(imageGallery, {
-          duration: 0.7,
-          xPercent: '-' + transform,
-          ease: 'power4.out',
-        });
-      } else {
-        gsap.to(imageGallery, {
-          duration: 0,
-          xPercent: '-' + transform,
-        });
-      }
-    },
-    // slide next
-    next() {
-      this.activeIndex = ++this.activeIndex;
-      this.slideGallery();
-      this.moreLess();
-    },
-    // slide prev
-    prev() {
-      this.activeIndex = --this.activeIndex;
-      this.slideGallery();
-      this.moreLess();
-    },
-    // close gallery
-    closeGallery() {
-      this.isActive = false;
-    },
-  },
-});
+const setActiveIndex = (i: number) => {
+  isActive.value = true;
+  activeIndex.value = i;
+  slideGallery(false);
+
+  moreLess();
+};
+
+const next = () => {
+  activeIndex.value = ++activeIndex.value;
+  slideGallery();
+  moreLess();
+};
+
+const prev = () => {
+  activeIndex.value = --activeIndex.value;
+  slideGallery();
+  moreLess();
+};
+
+const closeGallery = () => {
+  isActive.value = false;
+};
+
+watch(
+  () => activateGallery,
+  (newValue, _oldValue) => {
+    isActive.value = true;
+    activeIndex.value = newValue;
+    slideGallery(false);
+    moreLess();
+  }
+);
 </script>
 <style lang="scss" src="./imageGalleryEnlarged.scss" scoped></style>

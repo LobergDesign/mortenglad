@@ -67,166 +67,165 @@
 
 <script setup lang="ts">
 import Scrollbar from 'smooth-scrollbar';
-export default Vue.extend({
-  name: 'SiteHeader',
-  props: {
-    data: {
-      type: Object as () => NHeader.IHeaderData,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      isMenuActive: false,
-      isUXOptimized: false,
-      ease: 'power4.out',
-      duration: 0.8,
-      durationMedium: 1,
-      stagger: 0.03,
-    };
-  },
-  // watch on route changes
-  watch: {
-    $route() {
-      if (!this.isDevices()) {
-        setTimeout(() => {
-          this.handleScroll();
-        }, 2600);
-      }
+
+defineProps<{
+  data: NHeader.IHeaderData;
+}>();
+const isMenuActive = ref(false);
+const isUXOptimized = ref(false);
+const optimizedMenu = useTemplateRef('optimizedMenu');
+const menuIcon = useTemplateRef('menuIcon');
+const ease = 'power4.out';
+const duration = 0.8;
+const durationMedium = 1;
+const stagger = 0.03;
+
+const route = useRoute();
+
+watch(
+  () => route.fullPath,
+  () => {
+    if (!isDevices()) {
       setTimeout(() => {
-        this.isMenuActive = false;
-        this.handleToggleItem();
-      }, 1000);
-    },
-    isUXOptimized(isOptimized: boolean) {
-      this.handleMenuIcon(isOptimized);
-      this.handleMenuList(isOptimized);
-    },
-  },
-  mounted() {
-    this.resize();
-    if (!this.isDevices()) {
-      setTimeout(() => {
-        this.handleScroll();
-        this.handleMenuIcon();
-      }, 1200);
+        handleScroll();
+      }, 2600);
     }
-    this.handleOptimized();
-  },
+    setTimeout(() => {
+      isMenuActive.value = false;
+      handleToggleItem();
+    }, 1000);
+  }
+);
 
-  methods: {
-    toggleMenu() {
-      this.isMenuActive = !this.isMenuActive;
-      this.handleToggleItem();
-    },
-    handleToggleItem() {
-      const optimizedMenu = this.$refs.optimizedMenu as HTMLElement;
-      const gsap = this.$gsap.timeline({
-        defaults: { duration: this.duration, ease: this.ease },
-      });
+watch(
+  () => route.fullPath,
+  () => {
+    if (!isDevices()) {
+      setTimeout(() => {
+        handleScroll();
+      }, 2600);
+    }
+    setTimeout(() => {
+      isMenuActive.value = false;
+      handleToggleItem();
+    }, 1000);
+  }
+);
+watch(
+  () => isUXOptimized.value,
+  (newVal) => {
+    handleMenuIcon(newVal);
+    handleMenuList(newVal);
+  }
+);
+const toggleMenu = () => {
+  isMenuActive.value = !isMenuActive.value;
+  handleToggleItem();
+};
+const resize = () => {
+  window.addEventListener('resize', handleOptimized);
+};
+const isDevices = () => {
+  return !!window.matchMedia('(max-width: 768px)').matches;
+};
+const handleOptimized = () => {
+  isDevices() ? (isUXOptimized.value = true) : (isUXOptimized.value = false);
+};
+/// MENU ICON
+const handleMenuIcon = (isOptimized: boolean = false) => {
+  const tl = (window as any).gsap.timeline({
+    defaults: { duration: duration, ease: ease },
+  });
+  if (isOptimized) {
+    tl.to(menuIcon, {
+      yPercent: -40,
+      opacity: 0,
+      autoAlpha: 0,
+    });
+  } else {
+    tl.to(menuIcon, {
+      yPercent: 0,
+      opacity: 1,
+      autoAlpha: 1,
+    });
+  }
+};
 
-      if (this.isMenuActive) {
-        gsap.fromTo(
-          optimizedMenu,
-          {
-            autoAlpha: 0,
-            scale: 0.6,
-          },
-          {
-            autoAlpha: 1,
-            scale: 1,
-          }
-        );
-      } else {
-        gsap.to(optimizedMenu, {
-          autoAlpha: 0,
-          scale: 0.6,
-        });
+const handleToggleItem = () => {
+  const gsap = (window as any).gsap.timeline({
+    defaults: { duration: duration, ease: ease },
+  });
+
+  if (isMenuActive.value) {
+    gsap.fromTo(
+      optimizedMenu.value,
+      {
+        autoAlpha: 0,
+        scale: 0.6,
+      },
+      {
+        autoAlpha: 1,
+        scale: 1,
       }
-    },
-    resize() {
-      window.addEventListener('resize', this.handleOptimized);
-    },
-    isDevices() {
-      return !!window.matchMedia('(max-width: 768px)').matches;
-    },
-    handleOptimized() {
-      this.isDevices()
-        ? (this.isUXOptimized = true)
-        : (this.isUXOptimized = false);
-    },
-    /// MENU ICON
-    handleMenuIcon(isOptimized: boolean = false) {
-      const menuIcon = this.$refs.menuIcon as HTMLDivElement;
-      const gsap = this.$gsap.timeline({
-        defaults: { duration: this.duration, ease: this.ease },
-      });
+    );
+  } else {
+    gsap.to(optimizedMenu, {
+      autoAlpha: 0,
+      scale: 0.6,
+    });
+  }
+};
 
-      if (isOptimized) {
-        setTimeout(() => {
-          gsap.fromTo(
-            menuIcon,
-            {
-              autoAlpha: 0,
-              scale: 0.8,
-            },
-            {
-              autoAlpha: 1,
-              opacity: 1,
-              scale: 1,
-            }
-          );
-        }, 250);
-      } else {
-        gsap.to(menuIcon, {
-          autoAlpha: 0,
-          opacity: 0,
-          scale: 0.8,
-        });
-      }
-    },
-    handleMenuList(isOptimized: boolean = false) {
-      const mainMenu = this.$refs.mainMenu as HTMLElement;
-      const menuItems = mainMenu.querySelectorAll('[data-main-menu-item]');
-      const tl = this.$gsap.timeline({
-        defaults: { duration: this.duration, ease: this.ease },
-      });
-      if (isOptimized) {
-        tl.to(menuItems, {
-          yPercent: -40,
-          opacity: 0,
-          stagger: 0.1,
-          autoAlpha: 0,
-        });
-      } else {
-        tl.to(menuItems, {
-          yPercent: 0,
-          opacity: 1,
-          stagger: -0.1,
-          autoAlpha: 1,
-        });
-      }
-    },
-    handleScroll() {
-      const smoothWrap = document.querySelector(
-        '.smooth-container'
-      ) as HTMLElement;
-      const smoothScroll = Scrollbar.get(smoothWrap);
+const handleMenuList = (isOptimized: boolean = false) => {
+  const mainMenu = optimizedMenu.value as HTMLElement;
+  const menuItems = mainMenu.querySelectorAll('[data-main-menu-item]');
+  const tl = (window as any).gsap.timeline({
+    defaults: { duration: duration, ease: ease },
+  });
+  if (isOptimized) {
+    tl.to(menuItems, {
+      yPercent: -40,
+      opacity: 0,
+      stagger: stagger,
+      autoAlpha: 0,
+    });
+  } else {
+    tl.to(menuItems, {
+      yPercent: 0,
+      opacity: 1,
+      stagger: -stagger,
+      autoAlpha: 1,
+    });
+  }
+};
 
-      const myListener = () => {
-        smoothScroll!.addListener((status) => {
-          if (this.isMenuActive) {
-            this.isMenuActive = false;
-            this.handleToggleItem();
-          }
-          status.offset.y > 290
-            ? (this.isUXOptimized = true)
-            : (this.isUXOptimized = false);
-        });
-      };
-      myListener();
-    },
-  },
+const handleScroll = () => {
+  const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
+  const smoothScroll = Scrollbar.get(smoothWrap);
+
+  const myListener = () => {
+    smoothScroll!.addListener((status) => {
+      if (isMenuActive.value) {
+        isMenuActive.value = false;
+        handleToggleItem();
+      }
+      status.offset.y > 290
+        ? (isUXOptimized.value = true)
+        : (isUXOptimized.value = false);
+    });
+  };
+  myListener();
+};
+
+onMounted(() => {
+  resize();
+  if (!isDevices()) {
+    setTimeout(() => {
+      handleScroll();
+      handleMenuIcon();
+    }, 1200);
+  }
+  handleOptimized();
 });
 </script>
 <style lang="scss" src="./siteHeader.scss" scoped></style>

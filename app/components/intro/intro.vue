@@ -25,16 +25,7 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'IntroComponent',
-  props: {
-    data: {
-      type: Object as () => NIntro.IIntroData,
-      default: null,
-    },
-  },
-});
-const props = defineProps<{
+defineProps<{
   data: NIntro.IIntroData;
 }>();
 </script>

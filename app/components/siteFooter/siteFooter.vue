@@ -59,34 +59,26 @@
   </footer>
 </template>
 
-<script lang="ts">
-export default Vue.extend({
-  name: 'SiteFooter',
-  data() {
-    return {
-      footer: {},
+<script lang="ts" setup>
+const footer = ref<any>();
+
+useAsyncData(async () => {
+  const globalData = await $store.state.global.globalSettings;
+  if (globalData) {
+    const footerData = {
+      telephonenumber: globalData.globalSettings?.telephonenumber,
+      email: globalData.globalSettings?.email,
+      address: globalData.globalSettings?.address,
+      linkedIn: globalData.globalSettings?.linkedIn,
+      facebook: globalData.globalSettings?.facebook,
+      instagram: globalData.globalSettings?.instagram,
+      youtube: globalData.globalSettings?.youtube,
+      contactFormTitle: globalData.globalSettings?.contactFormTitle,
+      contactFormSuccessMessage:
+        globalData.globalSettings?.contactFormSuccessMessage,
     };
-  },
-
-  fetch() {
-    const globalData = this.$store.state.global.globalSettings;
-
-    if (globalData) {
-      const footer = {
-        telephonenumber: globalData.globalSettings?.telephonenumber,
-        email: globalData.globalSettings?.email,
-        address: globalData.globalSettings?.address,
-        linkedIn: globalData.globalSettings?.linkedIn,
-        facebook: globalData.globalSettings?.facebook,
-        instagram: globalData.globalSettings?.instagram,
-        youtube: globalData.globalSettings?.youtube,
-        contactFormTitle: globalData.globalSettings?.contactFormTitle,
-        contactFormSuccessMessage:
-          globalData.globalSettings?.contactFormSuccessMessage,
-      };
-      this.footer = footer;
-    }
-  },
+    footer.value = footerData;
+  }
 });
 </script>
 <style lang="scss" src="./siteFooter.scss" scoped></style>

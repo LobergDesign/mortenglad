@@ -20,27 +20,19 @@
   </div>
 </template>
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'ImageGallery',
-  props: {
-    images: {
-      type: Array as () => NGlobal.IMedia[],
-      default: null,
-    },
-  },
-  data() {
-    return {
-      activeIndex: 0,
-    };
-  },
+defineProps<{
+  images: NGlobal.IMedia[] | null;
+}>();
 
-  methods: {
-    // set active slide index
-    setActiveIndex(i: number) {
-      this.$emit('active-gallery', i);
-      this.activeIndex = i;
-    },
-  },
-});
+const emit = defineEmits<{
+  (e: 'active-gallery', index: number): void;
+}>();
+
+const activeIndex = ref(0);
+
+const setActiveIndex = (i: number) => {
+  activeIndex.value = i;
+  emit('active-gallery', i);
+};
 </script>
 <style lang="scss" src="./imageGallery.scss" scoped></style>

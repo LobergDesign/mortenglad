@@ -74,52 +74,40 @@
 </template>
 
 <script setup lang="ts">
-export default Vue.extend({
-  name: 'ContactForm',
-  props: {
-    title: {
-      type: String,
-      default: null,
-    },
-    successMessage: {
-      type: String,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      showSucces: false,
-      showError: false,
+defineProps<{
+  title: string;
+  successMessage: string;
+}>();
+
+const showSucces = ref(false);
+const showError = ref(false);
+
+onMounted(() => {
+  const form = document.getElementById(
+    'simple-contact-form'
+  ) as HTMLFormElement;
+
+  if (form) {
+    form.addEventListener('submit', (event: Event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body: new URLSearchParams(formData as any).toString(),
+      })
+        .then(() => formSuccesHandler())
+        .catch(() => formErrorHandler());
+    });
+    const formSuccesHandler = () => {
+      form.reset();
+      showSucces.value = true;
     };
-  },
-
-  mounted() {
-    const form = document.getElementById(
-      'simple-contact-form'
-    ) as HTMLFormElement;
-
-    if (form) {
-      form.addEventListener('submit', (event: Event) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'multipart/form-data' },
-          body: new URLSearchParams(formData as any).toString(),
-        })
-          .then(() => formSuccesHandler())
-          .catch(() => formErrorHandler());
-      });
-      const formSuccesHandler = () => {
-        form.reset();
-        this.showSucces = true;
-      };
-      const formErrorHandler = () => {
-        form.reset();
-        this.showError = true;
-      };
-    }
-  },
+    const formErrorHandler = () => {
+      form.reset();
+      showError.value = true;
+    };
+  }
 });
 </script>
 <style lang="scss" src="./contactForm.scss" scoped></style>

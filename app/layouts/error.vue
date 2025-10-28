@@ -17,24 +17,16 @@
     <pre></pre>
   </main>
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script lang="ts" setup>
+const data = ref<NGlobalData.IGlobalData>();
 
-export default Vue.extend({
-  name: 'ErrorPage',
-  data() {
-    return {
-      data: ({} as NGlobalData.IGlobalData) || {},
-    };
-  },
-  fetch() {
-    const globalData = this.$store.state.global.globalSettings;
-    if (globalData) {
-      this.data = {
-        pageNotFoundTitle: globalData.globalSettings.pageNotFoundTitle,
-        pageNotFoundBodytext: globalData.globalSettings.pageNotFoundBodytext,
-      };
-    }
-  },
+useAsyncData(async () => {
+  //  const globalData = this.$store.state.global.globalSettings;
+  //   if (globalData) {
+  //     this.data = {
+  //       pageNotFoundTitle: globalData.globalSettings.pageNotFoundTitle,
+  //       pageNotFoundBodytext: globalData.globalSettings.pageNotFoundBodytext,
+  //     };
+  //   }
 });
 </script>
