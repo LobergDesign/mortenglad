@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <transition appear :css="false" @appear="customBeforeAppear">
+    <!-- <transition appear :css="false" @appear="customBeforeAppear">
       <div class="app-init-effect" data-init-effect-bg>
         <span class="app-init-effect__text-wrap" data-init-text>
           <span class="app-init-effect__text">Morten Glad </span></span
@@ -11,11 +11,11 @@
           ></span
         >
       </div>
-    </transition>
+    </transition> -->
 
     <!-- <site-header :data="header" /> -->
     <main>
-      <Nuxt />
+      <slot />
     </main>
   </div>
 </template>
@@ -26,7 +26,10 @@ const header = ref();
 const ease = 'power4.out';
 const dark = '#151515';
 const light = '#e9f1f7';
+const { gsap, ScrollTrigger } = useGsap();
 
+console.log('gsap', gsap);
+console.log('ScrollTrigger', ScrollTrigger);
 // async fetch() {
 //   await this.$store.dispatch('global/fetchGlobalSettings');
 //   const globalData = this.$store.state.global.globalSettings;
@@ -39,123 +42,123 @@ const light = '#e9f1f7';
 //   }
 // }
 
-const route = useRoute();
+// const route = useRoute();
 
-watch(
-  () => route.path,
-  () => {
-    setTimeout(() => {
-      controlVisibleRotater();
-    }, 800);
-  }
-);
+// watch(
+//   () => route.path,
+//   () => {
+//     setTimeout(() => {
+//       controlVisibleRotater();
+//     }, 800);
+//   }
+// );
 
-const controlVisibleRotater = () => {
-  const isFrontpage = () => route.path === '/';
-  visibleRotater.value = isFrontpage();
-};
+// const controlVisibleRotater = () => {
+//   const isFrontpage = () => route.path === '/';
+//   visibleRotater.value = isFrontpage();
+// };
 
-const controleIsDevices = () => {
-  isDevices.value = !!window.matchMedia('(min-width: 768px)').matches;
-};
+// const controleIsDevices = () => {
+//   isDevices.value = !!window.matchMedia('(min-width: 768px)').matches;
+// };
 
-const bgAnimation = () => {
-  const initApp = () => {
-    // this.$store.commit('global/initApplication');
-  };
-  const gsap = (window as any).gsap as NLib.IGsap;
-  const tl = gsap.timeline();
-  const target = document.querySelector('[data-init-effect-bg]');
-  tl.fromTo(
-    target,
-    { backgroundColor: light },
-    {
-      duration: 3,
-      ease: ease,
-      backgroundColor: dark,
-      onComplete: initApp,
-    }
-  ).to(target, {
-    delay: 0.6,
-    autoAlpha: 0,
-  });
-};
+// const bgAnimation = () => {
+//   const initApp = () => {
+//     // this.$store.commit('global/initApplication');
+//   };
+//   const gsap = (window as any).gsap as NLib.IGsap;
+//   const tl = gsap.timeline();
+//   const target = document.querySelector('[data-init-effect-bg]');
+//   tl.fromTo(
+//     target,
+//     { backgroundColor: light },
+//     {
+//       duration: 3,
+//       ease: ease,
+//       backgroundColor: dark,
+//       onComplete: initApp,
+//     }
+//   ).to(target, {
+//     delay: 0.6,
+//     autoAlpha: 0,
+//   });
+// };
 
-const textAnimation = () => {
-  const SplitText = (window as any).$SplitText;
-  const gsap = (window as any).$gsap;
-  const target = document.querySelector('[data-init-text]');
-  const targetSmall = document.querySelector('[data-init-small-text]');
+// const textAnimation = () => {
+//   const SplitText = (window as any).$SplitText;
+//   const gsap = (window as any).$gsap;
+//   const target = document.querySelector('[data-init-text]');
+//   const targetSmall = document.querySelector('[data-init-small-text]');
 
-  const mySplitText = new SplitText(target, { type: 'chars' });
-  const mySplitTextSmall = new SplitText(targetSmall, { type: 'chars' });
-  const chars = mySplitText.chars;
-  const charsSmall = mySplitTextSmall.chars;
-  gsap.timeline().to(target, {
-    duration: 0,
-    autoAlpha: 1,
-  });
-  gsap.timeline().to(targetSmall, {
-    duration: 0,
-    autoAlpha: 1,
-  });
+//   const mySplitText = new SplitText(target, { type: 'chars' });
+//   const mySplitTextSmall = new SplitText(targetSmall, { type: 'chars' });
+//   const chars = mySplitText.chars;
+//   const charsSmall = mySplitTextSmall.chars;
+//   gsap.timeline().to(target, {
+//     duration: 0,
+//     autoAlpha: 1,
+//   });
+//   gsap.timeline().to(targetSmall, {
+//     duration: 0,
+//     autoAlpha: 1,
+//   });
 
-  gsap
-    .timeline({
-      defaults: { ease: ease, stagger: -0.05 },
-    })
-    .fromTo(
-      charsSmall,
-      { opacity: 0, x: -180, fontWeight: 100 },
-      {
-        duration: 2.1,
-        fontWeight: 300,
-        x: 0,
-        opacity: 1,
-        autoAlpha: 1,
-      }
-    )
-    .to(charsSmall, {
-      delay: 0.5,
-      duration: 2,
-      fontWeight: 100,
-      x: 120,
-      opacity: 0,
-    });
+//   gsap
+//     .timeline({
+//       defaults: { ease: ease, stagger: -0.05 },
+//     })
+//     .fromTo(
+//       charsSmall,
+//       { opacity: 0, x: -180, fontWeight: 100 },
+//       {
+//         duration: 2.1,
+//         fontWeight: 300,
+//         x: 0,
+//         opacity: 1,
+//         autoAlpha: 1,
+//       }
+//     )
+//     .to(charsSmall, {
+//       delay: 0.5,
+//       duration: 2,
+//       fontWeight: 100,
+//       x: 120,
+//       opacity: 0,
+//     });
 
-  gsap
-    .timeline({
-      defaults: { ease: ease, stagger: -0.05 },
-    })
-    .fromTo(
-      chars,
-      { opacity: 0, x: -260, fontWeight: 100, color: dark },
-      {
-        delay: 0.6,
-        duration: 2,
-        fontWeight: 400,
-        x: 0,
-        opacity: 1,
-        color: light,
-        autoAlpha: 1,
-      }
-    )
-    .to(chars, {
-      duration: 1.8,
-      fontWeight: 100,
-      x: 150,
-      opacity: 0,
-    });
-};
+//   gsap
+//     .timeline({
+//       defaults: { ease: ease, stagger: -0.05 },
+//     })
+//     .fromTo(
+//       chars,
+//       { opacity: 0, x: -260, fontWeight: 100, color: dark },
+//       {
+//         delay: 0.6,
+//         duration: 2,
+//         fontWeight: 400,
+//         x: 0,
+//         opacity: 1,
+//         color: light,
+//         autoAlpha: 1,
+//       }
+//     )
+//     .to(chars, {
+//       duration: 1.8,
+//       fontWeight: 100,
+//       x: 150,
+//       opacity: 0,
+//     });
+// };
 
-onBeforeMount(() => {
-  bgAnimation();
-  textAnimation();
-});
+// onBeforeMount(() => {
+//   bgAnimation();
+//   textAnimation();
+// });
 
-onMounted(() => {
-  controlVisibleRotater();
-  controleIsDevices();
-  window.addEventListener('resize', controleIsDevices);
-});
+// onMounted(() => {
+//   controlVisibleRotater();
+//   controleIsDevices();
+//   window.addEventListener('resize', controleIsDevices);
+// });
 </script>

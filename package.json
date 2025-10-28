@@ -15,6 +15,7 @@
     "@nuxt/types": "^2.18.1",
     "@nuxtjs/google-fonts": "^3.2.0",
     "graphql": "^16.11.0",
+    "gsap": "^3.13.0",
     "nuxt": "^4.2.0",
     "nuxt-graphql-request": "^8.1.1",
     "nuxt-icons": "^4.0.0",

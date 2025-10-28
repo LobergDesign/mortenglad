@@ -1,11 +1,13 @@
 <template>
   <div class="overflow-hidden">
-    <div data-aaaaand-action></div>
+    <h2>æjsndf</h2>
+
+    <!-- <div data-aaaaand-action></div> -->
     <div data-warm-blanket>
       <div class="smooth-container">
-        <hero-large v-if="hero" :data="hero" />
+        <!-- <hero-large v-if="hero" :data="hero" /> -->
         <div class="spacing-t-large">
-          <lazy-intro v-if="intro.introBodytext" :data="intro" />
+          <!-- <lazy-intro v-if="intro.introBodytext" :data="intro" />
           <lazy-featured-section
             v-if="featuredSection.featuredVideo"
             :data="featuredSection"
@@ -19,7 +21,7 @@
           <lazy-grid-handler
             v-if="data && data.dynamicBlockSectionCollection"
             :data="data.dynamicBlockSectionCollection"
-          />
+          /> -->
         </div>
         <site-footer />
       </div>

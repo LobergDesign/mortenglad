@@ -11,10 +11,6 @@ const referencePagesFragment = `fragment referencePagesFragment on Entry {
         slug
         title
       }
-      ... on PageShowreels {
-        slug
-        title
-      }
       ... on PageGallery {
         slug
         title

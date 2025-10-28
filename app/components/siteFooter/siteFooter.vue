@@ -1,45 +1,56 @@
 <template>
-  <footer v-if="!$fetchState.pending" class="footer">
+  <data class="data" v-if="!pending && data">
     <lazy-contact-form
-      :title="footer.contactFormTitle"
-      :success-message="footer.contactFormSuccessMessage"
+      :title="data.globalSettings.contactFormTitle"
+      :success-message="data.globalSettings.contactFormSuccessMessage"
     />
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-9 grid-c-sm-12">
-          <ul class="reset-ul footer__info">
-            <li v-if="footer.address">
+          <ul class="reset-ul data__info">
+            <li v-if="data.globalSettings.address">
               <address data-split-line-effect>
-                {{ footer.address }}
+                {{ data.globalSettings.address }}
               </address>
             </li>
-            <li v-if="footer.telephonenumber">
-              <a data-split-line-effect :href="'tel:' + footer.telephonenumber"
-                >+45 {{ footer.telephonenumber }}</a
+            <li v-if="data.globalSettings.telephonenumber">
+              <a
+                data.globalSettings-split-line-effect
+                :href="'tel:' + data.globalSettings.telephonenumber"
+                >+45 {{ data.globalSettings.telephonenumber }}</a
               >
             </li>
-            <li v-if="footer.email">
-              <a data-split-line-effect :href="'mailto:' + footer.email">{{
-                footer.email
-              }}</a>
+            <li v-if="data.globalSettings.email">
+              <a
+                data-split-line-effect
+                :href="'mailto:' + data.globalSettings.email"
+                >{{ data.globalSettings.email }}</a
+              >
             </li>
           </ul>
         </div>
         <div class="grid-c-3 grid-c-sm-12 flex-end reset-flex-end-md">
-          <ul class="reset-ul footer__social">
-            <li v-if="footer.facebook">
-              <a :href="footer.facebook" target="_blank" data-split-line-effect
+          <ul class="reset-ul data__social">
+            <li v-if="data.globalSettings.facebook">
+              <a
+                :href="data.globalSettings.facebook"
+                target="_blank"
+                data-split-line-effect
                 >Facebook</a
               >
             </li>
-            <li v-if="footer.linkedIn">
-              <a :href="footer.linkedIn" target="_blank" data-split-line-effect>
+            <li v-if="data.globalSettings.linkedIn">
+              <a
+                :href="data.globalSettings.linkedIn"
+                target="_blank"
+                data-split-line-effect
+              >
                 LinkedIn
               </a>
             </li>
-            <li v-if="footer.instagram">
+            <li v-if="data.globalSettings.instagram">
               <a
-                :href="footer.instagram"
+                :href="data.globalSettings.instagram"
                 target="_blank"
                 class="reset-fill"
                 data-split-line-effect
@@ -47,8 +58,12 @@
                 Instagram
               </a>
             </li>
-            <li v-if="footer.youtube">
-              <a :href="footer.youtube" target="_blank" data-split-line-effect>
+            <li v-if="data.globalSettings.youtube">
+              <a
+                :href="data.globalSettings.youtube"
+                target="_blank"
+                data-split-line-effect
+              >
                 Youtube
               </a>
             </li>
@@ -56,29 +71,10 @@
         </div>
       </div>
     </div>
-  </footer>
+  </data>
 </template>
 
 <script lang="ts" setup>
-const footer = ref<any>();
-
-useAsyncData(async () => {
-  const globalData = await $store.state.global.globalSettings;
-  if (globalData) {
-    const footerData = {
-      telephonenumber: globalData.globalSettings?.telephonenumber,
-      email: globalData.globalSettings?.email,
-      address: globalData.globalSettings?.address,
-      linkedIn: globalData.globalSettings?.linkedIn,
-      facebook: globalData.globalSettings?.facebook,
-      instagram: globalData.globalSettings?.instagram,
-      youtube: globalData.globalSettings?.youtube,
-      contactFormTitle: globalData.globalSettings?.contactFormTitle,
-      contactFormSuccessMessage:
-        globalData.globalSettings?.contactFormSuccessMessage,
-    };
-    footer.value = footerData;
-  }
-});
+const { data, pending } = await useGlobaleSettings();
 </script>
 <style lang="scss" src="./siteFooter.scss" scoped></style>

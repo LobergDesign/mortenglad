@@ -31,10 +31,10 @@ export default defineNuxtPlugin((nuxtApp) => {
       console.log('error from cms plugin', error);
     }
   };
-
-  // Inject in Nuxt Context
-  inject('apiResource', {
-    getData,
-    getDataWithLimit,
-  });
+  return {
+    provide: {
+      getData,
+      getDataWithLimit,
+    },
+  };
 });
