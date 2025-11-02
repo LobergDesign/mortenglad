@@ -1,5 +1,5 @@
 <template>
-  <data class="data" v-if="!pending && data">
+  <data class="footer" v-if="!pending && data">
     <lazy-contact-form
       :title="data.globalSettings.contactFormTitle"
       :success-message="data.globalSettings.contactFormSuccessMessage"
@@ -7,7 +7,7 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-9 grid-c-sm-12">
-          <ul class="reset-ul data__info">
+          <ul class="reset-ul footer__info">
             <li v-if="data.globalSettings.address">
               <address data-split-line-effect>
                 {{ data.globalSettings.address }}
@@ -30,7 +30,7 @@
           </ul>
         </div>
         <div class="grid-c-3 grid-c-sm-12 flex-end reset-flex-end-md">
-          <ul class="reset-ul data__social">
+          <ul class="reset-ul footer__social">
             <li v-if="data.globalSettings.facebook">
               <a
                 :href="data.globalSettings.facebook"

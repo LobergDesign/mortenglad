@@ -1,12 +1,12 @@
-import ioTransitions from "~/utils/transitionSetter";
-import { splitCharEffect } from "~/utils/transitions";
+import ioTransitions from '~/utils/transitionSetter';
+import { splitCharEffect } from '~/utils/transitions';
 export default {
-  computed: {
-    appIsReady() {
-      const isAppReady = this.$store.state.global.isApplicationReady;
-      return isAppReady;
-    },
-  },
+  // computed: {
+  //   appIsReady() {
+  //     const isAppReady = this.$store.state.global.isApplicationReady;
+  //     return isAppReady;
+  //   },
+  // },
   watch: {
     appIsReady() {
       // will run on first load after init load is done
@@ -34,7 +34,7 @@ export default {
         const SplitText = this.$SplitText;
         const gsap = this.$gsap as NLib.IGsap;
         const target = document.querySelector(
-          "[data-load-split-char-effect]"
+          '[data-load-split-char-effect]'
         ) as HTMLElement;
         setTimeout(() => {
           ioTransitions(gsap, SplitText).action();

@@ -1,9 +1,9 @@
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  modules: ["nuxt-icons", "@nuxtjs/google-fonts", "nuxt-graphql-request"],
-  css: ["~/assets/scss/main.scss"],
+  modules: ['nuxt-icons', '@nuxtjs/google-fonts', 'nuxt-graphql-request'],
+  css: ['~/assets/scss/main.scss'],
 
   vite: {
     css: {
@@ -19,15 +19,15 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      baseUrl: process.env.BASE_URL || "http://localhost:3000/",
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000/',
     },
   },
 
   app: {
     head: {
-      title: "mortenglad",
+      title: 'mortenglad',
       htmlAttrs: {
-        lang: "en",
+        lang: 'en',
       },
     },
   },
@@ -39,9 +39,9 @@ export default defineNuxtConfig({
         options: {
           headers: {
             authorization:
-              "Bearer " +
+              'Bearer ' +
               (process.env.BASE_URL ===
-              "https://morten-glad-preview.netlify.app/"
+              'https://morten-glad-preview.netlify.app/'
                 ? process.env.GRAPHQL_PREVIEW_TOKEN
                 : process.env.GRAPHQL_TOKEN),
           },
@@ -62,17 +62,17 @@ export default defineNuxtConfig({
   // images
   image: {
     cloudinary: {
-      baseURL: "https://res.cloudinary.com/dzw0r5i7d/image/fetch/",
+      baseURL: 'https://res.cloudinary.com/dzw0r5i7d/image/fetch/',
     },
   },
   build: {
-    transpile: ["nuxt-graphql-request", "gsap"],
+    transpile: ['nuxt-graphql-request', 'gsap'],
   },
   // google fonts
   googleFonts: {
     families: {
-      "Roboto+Mono": { wght: "100..700" },
+      'Roboto+Mono': { wght: '100..700' },
     },
-    display: "swap",
+    display: 'swap',
   },
 });

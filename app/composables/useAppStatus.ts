@@ -1,4 +1,3 @@
-import { query } from '~/queries/global';
 export const useAppStatus = () => {
   const isApplicationReady = ref(false);
 

@@ -14,7 +14,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       const response = await client.default.request(query, preview);
       return response;
     } catch (error: any) {
-      console.log('error from cms plugin', error);
+      console.error('error from cms plugin', error);
     }
   };
 
@@ -28,7 +28,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       const response = await client.default.request(query, variables);
       return response;
     } catch (error: any) {
-      console.log('error from cms plugin', error);
+      console.error('error from cms plugin', error);
     }
   };
   return {

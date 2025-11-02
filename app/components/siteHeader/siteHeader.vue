@@ -67,10 +67,11 @@
 
 <script setup lang="ts">
 import Scrollbar from 'smooth-scrollbar';
-
 defineProps<{
   data: NHeader.IHeaderData;
 }>();
+
+const { gsap } = useGsap();
 const isMenuActive = ref(false);
 const isUXOptimized = ref(false);
 const optimizedMenu = useTemplateRef('optimizedMenu');
@@ -133,7 +134,7 @@ const handleOptimized = () => {
 };
 /// MENU ICON
 const handleMenuIcon = (isOptimized: boolean = false) => {
-  const tl = (window as any).gsap.timeline({
+  const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
   if (isOptimized) {
@@ -152,12 +153,12 @@ const handleMenuIcon = (isOptimized: boolean = false) => {
 };
 
 const handleToggleItem = () => {
-  const gsap = (window as any).gsap.timeline({
+  const gsapTL = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
 
   if (isMenuActive.value) {
-    gsap.fromTo(
+    gsapTL.fromTo(
       optimizedMenu.value,
       {
         autoAlpha: 0,
@@ -169,7 +170,7 @@ const handleToggleItem = () => {
       }
     );
   } else {
-    gsap.to(optimizedMenu, {
+    gsapTL.to(optimizedMenu, {
       autoAlpha: 0,
       scale: 0.6,
     });
@@ -179,7 +180,7 @@ const handleToggleItem = () => {
 const handleMenuList = (isOptimized: boolean = false) => {
   const mainMenu = optimizedMenu.value as HTMLElement;
   const menuItems = mainMenu.querySelectorAll('[data-main-menu-item]');
-  const tl = (window as any).gsap.timeline({
+  const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
   if (isOptimized) {
@@ -201,6 +202,8 @@ const handleMenuList = (isOptimized: boolean = false) => {
 
 const handleScroll = () => {
   const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
+  console.log('smoothWrap', smoothWrap);
+
   const smoothScroll = Scrollbar.get(smoothWrap);
 
   const myListener = () => {

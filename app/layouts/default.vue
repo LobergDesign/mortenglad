@@ -1,7 +1,7 @@
 <template>
   <div class="app">
-    <!-- <transition appear :css="false" @appear="customBeforeAppear">
-      <div class="app-init-effect" data-init-effect-bg>
+    <!-- <Transition appear :css="false">
+      <div class="app-init-effect" ref="initEffectBg">
         <span class="app-init-effect__text-wrap" data-init-text>
           <span class="app-init-effect__text">Morten Glad </span></span
         >
@@ -11,9 +11,15 @@
           ></span
         >
       </div>
-    </transition> -->
+    </Transition> -->
 
-    <!-- <site-header :data="header" /> -->
+    <site-header
+      v-if="!pending && data"
+      :data="{
+        menu: data.globalSettings.mainMenuCollection,
+        logo: data.globalSettings.headerLogo,
+      }"
+    />
     <main>
       <slot />
     </main>
@@ -23,13 +29,14 @@
 const visibleRotater = ref(false);
 const isDevices = ref(false);
 const header = ref();
+const initEffectBg = useTemplateRef('initEffectBg');
 const ease = 'power4.out';
 const dark = '#151515';
 const light = '#e9f1f7';
-const { gsap, ScrollTrigger } = useGsap();
+const { gsap, scrollTrigger } = useGsap();
+const { data, pending } = await useGlobaleSettings();
+const { initApplication } = useAppStatus();
 
-console.log('gsap', gsap);
-console.log('ScrollTrigger', ScrollTrigger);
 // async fetch() {
 //   await this.$store.dispatch('global/fetchGlobalSettings');
 //   const globalData = this.$store.state.global.globalSettings;
@@ -62,27 +69,24 @@ console.log('ScrollTrigger', ScrollTrigger);
 //   isDevices.value = !!window.matchMedia('(min-width: 768px)').matches;
 // };
 
-// const bgAnimation = () => {
-//   const initApp = () => {
-//     // this.$store.commit('global/initApplication');
-//   };
-//   const gsap = (window as any).gsap as NLib.IGsap;
-//   const tl = gsap.timeline();
-//   const target = document.querySelector('[data-init-effect-bg]');
-//   tl.fromTo(
-//     target,
-//     { backgroundColor: light },
-//     {
-//       duration: 3,
-//       ease: ease,
-//       backgroundColor: dark,
-//       onComplete: initApp,
-//     }
-//   ).to(target, {
-//     delay: 0.6,
-//     autoAlpha: 0,
-//   });
-// };
+const bgAnimation = () => {
+  const tl = gsap.timeline();
+  const target = initEffectBg.value;
+  console.log('target', initEffectBg);
+  tl.fromTo(
+    target,
+    { backgroundColor: light },
+    {
+      duration: 3,
+      ease: ease,
+      backgroundColor: dark,
+      onComplete: initApplication,
+    }
+  ).to(target, {
+    delay: 0.6,
+    autoAlpha: 0,
+  });
+};
 
 // const textAnimation = () => {
 //   const SplitText = (window as any).$SplitText;
@@ -151,10 +155,10 @@ console.log('ScrollTrigger', ScrollTrigger);
 //     });
 // };
 
-// onBeforeMount(() => {
-//   bgAnimation();
-//   textAnimation();
-// });
+onMounted(() => {
+  // bgAnimation();
+  // textAnimation();
+});
 
 // onMounted(() => {
 //   controlVisibleRotater();
