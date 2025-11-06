@@ -50,6 +50,18 @@ const featuredSection = {
   featuredVideo: 'featuredVideo',
 };
 
+const { smoothScroll } = useSmoothScroll();
+onMounted(() => {
+  const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
+
+  smoothScroll.init(smoothWrap, {
+    continuousScrolling: true,
+    renderByPixels: true,
+    damping: 0.09,
+    thumbMinSize: 20,
+  });
+});
+
 // mixins: [animations, smooth],
 // useasyncData({ $apiResource, error }: Context) {
 //   const response = await $apiResource.getData(query);

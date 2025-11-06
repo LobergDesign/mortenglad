@@ -66,12 +66,12 @@
 </template>
 
 <script setup lang="ts">
-import Scrollbar from 'smooth-scrollbar';
 defineProps<{
   data: NHeader.IHeaderData;
 }>();
 
 const { gsap } = useGsap();
+
 const isMenuActive = ref(false);
 const isUXOptimized = ref(false);
 const optimizedMenu = useTemplateRef('optimizedMenu');
