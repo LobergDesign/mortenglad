@@ -1,3 +1,5 @@
+@use '@/assets/scss/settings/vars.scss' as *;
+@use '@/assets/scss/tools/mixins.scss' as *;
 // default theme
 :root {
   --color-primary: #{$color-black};

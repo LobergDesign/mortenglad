@@ -1,3 +1,5 @@
+@use '@/assets/scss/settings/vars.scss' as *;
+@use '@/assets/scss/tools/mixins.scss' as *;
 .app-init-effect {
   background-color: var(--color-primary);
   position: fixed;

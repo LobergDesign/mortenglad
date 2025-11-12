@@ -1,8 +1,10 @@
+@use '@/assets/scss/tools/mixins.scss' as *;
+
 .flex {
   display: flex;
 }
 
-[class*="flex-"] {
+[class*='flex-'] {
   display: flex;
 }
 

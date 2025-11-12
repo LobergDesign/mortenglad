@@ -1,10 +1,5 @@
 @use '../settings/vars' as *;
 
-@mixin grid-wrap {
-  width: clamp(36rem, 80vw, 192rem);
-  margin: 0 auto;
-}
-
 //-------- Fonts -------//
 @mixin font-main {
   font-family: 'Roboto Mono', sans-serif;

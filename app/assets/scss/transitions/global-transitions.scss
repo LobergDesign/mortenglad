@@ -10,17 +10,17 @@
 }
 [data-split-line-effect],
 [data-inview-simple-show-effect] {
-  visibility: hidden;
+  // visibility: hidden;
 }
 
 [data-split-line-effect-bodytext] {
   p {
-    visibility: hidden;
+    // visibility: hidden;
   }
 }
 
 [data-load-split-char-effect] {
-  visibility: hidden;
+  // visibility: hidden;
   > div {
     will-change: font-weight, opacity, transform;
   }

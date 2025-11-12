@@ -1,11 +1,12 @@
-@import 'base/global.scss';
-@import 'base/grid.scss';
-@import 'base/typography.scss';
-@import 'base/smoothScroll.scss';
+@use '@lobergdesign/dot-grid';
+@use 'base/global.scss';
+@use 'base/grid-extender.scss';
+@use 'base/typography.scss';
+@use 'base/smooth-scroll.scss';
 
-@import 'tools/spacing.scss';
-@import 'tools/helping-classes.scss';
+@use 'tools/spacing.scss';
+@use 'tools/helping-classes.scss';
 
-@import 'transitions/global-transitions.scss';
-@import 'transitions/init-animation.scss';
-@import 'transitions/page-transition.scss';
+@use 'transitions/global-transitions.scss';
+@use 'transitions/init-animation.scss';
+@use 'transitions/page-transition.scss';
