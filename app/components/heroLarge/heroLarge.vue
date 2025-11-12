@@ -41,10 +41,12 @@
           provider="cloudinary"
         >
           <source
+            v-if="data.heroVideo[0]"
             :src="data.heroVideo[0].original_secure_url"
             type="video/mp4"
           />
           <source
+            v-if="data.heroVideo[0]"
             :src="data.heroVideo[0].original_secure_url"
             type="video/ogg"
           />
@@ -59,10 +61,9 @@
 const { data } = defineProps<{
   data: NHeroLarge.IHeroLargeData;
 }>();
-
 const ease = 'power4.out';
 const duration = '3';
-const $gsap = (window as any).gsap;
+const { gsap } = useGsap();
 
 const heroSlider = () => {
   const images = document.querySelectorAll(
@@ -71,22 +72,23 @@ const heroSlider = () => {
   const totalImages = images.length;
   let activeImageIndex: number = 0;
   // hide all images exept first
-
-  $gsap.to(images[0], {
+  if (!images[0]) return;
+  gsap.to(images[0], {
     opacity: 1,
   });
 
   const setNewOpacity = () => {
     images.forEach((e, i) => {
       if (i !== activeImageIndex) {
-        $gsap.to(e, {
+        gsap.to(e, {
           duration: duration,
           ease: ease,
           opacity: 0,
         });
       }
     });
-    $gsap.to(images[activeImageIndex], {
+
+    gsap.to(images[activeImageIndex]!, {
       opacity: 1,
       duration: duration,
       ease: ease,

@@ -1,13 +1,15 @@
 <template>
   <div class="overflow-hidden">
-    <h2>æjsndf</h2>
-
     <!-- <div data-aaaaand-action></div> -->
     <div data-warm-blanket>
-      <div class="smooth-container">
-        <!-- <hero-large v-if="hero" :data="hero" /> -->
+      <div class="smooth-container" v-if="pageData">
+        <hero-large v-if="pageData.hero" :data="pageData.hero" />
         <div class="spacing-t-large">
-          <!-- <lazy-intro v-if="intro.introBodytext" :data="intro" />
+          <lazy-intro
+            v-if="pageData.intro.introBodytext"
+            :data="pageData.intro"
+          />
+          <!-- 
           <lazy-featured-section
             v-if="featuredSection.featuredVideo"
             :data="featuredSection"
@@ -40,27 +42,46 @@ const hero = ref<any>(null);
 const intro = ref<any>(null);
 const cvCollection = ref<NCVCollection.ICVItems | null>(null);
 const cvLink = ref<any>(null);
-const data = ref<NPage.IStandardPage | null>(null);
+// const data = ref<NPage.IStandardPage | null>(null);
 
-const featuredSection = {
-  featuredTitle: 'featuredTitle',
-  featuredBodytext: 'featuredBodytext',
-  featuredLink: 'featuredLink',
-  featuredLinkText: 'featuredLinkText',
-  featuredVideo: 'featuredVideo',
-};
+const { data } = await useFrontpage();
 
-const { smoothScroll } = useSmoothScroll();
-onMounted(() => {
-  const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
-
-  smoothScroll.init(smoothWrap, {
-    continuousScrolling: true,
-    renderByPixels: true,
-    damping: 0.09,
-    thumbMinSize: 20,
-  });
+const pageData = computed(() => {
+  const e = data.value;
+  if (!e) return;
+  const page = e.page;
+  const hero = {
+    heroTitle: page.heroTitle,
+    heroImages: page.heroImages,
+    heroVideo: page.heroVideo,
+    backdropOpacity: page.backdropOpacity,
+    heroTitleExtension: page.heroTitleExtension,
+  };
+  const intro = {
+    introTitle: page.introTitle,
+    introBodytext: page.introBodytext,
+    introLink: page.introLink,
+    introLinkText: page.introLinkText,
+  };
+  return {
+    hero,
+    intro,
+  };
 });
+
+console.log('data, data', data.value);
+
+// const { smoothScroll } = useSmoothScroll();
+// onMounted(() => {
+//   const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
+
+//   smoothScroll.init(smoothWrap, {
+//     continuousScrolling: true,
+//     renderByPixels: true,
+//     damping: 0.09,
+//     thumbMinSize: 20,
+//   });
+// });
 
 // mixins: [animations, smooth],
 // useasyncData({ $apiResource, error }: Context) {

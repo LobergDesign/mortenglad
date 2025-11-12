@@ -2,12 +2,12 @@
   <div class="contact-form">
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c-4 grid-c-sm-12">
+        <div class="grid-c-12 grid-c-sm-4">
           <h3 v-if="!showSucces && !showError && title" data-split-line-effect>
             {{ title }}
           </h3>
         </div>
-        <div class="grid-c-8 grid-c-sm-12">
+        <div class="grid-c-12 grid-c-sm-8">
           <template v-if="showSucces && successMessage">
             <p>{{ successMessage }}</p>
           </template>
@@ -24,7 +24,7 @@
               data-netlify="true"
             >
               <div class="grid-r">
-                <div class="grid-c-6 grid-c-sm-12">
+                <div class="grid-c-12 grid-c-sm-6">
                   <input
                     data-inview-simple-show-effect
                     type="text"
@@ -33,7 +33,7 @@
                     required
                   />
                 </div>
-                <div class="grid-c-6 grid-c-sm-12">
+                <div class="grid-c-12 grid-c-sm-6">
                   <input
                     data-inview-simple-show-effect
                     type="email"

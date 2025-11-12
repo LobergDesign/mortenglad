@@ -1,5 +1,5 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  const client = nuxtApp.$graphql;
+  const client = nuxtApp.$graphql as any;
 
   // handle preview
   const previewUrl = 'https://morten-glad-preview.netlify.app/';

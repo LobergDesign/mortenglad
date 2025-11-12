@@ -1,6 +1,10 @@
 <template>
   <div class="headline">
-    <h2 v-if="data.headlineType === 'h2'" class="h1" data-io-split-char-effect>
+    <h2
+      v-if="data.headlineType === 'h2' && data.title"
+      class="h1"
+      data-io-split-char-effect
+    >
       {{ data.title }}
     </h2>
 

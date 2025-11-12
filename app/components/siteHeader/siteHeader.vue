@@ -83,42 +83,42 @@ const stagger = 0.03;
 
 const route = useRoute();
 
-watch(
-  () => route.fullPath,
-  () => {
-    if (!isDevices()) {
-      setTimeout(() => {
-        handleScroll();
-      }, 2600);
-    }
-    setTimeout(() => {
-      isMenuActive.value = false;
-      handleToggleItem();
-    }, 1000);
-  }
-);
+// watch(
+//   () => route.fullPath,
+//   () => {
+//     if (!isDevices()) {
+//       setTimeout(() => {
+//         // handleScroll();
+//       }, 2600);
+//     }
+//     setTimeout(() => {
+//       isMenuActive.value = false;
+//       handleToggleItem();
+//     }, 1000);
+//   }
+// );
 
-watch(
-  () => route.fullPath,
-  () => {
-    if (!isDevices()) {
-      setTimeout(() => {
-        handleScroll();
-      }, 2600);
-    }
-    setTimeout(() => {
-      isMenuActive.value = false;
-      handleToggleItem();
-    }, 1000);
-  }
-);
-watch(
-  () => isUXOptimized.value,
-  (newVal) => {
-    handleMenuIcon(newVal);
-    handleMenuList(newVal);
-  }
-);
+// watch(
+//   () => route.fullPath,
+//   () => {
+//     if (!isDevices()) {
+//       setTimeout(() => {
+//         // handleScroll();
+//       }, 2600);
+//     }
+//     setTimeout(() => {
+//       isMenuActive.value = false;
+//       handleToggleItem();
+//     }, 1000);
+//   }
+// );
+// watch(
+//   () => isUXOptimized.value,
+//   (newVal) => {
+//     handleMenuIcon(newVal);
+//     handleMenuList(newVal);
+//   }
+// );
 const toggleMenu = () => {
   isMenuActive.value = !isMenuActive.value;
   handleToggleItem();
@@ -200,36 +200,35 @@ const handleMenuList = (isOptimized: boolean = false) => {
   }
 };
 
-const handleScroll = () => {
-  const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
-  console.log('smoothWrap', smoothWrap);
+// const handleScroll = () => {
+//   const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
 
-  const smoothScroll = Scrollbar.get(smoothWrap);
+//   const smoothScroll = Scrollbar.get(smoothWrap);
 
-  const myListener = () => {
-    smoothScroll!.addListener((status) => {
-      if (isMenuActive.value) {
-        isMenuActive.value = false;
-        handleToggleItem();
-      }
-      status.offset.y > 290
-        ? (isUXOptimized.value = true)
-        : (isUXOptimized.value = false);
-    });
-  };
-  myListener();
-};
+//   const myListener = () => {
+//     smoothScroll!.addListener((status) => {
+//       if (isMenuActive.value) {
+//         isMenuActive.value = false;
+//         handleToggleItem();
+//       }
+//       status.offset.y > 290
+//         ? (isUXOptimized.value = true)
+//         : (isUXOptimized.value = false);
+//     });
+//   };
+//   myListener();
+// };
 
-onMounted(() => {
-  resize();
-  if (!isDevices()) {
-    setTimeout(() => {
-      handleScroll();
-      handleMenuIcon();
-    }, 1200);
-  }
-  handleOptimized();
-});
+// onMounted(() => {
+//   resize();
+//   if (!isDevices()) {
+//     setTimeout(() => {
+//       // handleScroll();
+//       handleMenuIcon();
+//     }, 1200);
+//   }
+//   handleOptimized();
+// });
 </script>
 <style lang="scss" src="./siteHeader.scss" scoped></style>
 <style lang="scss" src="./siteHeaderControl.scss" scoped></style>

@@ -1,4 +1,4 @@
-import { referencePagesFragment } from "./referencePages";
+import { referencePagesFragment } from './referencePages';
 
 const referenceAllBlocksFragment = `fragment referenceAllBlocksFragment on Entry {
     ... on SimpleTextArea {
@@ -22,16 +22,6 @@ const referenceAllBlocksFragment = `fragment referenceAllBlocksFragment on Entry
       }
       linkText
       images
-    }
-    ... on ShowcaseSection {
-      title
-      linkToShowcase {
-        slug
-        title
-      }
-      linkText
-      video
-      videoCaption
     }
   }
   ${referencePagesFragment}`;

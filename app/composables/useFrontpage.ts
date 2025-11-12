@@ -1,11 +1,11 @@
-import { query } from '~/queries/global';
-export const useGlobaleSettings = async () => {
+import { query } from '~/queries/frontpage';
+export const useFrontpage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, status, pending, error } =
-    await useAsyncData<NStates.IGlobalSettingsState>('global-settings', () =>
-      $getData(query)
-    );
+  const { data, status, pending, error } = await useAsyncData<NFrontpage.IData>(
+    'frontpage',
+    () => $getData(query)
+  );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`
   if (error.value) {

@@ -2,9 +2,20 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  modules: ['nuxt-icons', '@nuxtjs/google-fonts', 'nuxt-graphql-request'],
+  modules: [
+    'nuxt-icons',
+    '@nuxtjs/google-fonts',
+    'nuxt-graphql-request',
+    '@nuxt/image',
+  ],
   css: ['~/assets/scss/main.scss'],
 
+  // images
+  image: {
+    cloudinary: {
+      baseURL: 'https://res.cloudinary.com/dzw0r5i7d/image/fetch/',
+    },
+  },
   vite: {
     css: {
       preprocessorOptions: {
@@ -59,12 +70,6 @@ export default defineNuxtConfig({
   //   },
   // },
 
-  // images
-  image: {
-    cloudinary: {
-      baseURL: 'https://res.cloudinary.com/dzw0r5i7d/image/fetch/',
-    },
-  },
   build: {
     transpile: ['nuxt-graphql-request', 'gsap'],
   },
