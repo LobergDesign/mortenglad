@@ -26,7 +26,7 @@
       </div>
       <ul class="reset-ul">
         <li v-for="(item, i) in items" :key="i">
-          <accordion-nested-item
+          <accordion-accordion-nested-item
             :data="item"
             :len="headlines.length"
             :headlines="headlines"

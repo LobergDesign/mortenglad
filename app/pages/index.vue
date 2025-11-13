@@ -9,21 +9,21 @@
             v-if="pageData.intro.introBodytext"
             :data="pageData.intro"
           />
-          <!-- 
           <lazy-featured-section
-            v-if="featuredSection.featuredVideo"
-            :data="featuredSection"
+            v-if="pageData.featuredSection.featuredVideo"
+            :data="pageData.featuredSection"
           />
           <lazy-accordion
-            v-if="cvCollection"
-            :data="cvCollection.cvListCollection.items"
-            :link="cvLink"
+            v-if="cvCollection?.pageCv"
+            :data="cvCollection.pageCv.cvListCollection.items"
+            :link="pageData.cvLink"
             :alternative="true"
           />
+
           <lazy-grid-handler
-            v-if="data && data.dynamicBlockSectionCollection"
-            :data="data.dynamicBlockSectionCollection"
-          /> -->
+            v-if="pageData?.dynamicBlockSectionCollection"
+            :data="pageData.dynamicBlockSectionCollection"
+          />
         </div>
         <site-footer />
       </div>
@@ -38,13 +38,8 @@
 // import animations from '~/mixins/loadAnimations';
 // import smooth from '~/mixins/smooth';
 
-const hero = ref<any>(null);
-const intro = ref<any>(null);
-const cvCollection = ref<NCVCollection.ICVItems | null>(null);
-const cvLink = ref<any>(null);
-// const data = ref<NPage.IStandardPage | null>(null);
-
 const { data } = await useFrontpage();
+const { data: cvCollection } = await useCVCollection();
 
 const pageData = computed(() => {
   const e = data.value;
@@ -63,9 +58,27 @@ const pageData = computed(() => {
     introLink: page.introLink,
     introLinkText: page.introLinkText,
   };
+  const featuredSection = {
+    featuredTitle: page.featuredTitle,
+    featuredBodytext: page.featuredBodytext,
+    featuredLink: page.featuredLink,
+    featuredLinkText: page.featuredLinkText,
+    featuredVideo: page.featuredVideo,
+  };
+
+  const cvLink = {
+    cvLink: page.cvCollectionsLink,
+    cvLinkText: page.cvCollectionsLinkText,
+  };
+
+  const dynamicBlockSectionCollection = page.dynamicBlockSectionCollection;
+
   return {
     hero,
     intro,
+    featuredSection,
+    cvLink,
+    dynamicBlockSectionCollection,
   };
 });
 

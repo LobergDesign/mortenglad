@@ -14,7 +14,7 @@ declare namespace NCVCollection {
     collectionType: string;
     title: string;
     tabelHeadlines: [];
-    itemsCollection: Array<ICVSingleCollection>;
+    itemsCollection: { items: Array<ICVSingleCollection> };
   }
   export interface ICVItems {
     cvListCollection: Array<NCVCollection.ICVCollection>;

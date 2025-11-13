@@ -5,6 +5,8 @@ export const useGsap = () => {
     nuxtApp.$scrollTrigger as typeof import('gsap/ScrollTrigger').ScrollTrigger;
   const splitText =
     nuxtApp.$splitText as typeof import('gsap/SplitText').SplitText;
+  const draggable =
+    nuxtApp.$draggable as typeof import('gsap/Draggable').Draggable;
 
-  return { gsap, scrollTrigger, splitText };
+  return { gsap, scrollTrigger, splitText, draggable };
 };

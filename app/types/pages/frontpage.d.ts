@@ -16,6 +16,9 @@ declare namespace NFrontpage {
       introBodytext: Object;
       introLink: NGlobal.ILink;
       introLinkText?: string;
+      cvCollectionsLinkText?: string;
+      cvCollectionsLink?: NGlobal.ILink;
+      dynamicBlockSectionCollection?: NGrid.IGridHanderData;
     };
   }
 }

@@ -14,12 +14,13 @@
         </div>
       </div>
     </div>
-    <div class="grid-slider">
-      <div class="grid-slider__wrap">
+    <div class="grid-slider" ref="sliderGrid">
+      <div class="grid-slider__wrap" ref="sliderWrap">
         <div
           v-for="(item, i) in data.images"
           :key="i"
           class="grid-slider__item-wrap"
+          ref="innerSliderWrap"
         >
           <nuxt-img
             v-if="item.url"
@@ -27,6 +28,7 @@
             provider="cloudinary"
             :src="item.url"
             :sizes="'sm:80vw lg:100vw'"
+            ref="sliderImg"
           />
         </div>
       </div>
@@ -40,39 +42,35 @@ defineProps<{
 }>();
 const ease = 'power4.out';
 const duration = '0.65';
-const $gsap = (window as any).gsap;
+const { gsap, draggable } = useGsap();
+const sliderWrap = useTemplateRef<HTMLElement>('sliderWrap');
+const sliderGrid = useTemplateRef('sliderGrid');
+const innerSliderWrap = useTemplateRef<HTMLElement>('innerSliderWrap');
+const sliderImg = useTemplateRef<HTMLElement>('sliderImg');
 
 const customSlider = () => {
-  const d = (window as any).Draggable;
-  const elm = '.grid-slider .grid-slider__wrap';
-  const innerElm = '.grid-slider__item-wrap';
-  const img = '.grid-slider__item-wrap img';
+  const innerElm = innerSliderWrap.value;
+  const img = sliderImg.value;
 
-  d.create(elm, {
+  draggable.create(sliderWrap.value, {
     type: 'x',
     edgeResistance: 0.8,
     inertia: true,
     onPress: () => {
+      if (!innerElm || !img) return;
       effect(innerElm, true);
       effect(img, true, false);
     },
     onRelease: () => {
+      if (!innerElm || !img) return;
       effect(innerElm, false);
       effect(img, false, false);
     },
     bounds: {
-      minX:
-        -(document.querySelector('.grid-slider__wrap') as HTMLDivElement)
-          .offsetWidth +
-        (document.querySelector('.grid-slider') as HTMLDivElement).offsetWidth,
+      minX: -sliderWrap.value!.offsetWidth + sliderGrid.value!.offsetWidth,
       maxX: 0,
     },
   });
-};
-
-const killSlider = () => {
-  const elm = '.grid-slider .grid-slider__wrap';
-  // this.$Draggable.get(elm).kill();
 };
 
 onMounted(() => {
@@ -82,7 +80,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', customSlider, false);
-  killSlider();
 });
 
 const effect = (
@@ -90,7 +87,7 @@ const effect = (
   active: boolean,
   scaleDown: boolean = true
 ) => {
-  const tl = $gsap.value.timeline({
+  const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
   if (active) {

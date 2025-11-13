@@ -10,7 +10,7 @@
         <div
           :class="[
             { 'text-right text-right--reset-md': i === 1 && alternative },
-            alternative ? 'grid-c-md-12 grid-c-3' : 'grid-c-12',
+            alternative ? 'grid-c-md-3 grid-c-12' : 'grid-c-12',
           ]"
         >
           <lazy-ui-headline-small v-if="alternative" :data="item.title" />
@@ -19,11 +19,11 @@
         <div
           :class="[
             { 'grid-revert grid-revert--reset-md': i === 1 && alternative },
-            alternative ? 'grid-c-md-12 grid-c-9' : 'grid-c-12',
+            alternative ? 'grid-c-md-9 grid-c-12' : 'grid-c-12',
           ]"
           data-inview-simple-show-effect
         >
-          <accordion-item
+          <accordion-accordion-item
             :headlines="item.tabelHeadlines"
             :items="item.itemsCollection.items"
           />
@@ -38,7 +38,7 @@
             <template v-else> Go to my {{ link.cvLink.title }} page </template>
           </nuxt-link>
         </div>
-        <div class="grid-c-md-12 grid-c-9"></div>
+        <div class="grid-c-md-9 grid-c-12"></div>
       </section>
     </div>
   </div>
@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  data: NCVCollection.ICVCollection[] | null;
+  data: NCVCollection.ICVCollection[];
   alternative: boolean;
   link: any;
 }>();

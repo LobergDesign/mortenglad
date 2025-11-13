@@ -1,5 +1,5 @@
 const query = `query($limit: Int, $isPreview: Boolean!) {
-  page: pageCv(id: "39ij59NxggY9zUrKbGaFRF", preview:$isPreview) {
+ pageCv(id: "39ij59NxggY9zUrKbGaFRF", preview:$isPreview) {
     cvListCollection(limit:3) {
       items {
         collectionType: __typename

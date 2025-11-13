@@ -80,7 +80,9 @@ defineProps<{
 }>();
 
 const isActive = ref(false);
-const $gsap = ref<NLib.IGsap>();
+
+const { gsap } = useGsap();
+
 const accordionContent = useTemplateRef('AccordionContent');
 
 const toggleAccordion = () => {
@@ -89,8 +91,6 @@ const toggleAccordion = () => {
   if (el) {
     const elHeight = el.scrollHeight;
 
-    // @ts-ignore
-    const gsap = $gsap.value as NLib.IGsap;
     if (!isActive.value) {
       isActive.value = true;
       gsap.to(el, {
