@@ -47,7 +47,7 @@
 <script setup lang="ts">
 defineProps<{
   data: NCVCollection.ICVCollection[];
-  alternative: boolean;
-  link: any;
+  alternative?: boolean;
+  link?: any;
 }>();
 </script>

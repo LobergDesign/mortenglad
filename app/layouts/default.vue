@@ -23,6 +23,7 @@
     <main>
       <slot />
     </main>
+    <site-footer />
   </div>
 </template>
 <script lang="ts" setup>
@@ -72,7 +73,6 @@ const { initApplication } = useAppStatus();
 const bgAnimation = () => {
   const tl = gsap.timeline();
   const target = initEffectBg.value;
-  console.log('target', initEffectBg);
   tl.fromTo(
     target,
     { backgroundColor: light },

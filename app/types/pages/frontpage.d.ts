@@ -19,6 +19,7 @@ declare namespace NFrontpage {
       cvCollectionsLinkText?: string;
       cvCollectionsLink?: NGlobal.ILink;
       dynamicBlockSectionCollection?: NGrid.IGridHanderData;
+      seo: NGlobal.ISeo;
     };
   }
 }
