@@ -5,7 +5,7 @@
         <div
           v-for="(item, i) in data.images"
           :key="i"
-          class="grid-c-4 grid-c-xs-6"
+          class="grid-c-6 grid-c-sm-4"
         >
           <ui-image :data="item" :sizes="'sm:50vw md:300px lg:800px'" />
         </div>
@@ -19,7 +19,7 @@
             :key="i"
             :class="[
               data.images.length === 2
-                ? 'grid-c-6 grid-c-xs-12'
+                ? 'grid-c-12 grid-c-sm-6'
                 : 'grid-c-8-offset-2  grid-remove-offset-sm ',
             ]"
           >

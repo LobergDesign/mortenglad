@@ -1,7 +1,7 @@
 <template>
   <div v-if="data" class="grid-w">
     <div class="grid-r">
-      <div class="grid-c-6 grid-c-sm-8 grid-c-xs-12">
+      <div class="grid-c-6 grid-c-sm-6 grid-c-md-8">
         <div class="contact-section">
           <ui-headline-small v-if="data.headerLogo" :data="data.headerLogo" />
           <ul

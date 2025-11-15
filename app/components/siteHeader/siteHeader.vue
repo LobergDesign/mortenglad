@@ -8,18 +8,18 @@
           </nuxt-link>
         </div>
         <div class="grid-c-8 flex-end" data-inview-simple-show-effect>
-          <div ref="menuIcon" class="header__menu-icon" @click="toggleMenu">
+          <div ref="menuButton" class="header__menu-icon" @click="toggleMenu">
             <button type="button">menu</button>
           </div>
-
           <ul ref="mainMenu" class="reset-ul header__menu">
             <li
               v-for="(item, index) in data.menu.items"
               :key="index"
               data-main-menu-item
+              ref="menuItemsList"
             >
               <nuxt-link
-                :to="item.slug === '/' ? '/' : `/${item.slug}/`"
+                :to="item.slug === '/' ? '/' : `/${item.slug}`"
                 class="header__menu-item"
                 :class="{ 'is-medium-string': item.title.length > 4 }"
               >
@@ -39,9 +39,9 @@
 
           <ul ref="optimizedMenu" class="reset-ul header__menu optimized-menu">
             <li v-for="(item, index) in data.menu.items" :key="index">
-              <div data-main-menu-item>
+              <div>
                 <nuxt-link
-                  :to="item.slug === '/' ? '/' : `/${item.slug}/`"
+                  :to="item.slug === '/' ? '/' : `/${item.slug}`"
                   class="header__menu-item"
                   :class="{ 'is-medium-string': item.title.length > 4 }"
                 >
@@ -69,96 +69,53 @@
 defineProps<{
   data: NHeader.IHeaderData;
 }>();
-
 const { gsap } = useGsap();
-
+const { isDevices } = useIsDevices();
+const { scrollTop } = useSmoothScroll();
 const isMenuActive = ref(false);
-const isUXOptimized = ref(false);
 const optimizedMenu = useTemplateRef('optimizedMenu');
-const menuIcon = useTemplateRef('menuIcon');
+const menuButton = useTemplateRef('menuButton');
+const menuItemsList = useTemplateRef('menuItemsList');
 const ease = 'power4.out';
 const duration = 0.8;
-const durationMedium = 1;
 const stagger = 0.03;
-
 const route = useRoute();
-
-// watch(
-//   () => route.fullPath,
-//   () => {
-//     if (!isDevices()) {
-//       setTimeout(() => {
-//         // handleScroll();
-//       }, 2600);
-//     }
-//     setTimeout(() => {
-//       isMenuActive.value = false;
-//       handleToggleItem();
-//     }, 1000);
-//   }
-// );
-
-// watch(
-//   () => route.fullPath,
-//   () => {
-//     if (!isDevices()) {
-//       setTimeout(() => {
-//         // handleScroll();
-//       }, 2600);
-//     }
-//     setTimeout(() => {
-//       isMenuActive.value = false;
-//       handleToggleItem();
-//     }, 1000);
-//   }
-// );
-// watch(
-//   () => isUXOptimized.value,
-//   (newVal) => {
-//     handleMenuIcon(newVal);
-//     handleMenuList(newVal);
-//   }
-// );
+// Method to toggle menu
 const toggleMenu = () => {
   isMenuActive.value = !isMenuActive.value;
-  handleToggleItem();
 };
-const resize = () => {
-  window.addEventListener('resize', handleOptimized);
-};
-const isDevices = () => {
-  return !!window.matchMedia('(max-width: 768px)').matches;
-};
-const handleOptimized = () => {
-  isDevices() ? (isUXOptimized.value = true) : (isUXOptimized.value = false);
-};
-/// MENU ICON
-const handleMenuIcon = (isOptimized: boolean = false) => {
+
+/// Menu button animation and visible control
+const handleMenuButton = () => {
   const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
-  if (isOptimized) {
-    tl.to(menuIcon, {
-      yPercent: -40,
-      opacity: 0,
-      autoAlpha: 0,
-    });
-  } else {
-    tl.to(menuIcon, {
+
+  const show = () => {
+    tl.to(menuButton.value, {
       yPercent: 0,
       opacity: 1,
       autoAlpha: 1,
     });
-  }
+  };
+  const hide = () => {
+    tl.to(menuButton.value, {
+      yPercent: -40,
+      opacity: 0,
+      autoAlpha: 0,
+    });
+  };
+  return { show, hide };
 };
 
+// Handle menu that pops up
 const handleToggleItem = () => {
-  const gsapTL = gsap.timeline({
+  const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
 
-  if (isMenuActive.value) {
-    gsapTL.fromTo(
+  const show = () => {
+    tl.fromTo(
       optimizedMenu.value,
       {
         autoAlpha: 0,
@@ -169,66 +126,61 @@ const handleToggleItem = () => {
         scale: 1,
       }
     );
-  } else {
-    gsapTL.to(optimizedMenu, {
+  };
+
+  const hide = () => {
+    tl.to(optimizedMenu.value, {
       autoAlpha: 0,
       scale: 0.6,
     });
-  }
+  };
+  return { show, hide };
 };
 
-const handleMenuList = (isOptimized: boolean = false) => {
-  const mainMenu = optimizedMenu.value as HTMLElement;
-  const menuItems = mainMenu.querySelectorAll('[data-main-menu-item]');
+const handleMenuList = () => {
+  const menuItems = menuItemsList.value;
   const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },
   });
-  if (isOptimized) {
-    tl.to(menuItems, {
-      yPercent: -40,
-      opacity: 0,
-      stagger: stagger,
-      autoAlpha: 0,
-    });
-  } else {
+  const show = () => {
     tl.to(menuItems, {
       yPercent: 0,
       opacity: 1,
       stagger: -stagger,
       autoAlpha: 1,
     });
-  }
+  };
+  const hide = () => {
+    tl.to(menuItems, {
+      yPercent: -40,
+      opacity: 0,
+      stagger: stagger,
+      autoAlpha: 0,
+    });
+  };
+
+  return { show, hide };
 };
+// watch on menu active
+watch(isMenuActive, (active) => handleToggleItem()[active ? 'show' : 'hide']());
 
-// const handleScroll = () => {
-//   const smoothWrap = document.querySelector('.smooth-container') as HTMLElement;
+// watch on scroll to hide/show menu button
+watch(scrollTop, (scrolled) => {
+  handleMenuButton()[scrolled > 290 ? 'show' : 'hide']();
+  handleMenuList()[scrolled > 290 ? 'hide' : 'show']();
+  isMenuActive.value = false;
+});
 
-//   const smoothScroll = Scrollbar.get(smoothWrap);
+// watch on route change to hide menu
+watch(route, () => {
+  isMenuActive.value = false;
+  handleMenuButton()[!isDevices.value ? 'hide' : 'show']();
+  handleMenuList()[!isDevices.value ? 'show' : 'hide']();
+});
 
-//   const myListener = () => {
-//     smoothScroll!.addListener((status) => {
-//       if (isMenuActive.value) {
-//         isMenuActive.value = false;
-//         handleToggleItem();
-//       }
-//       status.offset.y > 290
-//         ? (isUXOptimized.value = true)
-//         : (isUXOptimized.value = false);
-//     });
-//   };
-//   myListener();
-// };
-
-// onMounted(() => {
-//   resize();
-//   if (!isDevices()) {
-//     setTimeout(() => {
-//       // handleScroll();
-//       handleMenuIcon();
-//     }, 1200);
-//   }
-//   handleOptimized();
-// });
+onMounted(() => {
+  handleMenuButton()[!isDevices.value ? 'hide' : 'show']();
+});
 </script>
 <style lang="scss" src="./siteHeader.scss" scoped></style>
 <style lang="scss" src="./siteHeaderControl.scss" scoped></style>

@@ -9,7 +9,7 @@ $accordion-toggle-icon-size: 1rem;
     row-gap: 0;
   }
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -99,6 +99,10 @@ $accordion-toggle-icon-size: 1rem;
     &.has-additional-content {
       row-gap: clamp(1.5rem, 1.8vw, 4rem);
     }
+  }
+}
+@include viewport-small {
+  .accordion-nested-item {
     &__item {
       font-size: 1.3rem;
       color: var(--color-cta);

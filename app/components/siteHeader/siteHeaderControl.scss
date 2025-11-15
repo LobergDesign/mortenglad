@@ -24,19 +24,18 @@
 }
 
 // menu
-
 .optimized-menu {
   visibility: hidden;
-  // will-change: transform;
+  will-change: transform;
   &.header__menu {
-    top: clamp(4rem, 5vw, 6rem);
+    top: clamp(4rem, 4.5vw, 5rem);
     right: 2rem;
   }
   li {
     overflow: hidden;
   }
   &.header__menu:after {
-    content: "";
+    content: '';
     position: absolute;
     top: -0.4rem;
     right: -2.5rem;

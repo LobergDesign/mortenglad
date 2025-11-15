@@ -3,12 +3,12 @@
     <div class="grid-w">
       <div class="grid-r">
         <div
-          class="grid-c-5 grid-c-sm-12 text-center"
+          class="grid-c-12 grid-c-sm-5 text-center"
           data-inview-simple-show-effect
         >
           <nuxt-icon name="man" class="stats__icon" />
         </div>
-        <div class="grid-c-7 grid-c-sm-12">
+        <div class="grid-c-12 grid-c-sm-7">
           <ul class="reset-ul grid-r" data-inview-simple-show-effect>
             <li
               v-for="(item, i) in profileCollection.items"
@@ -32,7 +32,7 @@
             <li
               v-for="(item, i) in profileAdditionalCollection.items"
               :key="i"
-              class="grid-c-4 grid-c-sm-6"
+              class="grid-c-6 grid-c-sm-4"
             >
               <div class="stats__list-item">
                 <span

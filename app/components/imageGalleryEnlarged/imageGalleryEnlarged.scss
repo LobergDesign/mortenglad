@@ -2,18 +2,17 @@ $gallary-btn-size: clamp(4rem, 4vw, 5rem);
 $gallery-width-size: 80vw;
 $gallery-height-size: 86vh;
 $gallery-width-size-sm: 92vw;
-.image-gallery-enlarged-wrap {
-  overflow: hidden;
-}
+
 .image-gallery-enlarged {
   position: fixed;
   top: 0;
   right: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   text-align: center;
-  z-index: 15;
+  z-index: 20015;
+
   &__backdrop {
     position: absolute;
     top: 0;
@@ -30,9 +29,10 @@ $gallery-width-size-sm: 92vw;
     right: 9.4vw;
     background-color: transparent;
     z-index: 9;
-    svg {
+    ::v-deep(.nuxt-icon svg) {
       fill: var(--color-secondary);
       width: clamp(1.5rem, 1.5vw, 2rem);
+      height: clamp(1.5rem, 1.5vw, 2rem);
     }
   }
   &__list {
@@ -72,9 +72,11 @@ $gallery-width-size-sm: 92vw;
     z-index: 11;
     transform: rotate(90deg);
     transition: opacity $transition--slow;
-    svg {
-      fill: var(--color-secondary);
+    ::v-deep(.nuxt-icon svg) {
+      color: var(--color-secondary);
       transition: transform $transition;
+      width: clamp(1.5rem, 1.5vw, 2rem);
+      height: clamp(1.5rem, 1.5vw, 2rem);
     }
     // hover
     &:hover svg {

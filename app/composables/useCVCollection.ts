@@ -4,7 +4,7 @@ export const useCVCollection = async (limit: number | null = 3) => {
   const { $getDataWithLimit } = useNuxtApp();
 
   const { data, status, pending, error } = await useAsyncData(
-    'cvCollection',
+    'cv-collection',
     () => $getDataWithLimit(cvCollectionQuery, limit)
   );
 

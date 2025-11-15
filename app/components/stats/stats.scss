@@ -29,4 +29,9 @@
   &__list-value {
     font-size: 1.2rem;
   }
+
+  ::v-deep(.nuxt-icon svg) {
+    width: clamp(12rem, 20vw, 50rem);
+    height: auto;
+  }
 }

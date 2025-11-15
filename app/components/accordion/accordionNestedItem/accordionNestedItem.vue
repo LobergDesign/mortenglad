@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="grid-r reset-ul accordion-nested-item last-text-align-right reset-align-xs"
+    class="grid-r reset-ul accordion-nested-item last-text-align-right reset-align-sm"
     :class="[
       { 'has-additional-content': data.additionalContent },
       { 'is-active': isActive },
@@ -8,7 +8,7 @@
     @click="toggleAccordion"
   >
     <template v-if="len <= 4">
-      <li class="grid-c-xs-6 grid-c-3">
+      <li class="grid-c-6 grid-c-sm-3">
         <span class="accordion-nested-item__item-headline mobile-only">
           {{ headlines[0] }}
         </span>
@@ -24,7 +24,7 @@
           </template>
         </span>
       </li>
-      <li class="grid-c-xs-6 grid-c-5">
+      <li class="grid-c-6 grid-c-sm-5">
         <span class="accordion-nested-item__item-headline mobile-only">
           {{ headlines[1] }}
         </span>
@@ -37,7 +37,7 @@
           </template>
         </span>
       </li>
-      <li class="grid-c-xs-6 grid-c-3">
+      <li class="grid-c-6 grid-c-sm-3">
         <span class="accordion-nested-item__item-headline mobile-only">
           {{ headlines[2] }}
         </span>
@@ -50,7 +50,7 @@
           </template>
         </span>
       </li>
-      <li class="grid-c-xs-6 grid-c-1">
+      <li class="grid-c-6 grid-c-sm-1">
         <span class="accordion-nested-item__item-headline mobile-only">
           {{ headlines[3] }}
         </span>
@@ -65,7 +65,7 @@
     <span
       v-if="data.additionalContent"
       ref="AccordionContent"
-      class="grid-c-7 grid-c-sm-10 grid-c-xs-12 accordion-nested-item__content"
+      class="grid-c-md-7 grid-c-sm-10 grid-c-12 accordion-nested-item__content"
     >
       <ui-bodytext :data="data.additionalContent" />
     </span>

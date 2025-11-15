@@ -1,20 +1,18 @@
 <template>
-  <div class="overflow-hidden">
-    <div class="aaaaand-action" data-aaaaand-action></div>
-    <div data-warm-blanket>
-      <div v-if="data && !pending">
-        <div class="smooth-container">
-          <hero
-            v-if="data.page.hero"
-            :title="data.page.hero.title"
-            :bodytext="data.page.hero.bodytext"
-          />
-          <accordion
-            v-if="cvCollection.pageCv"
-            :data="cvCollection.pageCv.cvListCollection.items"
-          />
-          <!-- <site-footer /> -->
-        </div>
+  <div class="aaaaand-action" data-aaaaand-action></div>
+  <div data-warm-blanket>
+    <div v-if="data && !pending">
+      <div class="smooth-container">
+        <hero
+          v-if="data.page.hero"
+          :title="data.page.hero.title"
+          :bodytext="data.page.hero.bodytext"
+        />
+        <accordion
+          v-if="cvCollection.pageCv"
+          :data="cvCollection.pageCv.cvListCollection.items"
+        />
+        <lazy-site-footer />
       </div>
     </div>
   </div>

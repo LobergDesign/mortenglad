@@ -4,7 +4,7 @@
       <li
         v-for="(item, i) in images"
         :key="i"
-        class="grid-c-4 grid-c-sm-6"
+        class="grid-c-6 grid-c-sm-4"
         data-inview-simple-show-effect
       >
         <div class="image" @click="setActiveIndex(i)">

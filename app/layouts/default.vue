@@ -23,12 +23,42 @@
     <main>
       <slot />
     </main>
-    <site-footer />
   </div>
 </template>
 <script lang="ts" setup>
+const route = useRoute();
+const { initSmoothScroll, destroySmoothScroll } = useSmoothScroll();
+const { isDevices } = useIsDevices();
+onMounted(() => {
+  if (!isDevices.value) {
+    setTimeout(() => {
+      initSmoothScroll();
+    }, 1000);
+  }
+});
+
+watch(
+  () => route.path,
+  () => {
+    if (!isDevices.value) {
+      destroySmoothScroll();
+      setTimeout(() => {
+        initSmoothScroll();
+      }, 800);
+    }
+  }
+);
+
+watch(isDevices, (newVal) => {
+  if (newVal) {
+    destroySmoothScroll();
+  } else {
+    initSmoothScroll();
+  }
+});
+
 const visibleRotater = ref(false);
-const isDevices = ref(false);
+
 const header = ref();
 const initEffectBg = useTemplateRef('initEffectBg');
 const ease = 'power4.out';

@@ -1,8 +1,8 @@
 <template>
-  <div class="overflow-hidden">
-    <!-- <div data-aaaaand-action></div> -->
-    <div data-warm-blanket>
-      <div class="smooth-container" v-if="pageData">
+  <!-- <div data-aaaaand-action></div> -->
+  <div data-warm-blanket>
+    <div v-if="pageData">
+      <div class="smooth-container">
         <hero-large v-if="pageData.hero" :data="pageData.hero" />
         <div class="spacing-t-large">
           <lazy-intro
@@ -25,7 +25,7 @@
             :data="pageData.dynamicBlockSectionCollection"
           />
         </div>
-        <!-- <site-footer /> -->
+        <lazy-site-footer />
       </div>
     </div>
   </div>
@@ -33,12 +33,8 @@
 
 <script lang="ts" setup>
 import setHead from '~/utils/head';
-// import animations from '~/mixins/loadAnimations';
-// import smooth from '~/mixins/smooth';
-
 const { data } = await useFrontpage();
 const { data: cvCollection } = await useCVCollection();
-
 useSeoMeta(setHead(data.value!.page.seo));
 
 const pageData = computed(() => {
