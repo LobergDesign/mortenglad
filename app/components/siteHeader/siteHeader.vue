@@ -78,7 +78,8 @@ const menuButton = useTemplateRef('menuButton');
 const menuItemsList = useTemplateRef('menuItemsList');
 const ease = 'power4.out';
 const duration = 0.8;
-const stagger = 0.03;
+const stagger = 0.1;
+const scrolled = 180;
 const route = useRoute();
 // Method to toggle menu
 const toggleMenu = () => {
@@ -165,9 +166,9 @@ const handleMenuList = () => {
 watch(isMenuActive, (active) => handleToggleItem()[active ? 'show' : 'hide']());
 
 // watch on scroll to hide/show menu button
-watch(scrollTop, (scrolled) => {
-  handleMenuButton()[scrolled > 290 ? 'show' : 'hide']();
-  handleMenuList()[scrolled > 290 ? 'hide' : 'show']();
+watch(scrollTop, (e) => {
+  handleMenuButton()[e > scrolled ? 'show' : 'hide']();
+  handleMenuList()[e > scrolled ? 'hide' : 'show']();
   isMenuActive.value = false;
 });
 

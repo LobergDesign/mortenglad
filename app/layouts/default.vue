@@ -13,7 +13,14 @@
       </div>
     </Transition> -->
 
-    <site-header
+    <!-- <site-header
+      v-if="!pending && data"
+      :data="{
+        menu: data.globalSettings.mainMenuCollection,
+        logo: data.globalSettings.headerLogo,
+      }"
+    /> -->
+    <new-site-header
       v-if="!pending && data"
       :data="{
         menu: data.globalSettings.mainMenuCollection,
