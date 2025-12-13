@@ -12,6 +12,8 @@ import { splitCharEffect } from '~/utils/transitions';
 const { isApplicationReady } = useAppStatus();
 const { gsap, splitText } = useGsap();
 const route = useRoute();
+const { initSmoothScroll } = useSmoothScroll();
+const { isDevices } = useIsDevices();
 
 const splitCharLoadEffect = async () => {
   await nextTick();
@@ -28,32 +30,10 @@ watch(
   async () => {
     await nextTick();
     setTimeout(() => {
-      console.log('WATCH isApplicationReady.value', isApplicationReady.value);
       isApplicationReady.value && splitCharLoadEffect();
     }, 500);
   },
 );
-
-watch(
-  () => route.fullPath,
-  async () => {
-    // will run on route change
-    if (!isApplicationReady.value) return;
-
-    await nextTick();
-    setTimeout(() => {
-      console.log('WATCH route.fullPath', route.fullPath);
-      splitCharLoadEffect();
-    }, 200);
-  },
-);
-
-// onMounted(async () => {
-//   await nextTick();
-//   setTimeout(() => {
-//     isApplicationReady.value && splitCharLoadEffect();
-//   }, 500);
-// });
 
 const transition = {
   css: false,
@@ -100,9 +80,20 @@ const transition = {
     });
   },
 
-  onEnter(el: HTMLElement, done: Function) {
+  async onEnter(el: HTMLElement, done: Function) {
     const contentWrap = el.querySelector('[data-warm-blanket]');
     const polygonElm = el.querySelector('[data-aaaaand-action]');
+
+    await nextTick();
+    setTimeout(() => {
+      ioTransitions(gsap, splitText).action();
+      const target = el.querySelector(
+        '[data-load-split-char-effect]',
+      ) as HTMLElement;
+      if (target) {
+        splitCharEffect(target, gsap, splitText).action();
+      }
+    }, 200);
 
     gsap.to(polygonElm, {
       yPercent: -100,
@@ -120,7 +111,13 @@ const transition = {
         duration: 1,
         ease: 'power4.inOut',
         clearProps: true,
-        onComplete: () => done(),
+        onComplete: () => {
+          done();
+          // Reinit smooth scroll after page transition completes
+          if (!isDevices.value) {
+            initSmoothScroll();
+          }
+        },
       },
     );
   },

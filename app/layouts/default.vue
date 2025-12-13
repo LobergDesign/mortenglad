@@ -61,9 +61,6 @@ watch(
   () => {
     if (!isDevices.value) {
       destroySmoothScroll();
-      setTimeout(() => {
-        initSmoothScroll();
-      }, 800);
     }
   },
 );
