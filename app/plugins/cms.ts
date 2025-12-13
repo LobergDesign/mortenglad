@@ -5,7 +5,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   const previewUrl = 'https://morten-glad-preview.netlify.app/';
   const setPreviewBool = !!(
     process.env.BASE_URL === previewUrl ||
-    nuxtApp.$config.baseUrl === previewUrl
+    nuxtApp.$config.public.baseUrl === previewUrl
   );
   const isPreview = { isPreview: setPreviewBool };
   // get data from query

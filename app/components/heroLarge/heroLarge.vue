@@ -64,6 +64,7 @@ const { data } = defineProps<{
 const ease = 'power4.out';
 const duration = '3';
 const { gsap } = useGsap();
+const intervalId = ref<number | null>(null);
 
 const heroSlider = () => {
   const images = document.querySelectorAll(
@@ -98,12 +99,24 @@ const heroSlider = () => {
       activeImageIndex = 0;
     }
   };
-  setInterval(setNewOpacity, 4000);
+
+  // Clear any existing interval first
+  if (intervalId.value) clearInterval(intervalId.value);
+
+  // Store the new interval ID
+  intervalId.value = setInterval(setNewOpacity, 4000) as unknown as number;
 };
 
 onMounted(() => {
   if (!data.heroVideo?.length) {
     heroSlider();
+  }
+});
+
+onBeforeUnmount(() => {
+  if (intervalId.value) {
+    clearInterval(intervalId.value);
+    intervalId.value = null;
   }
 });
 </script>

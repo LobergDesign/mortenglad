@@ -1,17 +1,15 @@
 <template>
   <div class="app">
-    <Transition appear :css="false">
-      <div class="app-init-effect" ref="initEffectBg">
-        <span class="app-init-effect__text-wrap" data-init-text>
-          <span class="app-init-effect__text">Morten Glad </span></span
-        >
-        <span class="app-init-effect__text-wrap" data-init-small-text>
-          <span class="app-init-effect__text app-init-effect__text--small-cta">
-            Actor</span
-          ></span
-        >
-      </div>
-    </Transition>
+    <div class="app-init-effect" ref="initEffectBg">
+      <span class="app-init-effect__text-wrap" data-init-text>
+        <span class="app-init-effect__text">Morten Glad </span></span
+      >
+      <span class="app-init-effect__text-wrap" data-init-small-text>
+        <span class="app-init-effect__text app-init-effect__text--small-cta">
+          Actor</span
+        ></span
+      >
+    </div>
     <ClientOnly fallback-tag="div">
       <site-header
         v-if="!pending && data && !isDevices"
@@ -79,7 +77,7 @@ const dark = '#151515';
 const light = '#e9f1f7';
 const { gsap, splitText } = useGsap();
 const { data, pending } = await useGlobaleSettings();
-const { initApplication } = useAppStatus();
+const { initApplication, isApplicationReady } = useAppStatus();
 
 const bgAnimation = () => {
   const initApplication = () => useAppStatus().initApplication();
@@ -167,7 +165,10 @@ const textAnimation = () => {
 };
 
 onMounted(() => {
-  bgAnimation();
-  textAnimation();
+  // Only run initial animation if app hasn't been initialized yet
+  if (!isApplicationReady.value) {
+    bgAnimation();
+    textAnimation();
+  }
 });
 </script>

@@ -5,7 +5,7 @@
     <div class="liquidGlass-text">
       <div class="grid-w">
         <div class="grid-r no-gap">
-          <div class="grid-c-4" data-split-line-effect>
+          <div class="grid-c-4">
             <nuxt-link v-if="data.logo" class="header__logo" :to="'/'">
               {{ data.logo }}
             </nuxt-link>
