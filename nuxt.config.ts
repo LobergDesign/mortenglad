@@ -60,15 +60,6 @@ export default defineNuxtConfig({
       },
     },
   },
-  // gsap: {
-  //   extraPlugins: {
-  //     draggable: true,
-  //   },
-  //   clubPlugins: {
-  //     splitText: true,
-  //     inertia: true,
-  //   },
-  // },
 
   build: {
     transpile: ['nuxt-graphql-request', 'gsap'],

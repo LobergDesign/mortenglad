@@ -1,31 +1,33 @@
 <template>
-  <!-- <div data-aaaaand-action></div> -->
-  <div data-warm-blanket>
-    <div v-if="pageData">
-      <div class="smooth-container">
-        <hero-large v-if="pageData.hero" :data="pageData.hero" />
-        <div class="spacing-t-large">
-          <lazy-intro
-            v-if="pageData.intro.introBodytext"
-            :data="pageData.intro"
-          />
-          <lazy-featured-section
-            v-if="pageData.featuredSection.featuredVideo"
-            :data="pageData.featuredSection"
-          />
-          <lazy-accordion
-            v-if="cvCollection?.pageCv"
-            :data="cvCollection.pageCv.cvListCollection.items"
-            :link="pageData.cvLink"
-            :alternative="true"
-          />
+  <div>
+    <div class="aaaaand-action" data-aaaaand-action></div>
+    <div data-warm-blanket>
+      <div v-if="pageData">
+        <div class="smooth-container">
+          <hero-large v-if="pageData.hero" :data="pageData.hero" />
+          <div class="spacing-t-large">
+            <lazy-intro
+              v-if="pageData.intro.introBodytext"
+              :data="pageData.intro"
+            />
+            <lazy-featured-section
+              v-if="pageData.featuredSection.featuredVideo"
+              :data="pageData.featuredSection"
+            />
+            <lazy-accordion
+              v-if="cvCollection?.pageCv"
+              :data="cvCollection.pageCv.cvListCollection.items"
+              :link="pageData.cvLink"
+              :alternative="true"
+            />
 
-          <lazy-grid-handler
-            v-if="pageData?.dynamicBlockSectionCollection"
-            :data="pageData.dynamicBlockSectionCollection"
-          />
+            <lazy-grid-handler
+              v-if="pageData?.dynamicBlockSectionCollection"
+              :data="pageData.dynamicBlockSectionCollection"
+            />
+          </div>
+          <lazy-site-footer />
         </div>
-        <lazy-site-footer />
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@ const gsapConfig = {
 
 // initial h1 animation
 const splitCharEffect = (
-  target: Element | Vue | (Element | Vue)[] | undefined,
+  target: Element | Element[] | undefined,
   gsap: NLib.IGsap,
   SplitText: NLib.ISplitText,
 ) => {
@@ -14,7 +14,7 @@ const splitCharEffect = (
       type: 'chars',
       autoSplit: true,
       onSplit(self: any) {
-        return gsap.from(self.lines, {
+        return gsap.from(self.chars, {
           x: -190,
           opacity: 0,
           fontWeight: 100,
@@ -33,7 +33,7 @@ const splitCharEffect = (
 /// USED IN TRANSITION SETTER
 // in view split line anitmaiton
 const inviewSplitLineEffect = (
-  target: Element | Vue | (Element | Vue)[] | undefined,
+  target: Element | Element[] | undefined,
   gsap: NLib.IGsap,
   SplitText: NLib.ISplitText,
 ) => {
@@ -59,7 +59,7 @@ const inviewSplitLineEffect = (
 
 // initial h1 animation
 const simpleInviewEffect = (
-  target: Element | Vue | (Element | Vue)[] | undefined,
+  target: Element | Element[] | undefined,
   gsap: NLib.IGsap,
 ) => {
   const action = () => {
