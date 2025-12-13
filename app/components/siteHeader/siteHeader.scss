@@ -1,36 +1,48 @@
 .header {
   position: fixed;
+  top: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  top: 0;
   height: $header-height;
   z-index: 10;
-  // logo
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 1.6rem;
+  .grid-w {
+    width: 50rem;
+  }
   &__logo {
     @include font-main;
+    font-weight: 700;
     color: var(--color-secondary);
-    font-size: clamp(1.4rem, 1.3vw, 1.5rem);
+    font-size: clamp(1.2rem, 1vw, 1.4rem);
+    display: block;
+    margin: 1.15rem 2rem;
+  }
+  &__menu {
+    margin-top: clamp(0.2rem, 0.2vw, 0.3rem);
+  }
+  &__menu li {
+    display: inline-block;
   }
 
-  // menu
-  &__menu {
-    position: absolute;
-  }
   &__menu-item {
-    position: relative;
     display: block;
     padding: 0.6rem 0;
-    width: clamp(6rem, 7vw, 9rem);
     height: 1.8rem;
     white-space: nowrap;
 
     // active link
-    &.nuxt-link-exact-active .header__menu-item-inner span {
+    &.router-link-exact-active .header__menu-item-inner span {
       @include font-main-bold;
+      color: var(--color-cta);
     }
     &.is-medium-string .header__menu-item-inner span {
-      transition: transform 0.4s $transition--cubic,
-        font-weight $transition--slow, opacity $transition--slow;
+      transition:
+        transform 0.4s $transition--cubic,
+        font-weight $transition--slow,
+        opacity $transition--slow;
     }
   }
   &__menu-item-inner {
@@ -41,9 +53,12 @@
     color: var(--color-secondary);
     font-size: 1.4rem;
     @include font-main;
+    font-weight: 700;
     display: inline-block;
-    transition: transform 0.48s $transition--cubic,
-      font-weight $transition--slow, opacity $transition--slow;
+    transition:
+      transform 0.48s $transition--cubic,
+      font-weight $transition--slow,
+      opacity $transition--slow;
     will-change: transform, font-weight;
   }
 }
@@ -92,21 +107,19 @@
       span {
         opacity: 0;
         transform: translateY(100%);
-        transition: transform 0.22s $transition--cubic,
-          font-weight $transition--slow, opacity $transition--slow;
+        transition:
+          transform 0.22s $transition--cubic,
+          font-weight $transition--slow,
+          opacity $transition--slow;
       }
     }
     .header__menu-item.is-medium-string .header__menu-item-inner:last-child {
       span {
-        transition: transform 0.12s $transition--cubic,
-          font-weight $transition--slow, opacity $transition--slow;
+        transition:
+          transform 0.12s $transition--cubic,
+          font-weight $transition--slow,
+          opacity $transition--slow;
       }
     }
-  }
-}
-
-@include viewport-small {
-  .header {
-    padding-top: 1.5rem;
   }
 }

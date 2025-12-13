@@ -1,34 +1,31 @@
 // config
 const gsapConfig = {
-  ease: "power4.out",
+  ease: 'power4.out',
 };
 
 // initial h1 animation
 const splitCharEffect = (
   target: Element | Vue | (Element | Vue)[] | undefined,
   gsap: NLib.IGsap,
-  SplitText: NLib.ISplitText
+  SplitText: NLib.ISplitText,
 ) => {
   const action = () => {
-    const tl = gsap.timeline();
-    gsap.to(target, { autoAlpha: 1, duration: 0 });
-    // @ts-ignore
-    const mySplitText = new SplitText(target, { type: "chars" });
-    const chars = mySplitText.chars;
-
-    tl.fromTo(
-      chars,
-      { opacity: 0, x: -190, fontWeight: 100 },
-      {
-        fontWeight: 400,
-        x: 0,
-        opacity: 1,
-        force3D: true,
-        duration: 1.1,
-        stagger: -0.05,
-        ease: gsapConfig.ease,
-      }
-    );
+    SplitText.create(target, {
+      type: 'chars',
+      autoSplit: true,
+      onSplit(self: any) {
+        return gsap.from(self.lines, {
+          x: -190,
+          opacity: 0,
+          fontWeight: 100,
+          force3D: true,
+          duration: 1.1,
+          stagger: -0.05,
+          mask: 'chars',
+          ease: gsapConfig.ease,
+        });
+      },
+    });
   };
   return { action };
 };
@@ -38,34 +35,24 @@ const splitCharEffect = (
 const inviewSplitLineEffect = (
   target: Element | Vue | (Element | Vue)[] | undefined,
   gsap: NLib.IGsap,
-  SplitText: NLib.ISplitText
+  SplitText: NLib.ISplitText,
 ) => {
   const action = () => {
-    const t1 = gsap.timeline();
-    gsap.to(target, { autoAlpha: 1, duration: 0 });
-    // eslint-disable-next-line no-new
-    new (SplitText as any)(target, {
-      type: "lines",
-      linesClass: "child",
+    SplitText.create(target, {
+      type: 'lines',
+      autoSplit: true,
+      onSplit(self: any) {
+        return gsap.from(self.lines, {
+          yPercent: 100,
+          opacity: 0,
+          force3D: true,
+          stagger: 0.05,
+          mask: 'lines',
+          duration: 1.4,
+          ease: gsapConfig.ease,
+        });
+      },
     });
-    // eslint-disable-next-line no-new
-    new (SplitText as any)(target, {
-      type: "lines",
-      linesClass: "overflow-hidden",
-    });
-    const childTarget = (target as HTMLElement).querySelectorAll(".child");
-    t1.fromTo(
-      childTarget,
-      { yPercent: 100, opacity: 0 },
-      {
-        duration: 1.4,
-        yPercent: 0,
-        force3D: true,
-        opacity: 1,
-        ease: gsapConfig.ease,
-        stagger: 0.05,
-      }
-    );
   };
   return { action };
 };
@@ -73,17 +60,17 @@ const inviewSplitLineEffect = (
 // initial h1 animation
 const simpleInviewEffect = (
   target: Element | Vue | (Element | Vue)[] | undefined,
-  gsap: NLib.IGsap
+  gsap: NLib.IGsap,
 ) => {
   const action = () => {
     const t = target as HTMLElement;
     const accordionTarget = t.querySelector(
-      ".accordion-item"
+      '.accordion-item',
     ) as HTMLDivElement;
 
     if (accordionTarget) {
       setTimeout(() => {
-        accordionTarget.classList.add("is-in-view");
+        accordionTarget.classList.add('is-in-view');
       }, 50);
     }
     const tl = gsap.timeline();
@@ -97,7 +84,7 @@ const simpleInviewEffect = (
         opacity: 1,
         duration: 1,
         ease: gsapConfig.ease,
-      }
+      },
     );
   };
   return { action };

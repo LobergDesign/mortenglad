@@ -105,7 +105,7 @@ watch(
     activeIndex.value = newValue;
     slideGallery(false);
     moreLess();
-  }
+  },
 );
 </script>
 <style lang="scss" src="./imageGalleryEnlarged.scss" scoped></style>

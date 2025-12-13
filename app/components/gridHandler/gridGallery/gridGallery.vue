@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
 const effect = (
   target: HTMLElement,
   active: boolean,
-  scaleDown: boolean = true
+  scaleDown: boolean = true,
 ) => {
   const tl = gsap.timeline({
     defaults: { duration: duration, ease: ease },

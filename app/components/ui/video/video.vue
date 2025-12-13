@@ -3,12 +3,10 @@
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-12">
-          <template v-if="smallHeadline">
-            <ui-headline-small v-if="data.title" :data="data.title" />
-          </template>
-          <template v-else>
+          <template v-if="data.title">
+            <ui-headline-small v-if="smallHeadline" :data="data.title" />
             <ui-headline
-              v-if="data.title"
+              v-else
               :data="{ title: data.title, headlineType: 'h2' }"
             />
           </template>

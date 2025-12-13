@@ -16,23 +16,22 @@ const route = useRoute();
 const animations = async () => {
   await nextTick();
   const target = document.querySelector(
-    '[data-load-split-char-effect]'
+    '[data-load-split-char-effect]',
   ) as HTMLElement;
   setTimeout(() => {
-    ioTransitions(gsap, SplitText).action();
+    ioTransitions(gsap, splitText).action();
   }, 100);
-  target && splitCharEffect(target, gsap, SplitText).action();
+  target && splitCharEffect(target, gsap, splitText).action();
 };
 watch(
-  isApplicationReady,
+  () => isApplicationReady.value,
   async () => {
-    // will run on first load after init load is done
     await nextTick();
     setTimeout(() => {
       isApplicationReady.value && animations();
     }, 500);
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -44,7 +43,7 @@ watch(
     setTimeout(() => {
       animations();
     }, 300);
-  }
+  },
 );
 
 onMounted(async () => {

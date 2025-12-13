@@ -1,6 +1,6 @@
 declare namespace NHeader {
   interface IHeaderMenuItems {
-    items: any;
+    items?: any;
   }
   export interface IHeaderData {
     menu: IHeaderMenuItems;

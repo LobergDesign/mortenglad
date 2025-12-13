@@ -4,6 +4,9 @@ declare namespace NLib {
     to: Function;
     fromTo: Function;
     set: Function;
+    from: Function;
   }
-  export interface ISplitText {}
+  export interface ISplitText {
+    create: Function;
+  }
 }

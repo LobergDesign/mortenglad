@@ -1,5 +1,8 @@
 export const useAppStatus = () => {
-  const isApplicationReady = ref(false);
+  const isApplicationReady = useState<boolean>(
+    'isApplicationReady',
+    () => false,
+  );
 
   const initApplication = () => {
     isApplicationReady.value = true;
