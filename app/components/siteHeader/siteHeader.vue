@@ -49,7 +49,6 @@
 defineProps<{
   data: NHeader.IHeaderData;
 }>();
-
 const menuItems = useTemplateRef<HTMLLinkElement[]>('menuItemsList');
 
 const setWidth = () => {

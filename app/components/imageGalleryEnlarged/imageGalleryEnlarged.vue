@@ -21,9 +21,14 @@
         <li v-for="(item, i) in images" :key="i">
           <div class="image" :class="{ 'is-active': activeIndex === i }">
             <nuxt-img
-              v-if="item.original_secure_url"
+              v-if="item.public_id"
               provider="cloudinary"
-              :src="item.original_secure_url"
+              :src="item.public_id"
+              :alt="`Gallery image ${i + 1}`"
+              loading="eager"
+              sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw"
+              :modifiers="{ width: 1920 }"
+              format="auto"
             />
           </div>
         </li>
@@ -54,7 +59,7 @@ const activeIndex = ref(0);
 const imageAmount = ref(images.length);
 const more = ref(true);
 const less = ref(false);
-const gallery = useTemplateRef('gallery');
+const gallery = useTemplateRef<string>('gallery');
 
 const { gsap } = useGsap();
 const moreLess = () => {

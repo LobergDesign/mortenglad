@@ -45,7 +45,7 @@ defineProps<{
 }>();
 
 const { gsap } = useGsap();
-const menuToggleContent = useTemplateRef('menuToggleContent');
+const menuToggleContent = useTemplateRef<string>('menuToggleContent');
 const route = useRoute();
 let tl: gsap.core.Timeline;
 

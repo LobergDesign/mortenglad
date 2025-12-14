@@ -2,9 +2,9 @@ import { query } from '~/queries/global';
 export const useGlobaleSettings = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, status, pending, error } =
+  const { data, pending, error } =
     await useAsyncData<NStates.IGlobalSettingsState>('global-settings', () =>
-      $getData(query)
+      $getData(query),
     );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`
@@ -16,9 +16,9 @@ export const useGlobaleSettings = async () => {
     } else if (err.graphQLErrors?.length) {
       console.error('[GraphQL error]', err.graphQLErrors);
     } else {
-      console.error('[Unknown gql errosssr]', err);
+      console.error('[Unknown gql error]', err);
     }
   }
 
-  return { data, error, status, pending };
+  return { data, pending };
 };

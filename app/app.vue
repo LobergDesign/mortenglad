@@ -11,7 +11,6 @@ import { splitCharEffect } from '~/utils/transitions';
 
 const { isApplicationReady } = useAppStatus();
 const { gsap, splitText } = useGsap();
-const route = useRoute();
 const { initSmoothScroll } = useSmoothScroll();
 const { isDevices } = useIsDevices();
 

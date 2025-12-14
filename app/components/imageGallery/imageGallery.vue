@@ -9,10 +9,13 @@
       >
         <div class="image" @click="setActiveIndex(i)">
           <nuxt-img
-            v-if="item.secure_url"
+            v-if="item.public_id"
             provider="cloudinary"
-            :src="item.secure_url"
+            :src="item.public_id"
             sizes="sm:100vw md:50vw lg:800px"
+            :alt="`Gallery image ${i + 1}`"
+            loading="lazy"
+            format="auto"
           />
         </div>
       </li>

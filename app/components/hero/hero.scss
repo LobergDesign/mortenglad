@@ -3,4 +3,7 @@
   &__title {
     margin-bottom: 0;
   }
+  &--medium {
+    padding: clamp(4rem, 4vw, 7rem) 0 clamp(6rem, 5vw, 8rem);
+  }
 }

@@ -8,13 +8,29 @@ export default defineNuxtConfig({
     'nuxt-graphql-request',
     '@nuxt/image',
     'nuxt-security',
+    '@nuxtjs/robots',
   ],
+
+  // Robots - only allow indexing on production
+  robots: {
+    // Only index if CONTEXT is 'production' (not preview or branch deploys)
+    indexable: process.env.CONTEXT === 'production',
+  },
   css: ['~/assets/scss/main.scss'],
 
   // images
   image: {
     cloudinary: {
-      baseURL: 'https://res.cloudinary.com/dzw0r5i7d/image/fetch/',
+      baseURL: 'https://res.cloudinary.com/dzw0r5i7d/image/upload/',
+    },
+    // Responsive image breakpoints - generates different sizes for different screens
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
     },
   },
   vite: {

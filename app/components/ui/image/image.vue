@@ -5,10 +5,13 @@
     data-inview-simple-show-effect
   >
     <nuxt-img
-      v-if="data.url"
+      v-if="data.public_id"
       provider="cloudinary"
-      :src="data.url"
+      :src="data.public_id"
       :sizes="sizes"
+      alt=""
+      loading="lazy"
+      format="auto"
     />
   </div>
 </template>

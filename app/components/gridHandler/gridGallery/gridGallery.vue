@@ -23,11 +23,13 @@
           ref="innerSliderWrap"
         >
           <nuxt-img
-            v-if="item.url"
+            v-if="item.public_id"
             loading="lazy"
             provider="cloudinary"
-            :src="item.url"
+            :src="item.public_id"
             :sizes="'sm:80vw lg:100vw'"
+            :alt="`Gallery image ${i + 1}`"
+            format="auto"
             ref="sliderImg"
           />
         </div>

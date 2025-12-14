@@ -3,9 +3,8 @@ import { query } from '~/queries/resumepage';
 export const useResumePage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, status, pending, error } = await useAsyncData(
-    'resume-page',
-    () => $getData(query)
+  const { data, pending, error } = await useAsyncData('resume-page', () =>
+    $getData(query),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`
@@ -17,9 +16,9 @@ export const useResumePage = async () => {
     } else if (err.graphQLErrors?.length) {
       console.error('[GraphQL error]', err.graphQLErrors);
     } else {
-      console.error('[Unknown gql errosssr]', err);
+      console.error('[Unknown gql error]', err);
     }
   }
 
-  return { data, error, status, pending };
+  return { data, pending };
 };

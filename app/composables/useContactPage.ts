@@ -2,9 +2,8 @@ import { query } from '~/queries/contactpage';
 export const useContactPage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, status, pending, error } = await useAsyncData(
-    'contact-page',
-    () => $getData(query)
+  const { data, pending, error } = await useAsyncData('contact-page', () =>
+    $getData(query),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`
@@ -16,9 +15,9 @@ export const useContactPage = async () => {
     } else if (err.graphQLErrors?.length) {
       console.error('[GraphQL error]', err.graphQLErrors);
     } else {
-      console.error('[Unknown gql errosssr]', err);
+      console.error('[Unknown gql error]', err);
     }
   }
 
-  return { data, error, status, pending };
+  return { data, pending };
 };

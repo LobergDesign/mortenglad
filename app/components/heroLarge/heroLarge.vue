@@ -27,7 +27,17 @@
           class="hero-large__media-image"
         >
           <div class="image no-aspect-ratio">
-            <nuxt-img v-if="image.url" provider="cloudinary" :src="image.url" />
+            <nuxt-img
+              v-if="image.public_id"
+              provider="cloudinary"
+              :src="image.public_id"
+              :alt="data.heroTitle || 'Hero image'"
+              :loading="i === 0 ? 'eager' : 'lazy'"
+              sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw"
+              :modifiers="{ width: 1920 }"
+              format="auto"
+              quality="85"
+            />
           </div>
         </div>
       </div>
@@ -37,6 +47,8 @@
           autoplay
           muted
           loop
+          playsinline
+          preload="metadata"
           class="hero-large__video"
           provider="cloudinary"
         >
@@ -44,11 +56,6 @@
             v-if="data.heroVideo[0]"
             :src="data.heroVideo[0].original_secure_url"
             type="video/mp4"
-          />
-          <source
-            v-if="data.heroVideo[0]"
-            :src="data.heroVideo[0].original_secure_url"
-            type="video/ogg"
           />
           Your browser does not support the video tag.
         </video>
@@ -68,7 +75,7 @@ const intervalId = ref<number | null>(null);
 
 const heroSlider = () => {
   const images = document.querySelectorAll(
-    '.hero-large__media-image'
+    '.hero-large__media-image',
   ) as NodeListOf<HTMLElement>;
   const totalImages = images.length;
   let activeImageIndex: number = 0;

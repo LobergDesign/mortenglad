@@ -1,5 +1,5 @@
 <template>
-  <div class="hero">
+  <div :class="isMedium ? 'hero--medium' : 'hero'">
     <div class="grid-w">
       <div class="grid-r">
         <div class="grid-c-12 grid-sm-10">
@@ -22,6 +22,7 @@
 defineProps<{
   title: string;
   bodytext?: string;
+  isMedium?: boolean;
 }>();
 </script>
 <style lang="scss" src="./hero.scss" scoped></style>
