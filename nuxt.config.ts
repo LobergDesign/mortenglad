@@ -45,10 +45,6 @@ export default defineNuxtConfig({
     // Server-side only (never exposed to client)
     graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,
     graphqlToken: process.env.GRAPHQL_TOKEN,
-    // Client-side accessible
-    public: {
-      baseUrl: process.env.BASE_URL || 'http://localhost:3000/',
-    },
   },
 
   app: {
