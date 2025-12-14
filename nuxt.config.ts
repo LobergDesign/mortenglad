@@ -45,7 +45,6 @@ export default defineNuxtConfig({
     // Server-side only (never exposed to client)
     graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,
     graphqlToken: process.env.GRAPHQL_TOKEN,
-    graphqlPreviewToken: process.env.GRAPHQL_PREVIEW_TOKEN,
     // Client-side accessible
     public: {
       baseUrl: process.env.BASE_URL || 'http://localhost:3000/',
@@ -67,12 +66,7 @@ export default defineNuxtConfig({
         endpoint: process.env.GRAPHQL_ENDPOINT,
         options: {
           headers: {
-            authorization:
-              'Bearer ' +
-              (process.env.BASE_URL ===
-              'https://morten-glad-preview.netlify.app/'
-                ? process.env.GRAPHQL_PREVIEW_TOKEN
-                : process.env.GRAPHQL_TOKEN),
+            authorization: 'Bearer ' + process.env.GRAPHQL_TOKEN,
           },
         },
       },

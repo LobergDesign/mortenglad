@@ -2,16 +2,12 @@ export default defineEventHandler(async (event) => {
   const { query, variables } = await readBody(event);
   const config = useRuntimeConfig();
 
-  // Determine which token to use (preview or production)
-  const isPreview = config.public.baseUrl === 'https://morten-glad-preview.netlify.app/';
-  const token = isPreview ? config.graphqlPreviewToken : config.graphqlToken;
-
   try {
     const response: any = await $fetch(config.graphqlEndpoint!, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${config.graphqlToken}`,
       },
       body: {
         query,

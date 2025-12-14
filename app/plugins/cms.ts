@@ -1,24 +1,16 @@
-export default defineNuxtPlugin((nuxtApp) => {
-  // handle preview
-  const previewUrl = 'https://morten-glad-preview.netlify.app/';
-  const setPreviewBool = !!(
-    process.env.BASE_URL === previewUrl ||
-    nuxtApp.$config.public.baseUrl === previewUrl
-  );
-
+export default defineNuxtPlugin((_nuxtApp) => {
   // get data from query via server API route
-  const getData = async (query: string, preview: object = { isPreview: setPreviewBool }) => {
+  const getData = async (query: string) => {
     try {
       const response = await $fetch('/api/contentful', {
         method: 'POST',
         body: {
           query,
-          variables: preview,
         },
       });
       return response;
     } catch (error: any) {
-      console.error('error from cms plugin', error);
+      console.error('getData error from cms plugin', error);
       throw error;
     }
   };
@@ -26,9 +18,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   // get data from query with limit
   const getDataWithLimit = async (
     query: string,
-    limit: number | null = null
+    limit: number | null = null,
   ) => {
-    const variables = { limit, isPreview: setPreviewBool };
+    const variables = { limit };
     try {
       const response = await $fetch('/api/contentful', {
         method: 'POST',
@@ -39,7 +31,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       });
       return response;
     } catch (error: any) {
-      console.error('error from cms plugin', error);
+      console.error('getDataWithLimit error from cms plugin', error);
       throw error;
     }
   };
