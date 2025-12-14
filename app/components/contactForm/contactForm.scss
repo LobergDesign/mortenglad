@@ -6,6 +6,11 @@
 
 .contact-form {
   margin-bottom: clamp(4rem, 7vw, 10rem);
+  // Hide honeypot field from users (but not from bots)
+  .hidden {
+    position: absolute;
+    left: -9999px;
+  }
   input,
   textarea,
   form {

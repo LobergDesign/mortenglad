@@ -21,9 +21,18 @@
               id="simple-contact-form"
               name="simpleContactForm"
               method="POST"
+              action="/"
               data-netlify="true"
+              data-netlify-honeypot="bot-field"
             >
               <div class="grid-r">
+                <!-- Honeypot field for spam protection (hidden from users) -->
+                <p class="hidden">
+                  <label>
+                    Don't fill this out if you're human:
+                    <input name="bot-field" />
+                  </label>
+                </p>
                 <div class="grid-c-12 grid-c-sm-6">
                   <input
                     data-inview-simple-show-effect
@@ -93,7 +102,7 @@ onMounted(() => {
       const formData = new FormData(form);
       fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData as any).toString(),
       })
         .then(() => formSuccesHandler())

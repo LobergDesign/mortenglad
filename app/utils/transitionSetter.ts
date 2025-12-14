@@ -1,53 +1,91 @@
 import { inviewSplitLineEffect, simpleInviewEffect } from './transitions';
 
+// Store active observers for cleanup
+let splitLineObserver: IntersectionObserver | null = null;
+let simpleEffectObserver: IntersectionObserver | null = null;
+
 export default function (gsap: NLib.IGsap, SplitText: NLib.ISplitText) {
-  const splitLineEffects = document.querySelectorAll(
-    '[data-split-line-effect], [data-split-line-effect-bodytext] p',
-  );
-  const simpleEffect = document.querySelectorAll(
-    '[data-inview-simple-show-effect]',
-  );
-
   const action = () => {
-    const splitLineEffectsIO = (target: any) => {
-      const io = new IntersectionObserver(
-        (entries: IntersectionObserverEntry[], observer) => {
-          const entry = entries[0] as IntersectionObserverEntry;
-          if (entry.isIntersecting) {
-            const e = entry.target as HTMLElement;
-            splitLineEffects &&
-              inviewSplitLineEffect(e, gsap, SplitText).action();
+    // Query elements
+    const splitLineEffects = document.querySelectorAll(
+      '[data-split-line-effect], [data-split-line-effect-bodytext] p',
+    );
+    const simpleEffects = document.querySelectorAll(
+      '[data-inview-simple-show-effect]',
+    );
 
-            observer.unobserve(target);
-          }
-        },
-      );
-      io.observe(target);
+    // Observer options - using defaults for smooth performance
+    const observerOptions = {
+      rootMargin: '0px',
+      threshold: 0,
     };
-    const simpleShowEffect = (target: any) => {
-      const io = new IntersectionObserver(
-        (entries: IntersectionObserverEntry[], observer) => {
-          const entry = entries[0] as IntersectionObserverEntry;
+
+    // Single observer for split line effects
+    if (splitLineEffects.length > 0) {
+      // Disconnect previous observer if it exists
+      if (splitLineObserver) {
+        splitLineObserver.disconnect();
+      }
+
+      splitLineObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
-            const e = entry.target as HTMLElement;
-
-            simpleEffect && simpleInviewEffect(e, gsap).action();
-
-            observer.unobserve(target);
+            const element = entry.target as HTMLElement;
+            // Small delay to prevent too many concurrent animations
+            setTimeout(() => {
+              inviewSplitLineEffect(element, gsap, SplitText).action();
+            }, index * 50);
+            // Unobserve after animation triggers (one-time animation)
+            splitLineObserver?.unobserve(element);
           }
-        },
-      );
+        });
+      }, observerOptions);
 
-      io.observe(target);
-    };
-    // split line effect
-    if (splitLineEffects) {
-      splitLineEffects.forEach(splitLineEffectsIO);
+      // Observe all split line elements with single observer
+      splitLineEffects.forEach((element) => {
+        splitLineObserver?.observe(element);
+      });
     }
 
-    if (simpleEffect) {
-      simpleEffect.forEach(simpleShowEffect);
+    // Single observer for simple effects
+    if (simpleEffects.length > 0) {
+      // Disconnect previous observer if it exists
+      if (simpleEffectObserver) {
+        simpleEffectObserver.disconnect();
+      }
+
+      simpleEffectObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            const element = entry.target as HTMLElement;
+            // Small delay to prevent too many concurrent animations
+            setTimeout(() => {
+              simpleInviewEffect(element, gsap).action();
+            }, index * 50);
+            // Unobserve after animation triggers (one-time animation)
+            simpleEffectObserver?.unobserve(element);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all simple effect elements with single observer
+      simpleEffects.forEach((element) => {
+        simpleEffectObserver?.observe(element);
+      });
     }
   };
-  return { action };
+
+  const cleanup = () => {
+    // Disconnect observers when no longer needed
+    if (splitLineObserver) {
+      splitLineObserver.disconnect();
+      splitLineObserver = null;
+    }
+    if (simpleEffectObserver) {
+      simpleEffectObserver.disconnect();
+      simpleEffectObserver = null;
+    }
+  };
+
+  return { action, cleanup };
 }
