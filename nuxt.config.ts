@@ -119,4 +119,10 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  // robots.txt configuration
+  robots: {
+    UserAgent: '*',
+    Disallow: process.env.ROBOTS === 'true' ? '' : '/',
+  },
 });
