@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-security',
     '@nuxtjs/robots',
+    '@nuxtjs/sitemap',
   ],
 
   css: ['~/assets/scss/main.scss'],
@@ -118,11 +119,5 @@ export default defineNuxtConfig({
         includeSubdomains: true,
       },
     },
-  },
-
-  // robots.txt configuration
-  robots: {
-    UserAgent: '*',
-    Disallow: process.env.ROBOTS === 'true' ? '' : '/',
   },
 });
