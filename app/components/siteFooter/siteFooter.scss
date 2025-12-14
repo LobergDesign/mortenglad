@@ -12,6 +12,7 @@
     font-size: 1.3rem;
     color: var(--color-secondary);
     @include font-main;
+    display: block;
   }
   &__info li {
     margin-right: clamp(2rem, 4vw, 6rem);
@@ -29,7 +30,7 @@
   .footer {
     &__social {
       a {
-        margin-left: 0;
+        margin-top: 1rem;
       }
     }
   }

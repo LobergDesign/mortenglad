@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.1.6",
-    "@lobergdesign/dot-grid": "^1.0.5",
+    "@lobergdesign/dot-grid": "^1.0.6",
     "@nuxt/image": "^2.0.0",
     "@nuxt/types": "^2.18.1",
     "@nuxtjs/google-fonts": "^3.2.0",
-    "@nuxtjs/robots": "5.6.7",
+    "@nuxtjs/robots": "^5.6.7",
     "@nuxtjs/sitemap": "^7.4.9",
-    "@vueuse/core": "^14.0.0",
-    "graphql": "^16.11.0",
+    "@vueuse/core": "^14.1.0",
+    "graphql": "^16.12.0",
     "gsap": "^3.14.2",
     "isomorphic-dompurify": "^2.34.0",
     "nuxt": "^4.2.2",
@@ -27,7 +27,7 @@
     "nuxt-security": "2.5.0",
     "sass": "^1.96.0",
     "smooth-scrollbar": "^8.8.4",
-    "vue": "^3.5.22"
+    "vue": "^3.5.25"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.12.1",
