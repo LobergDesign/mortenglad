@@ -3,7 +3,7 @@
     <h2
       v-if="data.headlineType === 'h2' && data.title"
       class="h1"
-      data-split-line-effect
+      data-inview-simple-show-effect
     >
       {{ data.title }}
     </h2>
