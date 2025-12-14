@@ -71,7 +71,7 @@ watch(isDevices, (newVal) => {
   }
 });
 
-const initEffectBg = useTemplateRef('initEffectBg');
+const initEffectBg = useTemplateRef<string>('initEffectBg');
 const ease = 'power4.out';
 const dark = '#151515';
 const light = '#e9f1f7';

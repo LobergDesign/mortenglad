@@ -46,7 +46,7 @@ const ease = 'power4.out';
 const duration = '0.65';
 const { gsap, draggable } = useGsap();
 const sliderWrap = useTemplateRef<HTMLElement>('sliderWrap');
-const sliderGrid = useTemplateRef('sliderGrid');
+const sliderGrid = useTemplateRef<HTMLElement>('sliderGrid');
 const innerSliderWrap = useTemplateRef<HTMLElement>('innerSliderWrap');
 const sliderImg = useTemplateRef<HTMLElement>('sliderImg');
 

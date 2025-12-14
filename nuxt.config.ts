@@ -11,11 +11,6 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
   ],
 
-  // Robots - only allow indexing on production
-  robots: {
-    // Only index if CONTEXT is 'production' (not preview or branch deploys)
-    indexable: process.env.CONTEXT === 'production',
-  },
   css: ['~/assets/scss/main.scss'],
 
   // images
