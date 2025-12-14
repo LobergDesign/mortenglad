@@ -22,13 +22,17 @@ html, body {
   will-change: transform;
 }
 @include viewport-large {
+  html, body {
+    overflow: auto; // Re-enable scrolling on mobile devices
+  }
+
   .smooth-container {
     position: relative;
     top: auto;
     right: auto;
     bottom: auto;
     left: auto;
-    overflow: hidden;
+    overflow: visible; // Allow content to scroll normally on mobile
     padding-top: 0;
     height: auto;
   }

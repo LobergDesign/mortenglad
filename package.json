@@ -21,6 +21,7 @@
     "nuxt": "^4.2.2",
     "nuxt-graphql-request": "^8.1.1",
     "nuxt-icons": "^4.0.0",
+    "nuxt-security": "2.5.0",
     "sass": "^1.96.0",
     "smooth-scrollbar": "^8.8.4",
     "vue": "^3.5.22"

@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-graphql-request',
     '@nuxt/image',
+    'nuxt-security',
   ],
   css: ['~/assets/scss/main.scss'],
 
@@ -66,14 +67,45 @@ export default defineNuxtConfig({
     },
   },
 
-  build: {
-    transpile: ['nuxt-graphql-request', 'gsap'],
-  },
   // google fonts
   googleFonts: {
     families: {
       'Roboto+Mono': { wght: '100..700' },
     },
     display: 'swap',
+  },
+
+  // security
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': [
+          "'self'",
+          'data:',
+          'https://res.cloudinary.com', // Cloudinary images
+          'https://images.ctfassets.net', // Contentful assets
+        ],
+        'font-src': [
+          "'self'",
+          'https://fonts.gstatic.com', // Google Fonts
+        ],
+        'style-src': [
+          "'self'",
+          "'unsafe-inline'", // Needed for GSAP animations and dynamic styles
+          'https://fonts.googleapis.com', // Google Fonts
+        ],
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'", // Needed for GSAP and inline scripts
+        ],
+        'connect-src': [
+          "'self'", // API calls to /api/contentful
+        ],
+      },
+      strictTransportSecurity: {
+        maxAge: 31536000, // 1 year
+        includeSubdomains: true,
+      },
+    },
   },
 });

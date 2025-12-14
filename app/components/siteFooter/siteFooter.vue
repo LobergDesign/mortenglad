@@ -6,7 +6,7 @@
     />
     <div class="grid-w">
       <div class="grid-r">
-        <div class="grid-c- grid-c-sm-9">
+        <div class="grid-c grid-c-sm-9">
           <ul class="reset-ul footer__info">
             <li v-if="data.globalSettings.address">
               <address data-split-line-effect>
@@ -29,7 +29,7 @@
             </li>
           </ul>
         </div>
-        <div class="grid-c-12 grid-c-sm-3 flex-end reset-flex-end-md">
+        <div class="grid-c-12 grid-c-sm-3 place-t-r">
           <ul class="reset-ul footer__social">
             <li v-if="data.globalSettings.facebook">
               <a
