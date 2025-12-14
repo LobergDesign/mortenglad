@@ -35,14 +35,15 @@ $accordion-toggle-icon-size: 1rem;
     position: absolute;
     right: 0;
     top: 1.6rem;
+    font-size: $accordion-toggle-icon-size;
     transform: rotate(45deg);
     transition: transform $transition--fast;
-    svg {
-      height: $accordion-toggle-icon-size;
-      width: $accordion-toggle-icon-size;
+    ::v-deep(.nuxt-icon svg) {
+      height: 1em;
+      width: 1em;
       transition: transform $transition--fast;
     }
-    polygon {
+    ::v-deep(.nuxt-icon svg polygon) {
       fill: var(--color-secondary);
       transition: fill $transition--fast;
     }
@@ -81,13 +82,13 @@ $accordion-toggle-icon-size: 1rem;
     @include font-main-bold;
     color: var(--color-cta);
   }
-  .accordion-nested-item__icon polygon {
+  .accordion-nested-item__icon ::v-deep(.nuxt-icon svg polygon) {
     fill: var(--color-cta);
   }
 }
 // active
 .accordion-nested-item.has-additional-content.is-active {
-  .accordion-nested-item__icon svg {
+  .accordion-nested-item__icon ::v-deep(.nuxt-icon svg) {
     transform: rotate(-45deg);
   }
 }
