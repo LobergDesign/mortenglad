@@ -24,5 +24,5 @@
 import setHead from '~/utils/head';
 const { data: cvCollection } = await useCVCollection(null);
 const { data, pending } = await useCVPage();
-useSeoMeta(setHead(data.value!.page.seo));
+useSeoMeta(setHead(data.value?.page?.seo));
 </script>

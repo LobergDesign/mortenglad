@@ -1,10 +1,18 @@
-import { query as cvCollectionQuery } from '~/queries/cvCollections';
+import {
+  GetCvCollectionsDocument,
+  type GetCvCollectionsQuery,
+} from '~/generated/graphql';
 
 export const useCVCollection = async (limit: number | null = 3) => {
   const { $getDataWithLimit } = useNuxtApp();
 
-  const { data, error } = await useAsyncData('cv-collection', () =>
-    $getDataWithLimit(cvCollectionQuery, limit),
+  const { data, error } = await useAsyncData<GetCvCollectionsQuery>(
+    'cv-collection',
+    () =>
+      $getDataWithLimit(GetCvCollectionsDocument, {
+        id: CONTENT_IDS.CV_PAGE,
+        limit,
+      }),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`

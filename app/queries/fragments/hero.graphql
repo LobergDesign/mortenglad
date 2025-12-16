@@ -1,0 +1,6 @@
+fragment heroFragment on HeroSection {
+  title
+  bodytext {
+    json
+  }
+}

@@ -1,9 +1,14 @@
-import { query } from '~/queries/gallerypage';
+import {
+  GetGalleryPageDocument,
+  type GetGalleryPageQuery,
+} from '~/generated/graphql';
+
 export const useGalleryPage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, pending, error } = await useAsyncData('gallery-page', () =>
-    $getData(query),
+  const { data, pending, error } = await useAsyncData<GetGalleryPageQuery>(
+    'gallery-page',
+    () => $getData(GetGalleryPageDocument, { id: CONTENT_IDS.GALLERY_PAGE }),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`

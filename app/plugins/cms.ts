@@ -1,14 +1,18 @@
 export default defineNuxtPlugin((_nuxtApp) => {
   // get data from query via server API route
-  const getData = async (query: string) => {
+  const getData = async <TResult = any, TVariables = any>(
+    document: any,
+    variables?: TVariables,
+  ) => {
     try {
       const response = await $fetch('/api/contentful', {
         method: 'POST',
         body: {
-          query,
+          document,
+          variables,
         },
       });
-      return response;
+      return response as TResult;
     } catch (error: any) {
       console.error('getData error from cms plugin', error);
       throw error;
@@ -16,20 +20,19 @@ export default defineNuxtPlugin((_nuxtApp) => {
   };
 
   // get data from query with limit
-  const getDataWithLimit = async (
-    query: string,
-    limit: number | null = null,
+  const getDataWithLimit = async <TResult = any, TVariables = any>(
+    document: any,
+    variables: TVariables,
   ) => {
-    const variables = { limit };
     try {
       const response = await $fetch('/api/contentful', {
         method: 'POST',
         body: {
-          query,
+          document,
           variables,
         },
       });
-      return response;
+      return response as TResult;
     } catch (error: any) {
       console.error('getDataWithLimit error from cms plugin', error);
       throw error;

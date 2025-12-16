@@ -1,0 +1,40 @@
+query GetFrontpage($id: String!) {
+  page: pageHome(id: $id) {
+    heroTitle
+    heroImages
+    heroVideo
+    backdropOpacity
+    heroTitleExtension
+    featuredTitle
+    featuredBodytext {
+      json
+    }
+    featuredVideo
+    featuredLink {
+      ...referencePagesFragment
+    }
+    featuredLinkText
+    introTitle
+    introBodytext {
+      json
+    }
+    introLink {
+      ...referencePagesFragment
+    }
+    introLinkText
+    cvCollectionsLink {
+      slug
+      title
+    }
+    cvCollectionsLinkText
+    dynamicBlockSectionCollection(limit: 20) {
+      items {
+        blockType: __typename
+        ...referenceAllBlocksFragment
+      }
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}

@@ -29,6 +29,12 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    resolve: {
+      alias: {
+        '@graphql-typed-document-node/core':
+          '~/shims/@graphql-typed-document-node-core.ts',
+      },
+    },
     css: {
       preprocessorOptions: {
         scss: {
@@ -41,7 +47,6 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
-    // Server-side only (never exposed to client)
     graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,
     graphqlToken: process.env.GRAPHQL_TOKEN,
   },

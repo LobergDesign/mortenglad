@@ -1,6 +1,6 @@
-const query = `query($limit: Int) {
- pageCv(id: "39ij59NxggY9zUrKbGaFRF") {
-    cvListCollection(limit:3) {
+query GetCVCollections($id: String!, $limit: Int) {
+  pageCv(id: $id) {
+    cvListCollection(limit: 3) {
       items {
         collectionType: __typename
         ... on ExperienceSection {
@@ -52,5 +52,3 @@ const query = `query($limit: Int) {
     }
   }
 }
-`;
-export { query };

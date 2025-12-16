@@ -1,0 +1,8 @@
+export const CONTENT_IDS = {
+  FRONTPAGE: '3Oln3i9cBK6vV7lvdPPMjc',
+  GLOBAL_SETTINGS: '3RFdUR5nituVqENy0L5R5c',
+  CV_PAGE: '39ij59NxggY9zUrKbGaFRF',
+  RESUME_PAGE: '5BrH9tH85VtpxsV9YZDDwG',
+  CONTACT_PAGE: '7NV9lkLv3apV3Qfy2Oj3c',
+  GALLERY_PAGE: 'SNOugAwWFBdMfz1Df8Xvw',
+} as const;

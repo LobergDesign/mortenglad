@@ -1,0 +1,7 @@
+fragment seoFragment on SeoSection {
+  metaTitle
+  metaDescription
+  openGraphTitle
+  openGraphType
+  openGraphimage
+}

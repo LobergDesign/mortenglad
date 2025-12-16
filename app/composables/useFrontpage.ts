@@ -1,10 +1,14 @@
-import { query } from '~/queries/frontpage';
+import {
+  GetFrontpageDocument,
+  type GetFrontpageQuery,
+} from '~/generated/graphql';
+
 export const useFrontpage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, error } = await useAsyncData<NFrontpage.IData>(
+  const { data, error } = await useAsyncData<GetFrontpageQuery>(
     'frontpage',
-    () => $getData(query),
+    () => $getData(GetFrontpageDocument, { id: CONTENT_IDS.FRONTPAGE }),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`

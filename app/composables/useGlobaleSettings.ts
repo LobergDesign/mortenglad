@@ -1,11 +1,16 @@
-import { query } from '~/queries/global';
+import {
+  GetGlobalSettingsDocument,
+  type GetGlobalSettingsQuery,
+} from '~/generated/graphql';
+
 export const useGlobaleSettings = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, pending, error } =
-    await useAsyncData<NStates.IGlobalSettingsState>('global-settings', () =>
-      $getData(query),
-    );
+  const { data, pending, error } = await useAsyncData<GetGlobalSettingsQuery>(
+    'global-settings',
+    () =>
+      $getData(GetGlobalSettingsDocument, { id: CONTENT_IDS.GLOBAL_SETTINGS }),
+  );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`
   if (error.value) {

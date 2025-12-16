@@ -1,0 +1,17 @@
+query GetGalleryPage($id: String!) {
+  page: pageGallery(id: $id) {
+    hero {
+      ...heroFragment
+    }
+    images
+    dynamicBlockSectionCollection {
+      items {
+        blockType: __typename
+        ...referenceAllBlocksFragment
+      }
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}

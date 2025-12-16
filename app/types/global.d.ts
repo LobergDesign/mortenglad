@@ -32,13 +32,6 @@ declare namespace NGlobal {
     route?: string;
     name?: string;
   }
-  export interface ISeo {
-    metaTitle: string;
-    metaDescription: string;
-    openGraphTitle: string;
-    openGraphType: string;
-    openGraphimage: IMedia;
-  }
   export interface IGsapSettings {
     ease: string;
   }

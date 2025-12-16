@@ -1,0 +1,16 @@
+query GetCVPage($id: String!) {
+  page: pageCv(id: $id) {
+    hero {
+      ...heroFragment
+    }
+    dynamicBlockSectionCollection {
+      items {
+        blockType: __typename
+        ...referenceAllBlocksFragment
+      }
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}

@@ -28,5 +28,5 @@
 import setHead from '~/utils/head';
 const { data, pending } = await useContactPage();
 const { data: globalData, pending: globalPending } = await useGlobaleSettings();
-useSeoMeta(setHead(data.value!.page.seo));
+useSeoMeta(setHead(data.value?.page?.seo));
 </script>

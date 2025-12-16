@@ -1,0 +1,28 @@
+query GetResumePage($id: String!) {
+  page: pageResume(id: $id) {
+    hero {
+      ...heroFragment
+    }
+    profileCollection(limit: 10) {
+      items {
+        title
+        value
+      }
+    }
+    profileAdditionalCollection(limit: 20) {
+      items {
+        title
+        list
+      }
+    }
+    dynamicBlockSectionCollection {
+      items {
+        blockType: __typename
+        ...referenceAllBlocksFragment
+      }
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}

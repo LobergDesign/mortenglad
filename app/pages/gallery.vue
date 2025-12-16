@@ -34,7 +34,7 @@
 <script lang="ts" setup>
 import setHead from '~/utils/head';
 const { data, pending } = await useGalleryPage();
-useSeoMeta(setHead(data.value!.page.seo));
+useSeoMeta(setHead(data.value?.page?.seo));
 const activateGallery = ref(-1);
 const activeIndex = (i: number) => {
   activateGallery.value = -1;

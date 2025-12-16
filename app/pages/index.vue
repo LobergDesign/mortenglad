@@ -37,7 +37,7 @@
 import setHead from '~/utils/head';
 const { data } = await useFrontpage();
 const { data: cvCollection } = await useCVCollection();
-useSeoMeta(setHead(data.value!.page.seo));
+useSeoMeta(setHead(data.value?.page?.seo));
 
 const pageData = computed(() => {
   const e = data.value;

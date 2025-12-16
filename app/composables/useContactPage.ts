@@ -1,9 +1,14 @@
-import { query } from '~/queries/contactpage';
+import {
+  GetContactPageDocument,
+  type GetContactPageQuery,
+} from '~/generated/graphql';
+
 export const useContactPage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, pending, error } = await useAsyncData('contact-page', () =>
-    $getData(query),
+  const { data, pending, error } = await useAsyncData<GetContactPageQuery>(
+    'contact-page',
+    () => $getData(GetContactPageDocument, { id: CONTENT_IDS.CONTACT_PAGE }),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`

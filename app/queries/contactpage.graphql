@@ -1,0 +1,16 @@
+query GetContactPage($id: String!) {
+  page: pageContact(id: $id) {
+    hero {
+      ...heroFragment
+    }
+    dynamicBlockSectionCollection {
+      items {
+        blockType: __typename
+        ...referenceAllBlocksFragment
+      }
+    }
+    seo {
+      ...seoFragment
+    }
+  }
+}

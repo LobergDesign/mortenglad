@@ -7,10 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.1.6",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@lobergdesign/dot-grid": "^1.0.6",
     "@nuxt/image": "^2.0.0",
     "@nuxt/types": "^2.18.1",
@@ -29,7 +31,12 @@
     "vue": "^3.5.25"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^6.1.0",
+    "@graphql-codegen/typed-document-node": "^6.1.4",
+    "@graphql-codegen/typescript": "^5.0.6",
+    "@graphql-codegen/typescript-operations": "^5.0.6",
     "@nuxt/eslint": "^1.12.1",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
     "prettier": "^3.7.4"
   }

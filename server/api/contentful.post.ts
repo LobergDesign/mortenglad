@@ -1,6 +1,11 @@
+import { print } from 'graphql';
+
 export default defineEventHandler(async (event) => {
-  const { query, variables } = await readBody(event);
+  const { document, variables } = await readBody(event);
   const config = useRuntimeConfig();
+
+  // Convert document to query string on server side
+  const query = typeof document === 'string' ? document : print(document);
 
   try {
     const response: any = await $fetch(config.graphqlEndpoint!, {

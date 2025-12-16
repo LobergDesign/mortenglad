@@ -1,10 +1,14 @@
-import { query } from '~/queries/resumepage';
+import {
+  GetResumePageDocument,
+  type GetResumePageQuery,
+} from '~/generated/graphql';
 
 export const useResumePage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, pending, error } = await useAsyncData('resume-page', () =>
-    $getData(query),
+  const { data, pending, error } = await useAsyncData<GetResumePageQuery>(
+    'resume-page',
+    () => $getData(GetResumePageDocument, { id: CONTENT_IDS.RESUME_PAGE }),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`

@@ -1,10 +1,11 @@
-import { query } from '~/queries/cvpage';
+import { GetCvPageDocument, type GetCvPageQuery } from '~/generated/graphql';
 
 export const useCVPage = async () => {
   const { $getData } = useNuxtApp();
 
-  const { data, pending, error } = await useAsyncData('cv-page', () =>
-    $getData(query),
+  const { data, pending, error } = await useAsyncData<GetCvPageQuery>(
+    'cv-page',
+    () => $getData(GetCvPageDocument, { id: CONTENT_IDS.CV_PAGE }),
   );
 
   // ✅ GraphQL or network errors are stored reactively in `error.value`

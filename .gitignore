@@ -96,3 +96,6 @@ sw.*
 # Project TODO
 APP_TODO.md
 TODO.md
+
+# GraphQL Codegen
+app/generated/
