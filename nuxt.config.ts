@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-icons',
     '@nuxtjs/google-fonts',
-    'nuxt-graphql-request',
     '@nuxt/image',
     'nuxt-security',
     '@nuxtjs/robots',
@@ -52,19 +51,6 @@ export default defineNuxtConfig({
       title: 'mortenglad',
       htmlAttrs: {
         lang: 'en',
-      },
-    },
-  },
-  // graphql
-  graphql: {
-    clients: {
-      default: {
-        endpoint: process.env.GRAPHQL_ENDPOINT,
-        options: {
-          headers: {
-            authorization: 'Bearer ' + process.env.GRAPHQL_TOKEN,
-          },
-        },
       },
     },
   },

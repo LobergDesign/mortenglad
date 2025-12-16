@@ -81,6 +81,9 @@ dist
 # IDE / Editor
 .idea
 
+# Claude Code
+.claude
+
 # Service worker
 sw.*
 
@@ -92,3 +95,4 @@ sw.*
 
 # Project TODO
 APP_TODO.md
+TODO.md
