@@ -11,7 +11,6 @@
   address {
     font-size: 1.3rem;
     color: var(--color-secondary);
-    @include font-main;
     display: block;
   }
   &__info li {

@@ -10,7 +10,6 @@ h3,
 }
 h1,
 .h1 {
-  @include font-main;
   font-size: clamp(6rem, 12vw, 17.3rem);
   margin-top: 0;
   margin-bottom: clamp(2rem, 2vw, 3rem);
@@ -44,7 +43,7 @@ strong,
 }
 a,
 .btn {
-  @include font-main-bold;
+  font-weight: 400;
   color: $color-cta;
   text-decoration: none;
 }

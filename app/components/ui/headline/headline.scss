@@ -4,7 +4,7 @@
   }
   &__title-extension {
     display: inline-block;
-    @include font-main;
+    font-weight: 400;
     color: var(--color-cta);
   }
 }

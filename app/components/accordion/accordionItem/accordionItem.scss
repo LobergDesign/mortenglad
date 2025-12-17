@@ -9,7 +9,7 @@
     }
   }
   &__title-list::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -22,7 +22,7 @@
   }
   &__title {
     display: block;
-    @include font-main-bold;
+    font-weight: 600;
     font-size: 1.5rem;
   }
 }

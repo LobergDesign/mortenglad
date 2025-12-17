@@ -19,7 +19,8 @@ html {
 }
 
 body {
-  @include font-main;
+  font-family: 'satoshi', sans-serif;
+  font-style: normal;
   background-color: var(--color-primary);
   color: var(--color-secondary);
   font-size: 1.6rem;

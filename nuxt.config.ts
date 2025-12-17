@@ -4,11 +4,11 @@ export default defineNuxtConfig({
 
   modules: [
     'nuxt-icons',
-    '@nuxtjs/google-fonts',
     '@nuxt/image',
     'nuxt-security',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
+    '@nuxt/fonts',
   ],
 
   css: ['~/assets/scss/main.scss'],
@@ -46,6 +46,17 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  fonts: {
+    fontshare: {
+      families: {
+        satoshi: {
+          weights: ['100..700'],
+        },
+      },
+    },
+  },
+
   runtimeConfig: {
     graphqlEndpoint: process.env.GRAPHQL_ENDPOINT,
     graphqlToken: process.env.GRAPHQL_TOKEN,
@@ -58,14 +69,6 @@ export default defineNuxtConfig({
         lang: 'en',
       },
     },
-  },
-
-  // google fonts
-  googleFonts: {
-    families: {
-      'Roboto+Mono': { wght: '100..700' },
-    },
-    display: 'swap',
   },
 
   // security
@@ -81,11 +84,13 @@ export default defineNuxtConfig({
         'font-src': [
           "'self'",
           'https://fonts.gstatic.com', // Google Fonts
+          'https://api.fontshare.com', // Fontshare fonts
         ],
         'style-src': [
           "'self'",
           "'unsafe-inline'", // Needed for GSAP animations and dynamic styles
           'https://fonts.googleapis.com', // Google Fonts
+          'https://api.fontshare.com', // Fontshare fonts
         ],
         'script-src': [
           "'self'",

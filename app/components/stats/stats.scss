@@ -19,7 +19,7 @@
     border-radius: clamp(1.6rem, 1.2vw, 2.1rem);
   }
   &__item-value {
-    @include font-main-bold;
+    font-weight: 700;
     font-size: clamp(2rem, 3vw, 4.5rem);
   }
   // list

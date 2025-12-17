@@ -18,16 +18,20 @@ $accordion-toggle-icon-size: 1rem;
     background-color: var(--color-secondary);
     opacity: 0;
     transform: translateX(-100%);
-    transition: transform 0.8s $transition--cubic,
+    transition:
+      transform 0.8s $transition--cubic,
       opacity 0.5s $transition--cubic;
   }
   &__item {
     font-size: 1.4rem;
-    transition: color $transition--fast, font-weight $transition--fast;
+    font-weight: 100;
+    transition:
+      color $transition--fast,
+      font-weight $transition--fast;
   }
   &__item-headline {
     font-size: 1.2rem;
-    @include font-main-bold;
+    font-weight: 700;
     margin-bottom: 0.2rem;
   }
   // icon
@@ -79,7 +83,7 @@ $accordion-toggle-icon-size: 1rem;
 .accordion-nested-item.has-additional-content.is-active,
 .accordion-nested-item.has-additional-content:hover {
   .accordion-nested-item__item {
-    @include font-main-bold;
+    font-weight: 700;
     color: var(--color-cta);
   }
   .accordion-nested-item__icon ::v-deep(.nuxt-icon svg polygon) {

@@ -1,0 +1,9 @@
+Contact: mailto:jeanloberg@gmail.com
+Expires: 2026-12-17T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://yourwebsite.com/.well-known/security.txt
+
+# Security Policy
+# If you discover a security vulnerability in this website, please report it
+# to the contact address above. We take security seriously and will respond
+# to legitimate reports as quickly as possible.
