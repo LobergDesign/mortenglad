@@ -26,4 +26,3 @@ const sanitizedHtml = computed(() => {
   return rawHtml;
 });
 </script>
-<style lang="scss" src="./bodytext.scss" scoped></style>

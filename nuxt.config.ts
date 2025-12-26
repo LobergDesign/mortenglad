@@ -29,12 +29,6 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    resolve: {
-      alias: {
-        '@graphql-typed-document-node/core':
-          '~/shims/@graphql-typed-document-node-core.ts',
-      },
-    },
     css: {
       preprocessorOptions: {
         scss: {
