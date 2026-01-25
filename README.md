@@ -1,68 +1,126 @@
 # mortenglad
 
-## Build Setup
+A Nuxt 4 (Vue 3 + TypeScript) website scaffold that uses Contentful (GraphQL) as a CMS, GSAP for animations, and SCSS for styling.
+
+This README covers how to get the project running locally, how GraphQL types are generated, how the Contentful proxy is implemented, and the main areas of the codebase to help you quickly contribute.
+
+---
+
+## Table of contents
+
+- Quickstart
+- Required environment variables
+- Available scripts
+- GraphQL & codegen
+- How data fetching works (Contentful proxy + plugin)
+- Project structure & important files
+- Styling, images and fonts
+- Tips & troubleshooting
+- Contributing
+- License
+
+---
+
+## Quickstart
+
+Prerequisites:
+
+- Node.js (recommended 20+)
+- bun
+
+1. Clone the repository and install dependencies
 
 ```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+git clone https://github.com/LobergDesign/mortenglad.git
+cd mortenglad
+bun install
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+2. Create an environment file (example below) with your Contentful GraphQL endpoint and token.
 
-## Special Directories
+3. Generate GraphQL types (see codegen section) before running dev if you want type-safe GraphQL usage.
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+4. Run development server
 
-### `assets`
+```bash
+bun run dev
+# open http://localhost:3000
+```
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+Build for production:
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+```bash
+bun run build
+bun run preview   # preview the built server locally
+```
 
-### `components`
+Generate a static build:
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+```bash
+bun run generate
+```
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+Notes:
 
-### `layouts`
+- The app uses TypeScript and the generated GraphQL types are stored in `app/generated/graphql.ts`.
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+---
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+## Required environment variables
 
-### `pages`
+The app keeps Contentful credentials server-side. Provide the following variables in a `.env` (or via your hosting/provider):
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+.example .env (do NOT commit your secrets)
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+```
+GRAPHQL_ENDPOINT=https://graphql.contentful.com/content/v1/spaces/<SPACE_ID>
+GRAPHQL_TOKEN=<YOUR_CONTENTFUL_ACCESS_TOKEN>
+```
 
-### `plugins`
+- GRAPHQL_ENDPOINT: The Contentful GraphQL endpoint.
+- GRAPHQL_TOKEN: The Contentful access token (used only server-side via the server API).
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+Make sure these environment variables are available to your runtime (e.g., in your deployment platform or in your local shell).
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+---
 
-### `static`
+## GraphQL & codegen
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
+This project keeps GraphQL documents under `app/queries/*.graphql` and generates TypeScript types using GraphQL Code Generator.
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
+Configuration:
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+- `codegen.ts` configures the codegen to read `process.env.GRAPHQL_ENDPOINT` and `process.env.GRAPHQL_TOKEN` (so make sure these are set).
+- Generated output: `app/generated/graphql.ts`
 
-### `store`
+Run codegen:
 
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
+```bash
+# Ensure .env provides GRAPHQL_ENDPOINT and GRAPHQL_TOKEN
+bun run codegen
+```
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+If codegen encounters authentication or network errors, verify your environment variables and endpoint accessibility.
+
+---
+
+## Styling, images and fonts
+
+- SCSS:
+  - Global styles and variables in `app/assets/scss/`. `nuxt.config.ts` includes `~/assets/scss/main.scss`.
+  - Vite is configured to add SCSS variables and mixins automatically via `vite.css.preprocessorOptions.scss.additionalData`.
+
+- Images:
+  - `@nuxt/image` module is configured with Cloudinary baseURL in `nuxt.config.ts`:
+    - `https://res.cloudinary.com/dzw0r5i7d/image/upload/`
+  - Breakpoints for responsive images are defined in `nuxt.config.ts`.
+
+- Fonts:
+  - Uses `@nuxt/fonts` with Fontshare (Satoshi).
+
+---
+
+## Security & CSP
+
+- Content Security Policy and other security headers are configured in `nuxt.config.ts` using `nuxt-security`.
+- `img-src`, `font-src`, `style-src`, and `script-src` include allowances for cloudinary, Contentful assets and font providers. If you change assets/providers, update the CSP accordingly.
